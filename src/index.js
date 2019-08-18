@@ -15,4 +15,3 @@ const spyneApp = new SpyneApp({debug:true});
 const mainView = new MainView();
 
 mainView.appendToDom(document.body);
-

@@ -21,7 +21,7 @@ export class MainView extends ViewStream {
   onRendered() {
       this.appendView(new ViewStream({
         tagName: 'h2',
-        data: 'ViEWSTREAM LOAwDED'
+        data: 'ViEWSTREAM LOADED'
 
       }))
   }

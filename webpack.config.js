@@ -1,10 +1,11 @@
-module.exports = (env)=>{
   const path = require('path');
   const webpack = require('webpack');
+  const env = require('yargs').argv.env; // use --env with webpack 2
   const ExtractTextPlugin = require('extract-text-webpack-plugin');
   const MiniCssExtractPlugin = require('mini-css-extract-plugin');
   const {CleanWebpackPlugin} = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
+
   const miniCssPlugin = new MiniCssExtractPlugin({
     filename: 'assets/css/main.css'
   });
@@ -48,7 +49,7 @@ module.exports = (env)=>{
     src: path.join(__dirname, 'src')
   };
 
-  return {
+  const config = {
     mode: envVals.mode,
 
     entry: {
@@ -114,9 +115,8 @@ module.exports = (env)=>{
       ]
     },
 
-  }
+  };
 
 
 
-
-};
+module.exports = config;

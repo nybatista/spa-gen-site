@@ -7,7 +7,10 @@
 @import "03-components/containers/customize-container.scss";
 @import "03-components/containers/iframe-container.scss";
 @import "03-components/customizers/cutomize-main-view.scss";
-@import "03-components/customizers/customize-panel";
+@import "03-components/customizers/customize-panel.scss";
+@import "03-components/nav-creator/nav-creator.scss";
+@import "03-components/nav-creator/nav-creator-list.scss";
+@import "03-components/nav-creator/nav-creator-list-item.scss";
 
 body{
   background: #ddd;

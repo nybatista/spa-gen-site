@@ -1,5 +1,15 @@
+@import "01-vendors/normalize.css";
+@import "01-vendors/_mq.scss";
+@import "02-variables/variables.scss";
+@import "02-variables/fluid-type.scss";
+//@import "01-vendors/bootstrap/scss/bootstrap";
+@import "03-components/containers/main-container.scss";
+@import "03-components/containers/customize-container.scss";
+@import "03-components/containers/iframe-container.scss";
+@import "03-components/customizers/cutomize-main-view.scss";
+@import "03-components/customizers/customize-panel";
+
 body{
   background: #ddd;
   font-family: sans-serif;
-
 }

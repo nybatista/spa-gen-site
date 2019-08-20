@@ -1,9 +1,11 @@
 import {ViewStream} from 'spyne';
+import {MainContainer} from './components/containers/main-container';
 
 export class MainView extends ViewStream {
 
   constructor(props = {}) {
-    props.id = 'main-spagen'
+    props.tagName='main';
+    props.id = 'spyne-spa-gen-site';
     super(props);
 
   }
@@ -19,11 +21,7 @@ export class MainView extends ViewStream {
   }
 
   onRendered() {
-      this.appendView(new ViewStream({
-        tagName: 'h2',
-        data: 'ViEWSTREAM LOADED'
-
-      }))
+    this.appendView(new MainContainer());
   }
 
 }

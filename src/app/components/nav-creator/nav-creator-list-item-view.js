@@ -23,7 +23,6 @@ export class NavCreatorListItemView extends ViewStream {
   }
 
   onRendered() {
-
   }
 
 }

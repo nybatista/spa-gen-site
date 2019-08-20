@@ -1,11 +1,13 @@
 import {ViewStream} from 'spyne';
 import {NavCreatorListItemView} from './nav-creator-list-item-view';
+import {DraggableTrait} from '../../traits/draggable-trait';
 
 export class NavCreatorListView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName='ul';
     props.id = 'nav-creator-list';
+    props.traits = DraggableTrait;
     super(props);
 
   }
@@ -36,6 +38,7 @@ export class NavCreatorListView extends ViewStream {
   onRendered() {
 
     this.addItems();
+    this.$dragInitDraggable();
 
   }
 

@@ -1,0 +1,34 @@
+{
+  "spaGenConfig" : {
+    "config": {
+      "debug": true,
+      "channels": {
+        "ROUTE": {
+          "type": "slash",
+          "routes": {
+            "routePath": {
+              "routeName": "page",
+              "home": "",
+              "about": "about",
+              "work": {
+                "routePath": {
+                  "routeName": "item",
+                  "foo": "",
+                  "bar": "bar",
+                  "ubu": "ubu"
+                }
+              },
+              "404": ".*"
+            }
+          }
+        }
+      }
+    },
+    "templates": [
+      {
+        "name": "footer",
+        "template": "      <div class='footer-content'>\n  <p>spyne footer from config</p>\n</div>"
+      }
+    ]
+  }
+}

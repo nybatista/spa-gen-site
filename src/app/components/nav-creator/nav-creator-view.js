@@ -17,7 +17,10 @@ export class NavCreatorView extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+      ['.btn-blue', 'click']
+
+    ];
   }
 
   onRendered() {

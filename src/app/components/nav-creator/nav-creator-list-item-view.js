@@ -1,19 +1,24 @@
-import {ViewStream} from 'spyne';
+import {ViewStream, ChannelPayloadFilter} from 'spyne';
 
 export class NavCreatorListItemView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName = 'li';
     props.class='nav-creator-list-item';
+    props.dataset = props.data;
     props.template = require('./templates/nav-creator-list-item.tmpl.html');
     super(props);
 
   }
 
   addActionListeners() {
+
     // return nexted array(s)
-    return [];
+    return [
+    ];
   }
+
+
 
   broadcastEvents() {
     // return nexted array(s)

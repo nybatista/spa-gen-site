@@ -23,6 +23,7 @@ export class DraggableTrait extends SpyneTrait {
     let el = tempObj.el;
     let rowHeight = tempObj.index * this.props.rowHeight;
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
+
   }
 
 
@@ -47,10 +48,19 @@ export class DraggableTrait extends SpyneTrait {
           this.drag$UpdateIndex(obj, currentIndex, rowIndex);
         }
       };
+
+      const onReorder = ()=>{
+        const reorder = (obj)=>this.props.el.appendChild(obj.el);
+
+        this.props.dragItems.forEach(reorder);
+
+      };
+
       const onDragUp = ()=>{
         const el = obj.el;
+
         const rowHeight = obj.index * this.props.rowHeight;
-        TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
+        TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut, onComplete:onReorder});
       };
 
 
@@ -63,7 +73,15 @@ export class DraggableTrait extends SpyneTrait {
       });
 
       let position = el._gsTransform;
-      TweenMax.to(el, .5, {y:index*rowHeight, ease: Power1.easeInOut});
+      let indexStart = index-1;
+      indexStart =  indexStart<= 0 ? 0 : indexStart;
+      const rowHeightStart = indexStart * this.props.rowHeight;
+      if (position.y !== index*rowHeight) {
+
+        TweenMax.fromTo(el, .25, {y: rowHeightStart, opacity:0},
+            {y: index * rowHeight, opacity:1, ease: Power1.easeInOut});
+      }
+     // TweenMax.to(el, .5,  {y:index*rowHeight, ease: Power1.easeInOut});
       let obj = {el,position, index, dragger};
       return obj;
 

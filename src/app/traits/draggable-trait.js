@@ -12,14 +12,7 @@ export class DraggableTrait extends SpyneTrait {
   }
 
 
-  static drag$CheckToResetItemsOrder(){
-   // const currentYArr = map(path(['_gsTransform', 'y']), this.props.items$);
-    const currentYArr = map(path(['position', 'y']), this.props.dragItems);
-    const defaultYArr =  map(multiply(30), range(0,currentYArr.length));
 
-
-    console.log('items X ARR ',{currentYArr,defaultYArr},this.props.dragItems);
-  }
 
   static drag$UpdateIndex(obj, from ,to){
     let tempObj = this.props.dragItems[to];
@@ -29,11 +22,7 @@ export class DraggableTrait extends SpyneTrait {
     tempObj.index = from;
     let el = tempObj.el;
     let rowHeight = tempObj.index * this.props.rowHeight;
-
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
-
-    console.log("UPDATE ", {obj, from, to});
-
   }
 
 
@@ -55,24 +44,14 @@ export class DraggableTrait extends SpyneTrait {
         const changeIndex = rowIndex !== currentIndex;
 
         if (changeIndex === true){
-          console.log("before update ",{obj});
           this.drag$UpdateIndex(obj, currentIndex, rowIndex);
         }
-
-          //  console.log("THIS IS ",{rowHeight, totalRows, itemY, rowIndex, currentIndex});
-
-       // this.drag$CheckToResetItemsOrder();
       };
       const onDragUp = ()=>{
         const el = obj.el;
         const rowHeight = obj.index * this.props.rowHeight;
-
-        //console.log("OBJ RELEASE ",{el,rowHeight,obj});
         TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
-
       };
-
-
 
 
       const dragger = new Draggable(el, {
@@ -85,16 +64,12 @@ export class DraggableTrait extends SpyneTrait {
 
       let position = el._gsTransform;
       TweenMax.to(el, .5, {y:index*rowHeight, ease: Power1.easeInOut});
-
       let obj = {el,position, index, dragger};
       return obj;
 
     };
 
-    const draggableItems = values(mapObjIndexed(createDragItem, items));
-
-    console.log("items ",this.y);
-    return draggableItems;
+    return values(mapObjIndexed(createDragItem, items));
   }
 
 

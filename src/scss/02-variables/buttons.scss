@@ -1,0 +1,43 @@
+
+$largeBtnPadding: 1rem 2rem;
+$medBtnPadding: .5rem 1rem;
+$smallBtnPadding: .25rem .5rem;
+$btnColor:#0069ed;
+
+$largeBtnFontSize: 1rem;
+$medBtnFontSize: .75rem;
+$smallBtnFontSize: .5rem;
+
+
+button {
+  display: inline-block;
+  border: none;
+  padding:$medBtnPadding;
+  margin: 0;
+  text-decoration: none;
+  background: $btnColor;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: $medBtnFontSize;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out,
+  transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+  background: #0053ba;
+}
+
+button:focus {
+ outline: 1px solid #fff;
+  //outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+

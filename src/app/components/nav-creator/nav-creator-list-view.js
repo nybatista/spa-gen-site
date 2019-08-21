@@ -1,4 +1,4 @@
-import {ViewStream} from 'spyne';
+import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {NavCreatorListItemView} from './nav-creator-list-item-view';
 import {DraggableTrait} from '../../traits/draggable-trait';
 
@@ -14,18 +14,32 @@ export class NavCreatorListView extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
+    const onPayload = p=>p.class==="nav-creator-list-item";
+
+    let payloadFilter = new ChannelPayloadFilter("", {
+      payload: onPayload
+
+    });
+
     return [
-      ['CHANNEL_UI_CLICK_EVENT', 'onAddNewItem', '.btn-blue']
+      ['CHANNEL_UI_CLICK_EVENT', 'onAddNewItem', '.btn-blue'],
+      ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onLifeCycleEvent', payloadFilter]
 
     ];
   }
 
   onAddNewItem(e){
-    console.log("add new item");
+    console.log("add new item ");
     let text = 'new item';
     let data = {text};
     this.appendView(new NavCreatorListItemView({data}));
     this.drag$InitDraggable();
+
+  }
+
+  onLifeCycleEvent(e){
+    console.log('lifecycle event ',e.props());
+    this.drag$ResetPositions();
 
   }
 
@@ -58,6 +72,7 @@ export class NavCreatorListView extends ViewStream {
     this.props.items$ = this.props.el$('.nav-creator-list-item');
     this.drag$InitDraggable();
     this.addChannel("CHANNEL_UI");
+    this.addChannel("CHANNEL_LIFECYCLE");
 
   }
 

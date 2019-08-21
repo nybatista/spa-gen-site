@@ -22,8 +22,28 @@ export class DraggableTrait extends SpyneTrait {
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
   }
 
+  static drag$ResetPositions(){
+    const tl = new TimelineMax({paused:true, onComplete:this.drag$CreateDraggableList});
+    const rowHeight = this.props.rowHeight;
+    const onUpdateItem =(el, i)=>{
+      const height = i*rowHeight;
+      tl.to(el, .125, {y:height, ease: Power1.easeInOut});
+
+      console.log('el is ',{i,el});
+
+
+    };
+
+    const items = this.props.items$.el;
+
+    items.forEach(onUpdateItem);
+    tl.play();
+
+  }
+
 
   static drag$CreateDraggableList(){
+    this.props.items$ = this.props.el$(".nav-creator-list-item");
     const items = this.props.items$.el;// this.props.el$('.nav-creator-list-item').el;
     const createDragItem = (el, index)=>{
       const rowHeight = this.props.rowHeight;

@@ -62,7 +62,7 @@
       publicPath: envVals.publicPath,
     },
 
-    devtool: 'envVals.map',
+    devtool: envVals.map,
 
     devServer: {
       contentBase: PATHS.src,

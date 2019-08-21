@@ -13,17 +13,14 @@ export class NavCreatorListView extends ViewStream {
   }
 
   addActionListeners() {
-    // return nexted array(s)
-    const onPayload = p=>p.class==="nav-creator-list-item";
 
-    let payloadFilter = new ChannelPayloadFilter("", {
-      payload: onPayload
-
+    let payloadClassFilter = new ChannelPayloadFilter("", {
+      class: "nav-creator-list-item"
     });
 
     return [
       ['CHANNEL_UI_CLICK_EVENT', 'onAddNewItem', '.btn-blue'],
-      ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onLifeCycleEvent', payloadFilter]
+      ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onLifeCycleEvent', payloadClassFilter]
 
     ];
   }
@@ -38,8 +35,15 @@ export class NavCreatorListView extends ViewStream {
   }
 
   onLifeCycleEvent(e){
-    console.log('lifecycle event ',e.props());
+    let {id} = e.props();
+
+    console.log('lifecycle event ',this.props.dragItems,e.props());
+    this.props.dragItems = this.drag$RemoveDeletedDragItem(id);
+
+
+    console.log("ID ",{id},this.props.dragItems);
     this.drag$ResetPositions();
+    this.drag$InitDraggable(false);
 
   }
 

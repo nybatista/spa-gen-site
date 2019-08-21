@@ -25,7 +25,6 @@ export class NavCreatorListItemView extends ViewStream {
 
   onClickEvent(e){
     let {type} = e.props();
-    console.log("CLICK EVENT ",{type,e});
     if (type==='delete'){
       this.disposeViewStream();
     } else if (type==='expand') {
@@ -44,9 +43,6 @@ export class NavCreatorListItemView extends ViewStream {
   }
 
   onRendered() {
-    const theI = this.props.el$('i');
-    console.log("I is ",theI.el);
-
     this.addChannel("CHANNEL_UI");
   }
 

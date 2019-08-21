@@ -5,10 +5,46 @@ li.nav-creator-list-item{
   width:80%;
  // height: auto;
  // margin-bottom: 44px;
+  display: flex;
+  //flex-direction: column;
 
   //padding:5px 0;
   background: rgba(255,255,255,.8);
   cursor: pointer;
-    height: 30px;
+   // max-height: 42px;
   //font-size:8px;
+  justify-content: space-between;
+
+  div.icons {
+    position:relative;
+    justify-self: flex-end;
+    display: flex;
+    justify-content: start;
+    i{
+      //background: orange;
+      cursor:pointer;
+     // font-size:8px;
+
+      &.expand{
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+
+  div.input {
+  //  max-width:200px;
+    margin-bottom:4px;
+    input {
+
+      position: relative;
+      z-index: 10;
+      // max-width:50px;
+      // background: orange;
+    }
+
+  }
+
+
+
 }

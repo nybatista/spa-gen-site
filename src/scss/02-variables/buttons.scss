@@ -8,7 +8,69 @@ $largeBtnFontSize: 1rem;
 $medBtnFontSize: .75rem;
 $smallBtnFontSize: .5rem;
 
+$paddingSizes: (
+  large: $largeBtnPadding,
+  medium: $medBtnPadding,
+  small: $smallBtnPadding
+);
 
+$fontSizes: (
+  large: 1rem,
+  medium: .75rem,
+  small: .5rem
+
+
+);
+
+
+button.btn {
+  display: inline-block;
+  border: none;
+  //padding:$medBtnPadding;
+  margin: 0;
+  text-decoration: none;
+  //background: $btnColor;
+  color: #ffffff;
+  font-family: sans-serif;
+ // font-size: $medBtnFontSize;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out,
+  transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button.btn:hover,
+button.btn:focus {
+  background: #0053ba;
+}
+
+button.btn:focus {
+  outline: 1px solid #fff;
+  //outline-offset: -4px;
+}
+
+button.btn:active {
+  transform: scale(0.99);
+}
+
+
+@mixin baseBtn($size, $color){
+  padding: map_get($paddingSizes, $size);
+  font-size: map_get($fontSizes, $size);
+  background: $color;
+
+}
+
+.blue-btn{
+  background: orange;
+  @include baseBtn('medium', $btnColor);
+
+}
+
+
+/*
 button {
   display: inline-block;
   border: none;
@@ -40,4 +102,5 @@ button:focus {
 button:active {
   transform: scale(0.99);
 }
+*/
 

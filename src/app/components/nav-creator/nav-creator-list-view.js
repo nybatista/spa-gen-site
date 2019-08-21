@@ -35,10 +35,16 @@ export class NavCreatorListView extends ViewStream {
 
   }
 
+  initItemPositions(){
+
+  }
+
   onRendered() {
 
     this.addItems();
-    this.$dragInitDraggable();
+    this.props.rowHeight = 40;
+    this.props.items$ = this.props.el$('.nav-creator-list-item');
+    this.drag$InitDraggable();
 
   }
 

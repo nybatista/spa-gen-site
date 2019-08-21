@@ -1,6 +1,16 @@
-ul#nav-creator-list{
-  position:relative;
-  list-style-type: none;
-  background: rgba(0,0,0,.4);
+
+#creative-list-holder {
+  position: relative;
+  background: green;
+  min-height: 200px;
+
+  ul#nav-creator-list {
+    position: relative;
+    top:0px;
+    list-style-type: none;
+    min-height: 200px;
+    background: rgba(0, 0, 0, .4);
+    //background: orange;
+  }
 
 }

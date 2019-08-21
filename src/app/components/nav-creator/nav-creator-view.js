@@ -21,7 +21,7 @@ export class NavCreatorView extends ViewStream {
   }
 
   onRendered() {
-    this.appendView(new NavCreatorListView());
+    this.appendView(new NavCreatorListView(), '#creative-list-holder');
   }
 
 }

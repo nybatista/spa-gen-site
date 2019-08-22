@@ -29,7 +29,7 @@ export class NavCreatorListItemView extends ViewStream {
     if (type==='delete' && isLastEl>=2){
       this.disposeViewStream();
     } else if (type==='expand') {
-      //this.appendView(new NavCreatorListView());
+      this.appendView(new NavCreatorListView(), '.list-holder');
     }
 
   }

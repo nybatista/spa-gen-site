@@ -11,6 +11,11 @@ export class DraggableTrait extends SpyneTrait {
 
   }
 
+  static drag$GetListClass(){
+    return `list-item-${this.props.vsid}`;
+  }
+
+
   static drag$UpdateIndex(obj, from ,to, dragItems = this.props.dragItems){
     let tempObj = this.props.dragItems[to];
     dragItems[to] = obj;
@@ -38,7 +43,7 @@ export class DraggableTrait extends SpyneTrait {
       tl.to(el, .125, {y:height, ease: Power1.easeInOut});
     };
 
-    let items = this.props.el$('.nav-creator-list-item').el;
+    let items = this.props.el$(this.props.listClass).el;
     items = items.length !== undefined ? items : [items];
 
     items.forEach(onUpdateItem);
@@ -52,7 +57,7 @@ export class DraggableTrait extends SpyneTrait {
   }
 
 
-  static drag$CreateDraggableList(animate=true, rowHeight = this.props.rowHeight,items = this.props.el$(".nav-creator-list-item").el){
+  static drag$CreateDraggableList(animate=true, rowHeight = this.props.rowHeight,items = this.props.el$(this.props.listClass).el){
 
     const createDragItem = (el, index)=>{
       el._gsTransform = undefined;

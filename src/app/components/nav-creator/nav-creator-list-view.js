@@ -15,7 +15,7 @@ export class NavCreatorListView extends ViewStream {
   addActionListeners() {
 
     let payloadClassFilter = new ChannelPayloadFilter("", {
-      class: "nav-creator-list-item"
+      class: (c) => c.indexOf(`list-item-${this.props.vsid}`)>=0
     });
 
     return [
@@ -25,13 +25,29 @@ export class NavCreatorListView extends ViewStream {
     ];
   }
 
-  onAddNewItem(e){
-    let text = 'new item';
+  addNewItem(text='new item'){
     let data = {text};
-    this.appendView(new NavCreatorListItemView({data}));
+    const parentId = this.props.vsid;
+    this.appendView(new NavCreatorListItemView({data, parentId}));
+
+  }
+
+
+  onAddNewItem(e){
+    const itemClass = `.list-item-${this.props.vsid}`;
+    const num2 = this.props.el$(itemClass).len;
+    //const num = Math.random()*8;//this.props.el$(itemClass).len;
+    //const num = this.props.el.querySelectorAll(itemClass).length;
+    const txt = `item-${num2+1}`;
+    console.log("NUM LI ",{itemClass, num2, num2});
+    this.addNewItem(txt);
+    const delayer = ()=>this.drag$InitDraggable();
+     // window.setTimeout(delayer, 10);
+    //delayer();
     this.drag$InitDraggable();
 
   }
+
 
   onLifeCycleEvent(e){
     let {id} = e.props();
@@ -49,15 +65,16 @@ export class NavCreatorListView extends ViewStream {
   }
 
   addItems(){
-    let arr = ['item-1', 'item-2', 'item-3'];
+    let arr = ['item-1'];
 
     const addItem = (text)=>{
+      let parentId = this.props.vsid;
      let data = {text};
-     this.appendView(new NavCreatorListItemView({data}));
+     this.appendView(new NavCreatorListItemView({data,parentId}));
     };
 
-    arr.forEach(addItem);
-
+   // arr.forEach(addItem);
+    this.addNewItem('item-num-1');
 
   }
 
@@ -67,6 +84,7 @@ export class NavCreatorListView extends ViewStream {
 
   onRendered() {
 
+    this.props.listClass = '.'+this.drag$GetListClass();
     this.addItems();
     this.props.rowHeight = 40;
     this.props.items$ = this.props.el$('.nav-creator-list-item');

@@ -25,7 +25,8 @@ export class NavCreatorListItemView extends ViewStream {
 
   onClickEvent(e){
     let {type} = e.props();
-    if (type==='delete'){
+    let isLastEl = this.props.el.parentElement.querySelectorAll('.nav-creator-list-item').length;
+    if (type==='delete' && isLastEl>=2){
       this.disposeViewStream();
     } else if (type==='expand') {
       //this.appendView(new NavCreatorListView());

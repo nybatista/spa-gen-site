@@ -38,8 +38,9 @@ export class DraggableTrait extends SpyneTrait {
       tl.to(el, .125, {y:height, ease: Power1.easeInOut});
     };
 
-    const items = this.props.el$('.nav-creator-list-item').el;
-    console.log("ITEMS IS ",items);
+    let items = this.props.el$('.nav-creator-list-item').el;
+    items = items.length !== undefined ? items : [items];
+
     items.forEach(onUpdateItem);
     tl.play();
 
@@ -62,17 +63,11 @@ export class DraggableTrait extends SpyneTrait {
         const rowIndex = clamp(Math.round(itemY / rowHeight), 0, totalRows - 1);
         const currentIndex = obj.index*1;
         const changeIndex = rowIndex !== currentIndex;
-        //console.log("ROW INDEXES ", {rowIndex, currentIndex});
         if (changeIndex === true){
           this.drag$UpdateIndex(obj, currentIndex, rowIndex);
         }
       };
 
-      const onReorder = ()=>{
-        const reorder = (obj)=>this.props.el.appendChild(obj.el);
-        this.props.dragItems.forEach(reorder);
-
-      };
 
       const onDragUp = ()=>{
         const el = obj.el;
@@ -110,7 +105,7 @@ export class DraggableTrait extends SpyneTrait {
       return obj;
 
     };
-
+    items = items.length !== undefined ? items : [items];
     return values(mapObjIndexed(createDragItem, items));
   }
 

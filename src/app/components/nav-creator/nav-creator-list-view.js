@@ -26,7 +26,6 @@ export class NavCreatorListView extends ViewStream {
   }
 
   onAddNewItem(e){
-    console.log("add new item ");
     let text = 'new item';
     let data = {text};
     this.appendView(new NavCreatorListItemView({data}));
@@ -37,13 +36,10 @@ export class NavCreatorListView extends ViewStream {
   onLifeCycleEvent(e){
     let {id} = e.props();
 
-    console.log('lifecycle event ',this.props.dragItems,e.props());
     this.props.dragItems = this.drag$RemoveDeletedDragItem(id);
-
-
-    console.log("ID ",{id},this.props.dragItems);
-    this.drag$ResetPositions();
     this.drag$InitDraggable(false);
+    this.drag$ResetPositions();
+
 
   }
 

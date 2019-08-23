@@ -1,5 +1,5 @@
 import {ViewStream} from 'spyne';
-import {NavCreatorListView} from './nav-creator-list-view';
+import {NodeContainerView} from './node-container-view';
 
 export class NavCreatorView extends ViewStream {
 
@@ -24,7 +24,7 @@ export class NavCreatorView extends ViewStream {
   }
 
   onRendered() {
-    this.appendView(new NavCreatorListView(), '#creative-list-holder');
+    this.appendView(new NodeContainerView(), '#creative-list-holder');
   }
 
 }

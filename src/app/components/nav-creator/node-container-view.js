@@ -1,12 +1,12 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
-import {NavCreatorListItemView} from './nav-creator-list-item-view';
+import {NodeItemView} from './node-item-view';
 import {DraggableTrait} from '../../traits/draggable-trait';
 
-export class NavCreatorListView extends ViewStream {
+export class NodeContainerView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName='ul';
-    props.id = 'nav-creator-list';
+    props.id = 'node-container';
     props.traits = DraggableTrait;
     super(props);
 
@@ -28,7 +28,7 @@ export class NavCreatorListView extends ViewStream {
   addNewItem(text='new item'){
     let data = {text};
     const parentId = this.props.vsid;
-    this.appendView(new NavCreatorListItemView({data, parentId}));
+    this.appendView(new NodeItemView({data, parentId}));
 
   }
 
@@ -70,7 +70,7 @@ export class NavCreatorListView extends ViewStream {
     const addItem = (text)=>{
       let parentId = this.props.vsid;
      let data = {text};
-     this.appendView(new NavCreatorListItemView({data,parentId}));
+     this.appendView(new NodeItemView({data,parentId}));
     };
 
    // arr.forEach(addItem);
@@ -87,7 +87,7 @@ export class NavCreatorListView extends ViewStream {
     this.props.listClass = '.'+this.drag$GetListClass();
     this.addItems();
     this.props.rowHeight = 40;
-    this.props.items$ = this.props.el$('.nav-creator-list-item');
+    this.props.items$ = this.props.el$('.node-item');
     this.drag$InitDraggable();
     this.addChannel("CHANNEL_UI");
     this.addChannel("CHANNEL_LIFECYCLE");

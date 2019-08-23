@@ -1,15 +1,15 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
-import {NavCreatorListView} from './nav-creator-list-view';
+import {NodeContainerView} from './node-container-view';
 
-export class NavCreatorListItemView extends ViewStream {
+export class NodeItemView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName = 'li';
     props.sendLifecyleEvents=true;
-    //props.class=`nav-creator-list-item`;
-    props.class=`nav-creator-list-item list-item-${props.parentId}`;
+    //props.class=`node-item`;
+    props.class=`node-item list-item-${props.parentId}`;
     props.dataset = props.data;
-    props.template = require('./templates/nav-creator-list-item.tmpl.html');
+    props.template = require('./templates/node-item.tmpl.html');
     super(props);
 
   }
@@ -27,11 +27,11 @@ export class NavCreatorListItemView extends ViewStream {
 
   onClickEvent(e){
     let {type} = e.props();
-    let isLastEl = this.props.el.parentElement.querySelectorAll('.nav-creator-list-item').length;
+    let isLastEl = this.props.el.parentElement.querySelectorAll('.node-item').length;
     if (type==='delete' && isLastEl>=2){
       this.disposeViewStream();
     } else if (type==='expand') {
-      this.appendView(new NavCreatorListView(), '.list-holder');
+      this.appendView(new NodeContainerView(), '.list-holder');
     }
 
   }

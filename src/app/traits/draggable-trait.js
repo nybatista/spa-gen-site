@@ -1,7 +1,7 @@
 import {SpyneTrait} from 'spyne';
 import {Draggable} from 'gsap/Draggable';
 import {TweenMax, TimelineMax} from 'gsap';
-import {mapObjIndexed, map, filter, reject, multiply, range, compose, pathEq, prop, values} from 'ramda';
+import {mapObjIndexed, reduce, add, slice, clamp, map, filter, reject, multiply, range, compose, pathEq, prop, values} from 'ramda';
 
 export class DraggableTrait extends SpyneTrait {
 
@@ -12,7 +12,7 @@ export class DraggableTrait extends SpyneTrait {
   }
 
   static drag$GetListClass(){
-    return `list-item-${this.props.vsid}`;
+    return `node-item-${this.props.vsid}`;
   }
 
 
@@ -24,8 +24,31 @@ export class DraggableTrait extends SpyneTrait {
     tempObj.index = from;
     let el = tempObj.el;
     let rowHeight = tempObj.index * this.props.rowHeight;
+    rowHeight = this.drag$GetHeight(tempObj.index);
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
   }
+
+  static drag$GegHeightsArr(){
+    const mapHeights = (obj)=>{
+      let h = this.props.rowHeight;
+      let el = obj.el;
+      let nodeItemsLen = el.querySelectorAll('div.node-hangar ul li').length;
+      let nodesHeight = nodeItemsLen * h;
+      let finalHeight = h+nodesHeight;
+      //console.log(" H NODECONTAINER ",{h,finalHeight,nodesHeight,el});
+      return finalHeight;
+
+    };
+
+    let items = this.props.dragItems ? this.props.dragItems : this.props.el$(this.props.listClass).el;
+    console.log("HEIGHTS ARR ",map(mapHeights, items));
+    return map(mapHeights, items);
+  }
+
+  static drag$GetHeight(index=0, arr = this.drag$GegHeightsArr()){
+        return reduce(add,0, slice(0, index, arr))
+  }
+
 
 
   static drag$RemoveDeletedDragItem(id, dragItems=this.props.dragItems){
@@ -38,8 +61,9 @@ export class DraggableTrait extends SpyneTrait {
   static drag$ResetPositions(createDragFn = this.drag$CreateDraggableList){
     const tl = new TimelineMax({paused:true, onComplete:this.createDragFn});
     const rowHeight = this.props.rowHeight;
+    let heightsArr = this.drag$GegHeightsArr();
     const onUpdateItem =(el, i)=>{
-      const height = i*rowHeight;
+      const height = this.drag$GetHeight(i, heightsArr) ;// i*rowHeight;
       tl.to(el, .125, {y:height, ease: Power1.easeInOut});
     };
 
@@ -62,6 +86,8 @@ export class DraggableTrait extends SpyneTrait {
     const createDragItem = (el, index)=>{
       el._gsTransform = undefined;
       const totalRows = items.length;
+      const heightsArr = this.drag$GegHeightsArr();
+
       const clamp = (value, a, b)=> value < a ? a : value > b ? b : value;
       const onDragging=()=>{
         const itemY = obj.position.y;
@@ -76,7 +102,8 @@ export class DraggableTrait extends SpyneTrait {
 
       const onDragUp = ()=>{
         const el = obj.el;
-        const rowHeight = obj.index * this.props.rowHeight;
+        const rowHeight = this.drag$GetHeight(obj.index);// obj.index * this.props.rowHeight;
+        console.log("ROW HEIGHT INDEX ",this.drag$GetHeight(obj.index));
         TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut, onComplete:this.drag$ReOrder});
       };
 
@@ -100,11 +127,15 @@ export class DraggableTrait extends SpyneTrait {
       let position = el._gsTransform;
       let indexStart = index-1;
       indexStart =  indexStart<= 0 ? 0 : indexStart;
-      const rowHeightStart = indexStart * rowHeight;
+      let rowHeightStart = indexStart * rowHeight;
+
+      rowHeightStart = this.drag$GetHeight(indexStart, heightsArr);
+      let rowHeightTo  = this.drag$GetHeight(index, heightsArr);
+
       if (animate===true && position.y !== index*rowHeight) {
         TweenMax.fromTo(el, .25,
             {y: rowHeightStart, opacity:0},
-            {y: index * rowHeight, opacity:1, ease: Power1.easeInOut});
+            {y: rowHeightTo, opacity:1, ease: Power1.easeInOut});
       };
       let obj = {el,position, index, dragger};
       return obj;

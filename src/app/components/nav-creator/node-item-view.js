@@ -7,7 +7,7 @@ export class NodeItemView extends ViewStream {
     props.tagName = 'li';
     props.sendLifecyleEvents=true;
     //props.class=`node-item`;
-    props.class=`node-item list-item-${props.parentId}`;
+    props.class=`node-item node-item-${props.parentId}`;
     props.dataset = props.data;
     props.template = require('./templates/node-item.tmpl.html');
     super(props);
@@ -31,7 +31,7 @@ export class NodeItemView extends ViewStream {
     if (type==='delete' && isLastEl>=2){
       this.disposeViewStream();
     } else if (type==='expand') {
-      this.appendView(new NodeContainerView(), '.list-holder');
+      this.appendView(new NodeContainerView(), '.node-hangar');
     }
 
   }

@@ -15,7 +15,7 @@ export class NodeContainerView extends ViewStream {
   addActionListeners() {
 
     let payloadClassFilter = new ChannelPayloadFilter("", {
-      class: (c) => c.indexOf(`list-item-${this.props.vsid}`)>=0
+      class: (c) => c.indexOf(`node-item-${this.props.vsid}`)>=0
     });
 
     return [
@@ -34,7 +34,7 @@ export class NodeContainerView extends ViewStream {
 
 
   onAddNewItem(e){
-    const itemClass = `.list-item-${this.props.vsid}`;
+    const itemClass = `.node-item-${this.props.vsid}`;
     const num2 = this.props.el$(itemClass).len;
     //const num = Math.random()*8;//this.props.el$(itemClass).len;
     //const num = this.props.el.querySelectorAll(itemClass).length;

@@ -41,7 +41,7 @@ export class DraggableTrait extends SpyneTrait {
     };
 
     let items = this.props.dragItems ? this.props.dragItems : this.props.el$(this.props.listClass).el;
-    console.log("HEIGHTS ARR ",map(mapHeights, items));
+    console.log("HEIGHTS ARR ",this.props.vsid,map(mapHeights, items));
     return map(mapHeights, items);
   }
 
@@ -110,7 +110,7 @@ export class DraggableTrait extends SpyneTrait {
 
       const onClickTest = (item)=>{
         const tagName = item.tagName.toLowerCase();
-        return ['i','input'].indexOf(tagName)>=0;
+        return ['i','input','p.add-subnav'].indexOf(tagName)>=0;
 
         };
 

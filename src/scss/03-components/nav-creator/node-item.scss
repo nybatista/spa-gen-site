@@ -20,21 +20,41 @@ li.node-item{
     display:flex;
     justify-content: space-between;
     background: #00aa88;
-    max-height:40px;
+    max-height:38px;
 
     div.icons {
       position: relative;
       justify-self: flex-end;
       display: flex;
       justify-content: start;
+      flex-direction: column;
+
+      p.add-subnav{
+       // background: coral;
+        position:relative;
+        font-size:9px;
+        padding:0;
+        margin:0;
+        cursor:pointer;
+
+        &.no-subnav{
+          opacity:0;
+          pointer-events: 0;
+        }
+      }
 
       i {
         //background: orange;
+        position:relative;
+        align-self: flex-end;;
+
         cursor: pointer;
         // font-size:8px;
+        //background: skyblue;
 
-        &.expand {
-          transform: rotate(90deg);
+
+        &.delete {
+          transform: rotate(180deg);
         }
       }
     }
@@ -45,7 +65,6 @@ li.node-item{
       margin-bottom: 4px;
 
       input {
-
         position: relative;
         z-index: 10;
         // max-width:50px;

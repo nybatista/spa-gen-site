@@ -24,7 +24,9 @@ export class NavCreatorView extends ViewStream {
   }
 
   onRendered() {
-    this.appendView(new NodeContainerView(), '#creative-list-holder');
+    const triggerBtn = `${this.props.id$} .btn-blue`;
+
+    this.appendView(new NodeContainerView({addInitItem: true, triggerBtn}), '#creative-list-holder');
   }
 
 }

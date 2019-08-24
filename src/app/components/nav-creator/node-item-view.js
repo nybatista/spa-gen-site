@@ -57,7 +57,7 @@ export class NodeItemView extends ViewStream {
     let triggerBtn = `${this.props.id$} p.add-subnav`;
     let addInitItem = true;
     let terminate = true;;
-    this.appendView(new NodeContainerView({triggerBtn, terminate, addInitItem}));
+    this.appendView(new NodeContainerView({triggerBtn, terminate, addInitItem}), '.node-hangar');
   }
 
   onRendered() {

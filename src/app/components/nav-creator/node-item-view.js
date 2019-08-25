@@ -27,16 +27,18 @@ export class NodeItemView extends ViewStream {
 
 
   onClickEvent(e){
-    console.log("click item ",this.isLocalEvent(e));
+    //console.log("click item ",this.isLocalEvent(e));
     if (this.isLocalEvent(e)===false){
       return;
     }
     let {type} = e.props();
     let isLastEl = this.props.el.parentElement.querySelectorAll('.node-item').length;
-    if (type==='delete' && isLastEl>=2){
+    const allowDelete = isLastEl >=2 || this.props.allowEmpty === true;
+    console.log("ALLOW DELETE ",{allowDelete, isLastEl, type}, this.props.allowEmpty);
+    if (type==='delete' && allowDelete === true){
       this.disposeViewStream();
     } else if (type==='expand') {
-      this.appendView(new NodeContainerView(), '.node-hangar');
+      //this.appendView(new NodeContainerView(), '.node-hangar');
     } else if (type==='subnav' && this.props.nodeContainer === undefined){
       this.addSubNodeContainer();
     }
@@ -57,7 +59,9 @@ export class NodeItemView extends ViewStream {
     let triggerBtn = `${this.props.id$} p.add-subnav`;
     let addInitItem = true;
     let terminate = true;;
-    this.appendView(new NodeContainerView({triggerBtn, terminate, addInitItem}), '.node-hangar');
+    let allowEmpty = true;
+    this.props.nodeContainer = new NodeContainerView({triggerBtn, allowEmpty, terminate, addInitItem});
+    this.appendView(this.props.nodeContainer, '.node-hangar');
   }
 
   onRendered() {

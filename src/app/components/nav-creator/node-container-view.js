@@ -5,8 +5,9 @@ import {DraggableTrait} from '../../traits/draggable-trait';
 export class NodeContainerView extends ViewStream {
 
   constructor(props = {}) {
-    console.log('add init item ',props.triggerBtn);
+    //console.log('add init item ',props.triggerBtn);
     props.addInitItem = props.addInitItem !==undefined ? props.addInitItem : true;
+    props.allowEmpty = props.allowEmpty ? props.allowEmpty : false;
     props.tagName='ul';
     props.id = 'node-container';
     props.traits = DraggableTrait;
@@ -25,7 +26,7 @@ export class NodeContainerView extends ViewStream {
     return [
       ['CHANNEL_UI_CLICK_EVENT', 'onAddNewItem', this.props.triggerBtn],
       ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onLifeCycleEvent', payloadClassFilter],
-        ['CHANNEL_LIFECYCLE_RENDERED_EVENT', 'onLifecycleAddNewItem']
+        ['CHANNEL_LIFECYCLE_RENDERED_EVENT', 'onLifecycleNewItemAdded']
 
     ];
   }
@@ -33,21 +34,26 @@ export class NodeContainerView extends ViewStream {
   addNewItem(text='new item'){
     let data = {text};
     const parentId = this.props.vsid;
-    const terminate = this.props.terminate;
-    this.appendView(new NodeItemView({data, terminate, parentId}));
+    const {terminate, allowEmpty} = this.props;
+    this.appendView(new NodeItemView({data, terminate, allowEmpty, parentId}));
 
   }
 
 
   onAddNewItem(e){
-    console.log("ADD NEW ITEM ",e);
+    //console.log("ADD NEW ITEM ",e);
+
+    /** TODO:
+     *
+     *  TEST TO MAKE SURE ADD NEW IS FOR CURRENT ITEM ONLY
+     */
 
     const itemClass = `.node-item-${this.props.vsid}`;
     const num2 = this.props.el$(itemClass).len;
     //const num = Math.random()*8;//this.props.el$(itemClass).len;
     //const num = this.props.el.querySelectorAll(itemClass).length;
     const txt = `item-${num2+1}`;
-    console.log("NUM LI ",{itemClass, num2, num2});
+    //console.log("NUM LI ",{itemClass, num2, num2});
     this.addNewItem(txt);
     const delayer = ()=>this.drag$InitDraggable();
      // window.setTimeout(delayer, 10);
@@ -56,15 +62,15 @@ export class NodeContainerView extends ViewStream {
 
   }
 
-  onLifecycleAddNewItem(){
-    console.log("ADD LIFECYCLE");
+  onLifecycleNewItemAdded(e){
+    console.log("new item added ",e.props().class, this.props.vsid);;
     this.drag$ResetPositions();
   }
 
 
   onLifeCycleEvent(e){
     let {id} = e.props();
-      console.log('lifecycle events ',e,this.props.vsid);
+      //console.log('lifecycle events ',e,this.props.vsid);
     this.props.dragItems = this.drag$RemoveDeletedDragItem(id);
     this.drag$InitDraggable(false);
     this.drag$ResetPositions();
@@ -97,7 +103,7 @@ export class NodeContainerView extends ViewStream {
 
   onRendered() {
 
-    console.log("THIS CONTAINER ",this.props.vsid);
+    //console.log("THIS CONTAINER ",this.props.vsid);
 
     this.props.listClass = '.'+this.drag$GetListClass();
    // this.addItems();

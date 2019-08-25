@@ -41,7 +41,7 @@ export class DraggableTrait extends SpyneTrait {
     };
 
     let items = this.props.dragItems ? this.props.dragItems : this.props.el$(this.props.listClass).el;
-    console.log("HEIGHTS ARR ",this.props.vsid,map(mapHeights, items));
+    //console.log("HEIGHTS ARR ",this.props.vsid,map(mapHeights, items));
     return map(mapHeights, items);
   }
 
@@ -99,19 +99,20 @@ export class DraggableTrait extends SpyneTrait {
         }
       };
 
-
       const onDragUp = ()=>{
         const el = obj.el;
         const rowHeight = this.drag$GetHeight(obj.index);// obj.index * this.props.rowHeight;
-        console.log("ROW HEIGHT INDEX ",this.drag$GetHeight(obj.index));
+        //console.log("ROW HEIGHT INDEX ",this.drag$GetHeight(obj.index));
         TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut, onComplete:this.drag$ReOrder});
       };
 
 
       const onClickTest = (item)=>{
         const tagName = item.tagName.toLowerCase();
-        return ['i','input','p.add-subnav'].indexOf(tagName)>=0;
+        const isSubNav =  this.props.el$('div.node-hangar ul').exists === true &&  this.props.el$('div.node-hangar ul').el.contains(item);
+        console.log("ITEM IS ",this.props.vsid,item, this.props.el$('div.node-hangar ul').exists);
 
+        return ['i','input','p.add-subnav', 'ul'].indexOf(tagName)>=0 || isSubNav;
         };
 
       const dragger = new Draggable(el, {

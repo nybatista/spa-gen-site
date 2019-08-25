@@ -7,6 +7,7 @@ export class NodeItemView extends ViewStream {
     props.tagName = 'li';
     props.sendLifecyleEvents=true;
     props.data.terminateClass = props.terminate ? 'no-subnav' : 'nope';
+    props.data.parentId = props.parentId;
     //props.class=`node-item`;
     props.class=`node-item node-item-${props.parentId} ${props.terminateClass}`;
     props.dataset = props.data;

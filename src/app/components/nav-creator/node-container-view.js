@@ -9,7 +9,7 @@ export class NodeContainerView extends ViewStream {
     props.addInitItem = props.addInitItem !==undefined ? props.addInitItem : true;
     props.allowEmpty = props.allowEmpty ? props.allowEmpty : false;
     props.tagName='ul';
-    props.id = 'node-container';
+    props.class = 'node-container';
     props.traits = DraggableTrait;
     super(props);
    // console.log("TRIGGER BTN ",this.props.vsid, this.props.triggerBtn);

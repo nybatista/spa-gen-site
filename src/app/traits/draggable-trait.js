@@ -1,7 +1,7 @@
 import {SpyneTrait} from 'spyne';
 import {Draggable} from 'gsap/Draggable';
 import {TweenMax, TimelineMax} from 'gsap';
-import {mapObjIndexed, reduce, add, slice, clamp, map, filter, reject, multiply, range, compose, pathEq, prop, values} from 'ramda';
+import {mapObjIndexed, reduce, add, slice, clamp, map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
 
 export class DraggableTrait extends SpyneTrait {
 
@@ -109,10 +109,14 @@ export class DraggableTrait extends SpyneTrait {
 
       const onClickTest = (item)=>{
         const tagName = item.tagName.toLowerCase();
-        const isSubNav =  this.props.el$('div.node-hangar ul').exists === true &&  this.props.el$('div.node-hangar ul').el.contains(item);
-        console.log("ITEM IS ",this.props.vsid,item, this.props.el$('div.node-hangar ul').exists);
 
-        return ['i','input','p.add-subnav', 'ul'].indexOf(tagName)>=0 || isSubNav;
+        const nearestUl = prop('id', item.closest('ul'));
+        const liParent = path(['dataset', 'parentId'], item.closest('li'));
+        const noParentDrag = nearestUl === undefined || nearestUl !== liParent;
+       // const isSubNav =  this.props.el$('div.node-hangar ul').exists === true &&  this.props.el$('div.node-hangar ul').el.contains(item);
+        //console.log("ITEM IS ",this.props.vsid,item, this.props.el$('div.node-hangar ul').exists);
+        console.log("ITEM IS ",{item,liParent, nearestUl, noParentDrag},item.closest('ul'));
+        return ['i','input','p.add-subnav', 'ul'].indexOf(tagName)>=0  || noParentDrag === true;
         };
 
       const dragger = new Draggable(el, {

@@ -91,9 +91,11 @@ export class DraggableTrait extends SpyneTrait {
       const clamp = (value, a, b)=> value < a ? a : value > b ? b : value;
       const onDragging=()=>{
         const itemY = obj.position.y;
-        const rowIndex = clamp(Math.round(itemY / rowHeight), 0, totalRows - 1);
+        const rowIndex = Math.abs(clamp(Math.round(itemY / rowHeight), 0, totalRows - 1));
         const currentIndex = obj.index*1;
         const changeIndex = rowIndex !== currentIndex;
+
+       //console.log("ON DRAGGING: ",{el, totalRows,itemY, rowIndex, currentIndex, changeIndex, heightsArr},this.props.el);
         if (changeIndex === true){
           this.drag$UpdateIndex(obj, currentIndex, rowIndex);
         }
@@ -117,7 +119,7 @@ export class DraggableTrait extends SpyneTrait {
         //console.log("ITEM IS ",this.props.vsid,item, this.props.el$('div.node-hangar ul').exists);
         const subNavUl = this.props.el.querySelector('div.node-hangar ul');
         const isSubNav =  subNavUl !== null && subNavUl.contains(item);
-        console.log("CLICKADY CLACK ",{obj,item,subNavUl, isSubNav});
+       //console.log("CLICKADY CLACK ",{obj,item,subNavUl, isSubNav});
         //console.log("ITEM IS ",{item,liParent, nearestUl, noParentDrag},item.closest('ul'));
         return ['i','input','p.add-subnav', 'ul'].indexOf(tagName)>=0  || isSubNav === true;
         };
@@ -128,7 +130,7 @@ export class DraggableTrait extends SpyneTrait {
           dragClickables: false,
           clickableTest: onClickTest,
           onRelease: onDragUp,
-          bounds: this.props.id$,
+          bounds: document.querySelector('#creative-list-holder'),
           scope: el
       });
 
@@ -146,6 +148,8 @@ export class DraggableTrait extends SpyneTrait {
             {y: rowHeightTo, opacity:1, ease: Power1.easeInOut});
       };
       let obj = {el,position, index, dragger};
+
+      console.log("ANIM START ",{rowHeightStart, rowHeightTo, el,position,index,dragger});
       return obj;
 
     };

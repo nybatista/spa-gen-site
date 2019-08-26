@@ -35,7 +35,7 @@ export class NodeItemView extends ViewStream {
     let {type} = e.props();
     let isLastEl = this.props.el.parentElement.querySelectorAll('.node-item').length;
     const allowDelete = isLastEl >=2 || this.props.allowEmpty === true;
-    console.log("ALLOW DELETE ",{allowDelete, isLastEl, type}, this.props.allowEmpty);
+   // console.log("ALLOW DELETE ",{allowDelete, isLastEl, type}, this.props.allowEmpty);
     if (type==='delete' && allowDelete === true){
       this.disposeViewStream();
     } else if (type==='expand') {

@@ -63,7 +63,7 @@ export class NodeContainerView extends ViewStream {
   }
 
   onLifecycleNewItemAdded(e){
-    console.log("new item added ",e.props().class, this.props.vsid);;
+    //console.log("new item added ",e.props().class, this.props.vsid);;
     this.drag$ResetPositions();
   }
 

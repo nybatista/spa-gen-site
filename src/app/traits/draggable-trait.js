@@ -149,7 +149,7 @@ export class DraggableTrait extends SpyneTrait {
       };
       let obj = {el,position, index, dragger};
 
-      console.log("ANIM START ",{rowHeightStart, rowHeightTo, el,position,index,dragger});
+      //console.log("ANIM START ",{rowHeightStart, rowHeightTo, el,position,index,dragger});
       return obj;
 
     };

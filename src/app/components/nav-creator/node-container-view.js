@@ -18,7 +18,8 @@ export class NodeContainerView extends ViewStream {
 
   addActionListeners() {
 
-	let  propFilters = {class:  (c) => c.indexOf(`node-item-${this.props.vsid}`)>=0 };
+   // let  propFilters = {class:  (c) => c.indexOf(`node-item-${this.props.vsid}`)>=0 };
+    let  propFilters = {class:  (c) => c.indexOf(`node-item-`)>=0 };
    let payloadClassFilter = new ChannelPayloadFilter({propFilters});
 
    // console.log("TRIGGER BTN ",this.props.vsid, this.props.triggerBtn);
@@ -26,9 +27,14 @@ export class NodeContainerView extends ViewStream {
     return [
       ['CHANNEL_UI_CLICK_EVENT', 'onAddNewItem', this.props.triggerBtn],
       ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onLifeCycleEvent', payloadClassFilter],
-        ['CHANNEL_LIFECYCLE_RENDERED_EVENT', 'onLifecycleNewItemAdded']
-
+      ['CHANNEL_LIFECYCLE_RENDERED_EVENT', 'onLifecycleNewItemAdded'],
+        ['CHANNEL_NODE_LIST_.*EVENT', 'onChannelNodeList']
     ];
+  }
+
+  onChannelNodeList(e){
+
+    console.log("CHANNEL NODE LIST ",e);
   }
 
   addNewItem(text='new item'){
@@ -116,6 +122,7 @@ export class NodeContainerView extends ViewStream {
     this.drag$InitDraggable();
     this.addChannel("CHANNEL_UI");
     this.addChannel("CHANNEL_LIFECYCLE");
+    this.addChannel("CHANNEL_NODE_LIST");
 
   }
 

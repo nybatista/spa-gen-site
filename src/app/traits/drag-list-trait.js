@@ -1,7 +1,7 @@
 import {SpyneTrait} from 'spyne';
 import {Draggable} from 'gsap/Draggable';
 import {TweenMax, TimelineMax} from 'gsap';
-import {mapObjIndexed, reduce, add, slice, clamp, map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
+import {mapObjIndexed, reduce, add, slice,  map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
 
 export class DragListTrait extends SpyneTrait {
 
@@ -29,16 +29,28 @@ export class DragListTrait extends SpyneTrait {
 
 
   static dragList$OnDragging(obj){
-    const clamp = (value, a, b)=> value < a ? a : value > b ? b : value;
-
+      let count = 0;
     return ()=>{
+      const clamp = (value, a, b)=> value < a ? a : value > b ? b : value;
+
+
       const itemY = obj.position.y;
-      const rowHeight = this.dragMethod$GetHeight(obj.index);
-      const rowIndex = Math.abs(clamp(Math.round(itemY / rowHeight), 0, obj.totalRows - 1));
+      const rowHeight = this.props.rowHeight;//= this.dragMethod$GetHeight(obj.index);
+      let max = Math.round(itemY / rowHeight);
+      const totalRows = this.props.el$(this.props.listClass).len;// obj.totalRows - 1;
+      //max = max<=0 ? 1 : max;
+     // const rowIndex = Math.abs(clamp(max, 0,  totalRows));
+      //const rowIndex = Math.abs(clamp(Math.round(itemY / rowHeight), 0, totalRows));
+      const rowIndex = this.dragMethod$GetNearestHeight(itemY);
       const currentIndex = obj.index*1;
       const changeIndex = rowIndex !== currentIndex;
-      if (changeIndex === true){
-        this.dragMethod$UpdateIndex(obj, currentIndex, rowIndex);
+      console.log("CHANGE INDEX ",{changeIndex, itemY, rowIndex, currentIndex, totalRows}, this.props.dragItems);
+
+      if (changeIndex === true && count!==-10){
+        count ++;
+
+        //console.log("CHANGE INDEX ",{obj,currentIndex,rowIndex});
+        this.dragMethod$UpdateIndex(obj, currentIndex, rowIndex, this.props.dragItems);
       }
 
     }
@@ -55,7 +67,7 @@ export class DragListTrait extends SpyneTrait {
       let obj = {};
 
       const totalRows = items.length;
-      const heightsArr = this.dragMethod$GegHeightsArr();
+      const heightsArr = this.dragMethod$GetHeightsArr();
 
 
       const dragger = new Draggable(el, {

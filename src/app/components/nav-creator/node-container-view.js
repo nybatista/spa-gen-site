@@ -58,7 +58,7 @@ export class NodeContainerView extends ViewStream {
   onRendered() {
 
     //console.log("THIS CONTAINER ",this.props.vsid);
-
+    this.props.dragHeightsArr = [0];
     this.props.listClass = '.'+this.dragMethod$GetListClass();
    // this.addItems();
     if (this.props.addInitItem === true){

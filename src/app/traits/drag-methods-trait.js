@@ -15,7 +15,6 @@ export class DragMethodsTrait extends SpyneTrait {
     return `node-item-${vsid}`;
   }
 
-
   static dragMethod$UpdateIndex(obj, from ,to, dragItems = this.props.dragItems){
     let tempObj = dragItems[to];
     dragItems[to] = obj;
@@ -23,8 +22,7 @@ export class DragMethodsTrait extends SpyneTrait {
     dragItems[from] = tempObj;
     tempObj.index = from;
     let el = tempObj.el;
-    let rowHeight = tempObj.index * this.props.rowHeight;
-    rowHeight = this.dragMethod$GetHeight(tempObj.index);
+    let rowHeight = this.dragMethod$GetHeight(tempObj.index);
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
   }
 
@@ -37,7 +35,6 @@ export class DragMethodsTrait extends SpyneTrait {
       let finalHeight = h+nodesHeight;
       //console.log(" H NODECONTAINER ",{h,finalHeight,nodesHeight,el});
       return finalHeight;
-
     };
 
     let items = this.props.dragItems ? this.props.dragItems : this.props.el$(this.props.listClass).el;
@@ -49,15 +46,11 @@ export class DragMethodsTrait extends SpyneTrait {
     return reduce(add,0, slice(0, index, arr))
   }
 
-
-
   static dragMethod$RemoveDeletedDragItem(id, dragItems=this.props.dragItems){
     const rejectId = reject(pathEq(['el', 'id'], id));
     dragItems = rejectId(dragItems);
     return dragItems;
   }
-
-
 
   static dragMethod$ReOrder(el=this.props.el, dragItems = this.props.dragItems){
     const reorder = (obj)=> el.appendChild(obj.el);

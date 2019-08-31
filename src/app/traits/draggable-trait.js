@@ -1,7 +1,6 @@
 import {SpyneTrait} from 'spyne';
 import {Draggable} from 'gsap/Draggable';
-import {TweenMax, TimelineMax} from 'gsap';
-import {mapObjIndexed, reduce, add, slice, clamp, map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
+ç
 
 export class DraggableTrait extends SpyneTrait {
 

@@ -25,8 +25,11 @@ export class DragMethodsTrait extends SpyneTrait {
     let rowHeight = this.dragMethod$GetHeight(tempObj.index);
     console.log("UPDATE INDEX ",{tempObj, rowHeight, el, dragItems, obj});
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});*/
+    console.log('-----------------',{from, to})
+    const getObjInfo = o=>console.log('o is ',o.origIndex,{o});
 
-    let tempObj = this.props.dragItems[to];
+
+    let tempObj = dragItems[to];
     dragItems[to] = obj;
     obj.index = to;
     dragItems[from] = tempObj;
@@ -34,6 +37,8 @@ export class DragMethodsTrait extends SpyneTrait {
     let el = tempObj.el;
     //let rowHeight = tempObj.index * this.props.rowHeight;
     let rowHeight = this.dragMethod$GetHeight(tempObj.index);
+
+    this.props.dragItems.forEach(getObjInfo);
 
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
 
@@ -47,7 +52,7 @@ export class DragMethodsTrait extends SpyneTrait {
 
     let arr = this.dragMethod$GetHeightsArr()
     const mapValsIndexed = (val, index)=>{
-      console.log("VAL AND INDEX ",{val,index})
+      //console.log("VAL AND INDEX ",{val,index})
 
      return reduce(add,0, slice(0, index, arr));
     }
@@ -59,7 +64,7 @@ export class DragMethodsTrait extends SpyneTrait {
   static dragMethod$GetNearestHeight(yPos){
     let arr = [...this.props.dragHeightsArr];
     arr.push(1000000);
-    console.log("ARR IS ",arr);
+    //console.log("ARR IS ",arr);
 
     return compose(clamp(0, arr.length-2), findIndex(lte(yPos)))(arr);
    }
@@ -68,8 +73,10 @@ export class DragMethodsTrait extends SpyneTrait {
 
   static dragMethod$GetHeightsArr(){
     const mapHeights = (obj)=>{
+      console.log("EL IS ",obj);
+
       let h = this.props.rowHeight;
-      let el = obj.el;
+      let el = obj.el !== undefined ? obj.el : obj;
       let nodeItemsLen = el.querySelectorAll('div.node-hangar ul li').length;
       let nodesHeight = nodeItemsLen * h;
       let finalHeight = h+nodesHeight;
@@ -78,7 +85,9 @@ export class DragMethodsTrait extends SpyneTrait {
     };
 
     let items = this.props.dragItems ? this.props.dragItems : this.props.el$(this.props.listClass).el;
-   // console.log("HEIGHTS ARR ",this.props.vsid,map(mapHeights, items));
+    items = Array.from(items);
+
+   console.log("HEIGHTS ARR ", items.length,{items},this.props.vsid);
     return map(mapHeights, items);
   }
 
@@ -94,8 +103,8 @@ export class DragMethodsTrait extends SpyneTrait {
   }
 
   static dragMethod$ReOrder(el=this.props.el, dragItems = this.props.dragItems){
-    const reorder = (obj)=> el.appendChild(obj.el);
-    dragItems.forEach(reorder);
+    //const reorder = (obj)=> el.appendChild(obj.el);
+  //  dragItems.forEach(reorder);
   }
 
 

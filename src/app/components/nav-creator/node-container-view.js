@@ -38,12 +38,15 @@ export class NodeContainerView extends ViewStream {
 
 
   onLifecycleNewItemAdded(e){
+    console.log("EVT: Lifecycle Rendered");
+
     this.dragState$ResetPositions();
   }
 
 
   onLifeCycleEvent(e){
     let {id} = e.props();
+    console.log("EVT: Lifecycle Dispose");
     this.props.dragItems = this.dragState$RemoveItem(id);
     this.dragState$InitDraggable(false)
     this.dragState$ResetPositions();
@@ -58,6 +61,8 @@ export class NodeContainerView extends ViewStream {
   onRendered() {
 
     //console.log("THIS CONTAINER ",this.props.vsid);
+    console.log("EVT: Lifecycle ON RENDER");
+
     this.props.dragHeightsArr = [0];
     this.props.listClass = '.'+this.dragMethod$GetListClass();
    // this.addItems();
@@ -67,7 +72,7 @@ export class NodeContainerView extends ViewStream {
 
     this.props.rowHeight = 40;
     this.props.items$ = this.props.el$('.node-item');
-    this.dragState$InitDraggable();
+  //  this.dragState$InitDraggable();
     this.addChannel("CHANNEL_UI");
     this.addChannel("CHANNEL_LIFECYCLE");
     this.addChannel("CHANNEL_NODE_LIST");

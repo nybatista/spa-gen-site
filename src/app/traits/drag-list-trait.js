@@ -16,6 +16,12 @@ export class DragListTrait extends SpyneTrait {
        const el = obj.el;
        const rowHeight = this.dragMethod$GetHeight(obj.index);// obj.index * this.props.rowHeight;
        TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut, onComplete:this.dragMethod$ReOrder});
+
+
+      console.log('-------on up----------',obj)
+      const getObjInfo = o=>console.log('o is ',o.origIndex,{o});
+      this.props.dragItems.forEach(getObjInfo);
+
     }
 
   }
@@ -44,7 +50,7 @@ export class DragListTrait extends SpyneTrait {
       const rowIndex = this.dragMethod$GetNearestHeight(itemY);
       const currentIndex = obj.index*1;
       const changeIndex = rowIndex !== currentIndex;
-      console.log("CHANGE INDEX ",{changeIndex, itemY, rowIndex, currentIndex, totalRows}, this.props.dragItems);
+      //console.log("CHANGE INDEX ",{changeIndex, itemY, rowIndex, currentIndex, totalRows}, this.props.dragItems);
 
       if (changeIndex === true && count!==-10){
         count ++;
@@ -95,8 +101,11 @@ export class DragListTrait extends SpyneTrait {
       obj.el = el;
       obj.position = position;
       obj.index= index;
+      obj.origIndex = index;
       obj.totalRows = totalRows;
       obj.dragger = dragger;
+      console.log("DRAG INIT OBJ ",index, obj);
+
       return obj;
 
     };

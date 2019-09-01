@@ -14,8 +14,8 @@ export class DragStatesTrait extends SpyneTrait {
   static dragState$InitDraggable(animate=true){
     this.props.dragItems = this.dragList$CreateList(animate);
     this.props.dragHeightsArr = this.dragMethod$GetHeightsAddedArr();
-
-    console.log("HEIGHTS ARR IS ",this.props.dragHeightsArr);
+    console.log("DRAG STATE ",this.props.dragItems);
+    //console.log("HEIGHTS ARR IS ",this.props.dragHeightsArr);
   }
 
 
@@ -49,7 +49,7 @@ export class DragStatesTrait extends SpyneTrait {
     const txt = `item-${num+1}`;
     createItem(txt);
 
-    this.dragState$InitDraggable()
+    //this.dragState$InitDraggable()
   }
 
 

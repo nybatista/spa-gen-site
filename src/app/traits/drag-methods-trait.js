@@ -26,7 +26,7 @@ export class DragMethodsTrait extends SpyneTrait {
     console.log("UPDATE INDEX ",{tempObj, rowHeight, el, dragItems, obj});
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});*/
     console.log('-----------------',{from, to})
-    const getObjInfo = o=>console.log('o is ',o.origIndex,{o});
+    const getObjInfo = o=>console.log('o is ',o.index,o.origIndex, {o});
 
 
     let tempObj = dragItems[to];
@@ -73,10 +73,8 @@ export class DragMethodsTrait extends SpyneTrait {
 
   static dragMethod$GetHeightsArr(){
     const mapHeights = (obj)=>{
-      console.log("EL IS ",obj);
-
       let h = this.props.rowHeight;
-      let el = obj.el !== undefined ? obj.el : obj;
+      let el = obj.el;
       let nodeItemsLen = el.querySelectorAll('div.node-hangar ul li').length;
       let nodesHeight = nodeItemsLen * h;
       let finalHeight = h+nodesHeight;
@@ -85,9 +83,7 @@ export class DragMethodsTrait extends SpyneTrait {
     };
 
     let items = this.props.dragItems ? this.props.dragItems : this.props.el$(this.props.listClass).el;
-    items = Array.from(items);
-
-   console.log("HEIGHTS ARR ", items.length,{items},this.props.vsid);
+   // console.log("HEIGHTS ARR ",this.props.vsid,map(mapHeights, items));
     return map(mapHeights, items);
   }
 

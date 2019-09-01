@@ -100,8 +100,8 @@ export class DragListTrait extends SpyneTrait {
 
       obj.el = el;
       obj.position = position;
-      obj.index= index;
-      obj.origIndex = index;
+      obj.index= index*1;
+      obj.origIndex = Math.random();
       obj.totalRows = totalRows;
       obj.dragger = dragger;
       console.log("DRAG INIT OBJ ",index, obj);

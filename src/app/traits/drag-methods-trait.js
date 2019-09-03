@@ -15,7 +15,7 @@ export class DragMethodsTrait extends SpyneTrait {
     return `node-item-${vsid}`;
   }
 
-  static dragMethod$UpdateIndex(obj, from ,to, dragItems = this.props.dragItems){
+  static dragMethod$UpdateIndex(obj, from ,to ){
 /*    let tempObj =  this.props.dragItems[to];
     dragItems[to] = obj;
     obj.index = to;
@@ -26,25 +26,49 @@ export class DragMethodsTrait extends SpyneTrait {
     console.log("UPDATE INDEX ",{tempObj, rowHeight, el, dragItems, obj});
     TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});*/
     let txt = o => o.el.querySelector('input').value;
-    const getObjInfo = o=>console.log('o is ',o.index, txt(o), {o});
+    const getObjInfo = (o,i) =>{
+      o.index = i*1;
+      let ind = o.index;
+      let isDragging = o.dragger.isDragging;
+      //o.dragger.update();
+      console.log('o is ',o.index, txt(o), {ind, isDragging,o});
+      return o;
+    }
 
 
-    let tempObj = dragItems[to];
-    dragItems[to] = obj;
-    obj.index = to;
-    dragItems[from] = tempObj;
+
+    let tempObj = this.props.dragItems[to];
+
+    let tempOrig = tempObj.origIndex;
+    let orig = obj.origIndex;
+   // obj.index = to;
+    //tempObj.index = from;
+    let isDragging = tempObj.dragger.isDragging;
+
+
     tempObj.index = from;
-    let el = tempObj.el;
-    //let rowHeight = tempObj.index * this.props.rowHeight;
+    this.props.dragItems[to] = obj;
+    this.props.dragItems[from] = tempObj;
+    /*
+     this.props.dragItems[to].index = to;
+     this.props.dragItems[from].index =from;
+     let rowHeight = tempObj.index * this.props.rowHeight;
+    */
     let rowHeight = this.dragMethod$GetHeight(tempObj.index);
-    console.log('-----update index------------',{from, to, rowHeight}, obj.index, tempObj.index);
+    console.log('-----update index------------',{from, to, rowHeight, tempOrig, orig}, obj.index, tempObj.index);
 
-    this.props.dragItems.forEach(getObjInfo);
+   // console.log('----update')
+    this.props.dragItems = values(mapObjIndexed(getObjInfo, this.props.dragItems));
+    console.log("DRAG ITEMS ",{isDragging},this.props.dragItems)
+    const onUpdateY = ()=>tempObj.dragger.update();
+    let el =tempObj.el;
+    if (isDragging !== true) {
+      console.log("DRAGGING ++++++++++++++++ ", tempObj.el);
+      TweenMax.to(el, .125, {y: rowHeight, ease: Power1.easeInOut});
+    }
 
-    TweenMax.to(el, 0, {y:rowHeight, ease: Power1.easeInOut});
 
-
-
+    return obj;
 
   }
 
@@ -78,11 +102,11 @@ export class DragMethodsTrait extends SpyneTrait {
     const mapHeights = (obj)=>{
       let h = this.props.rowHeight;
       let el = obj.el;
-      let nodeItemsLen = el.querySelectorAll('div.node-hangar ul li').length;
-      let nodesHeight = nodeItemsLen * h;
-      let finalHeight = h+nodesHeight;
+     // let nodeItemsLen = el.querySelectorAll('div.node-hangar ul li').length;
+     // let nodesHeight = nodeItemsLen * h;
+      //let finalHeight = h+nodesHeight;
       //console.log(" H NODECONTAINER ",{h,finalHeight,nodesHeight,el});
-      return finalHeight;
+      return h;
     };
 
     let items = this.props.dragItems ? this.props.dragItems : this.props.el$(this.props.listClass).el;
@@ -102,8 +126,12 @@ export class DragMethodsTrait extends SpyneTrait {
   }
 
   static dragMethod$ReOrder(el=this.props.el, dragItems = this.props.dragItems){
-    const reorder = (obj)=> el.appendChild(obj.el);
-    dragItems.forEach(reorder);
+    const reorder = (obj)=> {
+      el.appendChild(obj.el);
+      obj.dragger.update();
+    }
+   this.props.dragItems.forEach(reorder);
+  //this.dragState$ResetPositions()
   }
 
 

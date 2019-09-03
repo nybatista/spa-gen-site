@@ -65,8 +65,8 @@ export class NodeItemView extends ViewStream {
     this.appendView(this.props.nodeContainer, '.node-hangar');
   }
 
+  //this.addSubNodeContainer();
   onRendered() {
-    //this.addSubNodeContainer();
     this.addChannel("CHANNEL_UI");
   }
 

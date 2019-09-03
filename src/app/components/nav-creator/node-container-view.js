@@ -67,7 +67,7 @@ export class NodeContainerView extends ViewStream {
 
     this.props.rowHeight = 40;
     this.props.items$ = this.props.el$('.node-item');
-    this.dragState$InitDraggable();
+   // this.dragState$InitDraggable();
     this.addChannel("CHANNEL_UI");
     this.addChannel("CHANNEL_LIFECYCLE");
     this.addChannel("CHANNEL_NODE_LIST");

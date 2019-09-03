@@ -15,7 +15,7 @@ export class DragStatesTrait extends SpyneTrait {
     this.props.dragItems = this.dragList$CreateList(animate);
     this.props.dragHeightsArr = this.dragMethod$GetHeightsAddedArr();
 
-    console.log("HEIGHTS ARR IS ",this.props.dragHeightsArr);
+   // console.log("INIT IS ",this.props.dragHeightsArr);
   }
 
 

@@ -14,14 +14,14 @@ export class DragListTrait extends SpyneTrait {
   static dragList$OnDragUp(obj){
     return ()=>{
        const el = obj.el;
-      // const rowHeight = this.dragMethod$GetHeight(obj.index);// obj.index * this.props.rowHeight;
-     //  TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut, onComplete:this.dragMethod$ReOrder});
-      this.dragMethod$ReOrder();
+       const rowHeight = this.dragMethod$GetHeight(obj.index);// obj.index * this.props.rowHeight;
+       TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut, onComplete:this.dragMethod$ReOrder});
+      //this.dragMethod$ReOrder();
 
       console.log('-------on up----------',obj)
       const getObjInfo = o=>console.log('o is ',o.index,o.origIndex,{o});
 
-      this.props.dragItems = this.dragList$CreateList();
+     // this.props.dragItems = this.dragList$CreateList(false);
       this.props.dragItems.forEach(getObjInfo);
 
     }

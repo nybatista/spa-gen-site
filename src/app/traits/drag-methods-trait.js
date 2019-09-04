@@ -104,6 +104,7 @@ export class DragMethodsTrait extends SpyneTrait {
   static dragMethod$ReOrder(el=this.props.el, dragItems = this.props.dragItems){
     const reorder = (obj)=> el.appendChild(obj.el);
     dragItems.forEach(reorder);
+    this.props.dragItems = this.dragList$CreateList(false);
   }
 
 

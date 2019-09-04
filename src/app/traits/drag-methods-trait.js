@@ -41,7 +41,7 @@ export class DragMethodsTrait extends SpyneTrait {
 
     this.props.dragItems.forEach(getObjInfo);
 
-    TweenMax.to(el, 0, {y:rowHeight, ease: Power1.easeInOut});
+    TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
 
 
 

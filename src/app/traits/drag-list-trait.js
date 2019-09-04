@@ -20,6 +20,8 @@ export class DragListTrait extends SpyneTrait {
 
       console.log('-------on up----------',obj)
       const getObjInfo = o=>console.log('o is ',o.index,o.origIndex,{o});
+
+      this.props.dragItems = this.dragList$CreateList();
       this.props.dragItems.forEach(getObjInfo);
 
     }

@@ -36,7 +36,7 @@ export class DragMethodsTrait extends SpyneTrait {
     tempObj.index = from;
     let el = tempObj.el;
     //let rowHeight = tempObj.index * this.props.rowHeight;
-    let rowHeight = this.dragMethod$GetHeight(tempObj.index);
+    let rowHeight = this.dragMethod$GetUpHeight(tempObj.index);
     console.log('-----update index------------',{from, to, rowHeight}, obj.index, tempObj.index);
 
     this.props.dragItems.forEach(getObjInfo);
@@ -49,6 +49,7 @@ export class DragMethodsTrait extends SpyneTrait {
   }
 
 
+/*
   static dragMethod$GetHeightsAddedArr(){
 
     let arr = this.dragMethod$GetHeightsArr()
@@ -71,6 +72,35 @@ export class DragMethodsTrait extends SpyneTrait {
 
     return getLastIndex(arr);
    }
+*/
+
+
+
+
+  static dragMethod$GetHeightsAddedArr(){
+
+    let arr = this.dragMethod$GetHeightsArr()
+    const mapValsIndexed = (val, index)=>{
+      //console.log("VAL AND INDEX ",{val,index})
+
+      return reduce(add,0, slice(0, index, arr));
+    }
+
+    let newArr = arr.map(mapValsIndexed);
+    return newArr
+  }
+
+  static dragMethod$GetNearestHeight(yPos){
+    let arr = [...this.props.dragHeightsArr];
+    //arr.push(1000000);
+    // const getIndex = compose(clamp(0, arr.length-2), findIndex(lte(yPos)));
+    const getLastIndex = compose(clamp(0, arr.length-1), findLastIndex(gte(yPos)));
+    // console.log("ARR IS ",arr, {yPos}, getLastIndex(arr));
+
+    return getLastIndex(arr);
+  }
+
+
 
 
 
@@ -81,7 +111,7 @@ export class DragMethodsTrait extends SpyneTrait {
       let nodeItemsLen = el.querySelectorAll('div.node-hangar ul li').length;
       let nodesHeight = nodeItemsLen * h;
       let finalHeight = h+nodesHeight;
-      //console.log(" H NODECONTAINER ",{h,finalHeight,nodesHeight,el});
+      console.log(" H NODECONTAINER ",{h,finalHeight,nodesHeight,el});
       return finalHeight;
     };
 
@@ -90,7 +120,12 @@ export class DragMethodsTrait extends SpyneTrait {
     return map(mapHeights, items);
   }
 
+  static dragMethod$GetUpHeight(index, arr=this.dragMethod$GetHeightsAddedArr()){
+    return arr[index];
+  }
+
   static dragMethod$GetHeight(index=0, arr = this.dragMethod$GetHeightsArr()){
+    console.log("ARR IS ",this.props.dragHeightsArr)
     return this.props.dragHeightsArr[index];
     //return reduce(add,0, slice(0, index, arr))
   }

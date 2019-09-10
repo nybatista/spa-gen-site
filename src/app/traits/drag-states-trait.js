@@ -15,13 +15,12 @@ export class DragStatesTrait extends SpyneTrait {
     this.props.dragItems = this.dragList$CreateList(animate);
     this.props.dragHeightsArr = this.dragMethod$GetHeightsAddedArr();
 
-    console.log("HEIGHTS ARR IS ",this.props.dragHeightsArr);
+    //console.log("HEIGHTS ARR IS ",this.props.dragHeightsArr);
   }
 
 
   static dragState$ResetPositions(createDragFn = this.dragList$CreateList){
     const tl = new TimelineMax({paused:true, onComplete:createDragFn});
-    const rowHeight = this.props.rowHeight;
     let heightsArr = this.dragMethod$GetHeightsArr();
     const onUpdateItem =(el, i)=>{
       const height = this.dragMethod$GetHeight(i, heightsArr) ;// i*rowHeight;

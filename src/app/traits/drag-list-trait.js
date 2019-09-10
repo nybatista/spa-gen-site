@@ -16,16 +16,7 @@ export class DragListTrait extends SpyneTrait {
        const el = obj.el;
        const rowHeight = this.dragMethod$GetUpHeight(obj.index);// obj.index * this.props.rowHeight;
        TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut, onComplete:this.dragMethod$ReOrder});
-      //this.dragMethod$ReOrder();
-
-      console.log('-------on up----------',obj)
-      const getObjInfo = o=>console.log('o is ',o.index,o.origIndex,{o});
-
-     // this.props.dragItems = this.dragList$CreateList(false);
-      this.props.dragItems.forEach(getObjInfo);
-
     }
-
   }
 
   static dragList$OnClickTest(item){
@@ -40,31 +31,18 @@ export class DragListTrait extends SpyneTrait {
       let count = 0;
     return ()=>{
       const clamp = (value, a, b)=> value < a ? a : value > b ? b : value;
-
-
       const itemY = obj.position.y;
       const rowHeight = this.props.rowHeight;//= this.dragMethod$GetHeight(obj.index);
       let max = Math.round(itemY / rowHeight);
       const totalRows = this.props.el$(this.props.listClass).len;// obj.totalRows - 1;
-      //max = max<=0 ? 1 : max;
-     // const rowIndex = Math.abs(clamp(max, 0,  totalRows));
-      //const rowIndex = Math.abs(clamp(Math.round(itemY / rowHeight), 0, totalRows));
       const rowIndex = this.dragMethod$GetNearestHeight(itemY);
-
       const currentIndex = obj.index*1;
       const changeIndex = rowIndex !== currentIndex;
-      //console.log("CHANGE INDEX ",{changeIndex, itemY, rowIndex, currentIndex, totalRows}, this.props.dragItems);
-
       if (changeIndex === true && count!==-10){
         count ++;
-
-        //console.log("CHANGE INDEX ",{obj,currentIndex,rowIndex});
         this.dragMethod$UpdateIndex(obj, currentIndex, rowIndex, this.props.dragItems);
       }
-
     }
-
-
   }
 
 
@@ -107,7 +85,7 @@ export class DragListTrait extends SpyneTrait {
       obj.origIndex = Math.random();
       obj.totalRows = totalRows;
       obj.dragger = dragger;
-      console.log("DRAG INIT OBJ ",index, obj);
+     // console.log("DRAG INIT OBJ ",index, obj);
 
       return obj;
 

@@ -39,14 +39,17 @@ export class NodeContainerView extends ViewStream {
 
   onLifecycleNewItemAdded(e){
     this.dragState$ResetPositions();
+
   }
 
 
   onLifeCycleEvent(e){
     let {id} = e.props();
     this.props.dragItems = this.dragState$RemoveItem(id);
-    this.dragState$InitDraggable(false)
+    this.dragState$InitDraggable(false);
     this.dragState$ResetPositions();
+    //const recreateDragList = ()=>this.dragState$ResetPositions();
+    //window.setTimeout(recreateDragList, 750);
   }
 
   broadcastEvents() {

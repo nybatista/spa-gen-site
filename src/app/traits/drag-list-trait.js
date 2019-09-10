@@ -47,7 +47,8 @@ export class DragListTrait extends SpyneTrait {
 
 
   static dragList$CreateList(animate=true, rowHeight = this.props.rowHeight,items = this.props.el$(this.props.listClass).el){
-
+    const vsid = this.props.vsid;
+    console.log("CREATE LIST ",{animate, vsid},this.constructor.name)
     const createDragItem = (el, index)=>{
       el._gsTransform = undefined;
       let position;

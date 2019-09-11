@@ -31,14 +31,53 @@ export class NodeListChannel extends Channel {
     return [
       'CHANNEL_NODE_LIST_ADD_ITEM_EVENT',
       'CHANNEL_NODE_LIST_ITEM_ADDED_EVENT',
-      'CHANNEL_NODE_LIST_REMOVE_ITEM_EVENT'
-      ];
+      'CHANNEL_NODE_LIST_REMOVE_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_CREATED_EVENT',
+      'CHANNEL_NODE_LIST_FIRST_LOADED_EVENT',
+      'CHANNEL_NODE_LIST_ADD_NEW_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_AFTER_ADD_NEW_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_ITEM_CLICKED_EVENT',
+      'CHANNEL_NODE_LIST_ITEM_UP_EVENT',
+      'CHANNEL_NODE_LIST_REMOVE_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_AFTER_REMOVE_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_ADD_NEW_SUBITEM_EVENT',
+      'CHANNEL_NODE_LIST_AFTER_ADD_NEW_SUBITEM_EVENT',
+      'CHANNEL_NODE_LIST_CLICKED_SUBITEM_EVENT'
+    ];
   }
 
-  onIncomingViewStreamInfo(obj) {
-    let {type,id} = obj.props();
+  static getAutoActions(){
+    return [
+      'CHANNEL_NODE_LIST_CREATED_EVENT',
+      'CHANNEL_NODE_LIST_FIRST_LOADED_EVENT',
+      'CHANNEL_NODE_LIST_ADD_NEW_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_AFTER_ADD_NEW_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_ITEM_CLICKED_EVENT',
+      'CHANNEL_NODE_LIST_ITEM_UP_EVENT',
+      'CHANNEL_NODE_LIST_REMOVE_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_AFTER_REMOVE_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_ADD_NEW_SUBITEM_EVENT',
+      'CHANNEL_NODE_LIST_AFTER_ADD_NEW_SUBITEM_EVENT',
+      'CHANNEL_NODE_LIST_CLICKED_SUBITEM_EVENT'
+    ]
 
-    console.log("TYPE ID ",{type,id},obj.props())
+  }
+
+
+
+  static checkForAutoSendPayload(action){
+     const arr = NodeListChannel.getAutoActions();
+     return arr.indexOf(action)>=0;
+  }
+
+  onChannelNodeListInitialized(e){
+    console.log("CHANNEL NODE INITIALIZED ",e);
+  }
+
+  onViewStreamInfo(obj) {
+   // let {type,id} = obj.props();
+    console.log("obj is ",obj);
+   // console.log("TYPE ID ",{type,id},obj.props())
   }
 
   onSendPayload(actionStr, payload = {}) {

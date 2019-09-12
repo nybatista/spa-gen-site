@@ -34,7 +34,8 @@ export class NavCreatorView extends ViewStream {
     let action = "CHANNEL_NODE_LIST_CREATED_EVENT";
 
     this.addChannel(nodeChannel);
-    this.sendInfoToChannel(nodeChannel, {action}, action)
+    const nodeListEl = this.props.el$('ul.node-container').el;
+    this.sendInfoToChannel(nodeChannel, {action,nodeListEl}, action)
 
 
   }

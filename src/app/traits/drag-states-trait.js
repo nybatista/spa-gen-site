@@ -57,19 +57,21 @@ export class DragStatesTrait extends SpyneTrait {
 
   }
 
-  static dragState$OnCreatedNodeList(){
-    return DragStatesTrait.dragState$SendChannelPayload('created');
+  static dragState$OnCreatedNodeList(payload={}){
+    return this.dragState$SendChannelPayload('created', payload);
   }
-  static dragState$OnFirstLoaded(){
-    return DragStatesTrait.dragState$SendChannelPayload('first_loaded');
+  static dragState$OnFirstLoaded(payload={}){
+    return this.dragState$SendChannelPayload('first_loaded', payload);
   }
-  static dragState$OnAddNewItem(){
-    return DragStatesTrait.dragState$SendChannelPayload('add_new_item');
+  static dragState$OnAddNewItem(payload={}){
+    return this.dragState$SendChannelPayload('add_new_item', payload);
   }
 
   static dragState$OnItemClicked(e){
     const {target} = e;
     const item = target.closest('li');
+   // let testObj  =  this.dragState$ClickTestChecks(item, item);
+   // testObj.target=target;
     return this.dragState$SendChannelPayload('item_clicked', {item});
   }
 
@@ -92,11 +94,11 @@ export class DragStatesTrait extends SpyneTrait {
     return isButton  || isSubNav === true;
   }
 
-  static dragState$OnItemUp(){
-    return DragStatesTrait.dragState$SendChannelPayload('item_up');
+  static dragState$OnItemUp(payload={}){
+    return this.dragState$SendChannelPayload('item_up', payload);
   }
-  static dragState$OnRemoveItem(){
-    return DragStatesTrait.dragState$SendChannelPayload('remove_item');
+  static dragState$OnRemoveItem(payload={}){
+    return this.dragState$SendChannelPayload('remove_item', payload);
   }
 
 
@@ -105,6 +107,7 @@ export class DragStatesTrait extends SpyneTrait {
     const action = DragStatesTrait.dragState$CreateActionString(actionStr);
     payload['action']=action;
     const channel = "CHANNEL_NODE_LIST";
+    console.log("send action ", {payload},this.sendInfoToChannel);
     if (this.sendInfoToChannel!==undefined) {
       this.sendInfoToChannel(channel, payload, action);
     }

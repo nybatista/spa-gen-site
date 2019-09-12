@@ -27,12 +27,19 @@ export class NodeListChannel extends Channel {
 
   }
 
+  onNodeListCreated(e){
+    const {nodeListEl} = e.props();
+    this.props.nodeListEl = nodeListEl;
+  }
+
+
+
   addRegisteredActions() {
     return [
       'CHANNEL_NODE_LIST_ADD_ITEM_EVENT',
       'CHANNEL_NODE_LIST_ITEM_ADDED_EVENT',
       'CHANNEL_NODE_LIST_REMOVE_ITEM_EVENT',
-      'CHANNEL_NODE_LIST_CREATED_EVENT',
+      ['CHANNEL_NODE_LIST_CREATED_EVENT', 'onNodeListCreated'],
       'CHANNEL_NODE_LIST_FIRST_LOADED_EVENT',
       'CHANNEL_NODE_LIST_ADD_NEW_ITEM_EVENT',
       'CHANNEL_NODE_LIST_AFTER_ADD_NEW_ITEM_EVENT',

@@ -1,6 +1,6 @@
 import {SpyneTrait} from 'spyne';
 import {TweenMax, TimelineMax} from 'gsap';
-import {mapObjIndexed, reduce, add, slice, clamp, map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
+import {mapObjIndexed, reduce, add, slice, clamp, toPairs, fromPairs, map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
 import {NodeItemView} from '../components/nav-creator/node-item-view';
 
 export class DragStatesTrait extends SpyneTrait {
@@ -72,6 +72,26 @@ export class DragStatesTrait extends SpyneTrait {
     const item = target.closest('li');
     return this.dragState$SendChannelPayload('item_clicked', {item});
   }
+
+
+  static dragState$ClickTestChecks(item, parentEl=this.props.el){
+    const tagName = item.tagName.toLowerCase();
+    const subNavUl = parentEl.querySelector('div.node-hangar ul');
+    const isSubNav =  subNavUl !== null && subNavUl.contains(item);
+    const isButton = ['i','input','p', 'ul'].indexOf(tagName)>=0;
+    const data = DragStatesTrait.dragState$ToObject(item.dataset);
+    return {item, tagName, subNavUl, isSubNav, data, isButton};
+  }
+
+
+  static dragState$OnItemClickTest(item){
+    let testObj  =  this.dragState$ClickTestChecks(item);
+    let {tagName, subNavUl, isSubNav, isButton} = testObj;
+    this.dragState$SendChannelPayload('item_click_test', testObj);
+
+    return isButton  || isSubNav === true;
+  }
+
   static dragState$OnItemUp(){
     return DragStatesTrait.dragState$SendChannelPayload('item_up');
   }
@@ -91,6 +111,9 @@ export class DragStatesTrait extends SpyneTrait {
     return {channel, payload, action};
   }
 
+  static dragState$ToObject(obj){
+    return compose(fromPairs, toPairs)(obj);
+  }
 
   static dragState$CreateActionString(actionStr){
     const actionType = String(actionStr).toUpperCase();

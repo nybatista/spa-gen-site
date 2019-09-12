@@ -20,12 +20,15 @@ export class DragListTrait extends SpyneTrait {
     }
   }
 
+/*
   static dragList$OnClickTest(item){
+    console.log("DRAG CLICK TEST ",item);
     const tagName = item.tagName.toLowerCase();
     const subNavUl = this.props.el.querySelector('div.node-hangar ul');
     const isSubNav =  subNavUl !== null && subNavUl.contains(item);
     return ['i','input','p.add-subnav', 'ul'].indexOf(tagName)>=0  || isSubNav === true;
   }
+*/
 
 
   static dragList$OnDragging(obj){
@@ -63,7 +66,7 @@ export class DragListTrait extends SpyneTrait {
         type: 'y',
         onDrag: this.dragList$OnDragging(obj),
         onClick: this.dragState$OnItemClicked,
-        clickableTest: this.dragList$OnClickTest,
+        clickableTest: this.dragState$OnItemClickTest,
         onRelease: this.dragList$OnDragUp(obj),
         dragClickables: false,
         bounds: document.querySelector('#creative-list-holder'),

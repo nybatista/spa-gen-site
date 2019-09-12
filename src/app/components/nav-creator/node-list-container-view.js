@@ -1,11 +1,13 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
-import {NodeItemView} from './node-item-view';
+
+/*import {NodeListItemView} from './node-item-view';
 import {DraggableTrait} from '../../traits/draggable-trait';
 import {DragMethodsTrait} from '../../traits/drag-methods-trait';
 import {DragListTrait} from '../../traits/drag-list-trait';
-import {DragStatesTrait} from '../../traits/drag-states-trait';
+import {DragStatesTrait} from '../../traits/drag-states-trait';*/
+import {NodeListContainerTrait} from '../../traits/node-list-container-trait';
 
-export class NodeContainerView extends ViewStream {
+export class NodeListContainerView extends ViewStream {
 
   constructor(props = {}) {
     //console.log('add init item ',props.triggerBtn);
@@ -13,7 +15,7 @@ export class NodeContainerView extends ViewStream {
     props.allowEmpty = props.allowEmpty ? props.allowEmpty : false;
     props.tagName='ul';
     props.class = 'node-container';
-    props.traits = [DragMethodsTrait, DragListTrait, DragStatesTrait];
+    props.traits = NodeListContainerTrait;
     super(props);
    // console.log("TRIGGER BTN ",this.props.vsid, this.props.triggerBtn);
 
@@ -24,9 +26,9 @@ export class NodeContainerView extends ViewStream {
    let payloadClassFilter = new ChannelPayloadFilter({propFilters});
 
     return [
-      ['CHANNEL_UI_CLICK_EVENT', 'dragState$AddItem', this.props.triggerBtn],
+     /* ['CHANNEL_UI_CLICK_EVENT', 'dragState$AddItem', this.props.triggerBtn],
       ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onLifeCycleEvent', payloadClassFilter],
-      ['CHANNEL_LIFECYCLE_RENDERED_EVENT', 'onLifecycleNewItemAdded']
+      ['CHANNEL_LIFECYCLE_RENDERED_EVENT', 'onLifecycleNewItemAdded']*/
     ];
   }
 
@@ -37,18 +39,17 @@ export class NodeContainerView extends ViewStream {
 
 
   onLifecycleNewItemAdded(e){
-    this.dragState$ResetPositions();
+   // this.dragState$ResetPositions();
 
   }
 
 
   onLifeCycleEvent(e){
     let {id} = e.props();
-    this.props.dragItems = this.dragState$RemoveItem(id);
-    this.dragState$InitDraggable(false);
-    this.dragState$ResetPositions();
-    //const recreateDragList = ()=>this.dragState$ResetPositions();
-    //window.setTimeout(recreateDragList, 750);
+    // this.props.dragItems = this.dragState$RemoveItem(id);
+    // this.dragState$InitDraggable(false);
+    // this.dragState$ResetPositions();
+
   }
 
   broadcastEvents() {
@@ -59,22 +60,21 @@ export class NodeContainerView extends ViewStream {
 
   onRendered() {
 
-    //console.log("THIS CONTAINER ",this.props.vsid);
-    this.dragState$OnFirstLoaded();
+    //this.dragState$OnFirstLoaded();
 
 
-    this.props.dragHeightsArr = [0];
-    this.props.listClass = '.'+this.dragMethod$GetListClass();
+   // this.props.dragHeightsArr = [0];
+    //this.props.listClass = '.'+this.dragMethod$GetListClass();
    // this.addItems();
     if (this.props.addInitItem === true){
-      this.dragState$AddItem();
+      //this.dragState$AddItem();
     }
 
     this.props.rowHeight = 40;
-    this.props.items$ = this.props.el$('.node-item');
-    this.dragState$InitDraggable();
-    this.addChannel("CHANNEL_UI");
-    this.addChannel("CHANNEL_LIFECYCLE");
+   // this.props.items$ = this.props.el$('.node-item');
+  //  this.dragState$InitDraggable();
+   // this.addChannel("CHANNEL_UI");
+    //this.addChannel("CHANNEL_LIFECYCLE");
 
   }
 

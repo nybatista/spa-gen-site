@@ -1,7 +1,7 @@
 import {SpyneTrait} from 'spyne';
 import {TweenMax, TimelineMax} from 'gsap';
 import {mapObjIndexed, reduce, add, slice, clamp, toPairs, fromPairs, map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
-import {NodeItemView} from '../components/nav-creator/node-item-view';
+import {NodeListItemView} from '../components/nav-creator/node-list-item-view';
 
 export class DragStatesTrait extends SpyneTrait {
 
@@ -40,7 +40,7 @@ export class DragStatesTrait extends SpyneTrait {
       let data = {text};
       const parentId = this.props.vsid;
       const {terminate, allowEmpty} = this.props;
-      this.appendView(new NodeItemView({data, terminate, allowEmpty, parentId}));
+      this.appendView(new NodeListItemView({data, terminate, allowEmpty, parentId}));
     };
 
     const itemClass = `.node-item-${this.props.vsid}`;

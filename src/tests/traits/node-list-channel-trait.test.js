@@ -1,4 +1,4 @@
-import {NodeListTrait} from '../../app/traits/node-list-trait';
+import {NodeListChannelTrait} from '../../app/traits/node-list-channel-trait';
 import {nodeListElement} from '../mocks/node-list-element';
 
 describe('root test', () => {
@@ -12,7 +12,7 @@ describe('root test', () => {
   it('should run node list traits', () => {
       const el = document.querySelector('ul.node-container');
 
-      const heightsArr = NodeListTrait.nodeList$GetHeightsArr(el);
+      const heightsArr = NodeListChannelTrait.nodeList$GetHeightsArr(el);
 
      // console.log('el is ',el);
     return true;

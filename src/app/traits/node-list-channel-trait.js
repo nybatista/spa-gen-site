@@ -2,7 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {reduce, add, slice, fromPairs} from 'ramda';
 
 
-export class NodeListTrait extends SpyneTrait {
+export class NodeListChannelTrait extends SpyneTrait {
 
   constructor(context) {
     let traitPrefix = 'nodeList$';

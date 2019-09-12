@@ -1,11 +1,11 @@
 import {ViewStream} from 'spyne';
-import {NodeContainerView} from './node-container-view';
+import {NodeListContainerView} from './node-list-container-view';
 
-export class NavCreatorView extends ViewStream {
+export class NodeListMainView extends ViewStream {
 
   constructor(props = {}) {
     props.id = 'nav-creator';
-    props.template = require('./templates/nav-creator.tmpl.html');
+    props.template = require('./templates/node-list-container.tmpl.html');
     super(props);
 
   }
@@ -29,7 +29,7 @@ export class NavCreatorView extends ViewStream {
   onRendered() {
     const triggerBtn = `${this.props.id$} .btn-blue`;
 
-    this.appendView(new NodeContainerView({addInitItem: true, triggerBtn}), '#creative-list-holder');
+    this.appendView(new NodeListContainerView({addInitItem: true, triggerBtn}), '#creative-list-holder');
     let nodeChannel = "CHANNEL_NODE_LIST";
     let action = "CHANNEL_NODE_LIST_CREATED_EVENT";
 

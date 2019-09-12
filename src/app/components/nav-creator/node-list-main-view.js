@@ -26,16 +26,25 @@ export class NodeListMainView extends ViewStream {
     ];
   }
 
-  onRendered() {
+  addInitialContainer(){
     const triggerBtn = `${this.props.id$} .btn-blue`;
+    this.appendView(new NodeListContainerView(
+        {addInitItem: true, triggerBtn}), '#creative-list-holder');
+  }
 
-    this.appendView(new NodeListContainerView({addInitItem: true, triggerBtn}), '#creative-list-holder');
+  onRendered() {
+
+    this.addInitialContainer();
+
+
     let nodeChannel = "CHANNEL_NODE_LIST";
     let action = "CHANNEL_NODE_LIST_CREATED_EVENT";
 
     this.addChannel(nodeChannel);
     const nodeListEl = this.props.el$('ul.node-container').el;
-    this.sendInfoToChannel(nodeChannel, {action,nodeListEl}, action)
+    const rowHeight = 40;
+    this.sendInfoToChannel(nodeChannel, {action,nodeListEl, rowHeight}, action)
+
 
 
   }

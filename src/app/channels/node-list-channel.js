@@ -28,8 +28,9 @@ export class NodeListChannel extends Channel {
   }
 
   onNodeListCreated(e){
-    const {nodeListEl} = e.props();
+    const {nodeListEl, rowHeight} = e.props();
     this.props.nodeListEl = nodeListEl;
+    this.props.rowHeight = rowHeight;
   }
 
 

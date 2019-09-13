@@ -15,7 +15,7 @@ export class NodeListChannel extends Channel {
 
   onUIClick(e){
 
-   // console.log("on ui click ",e.props());
+    console.log("on ui click ",e.props());
   }
 
   onRegistered() {
@@ -32,6 +32,9 @@ export class NodeListChannel extends Channel {
     this.props.nodeListEl = nodeListEl;
     this.props.rowHeight = rowHeight;
   }
+  onResetContainerHeights(e){
+
+  }
 
 
 
@@ -44,6 +47,8 @@ export class NodeListChannel extends Channel {
       'CHANNEL_NODE_LIST_FIRST_LOADED_EVENT',
       'CHANNEL_NODE_LIST_ADD_NEW_ITEM_EVENT',
       'CHANNEL_NODE_LIST_AFTER_ADD_NEW_ITEM_EVENT',
+      'CHANNEL_NODE_LIST_CONTAINER_REORDER_EVENT',
+      ['CHANNEL_NODE_LIST_AFTER_CONTAINER_REORDERED_EVENT', 'onResetContainerHeights'],
       'CHANNEL_NODE_LIST_ITEM_CLICKED_EVENT',
       'CHANNEL_NODE_LIST_ITEM_CLICK_TEST_EVENT',
       'CHANNEL_NODE_LIST_ITEM_UP_EVENT',

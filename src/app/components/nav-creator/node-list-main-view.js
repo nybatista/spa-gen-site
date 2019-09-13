@@ -5,6 +5,7 @@ export class NodeListMainView extends ViewStream {
 
   constructor(props = {}) {
     props.id = 'nav-creator';
+    props.data = {id:props.id};
     props.template = require('./templates/node-list-container.tmpl.html');
     super(props);
 
@@ -28,8 +29,10 @@ export class NodeListMainView extends ViewStream {
 
   addInitialContainer(){
     const triggerBtn = `${this.props.id$} .btn-blue`;
+    const parentId = this.props.id;
+    console.log("props id ",{parentId});
     this.appendView(new NodeListContainerView(
-        {addInitItem: true, triggerBtn}), '#creative-list-holder');
+        {addInitItem: true, triggerBtn, parentId}), '#creative-list-holder');
   }
 
   onRendered() {

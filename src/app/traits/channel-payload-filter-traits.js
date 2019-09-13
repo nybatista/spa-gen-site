@@ -10,8 +10,9 @@ export class ChannelPayloadFiltersTraits extends SpyneTrait {
 
   static filter$onClickNodeItemsFilter(){
     return new ChannelPayloadFilter({
-      selector: ['.node-item i', '.node-item p.add-subnav']
-
+      propFilters: {
+        nodeListType: (k)=>k!==undefined
+      }
     })
 
 

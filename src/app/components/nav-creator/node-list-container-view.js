@@ -26,11 +26,19 @@ export class NodeListContainerView extends ViewStream {
    let payloadClassFilter = new ChannelPayloadFilter({propFilters});
 
     return [
+
+        ['CHANNEL_NODE_LIST_ADD_ITEM_EVENT', 'onAddItemEvent']
      /* ['CHANNEL_UI_CLICK_EVENT', 'dragState$AddItem', this.props.triggerBtn],
       ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onLifeCycleEvent', payloadClassFilter],
       ['CHANNEL_LIFECYCLE_RENDERED_EVENT', 'onLifecycleNewItemAdded']*/
     ];
   }
+
+    onAddItemEvent(e){
+
+        console.log("add item ",e);
+
+    }
 
   onChannelNodeList(e){
     console.log("CHANNEL NODE LIST ",e);
@@ -75,6 +83,8 @@ export class NodeListContainerView extends ViewStream {
   //  this.dragState$InitDraggable();
    // this.addChannel("CHANNEL_UI");
     //this.addChannel("CHANNEL_LIFECYCLE");
+
+    this.addChannel('CHANNEL_NODE_LIST');
 
   }
 

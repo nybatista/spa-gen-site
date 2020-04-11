@@ -86,6 +86,24 @@
 
     module: {
       rules: [
+        { test: /\.js$/,
+          loader: "babel-loader",
+          options: {
+            "babelrc" : false,
+            "presets": [
+              ["@babel/preset-env", {
+                "targets": {
+                  "ie" : 10,
+                  "browsers": ["last 2 versions"],
+
+                },
+                "modules": 'auto',
+                "loose": true
+              }]
+            ]
+          }
+        },
+
         {
           test: /\.css$/,
           use: [

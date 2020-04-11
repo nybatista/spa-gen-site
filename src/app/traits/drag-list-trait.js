@@ -1,6 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {Draggable} from 'gsap/Draggable';
-import {ThrowPropsPlugin} from 'gsap/ThrowPropsPlugin';
+import {gsap, Draggable} from 'gsap/all';
 import {TweenMax, TimelineMax} from 'gsap';
 import {mapObjIndexed, reduce, add, slice,  map, filter, update, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
 
@@ -8,6 +7,8 @@ export class DragListTrait extends SpyneTrait {
 
   constructor(context) {
     let traitPrefix = 'dragList$';
+
+    gsap.registerPlugin(Draggable);
     super(context, traitPrefix);
 
   }
@@ -187,6 +188,7 @@ export class DragListTrait extends SpyneTrait {
       el._gsTransform = undefined;
 
 
+
       const totalRows = items.length;
       const heightsArr = this.dragMethod$GetHeightsArr();
 
@@ -271,6 +273,8 @@ export class DragListTrait extends SpyneTrait {
       return dragger;
 
     };
+    console.log("ITEMS IS ",items);
+
     items = items.length !== undefined ? items : [items];
     return values(mapObjIndexed(createDragItem, items));
   }

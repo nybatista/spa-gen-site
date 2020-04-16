@@ -25,7 +25,7 @@ export class DragMethodsTrait extends SpyneTrait {
     let el = tempObj.el;
     let rowHeight = tempObj.index * this.props.rowHeight;
     rowHeight = this.dragMethod$GetHeight(tempObj.index);
-    TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut});
+    TweenMax.to(el, .125, {y:rowHeight, ease: "Power1.easeInOut"});
   }
 
   static dragMethod$GegHeightsArr(){

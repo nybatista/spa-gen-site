@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {Draggable} from 'gsap/Draggable';
+import {gsap,Draggable, InertiaPlugin} from 'gsap/all';
 import {TweenMax, TimelineMax} from 'gsap';
 import {mapObjIndexed, reduce, add, slice, clamp, map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
 
@@ -7,6 +7,8 @@ export class DragListTrait extends SpyneTrait {
 
   constructor(context) {
     let traitPrefix = 'dragList$';
+    gsap.registerPlugin(Draggable);
+    gsap.registerPlugin(InertiaPlugin);
     super(context, traitPrefix);
 
   }
@@ -21,7 +23,8 @@ export class DragListTrait extends SpyneTrait {
 
       const clamp = (value, a, b)=> value < a ? a : value > b ? b : value;
       const onDragging=()=>{
-        const itemY = obj.position.y;
+        //console.log("OBJ IS ",obj);
+        const itemY = gsap.getProperty(obj.el, 'y');
         const rowIndex = Math.abs(clamp(Math.round(itemY / rowHeight), 0, totalRows - 1));
         const currentIndex = obj.index*1;
         const changeIndex = rowIndex !== currentIndex;
@@ -33,7 +36,7 @@ export class DragListTrait extends SpyneTrait {
       const onDragUp = ()=>{
         const el = obj.el;
         const rowHeight = this.dragMethod$GetHeight(obj.index);// obj.index * this.props.rowHeight;
-        TweenMax.to(el, .125, {y:rowHeight, ease: Power1.easeInOut, onComplete:this.dragMethod$ReOrder});
+        gsap.to(el, .125, {y:rowHeight, ease: "Power1.easeInOut", onComplete:this.dragMethod$ReOrder});
       };
 
 
@@ -41,12 +44,16 @@ export class DragListTrait extends SpyneTrait {
         const tagName = item.tagName.toLowerCase();
         const nearestUl = prop('id', item.closest('ul'));
         const liParent = path(['dataset', 'parentId'], item.closest('li'));
-        const subNavUl = this.props.el.querySelector('div.node-hangar ul');
-        const isSubNav =  subNavUl !== null && subNavUl.contains(item);
+        const subNavUl = this.props.el$('div.node-hangar ul').arr;
+
+        //console.log("SUB NAV UL ",{subNavUl});
+        const isSubNav =  subNavUl[0] !== undefined && subNavUl[0].contains(item);
         return ['i','input','p.add-subnav', 'ul'].indexOf(tagName)>=0  || isSubNav === true;
       };
 
-      const dragger = new Draggable(el, {
+      //console.log("EL IS ",{el});
+
+      const dragger =  Draggable.create(el, {
         type: 'y',
         onDrag: onDragging,
         dragClickables: false,
@@ -64,10 +71,10 @@ export class DragListTrait extends SpyneTrait {
       rowHeightStart = this.dragMethod$GetHeight(indexStart, heightsArr);
       let rowHeightTo  = this.dragMethod$GetHeight(index, heightsArr);
 
-      if (animate===true && position.y !== index*rowHeight) {
-        TweenMax.fromTo(el, .25,
+      if (animate===true && gsap.getProperty(el, 'y') !== index*rowHeight) {
+        gsap.fromTo(el, .25,
             {y: rowHeightStart, opacity:0},
-            {y: rowHeightTo, opacity:1, ease: Power1.easeInOut});
+            {y: rowHeightTo, opacity:1, ease: '"Power1.easeInOut"'});
       };
       let obj = {el,position, index, dragger};
       return obj;

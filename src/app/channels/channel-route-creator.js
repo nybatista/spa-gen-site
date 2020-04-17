@@ -12,11 +12,26 @@ export class ChannelRouteCreator extends Channel {
   }
 
   onRegistered() {
+    const payloadFilter = new ChannelPayloadFilter({propFilters:{
+        type: "routeBar"
+      }})
+
+      this.getChannel("CHANNEL_UI", payloadFilter)
+          .subscribe(this.onRouteBarUIEvent.bind(this));
 
   }
 
+  onRouteBarUIEvent(e){
+    const {holderId, barId, routeBarEvent} = e.props();
+    const action = "CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT";
+    this.sendChannelPayload(action, {holderId,barId,routeBarEvent});
+   // console.log("ROUTE BAR EVENT ",{holderId,barId, routeBarEvent,e})
+  }
+
   addRegisteredActions() {
-    return [];
+    return [
+        'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT'
+    ];
   }
 
   onViewStreamInfo(obj) {

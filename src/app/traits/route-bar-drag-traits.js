@@ -14,12 +14,12 @@ export class RouteBarDragTraits extends SpyneTrait {
     gsap.registerPlugin(InertiaPlugin);
 
     const {el} = props;
-
+      console.log("SELC IS ",this.props.id$+' > .dragger')
     const config =  {
       type: "y",
 
       bounds: el.parentElement,
-
+      trigger: this.props.id$+' > section div.dragger',
       edgeResistance: ".65",
       lockAxis: true,
       inertia: true,
@@ -27,8 +27,6 @@ export class RouteBarDragTraits extends SpyneTrait {
     }
     this.props.dragger = Draggable.create(el, config);
 
-
-    console.log("INIT DRAGGAGBLE ",el);
 
   }
 }

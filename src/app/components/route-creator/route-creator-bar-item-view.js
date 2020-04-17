@@ -1,10 +1,11 @@
 import {ViewStream} from 'spyne';
 
-export class RouteCreatorHolderView extends ViewStream {
+export class RouteCreatorBarItemView extends ViewStream {
 
   constructor(props = {}) {
-    props.id = 'route-creator-holder';
-    props.template = require('./templates/route-creator-holder.tmpl.html');
+    props.tagName = 'li';
+    props.class='route-creator-bar-item';
+    props.template=require('./templates/route-creator-bar-item.tmpl.html');
     super(props);
 
   }

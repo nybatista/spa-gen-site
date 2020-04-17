@@ -1,14 +1,51 @@
-#route-creator-holder{
+#route-creator-main{
   position: relative;
   header{
     color:  #333;
-
   }
-
   button{
     position:relative;
     cursor:pointer;
   }
 
+ ul.route-bar-items-list {
+    position: relative;
+    min-height: 300px;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    background: #dedede;
+   list-style-type:none;
+   padding: 0;
 
+    ul.node-container {
+      position: relative;
+      display:flex;
+      flex-direction: column;
+      flex-grow: 1;
+      top:0;
+      list-style-type: none;
+
+    }
+  }
+
+
+/*  #route-creator-content {
+    position: relative;
+    min-height: 300px;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    background: #dedede;
+
+    ul.node-container {
+      position: relative;
+      display:flex;
+      flex-direction: column;
+      flex-grow: 1;
+      top:0;
+      list-style-type: none;
+
+    }
+  }*/
 }

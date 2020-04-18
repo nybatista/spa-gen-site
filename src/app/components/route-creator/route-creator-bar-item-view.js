@@ -6,11 +6,12 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName = 'li';
-    props.class='route-creator-bar-item';
+    props.class=`route-creator-bar-item route-level-${props.routeLevel}`;
     props.traits = [RouteCreatorTraits,RouteBarDragTraits];
     props.data = {};
     props.data.holderId = props.parentVsid;
     props.template=require('./templates/route-creator-bar-item.tmpl.html');
+    console.log("BAR ITEM PROPS ",props);
     super(props);
 
   }

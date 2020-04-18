@@ -1,0 +1,17 @@
+{
+  "RouteGen": {
+    "routes": {
+      "routePath": {
+        "routeName": "pageId",
+        "home": "home",
+        "work": {
+          "routeName": "workId",
+          "company1": "company1",
+          "acme": "acme",
+          "widgets": "widgets"
+        },
+        "about": "about"
+      }
+    }
+  }
+}

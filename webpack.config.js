@@ -111,9 +111,57 @@
               'css-loader',
               'sass-loader'
           ]
+        },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name(file) {
+                  let dir = String(file).includes('/imgs/') === true ? 'static/imgs/' : '/static/data/';
+                  if (devMode===false){
+                    dir = assetsFolder+""+dir;
+                  }
+
+                  return dir + '[name].[ext]';
+                },
+              },
+            }],
+
+        },
+        {
+          type: 'javascript/auto',
+          test: /\.(json|vtt)$/,
+          use: [    {
+            loader: 'file-loader',
+            options: {
+              name(file) {
+                let dir = devMode === false ? assetsFolder+"static/data/" : "./static/data/";
+                return dir + '[name].[ext]';
+              },
+            },
+          } ]
         }
       ]
     },
+
+    resolve: {
+      alias: {
+        plugins: path.resolve(__dirname, 'src/plugins/'),
+        imgs: path.resolve(__dirname, 'src/static/imgs/'),
+        fonts: path.resolve(__dirname, 'src/static/fonts/'),
+        data: path.resolve(__dirname, 'src/static/data/'),
+        css: path.resolve(__dirname, 'src/css/'),
+        core: path.resolve(__dirname, 'src/core/'),
+        traits: path.resolve(__dirname, 'src/app/traits/'),
+        channels: path.resolve(__dirname, 'src/app/channels/'),
+        components: path.resolve(__dirname, 'src/app/components/'),
+        node_modules: path.resolve(__dirname, 'node_modules/')
+
+      },
+      extensions: ['.js', '.css'],
+    }
 
   };
 

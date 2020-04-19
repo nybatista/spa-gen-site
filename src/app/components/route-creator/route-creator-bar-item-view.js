@@ -1,6 +1,7 @@
 import {ViewStream} from 'spyne';
-import {RouteCreatorTraits} from '../../traits/route-creator-traits';
-import {RouteBarDragTraits} from '../../traits/route-bar-drag-traits';
+import {RouteCreatorTraits} from 'traits/route-creator-traits';
+import {RouteBarDragTraits} from 'traits/route-bar-drag-traits';
+import {gsap} from 'gsap/all';
 
 export class RouteCreatorBarItemView extends ViewStream {
 
@@ -8,10 +9,9 @@ export class RouteCreatorBarItemView extends ViewStream {
     props.tagName = 'li';
     props.class=`route-creator-bar-item route-level-${props.routeLevel}`;
     props.traits = [RouteCreatorTraits,RouteBarDragTraits];
-    props.data = {};
     props.data.holderId = props.parentVsid;
     props.template=require('./templates/route-creator-bar-item.tmpl.html');
-    console.log("BAR ITEM PROPS ",props);
+    //console.log("BAR ITEM PROPS ",props);
     super(props);
 
   }
@@ -29,12 +29,20 @@ export class RouteCreatorBarItemView extends ViewStream {
     ];
   }
 
+  initBar(){
+
+  }
+
   onRendered() {
     if (this.props.routeLevel<=0){
       this.routeCreator$CreateRouteBarHolder();
     }
+
+
     this.routeCreator$InitBarItem();
     this.routeBarDrag$InitDraggable();
+
+
   }
 
 }

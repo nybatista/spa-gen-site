@@ -14,7 +14,7 @@ export class RouteBarDragTraits extends SpyneTrait {
     gsap.registerPlugin(InertiaPlugin);
 
     const {el} = props;
-      console.log("SELC IS ",this.props.id$+' > .dragger')
+      //console.log("SELC IS ",this.props.id$+' > .dragger')
     const config =  {
       type: "y",
 

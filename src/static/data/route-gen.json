@@ -6,12 +6,17 @@
       "work": {
         "routePath": {
           "routeName": "workId",
-          "company1": "company1",
           "acme": "acme",
-          "widgets": "widgets"
+          "widgets": "widgets",
+          "globex": "globex"
         }
       },
-      "about": "about"
+      "about": {
+        "routePath": {
+          "routeName": "aboutId",
+          "contact": "contact"
+        }
+      }
     }
   }
 }

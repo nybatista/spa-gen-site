@@ -21,7 +21,9 @@ export class RouteCreateBarHolder extends ViewStream {
       parentVsid: vsid
       }});
     return [
-        ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent'],
+/*
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent'],
+*/
       ['CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT', 'onDragStartEvent',checkVsidPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT', 'onDraggingEvent',checkVsidPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT', 'onDragEndEvent',checkVsidPayloadFilter]
@@ -46,7 +48,7 @@ export class RouteCreateBarHolder extends ViewStream {
     const {holderId, barId, routeBarEvent} = e.props();
     const {vsid,el}=this.props;
     const isCurrentHolderEvent = holderId === vsid;
-   // console.log("ROUTE BAR HOLDER LISTENS ",{vsid,isCurrentHolderEvent,holderId, barId, routeBarEvent,el})
+    console.log("ROUTE BAR HOLDER LISTENS ",{vsid,isCurrentHolderEvent,holderId, barId, routeBarEvent,el})
   }
 
   broadcastEvents() {

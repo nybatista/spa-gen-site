@@ -1,13 +1,14 @@
-import {ViewStream} from 'spyne';
+import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {RouteCreatorBarItemView} from './route-creator-bar-item-view';
-import {RouteCreatorTraits} from '../../traits/route-creator-traits';
+import {RouteCreatorTraits} from 'traits/route-creator-traits';
+import {RouteAnimTraits} from 'traits/route-anim-traits';
 import {omit, compose, prop,keys, is, forEachObjIndexed} from 'ramda';
 
 export class RouteCreateBarHolder extends ViewStream {
 
   constructor(props = {}) {
     props.tagName='ul';
-    props.traits=[RouteCreatorTraits]
+    props.traits=[RouteCreatorTraits, RouteAnimTraits]
     props.class=props.isMainHolder === true ? 'route-bar-items-list main' : 'route-bar-items-list';
     super(props);
 
@@ -15,18 +16,37 @@ export class RouteCreateBarHolder extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
+    const {vsid} = this.props;
+    const checkVsidPayloadFilter = new ChannelPayloadFilter({propFilters:{
+      parentVsid: vsid
+      }});
     return [
-        ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent']
+        ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent'],
+      ['CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT', 'onDragStartEvent',checkVsidPayloadFilter],
+      ['CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT', 'onDraggingEvent',checkVsidPayloadFilter],
+      ['CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT', 'onDragEndEvent',checkVsidPayloadFilter]
     ];
   }
+
+  onDragStartEvent(){
+    console.log("DRAG START ",this.props.vsid);
+
+  }
+
+  onDraggingEvent(e){
+    console.log("DRAGGING ",this.props.vsid);
+  }
+  onDragEndEvent(){
+    console.log("DRAG END ",this.props.vsid);
+
+  }
+
 
   onRouteBarClickedEvent(e){
     const {holderId, barId, routeBarEvent} = e.props();
     const {vsid,el}=this.props;
     const isCurrentHolderEvent = holderId === vsid;
-
    // console.log("ROUTE BAR HOLDER LISTENS ",{vsid,isCurrentHolderEvent,holderId, barId, routeBarEvent,el})
-
   }
 
   broadcastEvents() {
@@ -36,22 +56,13 @@ export class RouteCreateBarHolder extends ViewStream {
 
   createBars(){
     const {props} = this;
-
     const createBar = (data)=>{
       data['initYPos'] = this.props.el.offsetHeight;
       this.routeCreator$CreateRouteBar(props, data);
-      console.log("create bar ",this.props.vsid,this.props.el.offsetHeight);
-
+      //console.log("create bar ",this.props.vsid,this.props.el.offsetHeight);
     }
-
     const barItemsData = this.routeCreator$ConformBarItemsData();
-
-
     forEachObjIndexed(createBar, barItemsData);
-
-    //console.log('bar holder data ', {barItemsData},this.props.data);
-
-  //  this.routeCreator$CreateRouteBar();
 
   }
 
@@ -60,6 +71,9 @@ export class RouteCreateBarHolder extends ViewStream {
     if (this.props.data!==undefined) {
       this.createBars();
     }
+
+
+
   }
 
 }

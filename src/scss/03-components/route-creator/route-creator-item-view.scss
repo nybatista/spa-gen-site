@@ -4,6 +4,7 @@ li.route-creator-bar-item {
   position: relative;
   top: 0;
   width: 100%;
+  opacity: 0;
   &.route-level-1{
     section.input-bar {
       width:75%;

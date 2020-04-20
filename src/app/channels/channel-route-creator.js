@@ -28,9 +28,31 @@ export class ChannelRouteCreator extends Channel {
    // console.log("ROUTE BAR EVENT ",{holderId,barId, routeBarEvent,e})
   }
 
+  getDragEventAction(str){
+    const actionHash = {
+      dragStart: 'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
+      dragging: 'CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT',
+      dragEnd: 'CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT'
+    }
+    return actionHash[str];
+  }
+
+  onDragEvent(e){
+    const {dragEvent, payload} = e.props();
+    const action = this.getDragEventAction(dragEvent);
+
+    this.sendChannelPayload(action, payload);
+   // console.log("PAYLOAD ",{action,dragEvent,payload,e});
+
+  }
+
   addRegisteredActions() {
     return [
-        'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT'
+        'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
+      'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
+      'CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT',
+      'CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT',
+        ['CHANNEL_ROUTE_CREATOR_DRAG_EVENT', 'onDragEvent']
     ];
   }
 

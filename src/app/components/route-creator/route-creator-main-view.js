@@ -24,8 +24,9 @@ export class RouteCreatorMainView extends ViewStream {
   onRouteGenData(e){
     const {routes} = e.props();
     this.props.data = routes;
-    //console.log('route gen data received ',{routes,e});
+    console.log('route gen data received ',{routes,e});
     this.createMainBarHolder();
+
   }
 
   broadcastEvents() {
@@ -45,8 +46,8 @@ export class RouteCreatorMainView extends ViewStream {
     this.addChannel("CHANNEL_ROUTEGEN_JSON")
 
       const delayer=()=> this.routeAnim$InitBarItensAnimation();
-      window.setTimeout(delayer,30);
-
+      //window.setTimeout(delayer,30);
+      this.setTimeout(delayer, 50);
 
 
   }

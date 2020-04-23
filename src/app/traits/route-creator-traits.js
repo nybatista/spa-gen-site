@@ -44,7 +44,7 @@ export class RouteCreatorTraits extends SpyneTrait {
         keyValue,
         routePath
       }
-      console.log('DSATS IS ',{data})
+     // console.log('DSATS IS ',{data})
       return data;
     }
 
@@ -57,7 +57,7 @@ export class RouteCreatorTraits extends SpyneTrait {
       el.dataset['barId'] = this.props.vsid;
     }
     this.props.data.initYPos = this.props.el.parentElement.offsetHeight+this.props.el.offsetHeight;
-    console.log("INIT Y IS ",this.props.data.initYPos);
+   // console.log("INIT Y IS ",this.props.data.initYPos);
     gsap.set(this.props.el,{y: this.props.data.initYPos});
 
     const arr = this.props.el$('.route-bar-btn').arr;

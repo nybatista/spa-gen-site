@@ -48,11 +48,11 @@ export class ChannelRouteCreator extends Channel {
 
   addRegisteredActions() {
     return [
-        'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
+      'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT',
-        ['CHANNEL_ROUTE_CREATOR_DRAG_EVENT', 'onDragEvent']
+     ['CHANNEL_ROUTE_CREATOR_DRAG_EVENT', 'onDragEvent']
     ];
   }
 

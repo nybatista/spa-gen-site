@@ -45,10 +45,9 @@ export class RouteCreatorMainView extends ViewStream {
   onRendered() {
     this.addChannel("CHANNEL_ROUTEGEN_JSON")
 
-      const delayer=()=> this.routeAnim$InitBarItensAnimation();
+      //const delayer=()=> this.routeAnim$InitBarItensAnimation();
       //window.setTimeout(delayer,30);
-      this.setTimeout(delayer, 50);
-
+      this.setTimeout(this.routeAnim$InitBarItemsAnimation, 150, true);
 
   }
 

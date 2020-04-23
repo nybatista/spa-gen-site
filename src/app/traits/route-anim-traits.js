@@ -15,10 +15,14 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
 
-  static routeAnim$InitBarItensAnimation(){
+  static routeAnim$InitBarItemsAnimation(){
     const allLiItemsEl = this.routeAnim$GetBarItems().el;
     //console.log("ALL ITEMS EL ",{allLiItemsEl})
     gsap.to(allLiItemsEl, .25, {opacity:1, stagger:.02, ease:"Power1.easeInOut"});
+
+  }
+
+  static routeAnim$CreateBarPosWatcher(){
 
   }
 

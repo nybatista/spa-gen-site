@@ -1,10 +1,15 @@
 // Karma configuration
 // Generated on Sun Aug 18 2019 03:33:56 GMT-0400 (Eastern Daylight Time)
 const webpackEnv = {test:true};
-
+const path = require('path');
 const webpackConfig = require('./webpack.config');
 webpackConfig.mode = 'development';
-//webpackConfig.output.filename = '[name].[hash:8].js';
+webpackConfig.plugins=[];
+webpackConfig.entry = {
+  index: path.join(__dirname, 'src/index.js')
+}
+
+webpackConfig.output.filename = '[name].[hash:8].js';
 const fileGlob = './src/tests/index.test.js';
 
 process.env.BABEL_ENV = 'test';
@@ -28,7 +33,7 @@ module.exports = function(config) {
       { pattern: './node_modules/rxjs/*.js', included:false,   watched: false },
       { pattern: './node_modules/rxjs/**/*.js', included:false,    watched: false },
 
-      { pattern: 'src/tests/**/*.test.js', watched: true },
+      { pattern: './src/tests/**/*.test.js', watched: true },
     ],
 
 
@@ -40,7 +45,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/tests/**/*.test.js': ['webpack']
+      './src/tests/**/*.test.js': ['webpack']
     },
 
     webpack: webpackConfig,

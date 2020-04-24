@@ -10,7 +10,7 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
   static routeAnim$GetBarItems(props=this.props, ulId){
-   const sel = ulId === undefined ? '#route-creator-container li' : `#${ulId} li`;
+   const sel = ulId === undefined ? '#route-creator-container li' : `#${ulId} > li`;
    return props.el$(sel);
   }
 

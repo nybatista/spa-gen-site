@@ -1,5 +1,6 @@
 import {RouteAnimTraits} from 'traits/route-anim-traits';
 import {RouteCreatorDom} from '../mocks/route-creator-mock';
+
 describe('route anim tests', () => {
   const props = {};
   props.el$ = (sel)=>document.querySelectorAll(sel);
@@ -11,7 +12,7 @@ describe('route anim tests', () => {
     document.body.removeChild(document.getElementById('route-creator-main'));
   });
 
-  console.log("TESTER a", {props});
+  console.log("TESTER aa", {props});
 
 
   it('should select all list items', () => {
@@ -21,7 +22,7 @@ describe('route anim tests', () => {
   });
 
   it('should select all work items', () => {
-    const liItems = RouteAnimTraits.routeAnim$GetBarItems(props,'shvxkhw');
+    const liItems = RouteAnimTraits.routeAnim$GetBarItems(props,'fkgdxrc');
     expect(liItems.length).to.eq(3);
   });
 

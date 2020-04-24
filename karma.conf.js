@@ -25,6 +25,7 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'chai'],
 
+  //{ pattern: './src/tests/**/*.test.js', watched: true },
 
     // list of files / patterns to load in the browser
     files: [
@@ -33,8 +34,16 @@ module.exports = function(config) {
       { pattern: './node_modules/rxjs/*.js', included:false,   watched: false },
       { pattern: './node_modules/rxjs/**/*.js', included:false,    watched: false },
 
-      { pattern: './src/tests/**/*.test.js', watched: true },
+      { pattern: './src/tests/components/bar-item*.test.js', watched: true },
+
     ],
+
+    client: {
+      mocha: {
+        grep: './src/tests/traits/route-anim-trait-test.js'
+      }
+
+    },
 
 
     // list of files / patterns to exclude

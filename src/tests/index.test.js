@@ -1,4 +1,4 @@
-describe('root test', () => {
+describe('index test', () => {
 
   //console.log("RUNNING TESTS");
   it('should run shell tests', () => {

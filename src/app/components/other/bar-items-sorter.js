@@ -1,4 +1,4 @@
-import {partialRight} from 'ramda';
+import {partialRight, pick,pluck, compose,head,filter,propEq} from 'ramda';
 
 export class BarItemsSorter{
 
@@ -6,20 +6,38 @@ export class BarItemsSorter{
     this.listItems = liItems;
     this.draggerId = id;
     //console.log("SORTER ",this);
-    this.sortArray = BarItemsSorter.createSorterObject(this.listItems);
+    this.barItemsSortArr = BarItemsSorter.createSorterObject(this.listItems);
   }
+
+  static updateBarItemsSorter(currentYPos, barItemsArr=this.barItemsSortArr){
+
+  }
+
+  static getDraggerObj(arr=this.barItemsSortArr){
+    return compose(head, filter(propEq('isDragger', true)))(arr);
+  }
+
+
+  static getBarItemsYPositions(arr=this.barItemsSortArr){
+    return pluck(['yPos'], arr);
+  }
+
+  static getBarItemsYCheckPositions(){
+
+  }
+
 
 
   static getDataFromBoundingBox(el,num, list, draggerId){
     const box = el.getBoundingClientRect();
-    const {height,y,top}=box;
+    let {height,y,top}=box;
+    height = parseInt(height);
     const id = el.id;
     const midPt = height/2;
     const isDragger = el.id === draggerId;
     let yPos = y!==undefined ? y : top;
     let hasChanged = false;
     let initialized = true;
-
     const sortObj = {
       height,yPos,hasChanged,id,num, midPt,isDragger,initialized
     }

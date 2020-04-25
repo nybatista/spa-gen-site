@@ -56,14 +56,13 @@ export class RouteCreatorTraits extends SpyneTrait {
     const addBarIdToAddBtn = (el)=>{
       el.dataset['barId'] = this.props.vsid;
     }
-    this.props.data.initYPos = this.props.el.parentElement.offsetHeight+this.props.el.offsetHeight;
-   // console.log("INIT Y IS ",this.props.data.initYPos);
-    gsap.set(this.props.el,{y: this.props.data.initYPos});
-
     const arr = this.props.el$('.route-bar-btn').arr;
     arr.forEach(addBarIdToAddBtn);
 
+  }
 
+  static routeCreator$GetListItems$(props=this.props){
+    return this.props.el$(`li.group-${this.props.id}`);
   }
 
 }

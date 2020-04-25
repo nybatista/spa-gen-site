@@ -30,8 +30,13 @@ export class RouteCreateBarHolder extends ViewStream {
     ];
   }
 
-  onDragStartEvent(){
-    console.log("DRAG START ",this.props.vsid);
+  onDragStartEvent(e){
+
+    //const items = this.routeCreator$GetListItems$();
+    const {dragVsid} = e.props();
+
+    console.log("draging ",{e},this.props.vsid,{dragVsid});
+    this.routeAnim$StartBarPosWatcher(dragVsid);
 
   }
 

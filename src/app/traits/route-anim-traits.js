@@ -10,7 +10,8 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
   static routeAnim$GetBarItems(props=this.props, ulId){
-   const sel = ulId === undefined ? '#route-creator-container li' : `#${ulId} > li`;
+   const sel = ulId === undefined ? '#route-creator-container li' : `li.group-${ulId}`;
+   console.log("SELCTOR ",{sel})
    return props.el$(sel);
   }
 
@@ -22,7 +23,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
   }
 
-  static routeAnim$CreateBarPosWatcher(){
+  static routeAnim$StartBarPosWatcher(dragVsid){
 
   }
 

@@ -37,8 +37,6 @@ export class RouteAnimTraits extends SpyneTrait {
           console.log(obj)
       }
       sortArr.forEach(initGsapPos);
-
-
   }
 
 }

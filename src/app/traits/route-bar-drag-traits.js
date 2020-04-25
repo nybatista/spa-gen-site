@@ -24,10 +24,14 @@ export class RouteBarDragTraits extends SpyneTrait {
   }
 
   static routeBarDrag$OnDrag(e){
+    const {pageY,target,currentTarget} = e;
+    const {endY,deltaY,y} = this.props.dragger[0];
     const dragEvent = 'dragging';
-    const dragYPos = e.y;
-    const {parentVsid} = this.props;
-    this.routeBarDrag$SendInfoToChannel({dragEvent,parentVsid, dragYPos});
+    const dragYPos = endY;
+    const {parentVsid, vsid} = this.props;
+    //console.log("DRAGGING ",{endY,deltaY,y,pageY,target,currentTarget,e},this.props.dragger);
+    const dragVsid = vsid;
+    this.routeBarDrag$SendInfoToChannel({dragEvent,dragVsid,parentVsid, dragYPos});
 
   }
 

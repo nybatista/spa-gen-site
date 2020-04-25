@@ -39,7 +39,7 @@ export class BarItemsSorter{
     let hasChanged = false;
     let initialized = true;
     const sortObj = {
-      height,yPos,hasChanged,id,num, midPt,isDragger,initialized
+      height,yPos,hasChanged,id,num,el, midPt,isDragger,initialized
     }
 
     Object.defineProperty(sortObj, 'index', {
@@ -56,11 +56,26 @@ export class BarItemsSorter{
 
   }
 
+  static addGsapYPos(arr){
+    const heightsArr = pluck('height', arr);
+    const getGsapYPos = (index)=>R.sum(R.take(index,heightsArr))
+
+    const addGsapY = (obj)=>{
+      obj.yGsap = getGsapYPos(obj.index);
+      obj.yCheck = obj.yGsap + obj.midPt;
+      return obj;
+    }
+
+    return arr.map(addGsapY);
+
+  }
+
 
   static createSorterObject(liItems, dId){
     const boxSorterFnCurried = partialRight(BarItemsSorter.getDataFromBoundingBox, [dId]);
 
-      const arr = Array.from(liItems).map(boxSorterFnCurried);
+      let arr = Array.from(liItems).map(boxSorterFnCurried);
+      arr = BarItemsSorter.addGsapYPos(arr);
       return arr;
   }
 
@@ -68,8 +83,12 @@ export class BarItemsSorter{
 
   }
 
-  static getItemsData(){
+  get sortArr(){
+      return this.barItemsSortArr;
+  }
 
+  set sortArr(obj){
+    this.barItemsSortArr = obj;
   }
 
   static updateItemsData(){

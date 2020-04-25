@@ -35,7 +35,7 @@ export class RouteCreateBarHolder extends ViewStream {
     //const items = this.routeCreator$GetListItems$();
     const {dragVsid} = e.props();
 
-    console.log("draging ",{e},this.props.vsid,{dragVsid});
+    //console.log("draging ",{e},this.props.vsid,{dragVsid});
     this.routeAnim$StartBarPosWatcher(dragVsid);
 
   }

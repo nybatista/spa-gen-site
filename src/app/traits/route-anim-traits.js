@@ -1,4 +1,6 @@
 import {SpyneTrait} from 'spyne';
+import {BarItemsSorter} from 'components/other/bar-items-sorter';
+import {pluck} from 'ramda';
 import {gsap} from 'gsap/all';
 
 export class RouteAnimTraits extends SpyneTrait {
@@ -11,7 +13,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
   static routeAnim$GetBarItems(props=this.props, ulId){
    const sel = ulId === undefined ? '#route-creator-container li' : `li.group-${ulId}`;
-   console.log("SELCTOR ",{sel})
+   //console.log("SELCTOR ",{sel})
    return props.el$(sel);
   }
 
@@ -24,6 +26,18 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
   static routeAnim$StartBarPosWatcher(dragVsid){
+      const liItems = this.routeAnim$GetBarItems(this.props, this.props.vsid);
+      this.props.barItemsSorter = new BarItemsSorter(liItems.el, dragVsid);
+      const {sortArr} = this.props.barItemsSorter;
+
+      liItems.addClass('anim-mode');
+      const initGsapPos = (obj)=>{
+          const {el, yGsap} = obj;
+          gsap.set(el, {y:yGsap});
+          console.log(obj)
+      }
+      sortArr.forEach(initGsapPos);
+
 
   }
 

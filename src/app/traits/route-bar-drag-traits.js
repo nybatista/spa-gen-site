@@ -46,7 +46,7 @@ export class RouteBarDragTraits extends SpyneTrait {
     const config =  {
       type: "y",
 
-      bounds: el.parentElement,
+      bounds: {minY:0, maxY:600},
       trigger: this.props.id$+' > section div.dragger',
       edgeResistance: ".65",
       lockAxis: true,

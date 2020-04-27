@@ -46,14 +46,8 @@ describe('bar items sorter tests', () => {
   it('should get y positions array', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const barItemsSorter = new BarItemsSorter(liItems, draggerId);
-    barItemsSorter.updateBarItemsSorter(53);
+    barItemsSorter.updateBarItemsSorter(253);
 
-   // const yPosArr = BarItemsSorter.getBarItemsYPositions(barItemsSorterArr);
-    //const y = 33;
-
-   // const len = yPosArr.length-1;
-
-    //const getTheIndex =R.compose(R.clamp(0,len),R.findLastIndex(R.gte(y)));
 
     return true;
   });

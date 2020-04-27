@@ -23,17 +23,24 @@ export class BarItemsSorter{
 
 
   updateBarItemsSorter(y, dragVsid){
-    const resetHasChanged = (o)=>o.hasChanged=false;
+    const filterChangedItems = (o)=> o.hasChanged===true && o.isDragger===false;
+
+    const resetStates = (o)=>{
+      o.hasChanged=false;
+      o.initialized=false;
+    }
+    this.barItemsSortArr.map(resetStates);
+
     let {arr,yIndex,draggerIndex,draggerObj,isNewIndex} =  this.checkDragYPosition(y, dragVsid);
     if (isNewIndex === true){
-      this.barItemsSortArr.map(resetHasChanged);
       draggerObj.index=yIndex;
       this.barItemsSortArr[yIndex].index = draggerIndex;
       this.barItemsSortArr  =  sortBy(prop('index'), this.barItemsSortArr);
       this.barItemsSortArr  = BarItemsSorter.addGsapYPos(this.barItemsSortArr);
-    } else{
-      this.barItemsSortArr.map(resetHasChanged);
+      return compose(head,filter(filterChangedItems))(this.barItemsSortArr);
     }
+
+    return undefined;
 
   }
 

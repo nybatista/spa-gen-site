@@ -16,7 +16,7 @@ describe('bar items sorter tests', () => {
     document.body.removeChild(document.getElementById('route-creator-main'));
   });
 
-
+/*
   it('should create organizer sorter object', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const barItemsSorter = new BarItemsSorter(liItems, draggerId);
@@ -42,12 +42,19 @@ describe('bar items sorter tests', () => {
     const barItemsSorterArr =  BarItemsSorter.createSorterObject(liItems, draggerId);
     const draggerItem = BarItemsSorter.getDraggerObj(barItemsSorterArr);
     return expect(draggerItem.id).to.equal(draggerId);
-  });
+  });*/
   it('should get y positions array', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
-    const barItemsSorterArr =  BarItemsSorter.createSorterObject(liItems, draggerId);
-    const yPosArr = BarItemsSorter.getBarItemsYPositions(barItemsSorterArr);
-    const indexPred = R.gte();
+    const barItemsSorter = new BarItemsSorter(liItems, draggerId);
+    barItemsSorter.updateBarItemsSorter(53);
+
+   // const yPosArr = BarItemsSorter.getBarItemsYPositions(barItemsSorterArr);
+    //const y = 33;
+
+   // const len = yPosArr.length-1;
+
+    //const getTheIndex =R.compose(R.clamp(0,len),R.findLastIndex(R.gte(y)));
+
     return true;
   });
 

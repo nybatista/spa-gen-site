@@ -43,9 +43,11 @@ export class RouteCreateBarHolder extends ViewStream {
   onDraggingEvent(e){
     const {dragYPos,dragVsid} = e.props();
     console.log("DRAGGING ",{dragYPos, dragVsid});
+    this.routeAnim$onCheckYOnDragging(dragYPos, dragVsid);
   }
   onDragEndEvent(){
     console.log("DRAG END ",this.props.vsid);
+
 
   }
 

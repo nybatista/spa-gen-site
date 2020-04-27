@@ -1,7 +1,7 @@
 import {BarItemsSorter} from "components/other/bar-items-sorter";
 import {RouteCreatorDom} from '../mocks/route-creator-mock';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
-
+const R = require('ramda');
 describe('bar items sorter tests', () => {
   const props = {};
   props.el$ = (sel)=>document.querySelectorAll(sel);
@@ -47,6 +47,7 @@ describe('bar items sorter tests', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const barItemsSorterArr =  BarItemsSorter.createSorterObject(liItems, draggerId);
     const yPosArr = BarItemsSorter.getBarItemsYPositions(barItemsSorterArr);
+    const indexPred = R.gte();
     return true;
   });
 

@@ -23,17 +23,17 @@ export class BarItemsSorter{
 
 
   updateBarItemsSorter(y, dragVsid){
+    const resetHasChanged = (o)=>o.hasChanged=false;
     let {arr,yIndex,draggerIndex,draggerObj,isNewIndex} =  this.checkDragYPosition(y, dragVsid);
-    console.log("ARR START ",{arr});
     if (isNewIndex === true){
-       draggerObj.index=yIndex;
+      this.barItemsSortArr.map(resetHasChanged);
+      draggerObj.index=yIndex;
       this.barItemsSortArr[yIndex].index = draggerIndex;
       this.barItemsSortArr  =  sortBy(prop('index'), this.barItemsSortArr);
       this.barItemsSortArr  = BarItemsSorter.addGsapYPos(this.barItemsSortArr);
+    } else{
+      this.barItemsSortArr.map(resetHasChanged);
     }
-
-    console.log("CHECK YS ",{arr,y,yIndex,draggerIndex,isNewIndex});
-    console.log("DRAG OBJ ",this.checkDragYPosition(y, dragVsid) ," ----- ")
 
   }
 
@@ -59,8 +59,6 @@ export class BarItemsSorter{
     return pluck(['yCheck'], arr);
   }
 
-
-
   static getDataFromBoundingBox(el,n, list, draggerId){
     const box = el.getBoundingClientRect();
     let {height,y,top}=box;
@@ -77,18 +75,14 @@ export class BarItemsSorter{
     }
 
     Object.defineProperties(sortObj,  {
-
       num: {
         get: ()=> n
-
       },
-
       hasChanged: {
         get: ()=>hasChanged,
         set: (b)=>hasChanged=b
 
       },
-
       index: {
         set: (n)=>{
           num=n
@@ -98,9 +92,7 @@ export class BarItemsSorter{
       }
     });
 
-
     return sortObj;
-
 
   }
 
@@ -110,7 +102,6 @@ export class BarItemsSorter{
     console.log('heights arr ',heightsArr);
     // CREATE CORRECT Y POSITION BY ADDING UP PREVIOUS HEIGHTS
     const getGsapYPos = (index)=>R.sum(R.take(index,heightsArr))
-
     // ADD THE CORRECT Y POS FOR GSAP AND CREATE THE MIDPOINTS FOR ARR CHECK
     const addGsapY = (obj)=>{
       obj.yGsap = getGsapYPos(obj.index);

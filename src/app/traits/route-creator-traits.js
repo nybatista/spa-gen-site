@@ -1,7 +1,7 @@
 import {SpyneTrait} from 'spyne';
 import {RouteCreatorBarItemView} from 'components/route-creator/route-creator-bar-item-view';
 import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
-import {omit, filter,last,either, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
+import {omit,path, filter,last,either, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
 import {gsap} from "gsap/all";
 
 export class RouteCreatorTraits extends SpyneTrait {
@@ -54,28 +54,27 @@ export class RouteCreatorTraits extends SpyneTrait {
 
 
   static routeCreatorSetLastItemInObj(obj){
-    //console.log("obj is ",obj);
-    const nestedPathArr = [];
-
+    const nestedArr = []
+    let lastProp;
 
     const pluckPathVal = (val, key)=>{
+      // OMIT routeName
       const props = omit(['routeName'], val);
+      // CHECK IF THERE ARE ANY NESTED OBJECTS
       const getLastObjKey = compose(last,keys, filter(hasPath(['routePath', 'routeName'])))(props);
-      console.log('props getlast obj',getLastObjKey)
       if (getLastObjKey!==undefined){
-        //nestedPathArr.push(getLastObjKey);
-
+        // KEEP LOOPING LAST FOUND OBJECT
+        nestedArr.push(getLastObjKey);
         pluckPathVal(val[getLastObjKey].routePath)
       } else{
-        const getLastProp = compose(last,keys)(val);
-        val['lastItem'] = getLastProp;
-       // nestedPathArr.push(getLastProp)
+        // ADD lastItem Prop WHEN THERE ARE NO LONGER ANY NESTED ITEMS
+         lastProp = compose(last,keys)(val);;
       }
 
     }
-      pluckPathVal(obj);
-    console.log("NESTED PATH \n",JSON.stringify(obj));
-
+    pluckPathVal(obj);
+    path(nestedArr, obj)['lastItem']=lastProp;
+    console.log("NESTED ARR ",JSON.stringify(obj));
     return obj;
 
   }

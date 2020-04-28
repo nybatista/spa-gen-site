@@ -35,15 +35,15 @@ export class RouteCreateBarHolder extends ViewStream {
 
     //const items = this.routeCreator$GetListItems$();
     const {dragVsid} = e.props();
-
+      this.routeAnim$OnDragStart(dragVsid);
     //console.log("draging ",{e},this.props.vsid,{dragVsid});
-    this.routeAnim$StartBarPosWatcher(dragVsid);
+   // this.routeAnim$StartBarPosWatcher(dragVsid);
 
   }
 
   onDraggingEvent(e){
     const {dragYPos,dragVsid} = e.props();
-    const draggingData = this.routeAnim$onCheckYOnDragging(dragYPos, dragVsid);
+    const draggingData = this.routeAnim$OnDragging(dragYPos, dragVsid);
 
     if (draggingData!==undefined){
       //const {el, yGsap} = draggingData;
@@ -58,13 +58,15 @@ export class RouteCreateBarHolder extends ViewStream {
   }
   onDragEndEvent(){
 
-    const draggerObjData = this.routeAnim$GetDraggerItemData();
+    this.routeAnim$OnDragEnd();
+
+/*    const draggerObjData = this.routeAnim$GetDraggerItemData();
     const {el, yGsap} = draggerObjData;
     console.log("DRAG END ",{el,yGsap});
     this.props.dragger.endDrag()
     const delayer = ()=>gsap.to(el, {duration:.125, y:yGsap, ease: "Power1.easeInOut"});
 
-    this.setTimeout(delayer,50);
+    this.setTimeout(delayer,50);*/
 
 
   }
@@ -98,6 +100,7 @@ export class RouteCreateBarHolder extends ViewStream {
     this.addChannel("CHANNEL_ROUTE_CREATOR");
     if (this.props.data!==undefined) {
       this.createBars();
+      this.setTimeout(this.routeAnim$CreateBarItemsSorter, 1500);
     }
 
 

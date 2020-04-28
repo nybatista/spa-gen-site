@@ -26,20 +26,34 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
 
-  static routeAnim$onCheckYOnDragging(y,vsid,barItemsSorter=this.props.barItemsSorter){
-    //console.log("Y DRAG ",{y,vsid,barItemsSorter});
-    return barItemsSorter.updateBarItemsSorter(y);
-  }
-
 
   static routeAnim$GetDraggerItemData(barItemsSorter = this.props.barItemsSorter){
     return barItemsSorter.getDraggerObj();
   }
 
-  static routeAnim$StartBarPosWatcher(dragVsid){
+  static routeAnim$OnDragStart(dragVsid, barItemsSorter=this.props.barItemsSorter){
+    // barItemSorter.draggerId = dragVsid;
+  }
+
+
+  static routeAnim$OnDragging(y,vsid,barItemsSorter=this.props.barItemsSorter){
+    //console.log("Y DRAG ",{y,vsid,barItemsSorter});
+    return barItemsSorter.updateBarItemsSorter(y);
+  }
+
+
+  static routeAnim$OnDragEnd(){
+
+  }
+
+
+
+  static routeAnim$CreateBarItemsSorter(dragVsid){
       const liItems = this.routeAnim$GetBarItems(this.props, this.props.vsid);
       this.props.barItemsSorter = new BarItemsSorter(liItems.el, dragVsid);
       const {sortArr} = this.props.barItemsSorter;
+
+      console.log("SORT ARR ",{sortArr})
 
       liItems.addClass('anim-mode');
       const initGsapPos = (obj)=>{

@@ -4,6 +4,9 @@ import {RouteCreatorDom} from '../mocks/route-creator-mock';
 describe('route anim tests', () => {
   const props = {};
   props.el$ = (sel)=>document.querySelectorAll(sel);
+  const mainUl = 'djyxzqa';
+  const subUl = 'beqywzl';
+  const draggerId = 'rotuwc';
 
   beforeEach(function() {
     document.body.insertAdjacentHTML('afterbegin', RouteCreatorDom);
@@ -22,7 +25,7 @@ describe('route anim tests', () => {
   });
 
   it('should select all work items', () => {
-    const liItems = RouteAnimTraits.routeAnim$GetBarItems(props,'fkgdxrc');
+    const liItems = RouteAnimTraits.routeAnim$GetBarItems(props,mainUl);
     expect(liItems.length).to.eq(3);
   });
 

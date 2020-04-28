@@ -47,7 +47,7 @@ export class RouteCreatorMainView extends ViewStream {
 
       //const delayer=()=> this.routeAnim$InitBarItensAnimation();
       //window.setTimeout(delayer,30);
-      this.setTimeout(this.routeAnim$InitBarItemsAnimation, 150, true);
+      this.setTimeout(this.routeAnim$InitBarItemsAnimation, 50, true);
 
   }
 

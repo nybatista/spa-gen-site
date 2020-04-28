@@ -3,6 +3,7 @@ import {NodeListChannel} from './app/channels/node-list-channel';
 import {ChannelRouteCreator} from './app/channels/channel-route-creator';
 import {MainView} from './app/main-view';
 import SpaGenData from 'data/route-gen.json';
+import {RouteCreatorTraits} from 'traits/route-creator-traits';
 
 //const spaGenData = require('data/route-gen.json');
 const R = require('ramda');
@@ -13,7 +14,10 @@ const spyneApp = new SpyneApp({debug:true});
 
 spyneApp.registerChannel(new NodeListChannel('CHANNEL_NODE_LIST'));
 spyneApp.registerChannel(new ChannelRouteCreator());
-spyneApp.registerChannel(new ChannelFetch('CHANNEL_ROUTEGEN_JSON', {url:SpaGenData}));
+spyneApp.registerChannel(new ChannelFetch('CHANNEL_ROUTEGEN_JSON', {
+    url:SpaGenData,
+    mapFn: RouteCreatorTraits.routeCreator$SetLastItemInObj
+}));
 
 
 //console.log("DATA SPA GEN ",{SpaGenData});

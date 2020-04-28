@@ -55,8 +55,8 @@ export class RouteBarDragTraits extends SpyneTrait {
       lockAxis: true,
       inertia: true,
       onPress: this.routeBarDrag$OnPress.bind(this),
-      onDrag: this.routeBarDrag$OnDrag.bind(this),
-      snap: ()=>114
+      onDrag: this.routeBarDrag$OnDrag.bind(this)
+
 
     }
     this.props.dragger = Draggable.create(el, config);

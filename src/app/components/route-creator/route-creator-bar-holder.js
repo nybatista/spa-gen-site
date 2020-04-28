@@ -86,6 +86,7 @@ export class RouteCreateBarHolder extends ViewStream {
 
   createBars(){
     const {props} = this;
+    console.log("PROPS HOLDER IS ",this.props.data);
     const createBar = (data)=>{
       data['initYPos'] = this.props.el.offsetHeight;
       this.routeCreator$CreateRouteBar(props, data);

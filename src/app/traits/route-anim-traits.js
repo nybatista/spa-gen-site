@@ -50,18 +50,19 @@ export class RouteAnimTraits extends SpyneTrait {
 
   static routeAnim$CreateBarItemsSorter(dragVsid){
       const liItems = this.routeAnim$GetBarItems(this.props, this.props.vsid);
+      this.props.liItems = liItems;
       this.props.barItemsSorter = new BarItemsSorter(liItems.el, dragVsid);
       const {sortArr} = this.props.barItemsSorter;
 
       console.log("SORT ARR ",{sortArr})
 
-      liItems.addClass('anim-mode');
+      //liItems.addClass('anim-mode');
       const initGsapPos = (obj)=>{
           const {el, yGsap} = obj;
           gsap.set(el, {y:yGsap});
           console.log(obj)
       }
-      sortArr.forEach(initGsapPos);
+     // sortArr.forEach(initGsapPos);
   }
 
 }

@@ -42,11 +42,10 @@ describe('route creator tests', () => {
     }
   }
 
-
-
   it('should find last property in an object', () => {
-    const revisedObj = RouteCreatorTraits.routeCreatorSetLastItemInObj(jsonObj.routes.routePath);
-    expect(revisedObj.about.lastItem).to.equal('contact');
+    const revisedObj = RouteCreatorTraits.routeCreator$SetLastItemInObj(jsonObj);
+    //console.log(JSON.stringify(revisedObj));
+    expect(revisedObj.routes.routePath.about.lastItem).to.equal('contact');
   });
 
 });

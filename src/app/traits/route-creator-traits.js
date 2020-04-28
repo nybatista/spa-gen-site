@@ -53,10 +53,9 @@ export class RouteCreatorTraits extends SpyneTrait {
   }
 
 
-  static routeCreatorSetLastItemInObj(obj){
+  static routeCreator$SetLastItemInObj(obj){
     const nestedArr = []
     let lastProp;
-
     const pluckPathVal = (val, key)=>{
       // OMIT routeName
       const props = omit(['routeName'], val);
@@ -72,9 +71,14 @@ export class RouteCreatorTraits extends SpyneTrait {
       }
 
     }
-    pluckPathVal(obj);
-    path(nestedArr, obj)['lastItem']=lastProp;
-    console.log("NESTED ARR ",JSON.stringify(obj));
+    // START LOOP WITH MAIN ROUTE PATH
+    const routeObj = obj.routes.routePath;
+    pluckPathVal(routeObj);
+
+    // ADD THE LAST ITEM PROP AND ADD PARSED ROUTEPATH OBJ
+    path(nestedArr, routeObj)['lastItem']=lastProp;
+    obj.routes.routePath = routeObj;
+
     return obj;
 
   }

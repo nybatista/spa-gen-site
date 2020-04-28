@@ -71,14 +71,14 @@ export class BarItemsSorter{
     let {height,y,top}=box;
     height = parseInt(height);
     const id = el.id;
-    const midPt = height/2;
+    const midPt = height*.95;// height/2;
     const isDragger = el.id === draggerId;
     let num = n;
     let yPos = y!==undefined ? y : top;
     let hasChanged = false;
     let initialized = true;
     const sortObj = {
-      height,yPos,id, midPt,isDragger,initialized
+      height,yPos,id,el, midPt,isDragger,initialized
     }
 
     Object.defineProperties(sortObj,  {
@@ -115,12 +115,8 @@ export class BarItemsSorter{
       obj.yCheck = obj.yGsap + obj.midPt;
       return obj;
     }
-
     return arr.map(addGsapY);
-
   }
-
-
 
   get sortArr(){
       return this.barItemsSortArr;

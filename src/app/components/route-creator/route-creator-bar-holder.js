@@ -3,6 +3,7 @@ import {RouteCreatorBarItemView} from './route-creator-bar-item-view';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
 import {omit, compose, prop,keys, is, forEachObjIndexed} from 'ramda';
+import {gsap} from 'gsap/all';
 
 export class RouteCreateBarHolder extends ViewStream {
 
@@ -42,11 +43,28 @@ export class RouteCreateBarHolder extends ViewStream {
 
   onDraggingEvent(e){
     const {dragYPos,dragVsid} = e.props();
-    console.log("DRAGGING ",{dragYPos, dragVsid});
-    this.routeAnim$onCheckYOnDragging(dragYPos, dragVsid);
+    const draggingData = this.routeAnim$onCheckYOnDragging(dragYPos, dragVsid);
+
+    if (draggingData!==undefined){
+      //const {el, yGsap} = draggingData;
+      //gsap.to(el, {duration:.125, y:yGsap, ease: "Power1.easeInOut"});
+      const action = "CHANNEL_ROUTE_CREATOR_DRAGGING_UPDATE_EVENT";
+      this.sendInfoToChannel("CHANNEL_ROUTE_CREATOR", draggingData, action);
+
+    }
+
+    console.log("DRAGGING DATA US ",{draggingData});
+
   }
   onDragEndEvent(){
-    console.log("DRAG END ",this.props.vsid);
+
+    const draggerObjData = this.routeAnim$GetDraggerItemData();
+    const {el, yGsap} = draggerObjData;
+    console.log("DRAG END ",{el,yGsap});
+    this.props.dragger.endDrag()
+    const delayer = ()=>gsap.to(el, {duration:.125, y:yGsap, ease: "Power1.easeInOut"});
+
+    this.setTimeout(delayer,50);
 
 
   }

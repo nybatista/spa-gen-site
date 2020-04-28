@@ -49,15 +49,14 @@ export class RouteBarDragTraits extends SpyneTrait {
       //console.log("SELC IS ",this.props.id$+' > .dragger')
     const config =  {
       type: "y",
-
       bounds: {minY:0, maxY:600},
       trigger: this.props.id$+' > section div.dragger',
-      edgeResistance: ".65",
+      edgeResistance: ".25",
       lockAxis: true,
       inertia: true,
       onPress: this.routeBarDrag$OnPress.bind(this),
       onDrag: this.routeBarDrag$OnDrag.bind(this),
-      onDragEnd: this.routeBarDrag$OnDragEnd.bind(this)
+      snap: ()=>114
 
     }
     this.props.dragger = Draggable.create(el, config);

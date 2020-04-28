@@ -26,8 +26,14 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
 
-  routeAnim$onCheckYOnDragging(y,vsid,barItemsSorter=this.props.barItemsSorter){
-    console.log("Y DRAG ",{y,vsid,barItemsSorter});
+  static routeAnim$onCheckYOnDragging(y,vsid,barItemsSorter=this.props.barItemsSorter){
+    //console.log("Y DRAG ",{y,vsid,barItemsSorter});
+    return barItemsSorter.updateBarItemsSorter(y);
+  }
+
+
+  static routeAnim$GetDraggerItemData(barItemsSorter = this.props.barItemsSorter){
+    return barItemsSorter.getDraggerObj();
   }
 
   static routeAnim$StartBarPosWatcher(dragVsid){

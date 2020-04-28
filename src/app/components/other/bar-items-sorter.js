@@ -106,7 +106,7 @@ export class BarItemsSorter{
   static addGsapYPos(arr){
     // CREATE ARRAY OF HEIGHTS
     const heightsArr = pluck('height', arr);
-    console.log('heights arr ',heightsArr);
+    //console.log('heights arr ',heightsArr);
     // CREATE CORRECT Y POSITION BY ADDING UP PREVIOUS HEIGHTS
     const getGsapYPos = (index)=>R.sum(R.take(index,heightsArr))
     // ADD THE CORRECT Y POS FOR GSAP AND CREATE THE MIDPOINTS FOR ARR CHECK

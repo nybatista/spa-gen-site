@@ -27,7 +27,7 @@ export class RouteCreatorTraits extends SpyneTrait {
     this.appendView(new RouteCreatorBarItemView({parentVsid, routeLevel, data}));
   }
 
-  static routeCreator$CreateRouteBarHolder(data=this.props.data.routePath){
+  static routeCreator$CreateRouteBarHolder(data=this.props.data){
     const routeLevel = this.props.routeLevel+1;
     const isMainHolder = routeLevel === 0;
     const appendSelector = isMainHolder === true ? '#route-creator-container' : undefined;
@@ -38,17 +38,18 @@ export class RouteCreatorTraits extends SpyneTrait {
   static routeCreator$ConformBarItemsData(){
     const conformBarItemsData = (value,key,d)=>{
       const keyValue = is(String, value) === false ? key : value;
-      const {routePath} = value;
+      const {routePath, lastItem} = value;
       const data = {
         key,
         keyValue,
-        routePath
+        routePath,
+        lastItem
       }
      // console.log('DSATS IS ',{data})
       return data;
     }
 
-    return compose(mapObjIndexed(conformBarItemsData),omit(['routeName']))(this.props.data);
+    return compose(mapObjIndexed(conformBarItemsData),omit(['routeName']))(this.props.data.routePath);
 
   }
 

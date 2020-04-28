@@ -49,6 +49,7 @@ export class ChannelRouteCreator extends Channel {
   addRegisteredActions() {
     return [
       'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
+      'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAGGING_UPDATE_EVENT',
@@ -58,7 +59,17 @@ export class ChannelRouteCreator extends Channel {
   }
 
   onViewStreamInfo(obj) {
-    let data = obj.props();
+    let {data,payload,action} = obj.props();
+
+    console.log("DATA RETURNED ", {action,payload});
+
+    const allowedActionsArr = ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT'];
+    if (allowedActionsArr.indexOf(action)>=0){
+     this.onSendPayload(action,payload);
+
+    }
+
+
   }
 
   onSendPayload(actionStr, payload = {}) {

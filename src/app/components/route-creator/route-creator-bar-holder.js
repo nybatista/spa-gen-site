@@ -27,7 +27,8 @@ export class RouteCreateBarHolder extends ViewStream {
 */
       ['CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT', 'onDragStartEvent',checkVsidPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT', 'onDraggingEvent',checkVsidPayloadFilter],
-      ['CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT', 'onDragEndEvent',checkVsidPayloadFilter]
+      ['CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT', 'onDragEndEvent',checkVsidPayloadFilter],
+        ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onAllItemsRenderedEvent']
     ];
   }
 
@@ -86,22 +87,28 @@ export class RouteCreateBarHolder extends ViewStream {
 
   createBars(){
     const {props} = this;
-    console.log("PROPS HOLDER IS ",this.props.data);
+    const {lastItem} = this.props.data;
+   // console.log("LAST ITEM IS ",{lastItem}, this.props);
     const createBar = (data)=>{
       data['initYPos'] = this.props.el.offsetHeight;
+      data['isLastItem'] = lastItem === data.keyValue;
       this.routeCreator$CreateRouteBar(props, data);
       //console.log("create bar ",this.props.vsid,this.props.el.offsetHeight);
     }
     const barItemsData = this.routeCreator$ConformBarItemsData();
+
     forEachObjIndexed(createBar, barItemsData);
 
+  }
+
+  onAllItemsRenderedEvent(e){
+    this.routeAnim$CreateBarItemsSorter();
   }
 
   onRendered() {
     this.addChannel("CHANNEL_ROUTE_CREATOR");
     if (this.props.data!==undefined) {
       this.createBars();
-      this.setTimeout(this.routeAnim$CreateBarItemsSorter, 1500);
     }
 
 

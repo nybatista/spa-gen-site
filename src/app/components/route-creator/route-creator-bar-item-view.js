@@ -33,6 +33,15 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   }
 
+  sendLastItemRenderedEvent(){
+
+    const {vsid, parentVsid} = this.props;
+    const action = 'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT';
+    const channel = 'CHANNEL_ROUTE_CREATOR';
+    this.sendInfoToChannel(channel, {vsid, parentVsid,action}, action);
+
+  }
+
   onRendered() {
     if (this.props.routeLevel<=0){
       this.routeCreator$CreateRouteBarHolder();
@@ -41,7 +50,9 @@ export class RouteCreatorBarItemView extends ViewStream {
 
     this.routeCreator$InitBarItem();
     this.routeBarDrag$InitDraggable();
-
+    if (this.props.data.isLastItem===true){
+      this.sendLastItemRenderedEvent();
+    }
 
   }
 

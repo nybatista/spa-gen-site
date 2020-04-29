@@ -9,6 +9,7 @@ export class BarItemsSorter{
     this.barItemsSortArr = BarItemsSorter.createSorterObject(this.listItems, id);
     this.getBarItemsYPositions = BarItemsSorter.getBarItemsYPositions.bind(this);
     this.getDraggerObj = BarItemsSorter.getDraggerObj.bind(this);
+    this.setDraggerObj = BarItemsSorter.setDraggerObj.bind(this);
   }
 
   /*
@@ -23,7 +24,7 @@ export class BarItemsSorter{
 
 
   updateBarItemsSorter(y, dragVsid){
-    const filterChangedItems = (o)=> o.hasChanged===true && o.isDragger===false;
+    const filterChangedItems = (o)=> o.hasChanged===true;
 
     const resetStates = (o)=>{
       o.hasChanged=false;
@@ -37,7 +38,10 @@ export class BarItemsSorter{
       this.barItemsSortArr[yIndex].index = draggerIndex;
       this.barItemsSortArr  =  sortBy(prop('index'), this.barItemsSortArr);
       this.barItemsSortArr  = BarItemsSorter.addGsapYPos(this.barItemsSortArr);
-      return compose(head,filter(filterChangedItems))(this.barItemsSortArr);
+      const swapItems = (filter(filterChangedItems))(this.barItemsSortArr);
+      const swapItemsIds = pluck('id', swapItems);
+      return {swapItems, swapItemsIds}
+
     }
 
     return undefined;
@@ -47,10 +51,16 @@ export class BarItemsSorter{
    checkDragYPosition(y, dragVsid){
     const arr = this.getBarItemsYPositions();
     const len = arr.length;
+
+    // getTheIndex COMPARES THE Y VALUES IN THE ARRAY WITH THE CURRENT DRAGGER Y
     const getTheIndex = compose(clamp(0,len),findIndex(lte(y)));
     const yIndex = getTheIndex(arr);
+
+    // THIS GETS THE CURRENT DRAGGER INDEX
     const draggerObj = this.getDraggerObj();
     const draggerIndex = draggerObj.index;
+
+    // THIS CHECKS TO SEE IF THE INDEX OF THE DRAGGER HAS CHANGED
     const isNewIndex = yIndex !== draggerIndex;
 
     return {arr,yIndex,draggerIndex,draggerObj,isNewIndex};
@@ -59,6 +69,12 @@ export class BarItemsSorter{
 
   static getDraggerObj(arr=this.barItemsSortArr){
     return compose(head, filter(propEq('isDragger', true)))(arr);
+  }
+
+  static setDraggerObj(draggerVsid, arr=this.barItemsSortArr){
+    const updateIsDraggerProp = (obj)=>obj.isDragger= obj.id === draggerVsid;
+    arr.map(updateIsDraggerProp);
+    return this.getDraggerObj();
   }
 
 

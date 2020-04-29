@@ -13,7 +13,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
   static routeAnim$GetBarItems(props=this.props, ulId){
    const sel = ulId === undefined ? '#route-creator-container li' : `li.group-${ulId}`;
-   //console.log("SELCTOR ",{sel})
+   //console.log("SELCTOR ",{sel, ulId})
    return props.el$(sel);
   }
 
@@ -33,6 +33,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
   static routeAnim$OnDragStart(dragVsid, barItemsSorter=this.props.barItemsSorter){
     // barItemSorter.draggerId = dragVsid;
+    return barItemsSorter.setDraggerObj(dragVsid);
   }
 
 
@@ -50,11 +51,11 @@ export class RouteAnimTraits extends SpyneTrait {
 
   static routeAnim$CreateBarItemsSorter(dragVsid){
       const liItems = this.routeAnim$GetBarItems(this.props, this.props.vsid);
-      this.props.liItems = liItems;
+      this.props.liItems = liItems.exists === true ? liItems : [];
       this.props.barItemsSorter = new BarItemsSorter(liItems.el, dragVsid);
       const {sortArr} = this.props.barItemsSorter;
 
-      //console.log("SORT ARR ",{sortArr})
+      //console.log("SORT ARR ",{sortArr}, this.props.barItemsSorter)
 
       liItems.addClass('anim-mode');
       const initGsapPos = (obj)=>{

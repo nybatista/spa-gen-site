@@ -31,7 +31,9 @@ export class ChannelRouteCreator extends Channel {
   getDragEventAction(str){
     const actionHash = {
       dragStart: 'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
+      dragInitDragItem: 'CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT',
       dragging: 'CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT',
+      dragSwapItems: 'CHANNEL_ROUTE_CREATOR_DRAGGING_SWAP_ITEMS_EVENT',
       dragEnd: 'CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT'
     }
     return actionHash[str];
@@ -42,7 +44,7 @@ export class ChannelRouteCreator extends Channel {
     const action = this.getDragEventAction(dragEvent);
 
     this.sendChannelPayload(action, payload);
-   // console.log("PAYLOAD ",{action,dragEvent,payload,e});
+   // console.log("DRAG EVENT ",{action,dragEvent,payload,e});
 
   }
 
@@ -51,10 +53,12 @@ export class ChannelRouteCreator extends Channel {
       'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
       'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
+        'CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAGGING_UPDATE_EVENT',
+      'CHANNEL_ROUTE_CREATOR_DRAGGING_SWAP_ITEMS_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT',
-     ['CHANNEL_ROUTE_CREATOR_DRAG_EVENT', 'onDragEvent']
+      ['CHANNEL_ROUTE_CREATOR_DRAG_EVENT', 'onDragEvent']
     ];
   }
 

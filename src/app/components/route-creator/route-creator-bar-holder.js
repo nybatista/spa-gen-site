@@ -36,25 +36,40 @@ export class RouteCreateBarHolder extends ViewStream {
 
     //const items = this.routeCreator$GetListItems$();
     const {dragVsid} = e.props();
-      this.routeAnim$OnDragStart(dragVsid);
+    const payload =  this.routeAnim$OnDragStart(dragVsid);
+
+    const dragEvent = 'dragInitDragItem';
+
+    this.sendDraggingEventToChannel(dragEvent, payload);
+    //console.log("START DRAGGER OBJ ",dragObj);
     //console.log("draging ",{e},this.props.vsid,{dragVsid});
    // this.routeAnim$StartBarPosWatcher(dragVsid);
 
   }
 
+
+  sendDraggingEventToChannel(dragEvent, payload){
+    const action = "CHANNEL_ROUTE_CREATOR_DRAG_EVENT";
+    const channel = "CHANNEL_ROUTE_CREATOR";
+    payload['dragEvent']=dragEvent;
+    this.sendInfoToChannel(channel, payload, action);
+  }
+
   onDraggingEvent(e){
     const {dragYPos,dragVsid} = e.props();
-    const draggingData = this.routeAnim$OnDragging(dragYPos, dragVsid);
+    const payload = this.routeAnim$OnDragging(dragYPos, dragVsid);
 
-    if (draggingData!==undefined){
+    if (payload!==undefined){
+      const dragEvent = 'dragSwapItems';
+      this.sendDraggingEventToChannel(dragEvent, payload);
       //const {el, yGsap} = draggingData;
       //gsap.to(el, {duration:.125, y:yGsap, ease: "Power1.easeInOut"});
-      const action = "CHANNEL_ROUTE_CREATOR_DRAGGING_UPDATE_EVENT";
-      this.sendInfoToChannel("CHANNEL_ROUTE_CREATOR", draggingData, action);
+     // const action = "CHANNEL_ROUTE_CREATOR_DRAGGING_UPDATE_EVENT";
+      //this.sendInfoToChannel("CHANNEL_ROUTE_CREATOR", draggingData, action);
+      //console.log("DRAGGING DATA US ",{payload});
 
     }
 
-    console.log("DRAGGING DATA US ",{draggingData});
 
   }
   onDragEndEvent(){

@@ -45,6 +45,15 @@ export class RouteBarDragTraits extends SpyneTrait {
     gsap.registerPlugin(Draggable);
     gsap.registerPlugin(InertiaPlugin);
 
+    const onSnapItem = (y)=>{
+      const {yGsap} = this.props.data;
+      console.log('this is ',{y,yGsap});
+      //this.props.dragger[0].endDrag();
+      //gsap.to(this.props.el,{duration:.125, y:yGsap, ease:"Power1.easeInOut"});
+      return yGsap;
+    }
+
+
     const {el} = props;
       //console.log("SELC IS ",this.props.id$+' > .dragger')
     const config =  {
@@ -53,9 +62,11 @@ export class RouteBarDragTraits extends SpyneTrait {
       trigger: this.props.id$+' > section div.dragger',
       edgeResistance: ".25",
       lockAxis: true,
+      maxDuration:.125,
       inertia: true,
       onPress: this.routeBarDrag$OnPress.bind(this),
-      onDrag: this.routeBarDrag$OnDrag.bind(this)
+      onDrag: this.routeBarDrag$OnDrag.bind(this),
+      snap:{y:onSnapItem}
 
 
     }

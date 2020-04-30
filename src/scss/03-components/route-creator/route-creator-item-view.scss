@@ -14,6 +14,16 @@ li.route-creator-bar-item {
     section.input-bar {
       width:75%;
       left:5%;
+      div.icons {
+
+        i{
+        }
+
+        p{
+          opacity:0;
+          pointer-events: none;
+        }
+      }
       div.dragger {
         background: skyblue;
       }
@@ -66,7 +76,7 @@ li.route-creator-bar-item {
         //background: orange;
         position: relative;
         align-self: flex-end;;
-        min-height: 10px;
+        //min-height: 10px;
         min-width: 40px;
         //background:blue;
 

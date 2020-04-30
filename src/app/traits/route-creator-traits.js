@@ -31,7 +31,8 @@ export class RouteCreatorTraits extends SpyneTrait {
     const routeLevel = this.props.routeLevel+1;
     const isMainHolder = routeLevel === 0;
     const appendSelector = isMainHolder === true ? '#route-creator-container' : undefined;
-    this.appendView(new RouteCreateBarHolder({routeLevel, isMainHolder, data}), appendSelector);
+    const subNavHolder = this.props.vsid;
+    this.appendView(new RouteCreateBarHolder({routeLevel, subNavHolder, isMainHolder, data}), appendSelector);
   }
 
 

@@ -9,10 +9,10 @@ export class FiltersTrait extends SpyneTrait {
   }
 
   static filter$BarHolderOnInternalUIEvent(props=this.props){
-    const {vsid} = props;
+    const {subNavHolder} = props;
     return new ChannelPayloadFilter({
       propFilters:{
-       holderId: vsid
+       barId: subNavHolder
       }
     });
 

@@ -31,7 +31,9 @@ export class RouteCreatorMainView extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+        ['.btn.btn-blue.route-bar-btn', 'click']
+    ];
   }
 
   createMainBarHolder(){
@@ -44,7 +46,7 @@ export class RouteCreatorMainView extends ViewStream {
 
   onRendered() {
     this.addChannel("CHANNEL_ROUTEGEN_JSON")
-
+      this.routeCreator$InitBarItem();
       //const delayer=()=> this.routeAnim$InitBarItensAnimation();
       //window.setTimeout(delayer,30);
       this.setTimeout(this.routeAnim$InitBarItemsAnimation, 50, true);

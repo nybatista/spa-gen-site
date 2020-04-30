@@ -94,7 +94,7 @@ export class RouteCreateBarHolder extends ViewStream {
     const {holderId, barId, routeBarEvent} = e.props();
     const {vsid,routeLevel,el}=this.props;
     const isCurrentHolderEvent = holderId === vsid;
-    console.log("ROUTE BAR HOLDER LISTENS ",{vsid,isCurrentHolderEvent,holderId,routeLevel, barId, routeBarEvent,el})
+    console.log("ROUTE BAR HOLDER LISTENS ",{vsid,isCurrentHolderEvent,holderId,routeLevel, barId, routeBarEvent,el},'--',this.props,'--')
   }
 
   broadcastEvents() {
@@ -107,7 +107,7 @@ export class RouteCreateBarHolder extends ViewStream {
     const {lastItem} = this.props.data;
    // console.log("LAST ITEM IS ",{lastItem}, this.props);
     const createBar = (data)=>{
-      data['initYPos'] = this.props.el.offsetHeight;
+      //data['initYPos'] = this.props.el.offsetHeight;
       data['isLastItem'] = lastItem === data.keyValue;
       this.routeCreator$CreateRouteBar(props, data);
       //console.log("create bar ",this.props.vsid,this.props.el.offsetHeight);
@@ -115,6 +115,9 @@ export class RouteCreateBarHolder extends ViewStream {
     const barItemsData = this.routeCreator$ConformBarItemsData();
 
     forEachObjIndexed(createBar, barItemsData);
+
+  }
+  addNewBar(){
 
   }
 

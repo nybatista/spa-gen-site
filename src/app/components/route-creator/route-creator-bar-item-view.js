@@ -22,11 +22,19 @@ export class RouteCreatorBarItemView extends ViewStream {
     // return nexted array(s)
     const initItemsPayloadFilter = this.filter$InitDraggingItem();
     const checkForSwappedItemsFilter = this.filter$CheckForSwappedItems();
+    const internalUIEventPayloadFilter = this.filter$BarItemOnInternalUIEvent();
+
+
     return [
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent',internalUIEventPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT', 'onInitDragEvent', initItemsPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAGGING_SWAP_ITEMS_EVENT', 'onSwapDragItemsEvent', checkForSwappedItemsFilter]
 
     ];
+  }
+
+  onRouteBarClickedEvent(e){
+    console.log("ITEM HAS CLICKED ",{e},e.payload,this.props.vsid);
   }
 
   broadcastEvents() {
@@ -43,7 +51,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     const {vsid} = this.props;
     this.props.data.yGsap = yGsap;
 
-    console.log("INIT DRAG EVENT ",{vsid,yGsap,e})
+    //console.log("INIT DRAG EVENT ",{vsid,yGsap,e})
   }
 
   onSwapDragItemsEvent(e){
@@ -58,7 +66,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     } else {
       gsap.to(this.props.el, {duration:.125, y:yGsap, ease:"Power1.easeInOut"});
     }
-    console.log("SWAP DRAG EVENT ",{yGsap,isDragger,vsid,dragData,e})
+   // console.log("SWAP DRAG EVENT ",{yGsap,isDragger,vsid,dragData,e})
   }
 
 

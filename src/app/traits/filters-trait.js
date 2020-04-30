@@ -8,6 +8,28 @@ export class FiltersTrait extends SpyneTrait {
 
   }
 
+  static filter$BarHolderOnInternalUIEvent(props=this.props){
+    const {vsid} = props;
+    return new ChannelPayloadFilter({
+      propFilters:{
+       holderId: vsid
+      }
+    });
+
+  }
+
+  static filter$BarItemOnInternalUIEvent(props=this.props){
+    const {vsid} = props;
+    return new ChannelPayloadFilter({
+      propFilters:{
+        barId: vsid
+      }
+    });
+
+  }
+
+
+
   static filter$InitDraggingItem(props=this.props){
     const {vsid} = props;
     return new ChannelPayloadFilter({

@@ -54,14 +54,14 @@ export class BarItemsSorter{
     const len = arr.length-2;
 
     // getTheIndex COMPARES THE Y VALUES IN THE ARRAY WITH THE CURRENT DRAGGER Y
-    const getTheIndex = compose(clamp(0,len),R.tap(console.log),findIndex(lte(y)));
+    const getTheIndex = compose(clamp(0,len),findIndex(lte(y)));
     const yIndex = getTheIndex(arr);
 
 
     // THIS GETS THE CURRENT DRAGGER INDEX
     const draggerObj = this.getDraggerObj();
     const draggerIndex = draggerObj.index;
-     console.log("INDEX: ",{yIndex,draggerIndex,len})
+     //console.log("INDEX: ",{yIndex,draggerIndex,len})
 
     // THIS CHECKS TO SEE IF THE INDEX OF THE DRAGGER HAS CHANGED
     const isNewIndex = yIndex !== draggerIndex;

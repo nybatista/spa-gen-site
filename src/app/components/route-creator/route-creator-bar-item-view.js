@@ -1,6 +1,7 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {RouteBarDragTraits} from 'traits/route-bar-drag-traits';
+import {RouteAnimTraits} from 'traits/route-anim-traits';
 import {gsap} from 'gsap/all';
 import {FiltersTrait} from 'traits/filters-trait';
 import {compose,head,filter,propEq} from 'ramda';
@@ -10,7 +11,7 @@ export class RouteCreatorBarItemView extends ViewStream {
   constructor(props = {}) {
     props.tagName = 'li';
     props.class=`route-creator-bar-item route-level-${props.routeLevel} group-${props.parentVsid}`;
-    props.traits = [RouteCreatorTraits,RouteBarDragTraits,FiltersTrait];
+    props.traits = [RouteCreatorTraits,RouteBarDragTraits,RouteAnimTraits,FiltersTrait];
     props.data.holderId = props.parentVsid;
     props.template=require('./templates/route-creator-bar-item.tmpl.html');
     //console.log("BAR ITEM PROPS ",props);
@@ -34,7 +35,12 @@ export class RouteCreatorBarItemView extends ViewStream {
   }
 
   onRouteBarClickedEvent(e){
-    console.log("ITEM HAS CLICKED ",{e},e.payload,this.props.vsid);
+    const {routeBarEvent} = e.props();
+    if (routeBarEvent==='delete'){
+      this.routeAnim$ItemAnimateOutAndDispose();
+    }
+
+    console.log("ITEM HAS CLICKED ",{routeBarEvent,e},e.payload,this.props.vsid);
   }
 
   broadcastEvents() {
@@ -64,16 +70,10 @@ export class RouteCreatorBarItemView extends ViewStream {
     if (isDragger===true){
       this.props.data.yGsap = yGsap;
     } else {
-      gsap.to(this.props.el, {duration:.125, y:yGsap, ease:"Power1.easeInOut"});
+      this.routeAnim$ItemAnimateIn(yGsap);
     }
-   // console.log("SWAP DRAG EVENT ",{yGsap,isDragger,vsid,dragData,e})
   }
 
-
-
-  initBar(){
-
-  }
 
   sendLastItemRenderedEvent(){
 

@@ -26,6 +26,16 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
 
+  static routeAnim$ItemAnimateIn(yVal){
+    gsap.to(this.props.el, {duration:.125, y:yVal, ease:"Power1.easeInOut"});
+
+  }
+
+  static routeAnim$ItemAnimateOutAndDispose(){
+    const onDispose = this.setTimeout(this.disposeViewStream.bind(this), 0);
+      gsap.to(this.props.el, {duration:.125, opactiy:0, onComplete:onDispose})
+  }
+
 
   static routeAnim$GetDraggerItemData(barItemsSorter = this.props.barItemsSorter){
     return barItemsSorter.getDraggerObj();

@@ -35,17 +35,11 @@ export class RouteCreateBarHolder extends ViewStream {
   }
 
   onDragStartEvent(e){
-
-    //const items = this.routeCreator$GetListItems$();
     const {dragVsid} = e.props();
     const payload =  this.routeAnim$OnDragStart(dragVsid);
-
     const dragEvent = 'dragInitDragItem';
 
     this.sendDraggingEventToChannel(dragEvent, payload);
-    //console.log("START DRAGGER OBJ ",dragObj);
-    //console.log("draging ",{e},this.props.vsid,{dragVsid});
-   // this.routeAnim$StartBarPosWatcher(dragVsid);
 
   }
 
@@ -60,41 +54,27 @@ export class RouteCreateBarHolder extends ViewStream {
   onDraggingEvent(e){
     const {dragYPos,dragVsid} = e.props();
     const payload = this.routeAnim$OnDragging(dragYPos, dragVsid);
-
     if (payload!==undefined){
       const dragEvent = 'dragSwapItems';
       this.sendDraggingEventToChannel(dragEvent, payload);
-      //const {el, yGsap} = draggingData;
-      //gsap.to(el, {duration:.125, y:yGsap, ease: "Power1.easeInOut"});
-     // const action = "CHANNEL_ROUTE_CREATOR_DRAGGING_UPDATE_EVENT";
-      //this.sendInfoToChannel("CHANNEL_ROUTE_CREATOR", draggingData, action);
-      //console.log("DRAGGING DATA US ",{payload});
-
     }
-
 
   }
   onDragEndEvent(){
-
     this.routeAnim$OnDragEnd();
-
-/*    const draggerObjData = this.routeAnim$GetDraggerItemData();
-    const {el, yGsap} = draggerObjData;
-    console.log("DRAG END ",{el,yGsap});
-    this.props.dragger.endDrag()
-    const delayer = ()=>gsap.to(el, {duration:.125, y:yGsap, ease: "Power1.easeInOut"});
-
-    this.setTimeout(delayer,50);*/
-
-
   }
 
 
   onRouteBarClickedEvent(e){
-    const {holderId, barId, routeBarEvent} = e.props();
+    const {holderId, barId, routeBarEvent, payload} = e.props();
     const {vsid,routeLevel,el}=this.props;
     const isCurrentHolderEvent = holderId === vsid;
-    console.log("ROUTE BAR HOLDER LISTENS ",{vsid,isCurrentHolderEvent,holderId,routeLevel, barId, routeBarEvent,el},'--',this.props,'--')
+
+    if (routeBarEvent === 'add'){
+      this.routeCreator$CreateRouteBar();
+    }
+
+    console.log("ROUTE BAR HOLDER LISTENS ",{payload,vsid,isCurrentHolderEvent,holderId,routeLevel, barId, routeBarEvent,el},'--',this.props,'--')
   }
 
   broadcastEvents() {

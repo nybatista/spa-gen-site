@@ -1,5 +1,5 @@
 import {SpyneTrait, ChannelPayloadFilter} from 'spyne';
-
+import {compose,ifElse,propEq} from 'ramda';
 export class FiltersTrait extends SpyneTrait {
 
   constructor(context) {
@@ -9,10 +9,14 @@ export class FiltersTrait extends SpyneTrait {
   }
 
   static filter$BarHolderOnInternalUIEvent(props=this.props){
-    const {subNavHolder} = props;
+    const {subNavHolder,vsid} = props;
+    const addPred = propEq('barId', subNavHolder);
+    const deletePred = propEq('holderId', vsid);
+    const isAdd = propEq('routeBarEvent', 'add');
+    const fn = ifElse(isAdd,addPred,deletePred);
     return new ChannelPayloadFilter({
       propFilters:{
-       barId: subNavHolder
+       payload: fn
       }
     });
 

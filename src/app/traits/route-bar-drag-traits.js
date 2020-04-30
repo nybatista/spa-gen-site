@@ -58,7 +58,8 @@ export class RouteBarDragTraits extends SpyneTrait {
       //console.log("SELC IS ",this.props.id$+' > .dragger')
     const config =  {
       type: "y",
-      bounds: {minY:0, maxY:600},
+      bounds2: {minY:0, maxY:1600},
+      bounds3: document.querySelector('#route-creator-container'),
       trigger: this.props.id$+' > section div.dragger',
       edgeResistance: ".25",
       lockAxis: true,

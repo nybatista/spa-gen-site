@@ -34,16 +34,10 @@ module.exports = function(config) {
       { pattern: './node_modules/rxjs/*.js', included:false,   watched: false },
       { pattern: './node_modules/rxjs/**/*.js', included:false,    watched: false },
 
-      { pattern: './src/tests/traits/route-creator*.test.js', watched: true },
+      { pattern: './src/tests/**/*.test.js', watched: true },
 
     ],
 
-    client: {
-      mocha: {
-        grep: './src/tests/traits/route-anim-trait-test.js'
-      }
-
-    },
 
 
     // list of files / patterns to exclude

@@ -16,7 +16,7 @@ describe('bar items sorter tests', () => {
     document.body.removeChild(document.getElementById('route-creator-main'));
   });
 
-/*
+
   it('should create organizer sorter object', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const barItemsSorter = new BarItemsSorter(liItems, draggerId);
@@ -42,7 +42,7 @@ describe('bar items sorter tests', () => {
     const barItemsSorterArr =  BarItemsSorter.createSorterObject(liItems, draggerId);
     const draggerItem = BarItemsSorter.getDraggerObj(barItemsSorterArr);
     return expect(draggerItem.id).to.equal(draggerId);
-  });*/
+  });
   it('should get y positions array', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const barItemsSorter = new BarItemsSorter(liItems, draggerId);

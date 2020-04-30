@@ -32,7 +32,7 @@ export class BarItemsSorter{
     }
     this.barItemsSortArr.map(resetStates);
 
-    let {arr,yIndex,draggerIndex,draggerObj,isNewIndex} =  this.checkDragYPosition(y, dragVsid);
+    let {yIndex,draggerIndex,draggerObj,isNewIndex} =  this.checkDragYPosition(y, dragVsid);
     if (isNewIndex === true){
       draggerObj.index=yIndex;
       this.barItemsSortArr[yIndex].index = draggerIndex;
@@ -50,15 +50,18 @@ export class BarItemsSorter{
 
    checkDragYPosition(y, dragVsid){
     const arr = this.getBarItemsYPositions();
-    const len = arr.length;
+    arr.push(1000000);
+    const len = arr.length-2;
 
     // getTheIndex COMPARES THE Y VALUES IN THE ARRAY WITH THE CURRENT DRAGGER Y
-    const getTheIndex = compose(clamp(0,len),findIndex(lte(y)));
+    const getTheIndex = compose(clamp(0,len),R.tap(console.log),findIndex(lte(y)));
     const yIndex = getTheIndex(arr);
+
 
     // THIS GETS THE CURRENT DRAGGER INDEX
     const draggerObj = this.getDraggerObj();
     const draggerIndex = draggerObj.index;
+     console.log("INDEX: ",{yIndex,draggerIndex,len})
 
     // THIS CHECKS TO SEE IF THE INDEX OF THE DRAGGER HAS CHANGED
     const isNewIndex = yIndex !== draggerIndex;

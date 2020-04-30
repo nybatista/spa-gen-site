@@ -101,6 +101,10 @@ export class BarItemsSorter{
     }
 
     Object.defineProperties(sortObj,  {
+
+      el: {
+        get: ()=>document.getElementById(id)
+      },
       num: {
         get: ()=> n
       },

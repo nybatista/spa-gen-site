@@ -32,7 +32,10 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
   static routeAnim$ItemAnimateOutAndDispose(){
-    const onDispose = this.setTimeout(this.disposeViewStream.bind(this), 0);
+    const onDispose = ()=>{
+      this.sendRenderedEvent(false);
+      this.setTimeout(this.disposeViewStream.bind(this), 0);
+    }
       gsap.to(this.props.el, {duration:.125, opactiy:0, onComplete:onDispose})
   }
 

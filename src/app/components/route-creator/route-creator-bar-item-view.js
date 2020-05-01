@@ -69,7 +69,7 @@ export class RouteCreatorBarItemView extends ViewStream {
 
     if (isDragger===true){
       this.props.data.yGsap = yGsap;
-    } else {
+    } else if (this.props.autoInit===false) {
       this.routeAnim$ItemAnimateIn(yGsap);
     }
   }
@@ -84,11 +84,27 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   }
 
+  sendRenderedEvent(isAddEvent=true){
+    const {vsid, parentVsid, routeLevel} = this.props;
+    const barId = vsid;
+    const action = isAddEvent === true ?
+          'CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT' :
+          'CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT';
+    const channel = 'CHANNEL_ROUTE_CREATOR';
+    this.sendInfoToChannel(channel, {barId, parentVsid, routeLevel, action}, action);
+
+
+  }
+
   onRendered() {
     if (this.props.routeLevel<=0){
       this.routeCreator$CreateRouteBarHolder();
     }
 
+    if (this.props.autoInit===true){
+      console.log("AUTO INIT IS ",this.props);
+      this.sendRenderedEvent();
+    }
 
     this.routeCreator$InitBarItem();
     this.routeBarDrag$InitDraggable();

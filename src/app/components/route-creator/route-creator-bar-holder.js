@@ -24,14 +24,29 @@ export class RouteCreateBarHolder extends ViewStream {
       }});
     const internalUIEventPayloadFilter = this.filter$BarHolderOnInternalUIEvent();
 
-    return [
-      ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent',internalUIEventPayloadFilter],
+    const itemRenderedPayloadFilter = this.filter$BarHolderItemRenderedEvent();
 
+    return [
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
+        'onRouteBarClickedEvent',internalUIEventPayloadFilter],
+      ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onItemAdded',itemRenderedPayloadFilter],
+      ['CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT', 'onItemRemoved',itemRenderedPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT', 'onDragStartEvent',checkVsidPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAGGING_EVENT', 'onDraggingEvent',checkVsidPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT', 'onDragEndEvent',checkVsidPayloadFilter],
-        ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onAllItemsRenderedEvent']
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onAllItemsRenderedEvent']
     ];
+  }
+
+  onItemAdded(e){
+    const {vsid} = this.props;
+    console.log("BAR HOLDER ADD ITEM ",{vsid,e});
+  }
+
+  onItemRemoved(e){
+    const {vsid} = this.props;
+
+    console.log("BAR HOLDER REMOVE ITEM ",{vsid,e});
   }
 
   onDragStartEvent(e){
@@ -71,7 +86,7 @@ export class RouteCreateBarHolder extends ViewStream {
     const isCurrentHolderEvent = holderId === vsid;
 
     if (routeBarEvent === 'add'){
-      this.routeCreator$CreateRouteBar();
+      this.routeCreator$CreateRouteBar(this.props, undefined, true);
     }
 
     console.log("ROUTE BAR HOLDER LISTENS ",{payload,vsid,isCurrentHolderEvent,holderId,routeLevel, barId, routeBarEvent,el},'--',this.props,'--')

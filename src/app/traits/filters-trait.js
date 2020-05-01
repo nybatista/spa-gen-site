@@ -8,6 +8,18 @@ export class FiltersTrait extends SpyneTrait {
 
   }
 
+  static filter$BarHolderItemRenderedEvent(props=this.props){
+    const {vsid, routeLevel} = props;
+    const vsidPred = propEq('parentVsid', vsid);
+    return new ChannelPayloadFilter({
+      propFilters: {
+        parentVsid: (val)=>val===vsid || routeLevel===0
+      }
+    })
+
+  }
+
+
   static filter$BarHolderOnInternalUIEvent(props=this.props){
     const {subNavHolder,vsid} = props;
     const addPred = propEq('barId', subNavHolder);

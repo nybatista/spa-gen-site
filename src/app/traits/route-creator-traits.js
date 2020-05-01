@@ -12,7 +12,7 @@ export class RouteCreatorTraits extends SpyneTrait {
 
   }
 
-  static routeCreator$CreateRouteBar(props=this.props, data){
+  static routeCreator$CreateRouteBar(props=this.props, data, autoInit=false){
     const {routeLevel, vsid} = props;
     const parentVsid = vsid;
     const defaulRoutePathName = path(['data','routePath','routeName'], props);
@@ -25,7 +25,7 @@ export class RouteCreatorTraits extends SpyneTrait {
     }
 
 
-    this.appendView(new RouteCreatorBarItemView({parentVsid, routeLevel, data}));
+    this.appendView(new RouteCreatorBarItemView({parentVsid, autoInit, routeLevel, data}));
   }
 
   static routeCreator$CreateRouteBarHolder(data=this.props.data){

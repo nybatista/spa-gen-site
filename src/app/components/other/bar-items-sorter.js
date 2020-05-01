@@ -24,16 +24,24 @@ export class BarItemsSorter{
 
 
   updateBarItemsSorter(y, dragVsid){
+
+    // ADD HAS CHANGED TO CORRECT ITEMS
     const filterChangedItems = (o)=> o.hasChanged===true;
 
+
+    // RESET CHANGE VALUES TO FALSE FOR ALL
     const resetStates = (o)=>{
       o.hasChanged=false;
       o.initialized=false;
     }
     this.barItemsSortArr.map(resetStates);
 
+    // PULL IN THE DATE FOR THE CURRENT DRAG POSITION FOR THE SELECTED DRAGGER
     let {yIndex,draggerIndex,draggerObj,isNewIndex} =  this.checkDragYPosition(y, dragVsid);
+
+    // THE UPDATE ABOVE CHECKS THE Y MIDPOINTS ARR TO SEE IF THE DRAGGER INDEX IS DIFFERENT
     if (isNewIndex === true){
+      // THIS SWAPS THE INDEXES AND SENDS THAT INFO TO THE BAR HOLDER
       draggerObj.index=yIndex;
       this.barItemsSortArr[yIndex].index = draggerIndex;
       this.barItemsSortArr  =  sortBy(prop('index'), this.barItemsSortArr);
@@ -49,6 +57,8 @@ export class BarItemsSorter{
   }
 
    checkDragYPosition(y, dragVsid){
+
+    // THE ARRAY OF Y POSITIONS, ADDING A LARGE VALUE TO MAKE FINDINDEX WORK CORRECTLY
     const arr = this.getBarItemsYPositions();
     arr.push(1000000);
     const len = arr.length-2;
@@ -76,6 +86,7 @@ export class BarItemsSorter{
 
   static setDraggerObj(draggerVsid, arr=this.barItemsSortArr){
     const updateIsDraggerProp = (obj)=>obj.isDragger= obj.id === draggerVsid;
+   // console.log("GET ARR IS ",{arr})
     arr.map(updateIsDraggerProp);
     return this.getDraggerObj();
   }
@@ -85,19 +96,53 @@ export class BarItemsSorter{
     return pluck(['yCheck'], arr);
   }
 
+
+  static getBarItemHeight(liEl){
+    const pullHeightFromBox = el=>el.getBoundingClientRect().height;
+    let height = pullHeightFromBox(liEl.querySelector('section.input-bar'))
+    const subUlItemsSel = 'ul.route-bar-items-list li';
+    const hasMainSubNav = liEl.querySelector(subUlItemsSel)!==null;
+
+    // RECURSIVE FUNCTION TO COLLECT HEIGHTS OF NESTED LI ITEMS
+    const getTheHeight = (listItem)=>{
+
+      //CHECK IF LI ITEM HAS A SUBNAV UL
+      const subUlItems = listItem.querySelectorAll(subUlItemsSel);
+
+      // IF SUB ITEMS EXIST, LOOP THOSE ITEMS, ELSE RETURN LAST TERMINATED ITEM
+      if (subUlItems.length>0){
+        Array.from(subUlItems).forEach(getTheHeight)
+      } else{
+        const itemHeight = pullHeightFromBox(listItem);
+        height += listItem.offsetHeight;
+      }
+    }
+      // INIT RECURSIVE FUNCTION
+      if (hasMainSubNav===true) {
+        getTheHeight(liEl);
+      }
+      return height;
+
+  }
+
   static getDataFromBoundingBox(el,n, list, draggerId){
     const box = el.getBoundingClientRect();
     let {height,y,top}=box;
-    height = parseInt(height);
+    //height = parseInt(height);
+
+    height = BarItemsSorter.getBarItemHeight(el);
+
     const id = el.id;
+    //console.log("HEIGHTS ",{height,id})
+
     const midPt = height*.95;// height/2;
     const isDragger = el.id === draggerId;
     let num = n;
-    let yPos = y!==undefined ? y : top;
+  //  let yPos = y!==undefined ? y : top;
     let hasChanged = false;
     let initialized = true;
     const sortObj = {
-      height,yPos,id,el, midPt,isDragger,initialized
+      height,id,el, midPt,isDragger,initialized
     }
 
     Object.defineProperties(sortObj,  {

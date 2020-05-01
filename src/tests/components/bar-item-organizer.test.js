@@ -11,6 +11,8 @@ describe('bar items sorter tests', () => {
 
   before(function() {
     document.body.insertAdjacentHTML('afterbegin', RouteCreatorDom);
+    const absoluter = (el)=>el.style.cssText='position:absolute;  padding:0;margin:0;top:0;';
+    Array.from(document.querySelectorAll(`#${mainUl} li`)).forEach(absoluter);
   });
   after(function() {
     document.body.removeChild(document.getElementById('route-creator-main'));
@@ -51,6 +53,12 @@ describe('bar items sorter tests', () => {
 
     return true;
   });
+
+  it('should get the height of each li element', ()=>{
+    var el = document.getElementById(draggerId);
+    const theHeight = BarItemsSorter.getBarItemHeight(el);
+    expect(theHeight).to.equal(340);
+  })
 
   it('should find the new index for dragger yPos', ()=>{
 

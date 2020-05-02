@@ -48,6 +48,8 @@ export class BarItemsSorter{
       this.barItemsSortArr  = BarItemsSorter.addGsapYPos(this.barItemsSortArr);
       const swapItems = (filter(filterChangedItems))(this.barItemsSortArr);
       const swapItemsIds = pluck('id', swapItems);
+     //console.log("SWAP ITEMS ",{swapItems})
+
       return {swapItems, swapItemsIds}
 
     }
@@ -96,11 +98,42 @@ export class BarItemsSorter{
     return pluck(['yCheck'], arr);
   }
 
+  static addItemToArr(id, arr=ths.barItemsSortArr){
+    // RESET HAS CHANGED TO FALSE
+    //  CREATE ITEM AND APPEND TO CURRENT ARR
+    //  ADD YGSAP ONLY TO LAST ITEM
+    // RETURN LAST ITEM
+
+    /*
+    *  TODO: FOR TOP BAR HOLDER, IT NEEDS TO REDO HEIGHTS CHECK FOR BOTH ADD AND DELETE
+    *   IN THAT CASE,
+    *   1. SET HAS CHANGED TO FALSE FOR ALL
+    *   2. UPDATE HEIGHTS
+    *   3. IF yGSAP has changed, return true
+    *
+    * */
+
+  }
+
 
   static removeItemFromArr(id, arr=this.barItemSortArr){
     const getIds = (el)=>console.log("EL ",el.id);
     arr.forEach(getIds);
     console.log("ID ",{id,arr});
+
+    // REMOVE ITEM BY ID
+
+    // UPDATE HEIGHTS FOR ALL
+
+    // RESET HAS CHANGED ALL TO FALSE
+
+    // UPDATE YGSAP / MIDPT FOR ALL  -- AUTO HAS CHANGED TO TRUE
+
+
+    // RETURN ONLY CHANGED ITEMS
+
+
+
     return id;
   }
 
@@ -149,9 +182,13 @@ export class BarItemsSorter{
   //  let yPos = y!==undefined ? y : top;
     let hasChanged = false;
     let initialized = true;
+  // let yGsap=0;
+    let yG = 0;
     const sortObj = {
-      height,id,el, midPt,isDragger,initialized
+      height,id,el, midPt,isDragger,initialized,
+      yGsap:yG
     }
+   // sortObj.yGsap=yGsap;
 
     Object.defineProperties(sortObj,  {
 
@@ -160,6 +197,9 @@ export class BarItemsSorter{
       },
       num: {
         get: ()=> n
+      },
+      yGsap: {
+        get: ()=>yG
       },
       hasChanged: {
         get: ()=>hasChanged,
@@ -172,6 +212,13 @@ export class BarItemsSorter{
           hasChanged = true
         },
         get: ()=>num
+      },
+      _yGsap: {
+        set: (v)=>{
+          yG = v;
+          hasChanged = true;
+        },
+        get: ()=>yG
       }
     });
 
@@ -187,7 +234,8 @@ export class BarItemsSorter{
     const getGsapYPos = (index)=>R.sum(R.take(index,heightsArr))
     // ADD THE CORRECT Y POS FOR GSAP AND CREATE THE MIDPOINTS FOR ARR CHECK
     const addGsapY = (obj)=>{
-      obj.yGsap = getGsapYPos(obj.index);
+     // obj.yGsap = getGsapYPos(obj.index);
+      obj._yGsap = getGsapYPos(obj.index);
       obj.yCheck = obj.yGsap + obj.midPt;
       return obj;
     }

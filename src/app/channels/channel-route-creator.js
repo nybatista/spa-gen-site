@@ -67,7 +67,7 @@ export class ChannelRouteCreator extends Channel {
   onViewStreamInfo(obj) {
     let {data,payload,action} = obj.props();
 
-    console.log("DATA RETURNED ", {action,payload});
+    //console.log("DATA RETURNED ", {action,payload});
 
     const allowedActionsArr = [
         'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',

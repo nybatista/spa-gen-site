@@ -16,21 +16,22 @@ export class RouteCreatorMainView extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-        ["CHANNEL_ROUTEGEN_JSON_DATA_EVENT", 'onRouteGenData']
+        ["CHANNEL_ROUTEGEN_JSON_DATA_EVENT", 'onRouteGenData'],
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'routeAnim$InitBarItemsAnimation']
 
     ];
   }
 
+
+
   onRouteGenData(e){
     const {routes} = e.props();
     this.props.data = routes;
-    console.log('route gen data received ',{routes,e});
     this.createMainBarHolder();
 
   }
 
   broadcastEvents() {
-    // return nexted array(s)
     return [
         ['.btn.btn-blue.route-bar-btn', 'click']
     ];
@@ -38,18 +39,13 @@ export class RouteCreatorMainView extends ViewStream {
 
   createMainBarHolder(){
     this.props.routeLevel = -1;
-
-    //console.log('routeBarItems Data ',{routeBarItemsData})
-   // forEachObjIndexed(addBarItems, routeBarItemsData);
     this.routeCreator$CreateRouteBarHolder();
   }
 
   onRendered() {
-    this.addChannel("CHANNEL_ROUTEGEN_JSON")
-      this.routeCreator$InitBarItem();
-      //const delayer=()=> this.routeAnim$InitBarItensAnimation();
-      //window.setTimeout(delayer,30);
-      this.setTimeout(this.routeAnim$InitBarItemsAnimation, 50, true);
+    this.addChannel("CHANNEL_ROUTEGEN_JSON");
+    this.addChannel("CHANNEL_ROUTE_CREATOR");
+    this.routeCreator$InitBarItem();
 
   }
 

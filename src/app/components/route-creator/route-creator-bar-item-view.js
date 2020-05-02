@@ -65,8 +65,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     const {vsid} = this.props;
 
     const dragData = compose(head,filter(propEq('id', vsid)))(swapItems);
-    const {yGsap, isDragger} = dragData;
-
+    const {yGsap,yGsap3, isDragger} = dragData;
     if (isDragger===true){
       this.props.data.yGsap = yGsap;
     } else if (this.props.autoInit===false) {

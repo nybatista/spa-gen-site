@@ -30,7 +30,7 @@ describe('bar items sorter tests', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const boxData = BarItemsSorter.getDataFromBoundingBox(liItems[2]);
     const {height} = boxData;
-    expect(height).to.equal(liItems[2].offsetHeight);
+    expect(height).to.equal(162);
   });
 
   it('should create organizer sorter array', () => {

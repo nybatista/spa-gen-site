@@ -19,6 +19,7 @@ describe('bar items sorter tests', () => {
   });
 
 
+/*
   it('should create organizer sorter object', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const barItemsSorter = new BarItemsSorter(liItems, draggerId);
@@ -30,7 +31,7 @@ describe('bar items sorter tests', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const boxData = BarItemsSorter.getDataFromBoundingBox(liItems[2]);
     const {height} = boxData;
-    expect(height).to.equal(162);
+    expect(height).to.equal(176);
   });
 
   it('should create organizer sorter array', () => {
@@ -49,15 +50,22 @@ describe('bar items sorter tests', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const barItemsSorter = new BarItemsSorter(liItems, draggerId);
     barItemsSorter.updateBarItemsSorter(253);
-
-
     return true;
   });
 
   it('should get the height of each li element', ()=>{
     var el = document.getElementById(draggerId);
     const theHeight = BarItemsSorter.getBarItemHeight(el);
-    expect(theHeight).to.equal(340);
+    expect(theHeight).to.equal(386);
+  })
+*/
+
+  it('should delete an item', ()=>{
+    const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
+    const barItemsSorter = new BarItemsSorter(liItems, draggerId);
+
+    const removeItem = BarItemsSorter.removeItemFromArr(draggerId, barItemsSorter.sortArr);
+
   })
 
   it('should find the new index for dragger yPos', ()=>{

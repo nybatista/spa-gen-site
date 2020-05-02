@@ -97,6 +97,14 @@ export class BarItemsSorter{
   }
 
 
+  static removeItemFromArr(id, arr=this.barItemSortArr){
+    const getIds = (el)=>console.log("EL ",el.id);
+    arr.forEach(getIds);
+    console.log("ID ",{id,arr});
+    return id;
+  }
+
+
   static getBarItemHeight(liEl){
     const pullHeightFromBox = el=>el.getBoundingClientRect().height;
     let height = pullHeightFromBox(liEl.querySelector('section.input-bar'))

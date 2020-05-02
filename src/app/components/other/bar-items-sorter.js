@@ -215,8 +215,9 @@ export class BarItemsSorter{
       },
       _yGsap: {
         set: (v)=>{
+          //hasChanged = true;
+          hasChanged = v !== yG;
           yG = v;
-          hasChanged = true;
         },
         get: ()=>yG
       }

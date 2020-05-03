@@ -47,7 +47,7 @@ export class RouteBarDragTraits extends SpyneTrait {
 
     const onSnapItem = (y)=>{
       const {yGsap} = this.props.data;
-      console.log('this is ',{y,yGsap});
+      //console.log('this is ',{y,yGsap});
       //this.props.dragger[0].endDrag();
       //gsap.to(this.props.el,{duration:.125, y:yGsap, ease:"Power1.easeInOut"});
       return yGsap;

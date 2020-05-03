@@ -46,13 +46,10 @@ export class RouteCreatorBarItemView extends ViewStream {
     const {yGsap} = animateData;
     this.props.yGsap = yGsap;
     this.routeAnim$ItemAnimateToYVal(yGsap);
-    console.log("ANIMATE ITEM IS ",{yGsap,animateData,e});
+    //console.log("ANIMATE ITEM IS ",{yGsap,animateData,e});
 
   }
 
-  onBeforeDispose() {
-    console.log("ON BEFORE DISPOSE HERE ",this.props.vsid);
-  }
 
   onRouteBarClickedEvent(e){
     const {routeBarEvent} = e.props();
@@ -60,7 +57,7 @@ export class RouteCreatorBarItemView extends ViewStream {
       this.routeAnim$ItemAnimateOutAndDispose();
     }
 
-    console.log("ITEM HAS CLICKED ",{routeBarEvent,e},e.payload,this.props.vsid);
+    //console.log("ITEM HAS CLICKED ",{routeBarEvent,e},e.payload,this.props.vsid);
   }
 
   broadcastEvents() {
@@ -121,7 +118,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     }
 
     if (this.props.autoInit===true){
-      console.log("AUTO INIT IS ",this.props);
+      //console.log("AUTO INIT IS ",this.props);
       this.sendRenderedEvent();
     }
 

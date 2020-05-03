@@ -40,7 +40,6 @@ export class RouteAnimTraits extends SpyneTrait {
   static routeAnim$ItemAnimateOutAndDispose(){
     const onDispose = ()=>{
       this.sendRenderedEvent(false);
-      console.log("DISPOSING VIEWSTREAM ",this.props.vsid);
       this.disposeViewStream();
      // this.setTimeout(this.disposeViewStream.bind(this), 0);
     }

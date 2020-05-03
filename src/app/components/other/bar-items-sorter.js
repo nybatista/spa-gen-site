@@ -136,7 +136,7 @@ export class BarItemsSorter{
 
   static resetItems(o,i){
     o.index = i;
-    console.log("ITEM IS ",{o});
+    //console.log("ITEM IS ",{o});
     o.height = BarItemsSorter.getBarItemHeight(o.el);
     o.hasChanged = false;
     o.initialized = false;
@@ -145,8 +145,8 @@ export class BarItemsSorter{
 
 
   static removeItemFromArr(id, arr=this.barItemsSortArr){
-    const getIds = (o)=>console.log("id :",o.id);
-    arr.forEach(getIds);
+   // const getIds = (o)=>console.log("id :",o.id);
+    //arr.forEach(getIds);
 
     arr = compose(mapIndexed(BarItemsSorter.resetItems),reject(propEq('id', id)))(arr);
     this.barItemsSortArr = BarItemsSorter.addGsapYPos(arr);

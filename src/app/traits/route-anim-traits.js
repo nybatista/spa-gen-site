@@ -24,11 +24,17 @@ export class RouteAnimTraits extends SpyneTrait {
     gsap.to(allLiItemsEl, .25, {opacity:1, stagger:.02, ease:"Power1.easeInOut"});
 
   }
-
+  static routeAnim$ItemAnimateToYVal(yVal){
+    gsap.to(this.props.el, {duration:.125, y:yVal, ease:"Power1.easeInOut"});
+  }
 
   static routeAnim$ItemAnimateIn(yVal){
     gsap.to(this.props.el, {duration:.125, y:yVal, ease:"Power1.easeInOut"});
 
+  }
+
+  static routeAnim$RemoveItemFromSorter(id, sorter=this.props.barItemsSorter){
+    return sorter.removeItemFromArr(id);
   }
 
   static routeAnim$ItemAnimateOutAndDispose(){

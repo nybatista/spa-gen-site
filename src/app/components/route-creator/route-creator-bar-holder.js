@@ -87,9 +87,19 @@ export class RouteCreateBarHolder extends ViewStream {
 
     if (routeBarEvent === 'add'){
       this.routeCreator$CreateRouteBar(this.props, undefined, true);
+    } else{
+      const {swapItems, swapItemsIds} = this.routeAnim$RemoveItemFromSorter(barId);
+      //console.log("REMOVE DATA IS ",{swapItemsIds, swapItems})
+      this.sendAnimInfoToChannel({swapItems,swapItemsIds})
     }
 
     console.log("ROUTE BAR HOLDER LISTENS ",{payload,vsid,isCurrentHolderEvent,holderId,routeLevel, barId, routeBarEvent,el},'--',this.props,'--')
+  }
+
+  sendAnimInfoToChannel(payload){
+   const action = 'CHANNEL_ROUTE_CREATOR_ANIMATE_ITEM_EVENT';
+   const channel = 'CHANNEL_ROUTE_CREATOR';
+   this.sendInfoToChannel(channel, payload, action);
   }
 
   broadcastEvents() {

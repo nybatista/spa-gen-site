@@ -29,9 +29,23 @@ export class RouteCreatorBarItemView extends ViewStream {
     return [
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent',internalUIEventPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT', 'onInitDragEvent', initItemsPayloadFilter],
-      ['CHANNEL_ROUTE_CREATOR_DRAGGING_SWAP_ITEMS_EVENT', 'onSwapDragItemsEvent', checkForSwappedItemsFilter]
+      ['CHANNEL_ROUTE_CREATOR_DRAGGING_SWAP_ITEMS_EVENT', 'onSwapDragItemsEvent', checkForSwappedItemsFilter],
+      ['CHANNEL_ROUTE_CREATOR_ANIMATE_ITEM_EVENT', 'onAnimateItem', checkForSwappedItemsFilter]
 
     ];
+  }
+
+  onAnimateItem(e){
+    const {swapItems} = e.props();
+    const {vsid} = this.props;
+
+
+    const animateData = compose(head,filter(propEq('id', vsid)))(swapItems);
+    const {yGsap} = animateData;
+    this.props.yGsap = yGsap;
+    this.routeAnim$ItemAnimateToYVal(yGsap);
+    console.log("ANIMATE ITEM IS ",{yGsap,animateData,e});
+
   }
 
   onRouteBarClickedEvent(e){
@@ -65,7 +79,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     const {vsid} = this.props;
 
     const dragData = compose(head,filter(propEq('id', vsid)))(swapItems);
-    const {yGsap,yGsap3, isDragger} = dragData;
+    const {yGsap, isDragger} = dragData;
     if (isDragger===true){
       this.props.data.yGsap = yGsap;
     } else if (this.props.autoInit===false) {

@@ -1,4 +1,5 @@
-import {partialRight,clamp,findLastIndex,findIndex,gte, sortBy,prop, lte, pick,pluck, compose,head,filter,propEq} from 'ramda';
+import {partialRight, map,addIndex,clamp,reject,findLastIndex,findIndex,gte, sortBy,prop, lte, pick,pluck, compose,head,filter,propEq} from 'ramda';
+const mapIndexed = addIndex(map);
 
 export class BarItemsSorter{
 
@@ -10,6 +11,7 @@ export class BarItemsSorter{
     this.getBarItemsYPositions = BarItemsSorter.getBarItemsYPositions.bind(this);
     this.getDraggerObj = BarItemsSorter.getDraggerObj.bind(this);
     this.setDraggerObj = BarItemsSorter.setDraggerObj.bind(this);
+    this.removeItemFromArr = BarItemsSorter.removeItemFromArr.bind(this);
   }
 
   /*
@@ -50,7 +52,7 @@ export class BarItemsSorter{
       const swapItemsIds = pluck('id', swapItems);
      //console.log("SWAP ITEMS ",{swapItems})
 
-      return {swapItems, swapItemsIds}
+       return BarItemsSorter.getChangedItems(this.barItemsSortArr);
 
     }
 
@@ -98,6 +100,15 @@ export class BarItemsSorter{
     return pluck(['yCheck'], arr);
   }
 
+  static updateHeightsForAllItems(arr=this.barItemsSortArr){
+    const mapItemToUpdateHeight = (obj)=>{
+      obj.height = BarItemsSorter.getBarItemHeight(obj.el);
+      return obj;
+    }
+
+    return arr.map(mapItemToUpdateHeight);
+  }
+
   static addItemToArr(id, arr=ths.barItemsSortArr){
     // RESET HAS CHANGED TO FALSE
     //  CREATE ITEM AND APPEND TO CURRENT ARR
@@ -116,10 +127,32 @@ export class BarItemsSorter{
   }
 
 
-  static removeItemFromArr(id, arr=this.barItemSortArr){
-    const getIds = (el)=>console.log("EL ",el.id);
+  static getChangedItems(arr){
+    const filterChangedItems = (o)=>o.hasChanged === true;
+    const swapItems = (filter(filterChangedItems))(arr);
+    const swapItemsIds = pluck('id', swapItems);
+    return {swapItems, swapItemsIds};
+  }
+
+  static resetItems(o,i){
+    o.index = i;
+    console.log("ITEM IS ",{o});
+    o.height = BarItemsSorter.getBarItemHeight(o.el);
+    o.hasChanged = false;
+    o.initialized = false;
+    return o;
+  }
+
+
+  static removeItemFromArr(id, arr=this.barItemsSortArr){
+    const getIds = (o)=>console.log("id :",o.id);
     arr.forEach(getIds);
-    console.log("ID ",{id,arr});
+
+    arr = compose(mapIndexed(BarItemsSorter.resetItems),reject(propEq('id', id)))(arr);
+    this.barItemsSortArr = BarItemsSorter.addGsapYPos(arr);
+   // const {swapItems,swapItemsIds} = BarItemsSorter.getChangedItems(arr);
+
+   // console.log("ID ",{id,arr, swapItems,swapItemsIds});
 
     // REMOVE ITEM BY ID
 
@@ -134,7 +167,8 @@ export class BarItemsSorter{
 
 
 
-    return id;
+    return BarItemsSorter.getChangedItems(this.barItemsSortArr);
+
   }
 
 
@@ -162,6 +196,8 @@ export class BarItemsSorter{
       if (hasMainSubNav===true) {
         getTheHeight(liEl);
       }
+
+      //console.log("HEIGHT IS ",{height});
       return height;
 
   }

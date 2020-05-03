@@ -10,6 +10,7 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName = 'li';
+    props.sendLifecyleEvents=true;
     props.class=`route-creator-bar-item route-level-${props.routeLevel} group-${props.parentVsid}`;
     props.traits = [RouteCreatorTraits,RouteBarDragTraits,RouteAnimTraits,FiltersTrait];
     props.data.holderId = props.parentVsid;
@@ -21,6 +22,7 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
+    const {routeLevel} = this.props;
     const initItemsPayloadFilter = this.filter$InitDraggingItem();
     const checkForSwappedItemsFilter = this.filter$CheckForSwappedItems();
     const internalUIEventPayloadFilter = this.filter$BarItemOnInternalUIEvent();
@@ -46,6 +48,10 @@ export class RouteCreatorBarItemView extends ViewStream {
     this.routeAnim$ItemAnimateToYVal(yGsap);
     console.log("ANIMATE ITEM IS ",{yGsap,animateData,e});
 
+  }
+
+  onBeforeDispose() {
+    console.log("ON BEFORE DISPOSE HERE ",this.props.vsid);
   }
 
   onRouteBarClickedEvent(e){

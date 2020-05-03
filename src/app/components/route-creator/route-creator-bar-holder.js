@@ -18,7 +18,8 @@ export class RouteCreateBarHolder extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    const {vsid} = this.props;
+    const {vsid, routeLevel} = this.props;
+    console.log("ROUTE LEVEL IN HOLDER ",{routeLevel, vsid})
     const checkVsidPayloadFilter = new ChannelPayloadFilter({propFilters:{
       parentVsid: vsid
       }});
@@ -27,6 +28,7 @@ export class RouteCreateBarHolder extends ViewStream {
     const itemRenderedPayloadFilter = this.filter$BarHolderItemRenderedEvent();
 
     return [
+        ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onChannelLifecycle'],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
         'onRouteBarClickedEvent',internalUIEventPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onItemAdded',itemRenderedPayloadFilter],
@@ -42,11 +44,40 @@ export class RouteCreateBarHolder extends ViewStream {
     const {vsid} = this.props;
     console.log("BAR HOLDER ADD ITEM ",{vsid,e});
   }
+  onChannelLifecycle(e){
+    if (this.props.sendItemRemoveObj!==undefined){
+      const {vsid} = e.props();
+      const {barId, itemRemoveFn} = this.props.sendItemRemoveObj;
+      const isRemovedItem = barId === vsid;
+      itemRemoveFn();
+      this.props.sendItemRemoveObj = undefined;
+      console.log("CHANNEL LIFECYLE ",{isRemovedItem, vsid,barId,itemRemoveFn,e});
+
+    }
+
+  }
 
   onItemRemoved(e){
+    const {barId, parentVsid} = e.props();
     const {vsid} = this.props;
+    const isContainer = parentVsid === vsid;
+    if (isContainer===true) {
+      const {swapItems, swapItemsIds} = this.routeAnim$RemoveItemFromSorter(barId);
 
-    console.log("BAR HOLDER REMOVE ITEM ",{vsid,e});
+      console.log("REMOVE DATA TRUE IS ",{swapItemsIds, swapItems})
+      this.sendAnimInfoToChannel({swapItems,swapItemsIds})
+    } else {
+      const itemRemoveFn = ()=> {
+        const {swapItems, swapItemsIds} = this.routeAnim$RemoveItemFromSorter(barId);
+        this.sendAnimInfoToChannel({swapItems,swapItemsIds})
+      }
+      this.props.sendItemRemoveObj = {
+        barId,
+        itemRemoveFn
+      }
+    }
+
+
   }
 
   onDragStartEvent(e){
@@ -88,9 +119,7 @@ export class RouteCreateBarHolder extends ViewStream {
     if (routeBarEvent === 'add'){
       this.routeCreator$CreateRouteBar(this.props, undefined, true);
     } else{
-      const {swapItems, swapItemsIds} = this.routeAnim$RemoveItemFromSorter(barId);
-      //console.log("REMOVE DATA IS ",{swapItemsIds, swapItems})
-      this.sendAnimInfoToChannel({swapItems,swapItemsIds})
+
     }
 
     console.log("ROUTE BAR HOLDER LISTENS ",{payload,vsid,isCurrentHolderEvent,holderId,routeLevel, barId, routeBarEvent,el},'--',this.props,'--')
@@ -132,6 +161,7 @@ export class RouteCreateBarHolder extends ViewStream {
 
   onRendered() {
     this.addChannel("CHANNEL_ROUTE_CREATOR");
+    this.addChannel("CHANNEL_LIFECYCLE");
     if (this.props.data!==undefined) {
       this.createBars();
     }

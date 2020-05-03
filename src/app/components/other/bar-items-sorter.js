@@ -12,6 +12,7 @@ export class BarItemsSorter{
     this.getDraggerObj = BarItemsSorter.getDraggerObj.bind(this);
     this.setDraggerObj = BarItemsSorter.setDraggerObj.bind(this);
     this.removeItemFromArr = BarItemsSorter.removeItemFromArr.bind(this);
+    this.addItemToArr = BarItemsSorter.addItemToArr.bind(this);
   }
 
   /*
@@ -109,22 +110,6 @@ export class BarItemsSorter{
     return arr.map(mapItemToUpdateHeight);
   }
 
-  static addItemToArr(id, arr=ths.barItemsSortArr){
-    // RESET HAS CHANGED TO FALSE
-    //  CREATE ITEM AND APPEND TO CURRENT ARR
-    //  ADD YGSAP ONLY TO LAST ITEM
-    // RETURN LAST ITEM
-
-    /*
-    *  TODO: FOR TOP BAR HOLDER, IT NEEDS TO REDO HEIGHTS CHECK FOR BOTH ADD AND DELETE
-    *   IN THAT CASE,
-    *   1. SET HAS CHANGED TO FALSE FOR ALL
-    *   2. UPDATE HEIGHTS
-    *   3. IF yGSAP has changed, return true
-    *
-    * */
-
-  }
 
 
   static getChangedItems(arr){
@@ -142,6 +127,34 @@ export class BarItemsSorter{
     o.initialized = false;
     return o;
   }
+
+  static addItemToArr(el, arr=this.barItemsSortArr){
+    // RESET HAS CHANGED TO FALSE
+    //  CREATE ITEM AND APPEND TO CURRENT ARR
+    //  ADD YGSAP ONLY TO LAST ITEM
+    // RETURN LAST ITEM
+
+    if (el!==null){
+      console.log("EL IS ",el);
+      const newObj = BarItemsSorter.getDataFromBoundingBox(el,arr.length-1);
+      arr.push(newObj);
+    }
+
+    mapIndexed(BarItemsSorter.resetItems, arr);
+    this.barItemsSortArr = BarItemsSorter.addGsapYPos(arr);
+    this.barItemsSortArr[this.barItemsSortArr.length-1].hasChanged=true;
+
+    /*
+    *  TODO: FOR TOP BAR HOLDER, IT NEEDS TO REDO HEIGHTS CHECK FOR BOTH ADD AND DELETE
+    *   IN THAT CASE,
+    *   1. SET HAS CHANGED TO FALSE FOR ALL
+    *   2. UPDATE HEIGHTS
+    *   3. IF yGSAP has changed, return true
+    *
+    * */
+    return BarItemsSorter.getChangedItems(this.barItemsSortArr);
+  }
+
 
 
   static removeItemFromArr(id, arr=this.barItemsSortArr){

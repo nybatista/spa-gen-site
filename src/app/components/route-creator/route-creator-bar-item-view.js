@@ -38,15 +38,16 @@ export class RouteCreatorBarItemView extends ViewStream {
   }
 
   onAnimateItem(e){
-    const {swapItems} = e.props();
+    const {swapItems, animEvent} = e.props();
     const {vsid} = this.props;
-
+    const animateFn = animEvent === 'animateIn' ? this.routeAnim$ItemAnimateIn : this.routeAnim$ItemAnimateToYVal;
 
     const animateData = compose(head,filter(propEq('id', vsid)))(swapItems);
     const {yGsap} = animateData;
     this.props.yGsap = yGsap;
-    this.routeAnim$ItemAnimateToYVal(yGsap);
-    //console.log("ANIMATE ITEM IS ",{yGsap,animateData,e});
+    animateFn(yGsap);
+   // this.routeAnim$ItemAnimateToYVal(yGsap);
+    console.log("ANIMATE ITEM IS ",{yGsap,animateData,animEvent,swapItems,e});
 
   }
 
@@ -113,6 +114,8 @@ export class RouteCreatorBarItemView extends ViewStream {
   }
 
   onRendered() {
+    this.addChannel('CHANNEL_ROUTE_CREATOR');
+
     if (this.props.routeLevel<=0){
       this.routeCreator$CreateRouteBarHolder();
     }
@@ -127,7 +130,6 @@ export class RouteCreatorBarItemView extends ViewStream {
     if (this.props.data.isLastItem===true){
       this.sendLastItemRenderedEvent();
     }
-    this.addChannel('CHANNEL_ROUTE_CREATOR');
 
 
   }

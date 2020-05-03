@@ -40,10 +40,7 @@ export class RouteCreateBarHolder extends ViewStream {
     ];
   }
 
-  onItemAdded(e){
-    const {vsid} = this.props;
-    //console.log("BAR HOLDER ADD ITEM ",{vsid,e});
-  }
+
   onChannelLifecycle(e){
     if (this.props.sendItemRemoveObj!==undefined){
       const {vsid} = e.props();
@@ -56,20 +53,35 @@ export class RouteCreateBarHolder extends ViewStream {
     }
 
   }
+  onItemAdded(e){
+    const {barId, parentVsid} = e.props();
+    const {vsid} = this.props;
+    const isContainer = parentVsid === vsid;
+    const item$ = this.props.el$(`#${barId}`);
+    const el = isContainer === true ? item$.el : null;
 
+    const {swapItems, swapItemsIds} =  this.routeAnim$AddItemToSorter(el);
+    const animEvent = isContainer === true ? 'animateIn' : 'animate';;
+    this.sendAnimInfoToChannel({swapItems,swapItemsIds,animEvent});
+
+
+    console.log("BAR HOLDER ADD ITEM ",{animEvent,isContainer, parentVsid, vsid, barId, swapItems, swapItemsIds, el});
+
+  }
   onItemRemoved(e){
     const {barId, parentVsid} = e.props();
     const {vsid} = this.props;
     const isContainer = parentVsid === vsid;
+    const animEvent = 'animateOut';
     if (isContainer===true) {
       const {swapItems, swapItemsIds} = this.routeAnim$RemoveItemFromSorter(barId);
 
       //console.log("REMOVE DATA TRUE IS ",{swapItemsIds, swapItems})
-      this.sendAnimInfoToChannel({swapItems,swapItemsIds})
+      this.sendAnimInfoToChannel({swapItems,swapItemsIds,animEvent})
     } else {
       const itemRemoveFn = ()=> {
         const {swapItems, swapItemsIds} = this.routeAnim$RemoveItemFromSorter(barId);
-        this.sendAnimInfoToChannel({swapItems,swapItemsIds})
+        this.sendAnimInfoToChannel({swapItems,swapItemsIds,animEvent})
       }
       this.props.sendItemRemoveObj = {
         barId,

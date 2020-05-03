@@ -29,13 +29,20 @@ export class RouteAnimTraits extends SpyneTrait {
   }
 
   static routeAnim$ItemAnimateIn(yVal){
-    gsap.to(this.props.el, {duration:.125, y:yVal, ease:"Power1.easeInOut"});
+    this.props.el$.addClass('anim-mode');
+    console.log("animate In ", this.props.el);
+    gsap.to(this.props.el, {duration:.125, opacity:1, y:yVal, ease:"Power1.easeInOut"});
 
   }
 
   static routeAnim$RemoveItemFromSorter(id, sorter=this.props.barItemsSorter){
     return sorter.removeItemFromArr(id);
   }
+
+  static routeAnim$AddItemToSorter(el, sorter=this.props.barItemsSorter, isContainer){
+    return sorter.addItemToArr(el);
+  }
+
 
   static routeAnim$ItemAnimateOutAndDispose(){
     const onDispose = ()=>{

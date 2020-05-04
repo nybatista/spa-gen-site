@@ -86,7 +86,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     const {yGsap, isDragger} = dragData;
     if (isDragger===true){
       this.props.data.yGsap = yGsap;
-    } else if (this.props.autoInit===false) {
+    } else  {
       this.routeAnim$ItemAnimateIn(yGsap);
     }
   }
@@ -117,7 +117,8 @@ export class RouteCreatorBarItemView extends ViewStream {
     this.addChannel('CHANNEL_ROUTE_CREATOR');
 
     if (this.props.routeLevel<=0){
-      this.routeCreator$CreateRouteBarHolder();
+      const autoInit = this.props.autoInit === true;
+      this.routeCreator$CreateRouteBarHolder(this.props.data, autoInit);
     }
 
     if (this.props.autoInit===true){

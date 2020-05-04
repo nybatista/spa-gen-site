@@ -30,7 +30,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
   static routeAnim$ItemAnimateIn(yVal){
     this.props.el$.addClass('anim-mode');
-    console.log("animate In ", this.props.el);
+    //console.log("animate In ", this.props.el);
     gsap.to(this.props.el, {duration:.125, opacity:1, y:yVal, ease:"Power1.easeInOut"});
 
   }

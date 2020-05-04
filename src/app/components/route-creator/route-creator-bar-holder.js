@@ -174,6 +174,10 @@ export class RouteCreateBarHolder extends ViewStream {
   onRendered() {
     this.addChannel("CHANNEL_ROUTE_CREATOR");
     this.addChannel("CHANNEL_LIFECYCLE");
+    if (this.props.autoInit===true){
+      this.onAllItemsRenderedEvent();
+    }
+
     if (this.props.data!==undefined) {
       this.createBars();
     }

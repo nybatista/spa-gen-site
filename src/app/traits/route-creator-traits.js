@@ -28,12 +28,12 @@ export class RouteCreatorTraits extends SpyneTrait {
     this.appendView(new RouteCreatorBarItemView({parentVsid, autoInit, routeLevel, data}));
   }
 
-  static routeCreator$CreateRouteBarHolder(data=this.props.data){
+  static routeCreator$CreateRouteBarHolder(data=this.props.data, autoInit=false){
     const routeLevel = this.props.routeLevel+1;
     const isMainHolder = routeLevel === 0;
     const appendSelector = isMainHolder === true ? '#route-creator-container' : undefined;
     const subNavHolder = this.props.vsid;
-    this.appendView(new RouteCreateBarHolder({routeLevel, subNavHolder, isMainHolder, data}), appendSelector);
+    this.appendView(new RouteCreateBarHolder({routeLevel, subNavHolder, isMainHolder, autoInit, data}), appendSelector);
   }
 
 

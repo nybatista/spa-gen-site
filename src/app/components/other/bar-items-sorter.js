@@ -1,4 +1,4 @@
-import {partialRight, map,addIndex,clamp,reject,findLastIndex,findIndex,gte, sortBy,prop, lte, pick,pluck, compose,head,filter,propEq} from 'ramda';
+import {partialRight, map,addIndex,clamp,reject,findLastIndex,findIndex,gte, sortBy,prop, lte, pick,pluck, compose,head,filter,clone,propEq} from 'ramda';
 const mapIndexed = addIndex(map);
 
 export class BarItemsSorter{
@@ -46,12 +46,13 @@ export class BarItemsSorter{
     if (isNewIndex === true){
       // THIS SWAPS THE INDEXES AND SENDS THAT INFO TO THE BAR HOLDER
       draggerObj.index=yIndex;
+      console.log("NEW ITEM IS ",this.barItemsSortArr[yIndex], {yIndex}, this.barItemsSortArr);
       this.barItemsSortArr[yIndex].index = draggerIndex;
       this.barItemsSortArr  =  sortBy(prop('index'), this.barItemsSortArr);
       this.barItemsSortArr  = BarItemsSorter.addGsapYPos(this.barItemsSortArr);
       const swapItems = (filter(filterChangedItems))(this.barItemsSortArr);
       const swapItemsIds = pluck('id', swapItems);
-     //console.log("SWAP ITEMS ",{swapItems})
+      console.log("SWAP ITEMS ",{swapItems})
 
        return BarItemsSorter.getChangedItems(this.barItemsSortArr);
 
@@ -81,6 +82,7 @@ export class BarItemsSorter{
     // THIS CHECKS TO SEE IF THE INDEX OF THE DRAGGER HAS CHANGED
     const isNewIndex = yIndex !== draggerIndex;
 
+    //console.log("DRAGGER DATA ", {len,y,arr,yIndex,draggerIndex,draggerObj,isNewIndex});
     return {arr,yIndex,draggerIndex,draggerObj,isNewIndex};
 
   }
@@ -121,7 +123,7 @@ export class BarItemsSorter{
 
   static resetItems(o,i){
     o.index = i;
-    //console.log("ITEM IS ",{o});
+    console.log("ITEM IS ",{o,i});
     o.height = BarItemsSorter.getBarItemHeight(o.el);
     o.hasChanged = false;
     o.initialized = false;
@@ -133,6 +135,7 @@ export class BarItemsSorter{
     //  CREATE ITEM AND APPEND TO CURRENT ARR
     //  ADD YGSAP ONLY TO LAST ITEM
     // RETURN LAST ITEM
+    console.log("ARR BEFORE ",clone(arr));
 
     if (el!==null){
       console.log("EL IS ",el);
@@ -142,7 +145,10 @@ export class BarItemsSorter{
 
     mapIndexed(BarItemsSorter.resetItems, arr);
     this.barItemsSortArr = BarItemsSorter.addGsapYPos(arr);
-    this.barItemsSortArr[this.barItemsSortArr.length-1].hasChanged=true;
+    if (el!==null) {
+      this.barItemsSortArr[this.barItemsSortArr.length - 1].hasChanged = true;
+    }
+    console.log("ARR AFTER ",clone(arr));
 
     /*
     *  TODO: FOR TOP BAR HOLDER, IT NEEDS TO REDO HEIGHTS CHECK FOR BOTH ADD AND DELETE
@@ -225,7 +231,7 @@ export class BarItemsSorter{
     const id = el.id;
     //console.log("HEIGHTS ",{height,id})
 
-    const midPt = height*.95;// height/2;
+    const midPt = height*.5;// height/2;
     const isDragger = el.id === draggerId;
     let num = n;
   //  let yPos = y!==undefined ? y : top;

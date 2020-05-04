@@ -10,7 +10,8 @@ export class RouteCreateBarHolder extends ViewStream {
 
   constructor(props = {}) {
     props.tagName='ul';
-    props.traits=[RouteCreatorTraits, RouteAnimTraits, FiltersTrait]
+    props.traits=[RouteCreatorTraits, RouteAnimTraits, FiltersTrait];
+    props.reSortOnDragEnd = false;
     props.class=props.isMainHolder === true ? 'route-bar-items-list main' : 'route-bar-items-list';
     super(props);
 
@@ -26,7 +27,7 @@ export class RouteCreateBarHolder extends ViewStream {
     const internalUIEventPayloadFilter = this.filter$BarHolderOnInternalUIEvent();
 
     const itemRenderedPayloadFilter = this.filter$BarHolderItemRenderedEvent();
-
+0
     return [
         ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onChannelLifecycle'],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
@@ -114,12 +115,18 @@ export class RouteCreateBarHolder extends ViewStream {
     const payload = this.routeAnim$OnDragging(dragYPos, dragVsid);
     if (payload!==undefined){
       const dragEvent = 'dragSwapItems';
+      this.props.reSortOnDragEnd=true;
       this.sendDraggingEventToChannel(dragEvent, payload);
     }
 
   }
   onDragEndEvent(){
-    this.routeAnim$OnDragEnd();
+    console.log("DRAG END ",this.props.reSortOnDragEnd);
+   // this.routeAnim$OnDragEnd();
+    if (this.props.reSortOnDragEnd === true) {
+      this.routeCreator$ReorderChildElements();
+    }
+    this.props.reSortOnDragEnd = false;
   }
 
 

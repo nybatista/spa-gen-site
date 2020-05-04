@@ -36,6 +36,15 @@ export class RouteCreatorTraits extends SpyneTrait {
     this.appendView(new RouteCreateBarHolder({routeLevel, subNavHolder, isMainHolder, autoInit, data}), appendSelector);
   }
 
+  static routeCreator$ReorderChildElements(props=this.props, sorter=this.props.barItemsSorter){
+    const els = sorter.itemsArr;
+
+
+
+    console.log("ELS ARE ", {els, sorter,props});
+
+  }
+
 
   static routeCreator$ConformBarItemsData(){
     const conformBarItemsData = (value,key,d)=>{

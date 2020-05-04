@@ -46,13 +46,13 @@ export class BarItemsSorter{
     if (isNewIndex === true){
       // THIS SWAPS THE INDEXES AND SENDS THAT INFO TO THE BAR HOLDER
       draggerObj.index=yIndex;
-      console.log("NEW ITEM IS ",this.barItemsSortArr[yIndex], {yIndex}, this.barItemsSortArr);
+    //  console.log("NEW ITEM IS ",this.barItemsSortArr[yIndex], {yIndex}, this.barItemsSortArr);
       this.barItemsSortArr[yIndex].index = draggerIndex;
       this.barItemsSortArr  =  sortBy(prop('index'), this.barItemsSortArr);
       this.barItemsSortArr  = BarItemsSorter.addGsapYPos(this.barItemsSortArr);
       const swapItems = (filter(filterChangedItems))(this.barItemsSortArr);
       const swapItemsIds = pluck('id', swapItems);
-      console.log("SWAP ITEMS ",{swapItems})
+      //console.log("SWAP ITEMS ",{swapItems})
 
        return BarItemsSorter.getChangedItems(this.barItemsSortArr);
 
@@ -296,6 +296,10 @@ export class BarItemsSorter{
       return obj;
     }
     return arr.map(addGsapY);
+  }
+
+  get itemsArr(){
+    return pluck(['el'], this.barItemsSortArr);
   }
 
   get sortArr(){

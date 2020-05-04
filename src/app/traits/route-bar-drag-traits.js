@@ -67,6 +67,7 @@ export class RouteBarDragTraits extends SpyneTrait {
       inertia: true,
       onPress: this.routeBarDrag$OnPress.bind(this),
       onDrag: this.routeBarDrag$OnDrag.bind(this),
+      onDragEnd: this.routeBarDrag$OnDragEnd.bind(this),
       snap:{y:onSnapItem}
 
 

@@ -37,11 +37,52 @@ export class RouteCreatorTraits extends SpyneTrait {
   }
 
   static routeCreator$ReorderChildElements(props=this.props, sorter=this.props.barItemsSorter){
-    const els = sorter.itemsArr;
+    const els = sorter.itemsArr.reverse();
+
+    const firstElSel = `li.group-${this.props.vsid}`;
+    const firstInsert = (el)=>{
+      const beforeEl = this.props.el$(firstElSel).el;
+      console.log("BEFORE EL ", {beforeEl},this.props.el.firstElementChild);
+      this.props.el.insertBefore(el,this.props.el$(firstElSel).el);
+    }
+
+    //const tempLi = document.createElement('li');
+   // tempLi.setAttribute('id', 'temp-id');
+   // this.props.el.appendChild(tempLi);
+  //  this.props.el.insertBefore(this.props.el.childNodes[0], tempLi);
+
+    const addEachItemInOder = (el,i, arr)=>{
+    //  let beforeEl = i === 0 ? tempLi : arr[i=1];
+    //  const isSameNode = beforeEl.isEqualNode(el);
+      const beforeEl = this.props.el.firstElementChild;
+      console.log("BEFORE EL ",{beforeEl, el});
+        this.props.el.insertBefore(el, beforeEl);
+      //this.props.el.insertBefore(beforeEl, el);
+
+     // const beforeEl = this.props.el.firstElementChild;
+     // console.log("BEFORE EL ",{beforeEl, el});
+/*      if (isSameNode === false) {
+        this.props.el.insertBefore(beforeEl, el);
+      } else{
+        beforeEl = this.props.el.firstElementChild.nextSibling;
+        this.props.el.insertBefore(beforeEl, el);
+      }*/
+      /*  if (i===0){
+        this.props.el.insertBefore(el, this.props.el.firstElementChild);
+      } else{
+        const beforeItem = arr[i-1].el;
+        this.props.el.insertAfter(beforeItem, el);
+      }
+*/
+      console.log("EL IS I ",{i,el, beforeEl});
+    }
+
+    console.log("ELS ARE ", {els});
+
+    els.forEach(addEachItemInOder);
 
 
-
-    console.log("ELS ARE ", {els, sorter,props});
+    const updatedEls = this.props.el$(firstElSel).arr
 
   }
 

@@ -1,6 +1,7 @@
 import {SpyneTrait} from 'spyne';
 import {RouteCreatorBarItemView} from 'components/route-creator/route-creator-bar-item-view';
 import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
+import {RouteCreatorRouteNameView} from 'components/route-creator/route-creator-route-name-view';
 import {omit,path, filter,last,either, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
 import {gsap} from "gsap/all";
 
@@ -35,6 +36,14 @@ export class RouteCreatorTraits extends SpyneTrait {
     const subNavHolder = this.props.vsid;
     this.appendView(new RouteCreateBarHolder({routeLevel, subNavHolder, isMainHolder, autoInit, data}), appendSelector);
   }
+
+  static routeCreator$CreateRouteName(data=this.props.data){
+    const routeLevel = this.props.routeLevel+1;
+    const isMainHolder = routeLevel === 0;
+    const holderId = this.props.vsid;
+    this.appendView(new RouteCreatorRouteNameView({routeLevel, holderId, isMainHolder}));
+  }
+
 
   static routeCreator$ReorderChildElements(props=this.props, sorter=this.props.barItemsSorter){
     const els = sorter.itemsArr.reverse();

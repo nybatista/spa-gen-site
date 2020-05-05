@@ -44,6 +44,14 @@ export class FiltersTrait extends SpyneTrait {
 
   }
 
+  static filter$BarItemUIClickForRouteName(props=this.props){
+    const {holderId} = props;
+    return new ChannelPayloadFilter({
+        propFilters: {
+          barId: holderId
+        }
+    });
+  }
 
 
   static filter$InitDraggingItem(props=this.props){

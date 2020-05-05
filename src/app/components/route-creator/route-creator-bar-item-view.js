@@ -119,6 +119,8 @@ export class RouteCreatorBarItemView extends ViewStream {
     if (this.props.routeLevel<=0){
       const autoInit = this.props.autoInit === true;
       this.routeCreator$CreateRouteBarHolder(this.props.data, autoInit);
+      this.routeCreator$CreateRouteName();
+
     }
 
     if (this.props.autoInit===true){

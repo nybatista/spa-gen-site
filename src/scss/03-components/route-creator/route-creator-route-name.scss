@@ -3,14 +3,25 @@
   top: 38px;
   min-width:80px;
   min-height:20px;
-  background: orange;
+  opacity: 0;
+  pointer-events: none;
+  &.show{
+    opacity: 1;
+    pointer-events: all;
+  }
+
 
   input{
     position: absolute;
-    top:0;
+    //top:0;
+    //background: #ccc;
+
     width:100%;
     border:0;
-    background: #ccc;
+    top: 7px;
+    background: #dedede;
+    color:#666;
+
 
   }
 

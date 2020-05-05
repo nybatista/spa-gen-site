@@ -13,6 +13,8 @@ export class RouteCreateBarHolder extends ViewStream {
     props.traits=[RouteCreatorTraits, RouteAnimTraits, FiltersTrait];
     props.reSortOnDragEnd = false;
     props.menuNameInc = 1;
+    props.dataset = {};
+    props.dataset['mainBar'] = props.subNavHolder;
     props.class=props.isMainHolder === true ? 'route-bar-items-list main' : 'route-bar-items-list';
     super(props);
 

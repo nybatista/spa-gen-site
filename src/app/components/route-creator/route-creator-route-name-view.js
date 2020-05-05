@@ -7,8 +7,8 @@ import {RouteCreatorToDataTraits} from 'traits/route-creator-to-data-traits';
 export class RouteCreatorRouteNameView extends ViewStream {
 
   constructor(props = {}) {
-    props.class='route-creator-route-name hide';
-    props.isActive = false;
+    props.class='route-creator-route-name';
+    props.isActive = -1;
     props.traits = [RouteAnimTraits, RouteCreatorTraits, RouteCreatorToDataTraits, FiltersTrait];
     props.template = require('./templates/route-creator-route-name.tmpl.html');
     super(props);
@@ -19,19 +19,31 @@ export class RouteCreatorRouteNameView extends ViewStream {
     // return nexted array(s)
     const filterUIClickForRouteName = this.filter$BarItemUIClickForRouteName();
     return [
-      ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onItemEvent', filterUIClickForRouteName],
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onItemEvent'],
     ];
   }
 
   onItemEvent(e){
-    const {holderId} = this.props;
-    const {barId} = e.props();
-    const ulLiSel = `#${barId} ul.route-bar-items-list`;
-    const ulData = this.routeCreatorToData$GetUlData(ulLiSel);
+    const {holderId,barId,routeBarEvent} = e.props();
+    console.log("route Name IS ",{holderId,barId,routeBarEvent,e})
 
+   // this.checkIfRouteIsActive();
+  }
 
+  checkIfRouteIsActive(){
 
-    console.log("E IS ",{holderId,barId,ulData});
+    const {holderId, isActive} = this.props;
+    const ulData = this.routeCreatorToData$GetUlData(holderId);
+    const num = ulData.length;
+    const currentActiveMode = num>=1;
+    const activeModeHasChanged = currentActiveMode !== isActive;
+
+    if (activeModeHasChanged===true){
+      this.props.isActive = currentActiveMode;
+      this.props.el$.toggleClass('show', this.props.isActive);
+    }
+    console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
+
   }
 
   broadcastEvents() {
@@ -40,6 +52,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
   }
 
   onRendered() {
+    this.checkIfRouteIsActive();
     this.addChannel("CHANNEL_ROUTE_CREATOR");
   }
 

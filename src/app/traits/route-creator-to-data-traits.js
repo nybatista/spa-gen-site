@@ -8,7 +8,28 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
 
   }
 
-  static routeCreatorToData$GetUlData(ulSelector){
+
+
+
+  static routeCreatorToData$GetDataElByType(barEl, type){
+    /*
+    *
+    * TYPE: barInputVal, routeNameInputVal, listItemsData
+    *
+    * */
+  }
+
+  static routeCreatorToData$GetUlData(barId){
+    const ulLiSel = `#${barId} ul.route-bar-items-list`;
+    const ul = document.querySelector(ulLiSel);
+    const ulData = compose(fromPairs,toPairs)(ul.dataset);
+    const ulLiEls = ul.querySelectorAll(`${ulLiSel} > li`);
+    const length = ulLiEls.length;
+    return {ulData,length};
+
+  }
+
+  static routeCreatorToData$GetData(ulSelector){
     /*
     * TODO: CREATE MICRO TASKS AND HAVE SPECIFIC METHODS THAT CONSOLIDATES
     *  JUST THE RIGHT AMOUNT OF THOSE MICRO TASKS
@@ -28,6 +49,8 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     const length = ulLiEls.length;
     return {ulData,length};
   }
+
+
 
   static routeCreatorToData$GetDefaultRouteName(str){
     /**

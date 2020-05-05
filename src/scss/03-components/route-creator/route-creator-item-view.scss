@@ -3,7 +3,7 @@ li.route-creator-bar-item {
   position: relative;
  // top: 0;
  // width: 100%;
-  min-width: 350px;
+  min-width: 460px;
   opacity: 0;
 
   &.anim-mode{
@@ -15,7 +15,7 @@ li.route-creator-bar-item {
 
   &.route-level-1{
    // min-width: 300px;
-    padding-left:80px;
+    padding-left:120px;
 
     section.input-bar {
       width:100%;

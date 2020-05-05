@@ -14,13 +14,13 @@ export class RouteCreatorTraits extends SpyneTrait {
   }
 
   static routeCreator$CreateRouteBar(props=this.props, data, autoInit=false){
-    const {routeLevel, vsid} = props;
+    const {routeLevel, vsid,menuNameInc} = props;
     const parentVsid = vsid;
     const defaulRoutePathName = path(['data','routePath','routeName'], props);
     if (data===undefined){
       data = {
         key: defaulRoutePathName,
-        keyValue: "menu-name",
+        keyValue: `menu-name-${menuNameInc}`,
         routePath: undefined
       }
     }

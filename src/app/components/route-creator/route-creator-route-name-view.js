@@ -2,12 +2,14 @@ import {ViewStream} from 'spyne';
 import {FiltersTrait} from 'traits/filters-trait';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
+import {RouteCreatorToDataTraits} from 'traits/route-creator-to-data-traits';
 
 export class RouteCreatorRouteNameView extends ViewStream {
 
   constructor(props = {}) {
-    props.class='route-creator-route-name';
-    props.traits = [RouteAnimTraits, RouteCreatorTraits, FiltersTrait];
+    props.class='route-creator-route-name hide';
+    props.isActive = false;
+    props.traits = [RouteAnimTraits, RouteCreatorTraits, RouteCreatorToDataTraits, FiltersTrait];
     props.template = require('./templates/route-creator-route-name.tmpl.html');
     super(props);
 
@@ -24,11 +26,12 @@ export class RouteCreatorRouteNameView extends ViewStream {
   onItemEvent(e){
     const {holderId} = this.props;
     const {barId} = e.props();
-    const ulLiSel = `#${barId} ul.route-bar-items-list > li`;
-    const ulLiEls = document.querySelectorAll(ulLiSel);
+    const ulLiSel = `#${barId} ul.route-bar-items-list`;
+    const ulData = this.routeCreatorToData$GetUlData(ulLiSel);
 
 
-    console.log("E IS ",{holderId,barId,ulLiEls});
+
+    console.log("E IS ",{holderId,barId,ulData});
   }
 
   broadcastEvents() {

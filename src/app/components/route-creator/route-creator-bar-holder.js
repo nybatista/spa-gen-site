@@ -12,6 +12,7 @@ export class RouteCreateBarHolder extends ViewStream {
     props.tagName='ul';
     props.traits=[RouteCreatorTraits, RouteAnimTraits, FiltersTrait];
     props.reSortOnDragEnd = false;
+    props.menuNameInc = 1;
     props.class=props.isMainHolder === true ? 'route-bar-items-list main' : 'route-bar-items-list';
     super(props);
 
@@ -137,8 +138,9 @@ export class RouteCreateBarHolder extends ViewStream {
 
     if (routeBarEvent === 'add'){
       this.routeCreator$CreateRouteBar(this.props, undefined, true);
+      this.props.menuNameInc +=1;
     } else{
-
+      //this.props.menuNameInc -=1;
     }
 
     //console.log("ROUTE BAR HOLDER LISTENS ",{payload,vsid,isCurrentHolderEvent,holderId,routeLevel, barId, routeBarEvent,el},'--',this.props,'--')

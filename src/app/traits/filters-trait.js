@@ -48,7 +48,7 @@ export class FiltersTrait extends SpyneTrait {
     const {holderId} = props;
     return new ChannelPayloadFilter({
         propFilters: {
-          barId: holderId
+          masterItem: holderId
         }
     });
   }

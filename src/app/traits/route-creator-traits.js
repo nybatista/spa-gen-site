@@ -14,7 +14,7 @@ export class RouteCreatorTraits extends SpyneTrait {
   }
 
   static routeCreator$CreateRouteBar(props=this.props, data, autoInit=false){
-    const {routeLevel, vsid,menuNameInc} = props;
+    const {routeLevel, vsid, subNavHolder, menuNameInc} = props;
     const parentVsid = vsid;
     const defaulRoutePathName = path(['data','routePath','routeName'], props);
     if (data===undefined){
@@ -25,6 +25,7 @@ export class RouteCreatorTraits extends SpyneTrait {
       }
     }
 
+    data['masterItem']=subNavHolder;
 
     this.appendView(new RouteCreatorBarItemView({parentVsid, autoInit, routeLevel, data}));
   }
@@ -105,6 +106,14 @@ export class RouteCreatorTraits extends SpyneTrait {
     const addBarIdToAddBtn = (el)=>{
       el.dataset['barId'] = this.props.vsid;
     }
+
+     const addBtn$ =  this.props.el$('div.icons .add-subnav');
+    const updateMasterItem = el=>el.dataset['masterItem']=this.props.vsid;
+
+      addBtn$.arr.forEach(updateMasterItem);
+
+
+
     const arr = this.props.el$('.route-bar-btn').arr;
     arr.forEach(addBarIdToAddBtn);
 

@@ -19,15 +19,18 @@ export class RouteCreatorRouteNameView extends ViewStream {
     // return nexted array(s)
     const filterUIClickForRouteName = this.filter$BarItemUIClickForRouteName();
     return [
-      ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onItemEvent'],
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onItemEvent',filterUIClickForRouteName],
     ];
   }
 
   onItemEvent(e){
-    const {holderId,barId,routeBarEvent} = e.props();
-    console.log("route Name IS ",{holderId,barId,routeBarEvent,e})
+    const {holderId,masterItem,barId,routeBarEvent} = e.props();
+    const masterElSel = `[data-vsid='${masterItem}']`;;
+    const masterEl = document.querySelector(masterElSel);
+    console.log("route Name IS ",{masterElSel, masterEl,holderId,barId,routeBarEvent,e})
 
-   // this.checkIfRouteIsActive();
+
+    // this.checkIfRouteIsActive();
   }
 
   checkIfRouteIsActive(){

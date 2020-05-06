@@ -27,20 +27,20 @@ export class RouteCreatorRouteNameView extends ViewStream {
     const {holderId,masterItem,barId,routeBarEvent} = e.props();
     const masterElSel = `[data-vsid='${masterItem}']`;;
     const masterEl = document.querySelector(masterElSel);
-    console.log("route Name IS ",{masterElSel, masterEl,holderId,barId,routeBarEvent,e})
+    //console.log("route Name IS ",{masterElSel, masterEl,holderId,barId,routeBarEvent,e})
 
-
-     this.checkIfRouteIsActive();
+      const isDelete = routeBarEvent === 'delete';
+     this.checkIfRouteIsActive(isDelete);
   }
   updateRouteNameVal(str){
     this.props.el$('input').el.value = str;
   }
 
-  checkIfRouteIsActive(){
+  checkIfRouteIsActive(isDelete=false){
 
     const {holderId, isActive} = this.props;
     const ulData = this.routeCreatorToData$GetUlData(holderId);
-    const num = ulData.length;
+    let num = isDelete === true ? ulData.length-1 : ulData.length;
     const currentActiveMode = num>=1;
     const activeModeHasChanged = currentActiveMode !== isActive;
 
@@ -51,7 +51,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
       if (this.props.isActive===true){
         const routeNameValue = this.routeCreatorToData$GetDefaultRouteName();
         this.updateRouteNameVal(routeNameValue);
-        console.log("ROUTE NAME VALUE ",{routeNameValue});
+        //console.log("ROUTE NAME VALUE ",{routeNameValue});
       }
 
     }

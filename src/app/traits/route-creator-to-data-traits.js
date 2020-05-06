@@ -56,7 +56,6 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     const {holderId} = props;
     const inputBarSel = `[data-vsid='${holderId}'] section.input-bar input`;
     const inputEl= document.querySelector(inputBarSel);
-    console.log("INPUT EL ",inputEl);
     const inputVal = inputEl.value !== "" ? inputEl.value : inputEl.placeholder;
 
     const snakeToCamel = (str) => str.replace(

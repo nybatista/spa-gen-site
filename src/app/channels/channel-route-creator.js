@@ -22,7 +22,7 @@ export class ChannelRouteCreator extends Channel {
   }
 
   onRouteBarUIEvent(e){
-    console.log("ROUTE BAR EVENT ",e);
+    //console.log("ROUTE BAR EVENT ",e);
     const {holderId, barId, masterItem, routeBarEvent} = e.props();
     const action = "CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT";
     this.sendChannelPayload(action, {holderId,barId,masterItem,routeBarEvent});

@@ -69,7 +69,7 @@ export class RouteCreateBarHolder extends ViewStream {
     this.sendAnimInfoToChannel({swapItems,swapItemsIds,animEvent});
 
 
-    console.log("BAR HOLDER ADD ITEM ",{animEvent,isContainer, parentVsid, vsid, barId, swapItems, swapItemsIds, el});
+   // console.log("BAR HOLDER ADD ITEM ",{animEvent,isContainer, parentVsid, vsid, barId, swapItems, swapItemsIds, el});
 
   }
   onItemRemoved(e){

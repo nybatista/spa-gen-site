@@ -47,7 +47,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     this.props.yGsap = yGsap;
     animateFn(yGsap);
    // this.routeAnim$ItemAnimateToYVal(yGsap);
-    console.log("ANIMATE ITEM IS ",{yGsap,animateData,animEvent,swapItems,e});
+    //console.log("ANIMATE ITEM IS ",{yGsap,animateData,animEvent,swapItems,e});
 
   }
 

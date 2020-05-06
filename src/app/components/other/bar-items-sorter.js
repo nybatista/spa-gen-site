@@ -138,7 +138,7 @@ export class BarItemsSorter{
     //console.log("ARR BEFORE ",clone(arr));
 
     if (el!==null){
-      console.log("EL IS ",el);
+      //console.log("EL IS ",el);
       const newObj = BarItemsSorter.getDataFromBoundingBox(el,arr.length-1);
       arr.push(newObj);
     }

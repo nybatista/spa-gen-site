@@ -2,7 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {RouteCreatorBarItemView} from 'components/route-creator/route-creator-bar-item-view';
 import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
 import {RouteCreatorRouteNameView} from 'components/route-creator/route-creator-route-name-view';
-import {omit,path, filter,last,either, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
+import {omit,path, filter,last,either,defaultTo, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
 import {gsap} from "gsap/all";
 
 export class RouteCreatorTraits extends SpyneTrait {
@@ -38,11 +38,16 @@ export class RouteCreatorTraits extends SpyneTrait {
     this.appendView(new RouteCreateBarHolder({routeLevel, subNavHolder, isMainHolder, autoInit, data}), appendSelector);
   }
 
-  static routeCreator$CreateRouteName(data=this.props.data){
+  static routeCreator$CreateRouteName(d=this.props.data){
     const routeLevel = this.props.routeLevel+1;
+
+    const routeNameVal = path(['routePath', 'routeName'], d);
+
     const isMainHolder = routeLevel === 0;
     const holderId = this.props.vsid;
-    this.appendView(new RouteCreatorRouteNameView({routeLevel, holderId, isMainHolder}));
+
+    const data = {routeNameVal}
+    this.appendView(new RouteCreatorRouteNameView({routeLevel, data, holderId, isMainHolder}));
   }
 
 

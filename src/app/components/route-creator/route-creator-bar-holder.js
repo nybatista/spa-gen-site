@@ -16,6 +16,7 @@ export class RouteCreateBarHolder extends ViewStream {
     props.dataset = {};
     props.dataset['mainBar'] = props.subNavHolder;
     props.class=props.isMainHolder === true ? 'route-bar-items-list main' : 'route-bar-items-list';
+    //console.log("BAR HOLDER DATA ",props.data);
     super(props);
 
   }

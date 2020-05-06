@@ -9,6 +9,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
   constructor(props = {}) {
     props.class='route-creator-route-name';
     props.isActive = -1;
+    props.initShow = false;
     props.traits = [RouteAnimTraits, RouteCreatorTraits, RouteCreatorToDataTraits, FiltersTrait];
     props.template = require('./templates/route-creator-route-name.tmpl.html');
     super(props);
@@ -49,8 +50,12 @@ export class RouteCreatorRouteNameView extends ViewStream {
       this.props.el$.toggleClass('show', this.props.isActive);
 
       if (this.props.isActive===true){
-        const routeNameValue = this.routeCreatorToData$GetDefaultRouteName();
-        this.updateRouteNameVal(routeNameValue);
+        if (this.props.initShow===true || this.props.data.routeNameVal === undefined) {
+          const routeNameValue = this.routeCreatorToData$GetDefaultRouteName();
+          this.updateRouteNameVal(routeNameValue);
+        }
+
+        this.props.initShow=true;
         //console.log("ROUTE NAME VALUE ",{routeNameValue});
       }
 

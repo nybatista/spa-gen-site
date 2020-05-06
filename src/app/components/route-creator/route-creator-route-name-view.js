@@ -30,7 +30,10 @@ export class RouteCreatorRouteNameView extends ViewStream {
     console.log("route Name IS ",{masterElSel, masterEl,holderId,barId,routeBarEvent,e})
 
 
-    // this.checkIfRouteIsActive();
+     this.checkIfRouteIsActive();
+  }
+  updateRouteNameVal(str){
+    this.props.el$('input').el.value = str;
   }
 
   checkIfRouteIsActive(){
@@ -44,6 +47,13 @@ export class RouteCreatorRouteNameView extends ViewStream {
     if (activeModeHasChanged===true){
       this.props.isActive = currentActiveMode;
       this.props.el$.toggleClass('show', this.props.isActive);
+
+      if (this.props.isActive===true){
+        const routeNameValue = this.routeCreatorToData$GetDefaultRouteName();
+        this.updateRouteNameVal(routeNameValue);
+        console.log("ROUTE NAME VALUE ",{routeNameValue});
+      }
+
     }
     //console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
 

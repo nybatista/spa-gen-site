@@ -52,12 +52,21 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
 
 
 
-  static routeCreatorToData$GetDefaultRouteName(str){
-    /**
-     *  TODO: STRING FROM kebobCase to camelCase
-     *  + Id
-     *
-     */
+  static routeCreatorToData$GetDefaultRouteName(props=this.props){
+    const {holderId} = props;
+    const inputBarSel = `[data-vsid='${holderId}'] section.input-bar input`;
+    const inputEl= document.querySelector(inputBarSel);
+    console.log("INPUT EL ",inputEl);
+    const inputVal = inputEl.value !== "" ? inputEl.value : inputEl.placeholder;
+
+    const snakeToCamel = (str) => str.replace(
+        /([-_][a-z])/g,
+        (group) => group.toUpperCase()
+        .replace('-', '')
+        .replace('_', '')
+    );
+
+    return `${snakeToCamel(inputVal)}Id`;
 
   }
 

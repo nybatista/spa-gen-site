@@ -1,3 +1,16 @@
+
+#route-creator-main{
+
+ > .route-creator-route-name{
+    top:86px;
+    left:15px;
+    //background: #ccc;
+    input{
+      background: #ccc;
+    }
+  }
+
+}
 .route-creator-route-name{
   position: absolute;
   top: 38px;

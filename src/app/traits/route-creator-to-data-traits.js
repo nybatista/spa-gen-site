@@ -20,7 +20,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
   }
 
   static routeCreatorToData$GetUlData(barId){
-    const ulLiSel = `#${barId} ul.route-bar-items-list`;
+    const ulLiSel = `[data-vsid='${barId}'] ul.route-bar-items-list`;
     const ul = document.querySelector(ulLiSel);
     const ulData = compose(fromPairs,toPairs)(ul.dataset);
     const ulLiEls = ul.querySelectorAll(`${ulLiSel} > li`);

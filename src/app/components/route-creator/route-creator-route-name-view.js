@@ -45,7 +45,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
       this.props.isActive = currentActiveMode;
       this.props.el$.toggleClass('show', this.props.isActive);
     }
-    console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
+    //console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
 
   }
 

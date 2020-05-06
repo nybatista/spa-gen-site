@@ -107,7 +107,7 @@ export class RouteCreatorTraits extends SpyneTrait {
       el.dataset['barId'] = this.props.vsid;
     }
 
-     const addBtn$ =  this.props.el$('div.icons .add-subnav');
+     const addBtn$ =  this.props.el$('.add-subnav');
     const updateMasterItem = el=>el.dataset['masterItem']=this.props.vsid;
 
       addBtn$.arr.forEach(updateMasterItem);

@@ -40,6 +40,8 @@ export class RouteCreatorMainView extends ViewStream {
   createMainBarHolder(){
     this.props.routeLevel = -1;
     this.routeCreator$CreateRouteBarHolder();
+    this.routeCreator$CreateRouteName();
+
   }
 
   onRendered() {

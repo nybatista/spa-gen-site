@@ -123,7 +123,7 @@ export class BarItemsSorter{
 
   static resetItems(o,i){
     o.index = i;
-    console.log("ITEM IS ",{o,i});
+    //console.log("ITEM IS ",{o,i});
     o.height = BarItemsSorter.getBarItemHeight(o.el);
     o.hasChanged = false;
     o.initialized = false;
@@ -135,7 +135,7 @@ export class BarItemsSorter{
     //  CREATE ITEM AND APPEND TO CURRENT ARR
     //  ADD YGSAP ONLY TO LAST ITEM
     // RETURN LAST ITEM
-    console.log("ARR BEFORE ",clone(arr));
+    //console.log("ARR BEFORE ",clone(arr));
 
     if (el!==null){
       console.log("EL IS ",el);
@@ -148,7 +148,7 @@ export class BarItemsSorter{
     if (el!==null) {
       this.barItemsSortArr[this.barItemsSortArr.length - 1].hasChanged = true;
     }
-    console.log("ARR AFTER ",clone(arr));
+    //console.log("ARR AFTER ",clone(arr));
 
     /*
     *  TODO: FOR TOP BAR HOLDER, IT NEEDS TO REDO HEIGHTS CHECK FOR BOTH ADD AND DELETE

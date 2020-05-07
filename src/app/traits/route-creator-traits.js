@@ -19,10 +19,12 @@ export class RouteCreatorTraits extends SpyneTrait {
     const len = this.props.el$(`li.group-${vsid}`).arr.length+1;
 
     const defaulRoutePathName = path(['data','routePath','routeName'], props);
+    const defaultMenuVal = routeLevel === 0 ? 'menu' : 'sub-menu';
+
     if (data===undefined){
       data = {
         key: defaulRoutePathName,
-        keyValue: `sub-menu-${len}`,
+        keyValue: `${defaultMenuVal}-${len}`,
         routePath: undefined
       }
     }

@@ -1,8 +1,23 @@
-#customize-panel-view{
+$hj-railcasts: #072027;
+
+.customize-panel{
   position:relative;
-  width: 50%;
+  width: 40%;
   margin: 10px;
   //background: #ddd;
   height: 100%;
+  z-index: $z-index-ui;
 
+
+
+}
+
+#route-json-viewer{
+ // background: #222;
+
+
+  pre code.json.hljs{
+    background: $hj-railcasts;
+
+  }
 }

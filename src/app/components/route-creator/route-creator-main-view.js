@@ -33,7 +33,8 @@ export class RouteCreatorMainView extends ViewStream {
 
   broadcastEvents() {
     return [
-        ['.btn.btn-blue.route-bar-btn', 'click']
+        ['.btn.btn-blue.route-bar-btn', 'click'],
+        ['.btn.generate-route', 'click']
     ];
   }
 

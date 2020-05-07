@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {compose, fromPairs, toPairs} from 'ramda';
+import {compose, fromPairs,map, toPairs,merge,mergeAll} from 'ramda';
 export class RouteCreatorToDataTraits extends SpyneTrait {
 
   constructor(context) {
@@ -20,21 +20,36 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
   }
 
   static routeCreatorToData$GetUlData(barId){
-    console.log("BAR VSID ",{barId}, document.querySelector(`[data-vsid='${barId}']`));
+    //console.log("BAR VSID ",{barId}, document.querySelector(`[data-vsid='${barId}']`));
+    const ul = RouteCreatorToDataTraits.routeCreatorToData$GetUl(barId);
 
-    const ulLiSel = `[data-vsid='${barId}'] > ul.route-bar-items-list`;
-    const ul = document.querySelector(ulLiSel);
     const ulData = compose(fromPairs,toPairs)(ul.dataset);
-    const ulLiEls = ul.querySelectorAll(`${ulLiSel} > li`);
+    const ulLiEls = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems();
     const length = ulLiEls.length;
     return {ulData,length};
 
   }
 
+
+  static routeCreatorToData$GetUl(vsid){
+    const ulSel = `[data-vsid='${vsid}'] > ul.route-bar-items-list`;
+    return document.querySelector(ulSel);
+  }
+
+  static routeCreatorToData$GetUlListItems(vsid){
+    const ulLiSel = `[data-vsid='${vsid}'] > ul.route-bar-items-list  > li`;
+    return Array.from(document.querySelectorAll(ulLiSel));
+  }
+
+  static routeCreatorToData$GetInputVal(listItemEl){
+    const inputEl = listItemEl.querySelector('section.input-bar input');
+    return inputEl.value === "" ? inputEl.placeholder : inputEl.value;
+  }
+
   static routeCreatorToData$GetRouteName(vsid){
-    const routeNamseSel = `[data-vsid='${barId}'] > div.route-bar-route-name input`;
-
-
+    const routeNamseSel = `[data-vsid='${vsid}'] > div.route-creator-route-name input`;
+    const el = document.querySelector(routeNamseSel);
+    return el.value!=="" ? el.value : el.placeholder;
   }
 
   static routeCreatorToData$GetData(ulSelector){
@@ -68,26 +83,44 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
       return routes;
     }
 
+    const addStringOrObjForEachListItem = (liEl)=>{
+
+      const inputVal = RouteCreatorToDataTraits.routeCreatorToData$GetInputVal(liEl);
+
+      let arr = [inputVal, inputVal];
+      const listItemsArr = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(liEl.dataset.vsid);
+      if (listItemsArr.length>=1){
+        //obj[inputVal] = createObjFromUl(liEl.dataset.vsid);
+        arr= [inputVal, createObjFromUl(liEl.dataset.vsid)];
+      }
+
+      //console.log("ARR IS ",arr);
+     // console.log("LIST ITEM EL ",liEl.id,inputVal,listItemsArr.length, obj)
+      return arr;
+     // return [inputVal,inputVal];
+    }
+
 
 
     const createObjFromUl = (vsid)=>{
-      const obj = generateRoutePathObj();
+      console.log("VSID ",vsid);
+      const listItemsArr = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(vsid)
 
-      const ul = RouteCreatorToDataTraits.routeCreatorToData$GetUlData(vsid);
-      const routeName = '';
+      const routeName = RouteCreatorToDataTraits.routeCreatorToData$GetRouteName(vsid);
+      const routePath = compose(merge({routeName}),fromPairs,map(addStringOrObjForEachListItem))(listItemsArr);
 
-      console.log("UL IS ",ul);
+      return {routePath};
 
     };
 
 
     const mainEl = document.getElementById(mainSel);
+    const routes =  createObjFromUl(mainEl.dataset.vsid);
+    const obj = {routes};
 
-    const ul = createObjFromUl(mainEl.dataset.vsid);
+    console.log("OBJ IS \n",JSON.stringify(obj));
 
-
-
-    return mainEl;
+    return obj;
 
   }
 

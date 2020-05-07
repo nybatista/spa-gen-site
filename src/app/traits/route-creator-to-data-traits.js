@@ -22,10 +22,12 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
   static routeCreatorToData$GetUlData(barId){
     //console.log("BAR VSID ",{barId}, document.querySelector(`[data-vsid='${barId}']`));
     const ul = RouteCreatorToDataTraits.routeCreatorToData$GetUl(barId);
-
     const ulData = compose(fromPairs,toPairs)(ul.dataset);
-    const ulLiEls = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems();
+    const ulLiEls = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(barId);
     const length = ulLiEls.length;
+
+    console.log("UL IS ",{ulLiEls});
+
     return {ulData,length};
 
   }

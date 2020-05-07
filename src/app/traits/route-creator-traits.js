@@ -46,7 +46,7 @@ export class RouteCreatorTraits extends SpyneTrait {
     const routeNameVal = path(['routePath', 'routeName'], d);
 
     const isMainHolder = routeLevel === 0;
-    const holderId = isMainHolder === true ? 'main' : this.props.vsid;
+    const holderId =  isMainHolder === true ? 'main' : this.props.vsid;
 
     const data = {routeNameVal}
     const appendSel = isMainHolder === true ? '#route-creator-container' : undefined;

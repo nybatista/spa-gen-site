@@ -56,11 +56,11 @@ export class RouteCreatorRouteNameView extends ViewStream {
         }
 
         this.props.initShow=true;
-        //console.log("ROUTE NAME VALUE ",{routeNameValue});
+       // console.log("ROUTE NAME VALUE ",{routeNameValue});
       }
 
     }
-    //console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
+    console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
 
   }
 

@@ -3,7 +3,7 @@ $hj-railcasts: #072027;
 .customize-panel{
   position:relative;
   width: 40%;
-  margin: 10px;
+  margin: 30px;
   //background: #ddd;
   height: 100%;
   z-index: $z-index-ui;
@@ -16,8 +16,13 @@ $hj-railcasts: #072027;
  // background: #222;
 
 
-  pre code.json.hljs{
-    background: $hj-railcasts;
+  pre {
+    top: 105px;
+    position: absolute;
+    min-width: 560px;
 
+    code.json.hljs{
+    background: $hj-railcasts;
+  }
   }
 }

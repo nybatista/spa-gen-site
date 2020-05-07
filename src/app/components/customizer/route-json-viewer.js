@@ -1,7 +1,7 @@
 import {ViewStream} from 'spyne';
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
-
+import {RouteCreatorToDataTraits} from 'traits/route-creator-to-data-traits';
 
 export class RouteJsonViewer extends ViewStream {
 
@@ -13,6 +13,7 @@ export class RouteJsonViewer extends ViewStream {
     hljs.initHighlightingOnLoad()
     const html = code;// Prism.highlight(code, Prism.languages.javascript, 'javascript');
     props.data = {code,html};
+    props.traits=[RouteCreatorToDataTraits];
     props.template = require('./templates/route-json-view.tmpl.html');
 
     props.class ='customize-panel';
@@ -23,7 +24,21 @@ export class RouteJsonViewer extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+        ["CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT", 'onGenerateJson']
+
+    ];
+  }
+
+  onGenerateJson(e){
+    const json = this.routeCreatorToData$DomToRouteJson();
+    hljs.registerLanguage('javascript', javascript);
+    hljs.initHighlightingOnLoad();
+   const codeEl = this.props.el$('code.json').el;
+   codeEl.innerHTML = JSON.stringify(json, null, 4);
+   hljs.highlightBlock(codeEl);
+
+
   }
 
   static getTestRouteObj(){
@@ -61,7 +76,7 @@ export class RouteJsonViewer extends ViewStream {
   }
 
   onRendered() {
-
+    this.addChannel("CHANNEL_ROUTE_CREATOR");
 
   }
 

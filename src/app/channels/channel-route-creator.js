@@ -16,10 +16,27 @@ export class ChannelRouteCreator extends Channel {
         type: "routeBar"
       }})
 
-      this.getChannel("CHANNEL_UI", payloadFilter)
+
+    const jsonGenPayloadFilter = new ChannelPayloadFilter({propFilters:{
+        type: "generateJson"
+      }})
+
+
+    this.getChannel("CHANNEL_UI", payloadFilter)
           .subscribe(this.onRouteBarUIEvent.bind(this));
 
+
+    this.getChannel("CHANNEL_UI", jsonGenPayloadFilter)
+    .subscribe(this.onGenJson.bind(this));
+
+
   }
+
+  onGenJson(e){
+    const action = 'CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT';
+    this.sendChannelPayload(action, {action});
+  }
+
 
   onRouteBarUIEvent(e){
     //console.log("ROUTE BAR EVENT ",e);
@@ -53,6 +70,7 @@ export class ChannelRouteCreator extends Channel {
     return [
       'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
       'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',
+      'CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
       'CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT',
       'CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT',

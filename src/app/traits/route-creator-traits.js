@@ -16,11 +16,13 @@ export class RouteCreatorTraits extends SpyneTrait {
   static routeCreator$CreateRouteBar(props=this.props, data, autoInit=false){
     const {routeLevel, vsid, subNavHolder, menuNameInc} = props;
     const parentVsid = vsid;
+    const len = this.props.el$(`li.group-${vsid}`).arr.length+1;
+
     const defaulRoutePathName = path(['data','routePath','routeName'], props);
     if (data===undefined){
       data = {
         key: defaulRoutePathName,
-        keyValue: `menu-name-${menuNameInc}`,
+        keyValue: `sub-menu-${len}`,
         routePath: undefined
       }
     }
@@ -44,10 +46,11 @@ export class RouteCreatorTraits extends SpyneTrait {
     const routeNameVal = path(['routePath', 'routeName'], d);
 
     const isMainHolder = routeLevel === 0;
-    const holderId = this.props.vsid;
+    const holderId = isMainHolder === true ? 'main' : this.props.vsid;
 
     const data = {routeNameVal}
-    this.appendView(new RouteCreatorRouteNameView({routeLevel, data, holderId, isMainHolder}));
+    const appendSel = isMainHolder === true ? '#route-creator-container' : undefined;
+    this.appendView(new RouteCreatorRouteNameView({routeLevel, data, holderId, isMainHolder}), appendSel);
   }
 
 

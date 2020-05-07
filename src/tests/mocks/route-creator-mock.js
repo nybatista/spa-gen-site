@@ -2,7 +2,7 @@ const RouteCreatorDom = `<div id="route-creator-main" name="RouteCreatorMainView
     <h3>Nav Creator</h3>
     <button class="btn btn-blue" data-channel="UI" data-type="create-button">Add Nav Item</button>
 </header>
-<div id="route-creator-container">
+<div id="route-creator-containe3">
 <ul class="route-bar-items-list main" id="djyxzqa" name="RouteCreateBarHolder" data-vsid="djyxzqa">
 <li class="route-creator-bar-item route-level-0 group-djyxzqa" id="lvvidaa" name="RouteCreatorBarItemView" data-vsid="lvvidaa" style="opacity: 1;"><section class="input-bar">
     <div class="dragger" style="touch-action: pan-x; cursor: grab; user-select: none;"></div>

@@ -34,7 +34,7 @@ module.exports = function(config) {
       { pattern: './node_modules/rxjs/*.js', included:false,   watched: false },
       { pattern: './node_modules/rxjs/**/*.js', included:false,    watched: false },
 
-      { pattern: './src/tests/components/bar*.test.js', watched: true },
+      { pattern: './src/tests/traits/route-creator-data*.test.js', watched: true },
 
     ],
 

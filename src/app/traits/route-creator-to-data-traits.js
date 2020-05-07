@@ -75,52 +75,27 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
 
   static routeCreatorToData$DomToRouteJson(mainSel='route-creator-container'){
 
-
-    const generateRoutePathObj = ()=>{
-      const routeName = "";
-      const routePath = {routeName};
-      const routes = {routePath};
-      return routes;
-    }
-
     const addStringOrObjForEachListItem = (liEl)=>{
-
       const inputVal = RouteCreatorToDataTraits.routeCreatorToData$GetInputVal(liEl);
-
       let arr = [inputVal, inputVal];
       const listItemsArr = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(liEl.dataset.vsid);
       if (listItemsArr.length>=1){
-        //obj[inputVal] = createObjFromUl(liEl.dataset.vsid);
         arr= [inputVal, createObjFromUl(liEl.dataset.vsid)];
       }
-
-      //console.log("ARR IS ",arr);
-     // console.log("LIST ITEM EL ",liEl.id,inputVal,listItemsArr.length, obj)
       return arr;
-     // return [inputVal,inputVal];
     }
 
-
-
     const createObjFromUl = (vsid)=>{
-      console.log("VSID ",vsid);
       const listItemsArr = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(vsid)
-
       const routeName = RouteCreatorToDataTraits.routeCreatorToData$GetRouteName(vsid);
       const routePath = compose(merge({routeName}),fromPairs,map(addStringOrObjForEachListItem))(listItemsArr);
-
       return {routePath};
-
     };
-
 
     const mainEl = document.getElementById(mainSel);
     const routes =  createObjFromUl(mainEl.dataset.vsid);
-    const obj = {routes};
 
-    console.log("OBJ IS \n",JSON.stringify(obj));
-
-    return obj;
+    return {routes};
 
   }
 

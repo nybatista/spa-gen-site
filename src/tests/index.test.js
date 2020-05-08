@@ -1,6 +1,6 @@
-describe('root test', () => {
+describe('index test', () => {
 
-  console.log("RUNNING TESTS");
+  //console.log("RUNNING TESTS");
   it('should run shell tests', () => {
       console.log("test ran");
     return true;

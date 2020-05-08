@@ -25,7 +25,7 @@ export class DragStatesTrait extends SpyneTrait {
     let heightsArr = this.dragMethod$GetHeightsArr();
     const onUpdateItem =(el, i)=>{
       const height = this.dragMethod$GetHeight(i, heightsArr) ;// i*rowHeight;
-      tl.to(el, .125, {y:height, ease: Power1.easeInOut});
+      tl.to(el, .125, {y:height, ease: "Power1.easeInOut"});
     };
 
     let items = this.props.el$(this.props.listClass).el;

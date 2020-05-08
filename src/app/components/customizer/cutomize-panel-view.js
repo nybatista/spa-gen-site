@@ -1,5 +1,6 @@
 import {ViewStream} from 'spyne';
 import {NavCreatorView} from '../nav-creator/nav-creator-view';
+import {RouteCreatorMainView} from '../route-creator/route-creator-main-view';
 
 export class CustomizePanelView extends ViewStream {
 
@@ -22,7 +23,8 @@ export class CustomizePanelView extends ViewStream {
   }
 
   onRendered() {
-    this.appendView(new NavCreatorView());
+    this.appendView(new RouteCreatorMainView());
+    //this.appendView(new NavCreatorView());
   }
 
 }

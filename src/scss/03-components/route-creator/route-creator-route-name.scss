@@ -1,0 +1,44 @@
+
+#route-creator-main{
+
+ > .route-creator-route-name{
+    top:86px;
+    left:15px;
+    //background: #ccc;
+    input{
+      background: #ccc;
+    }
+  }
+
+}
+.route-creator-route-name{
+  position: absolute;
+  top: 38px;
+  min-width:80px;
+  min-height:20px;
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: .2s;
+  transition: opacity .3s ease-in-out;
+
+  &.show{
+    opacity: 1;
+    pointer-events: all;
+  }
+
+
+  input{
+    position: absolute;
+    //top:0;
+    //background: #ccc;
+
+    width:100%;
+    border:0;
+    top: 7px;
+    background: #dedede;
+    color:#666;
+
+
+  }
+
+}

@@ -1,0 +1,22 @@
+{
+  "routes": {
+    "routePath": {
+      "routeName": "pageId",
+      "home": "home",
+      "work": {
+        "routePath": {
+          "routeName": "workId",
+          "acme": "acme",
+          "widgets": "widgets",
+          "globex": "globex"
+        }
+      },
+      "about": {
+        "routePath": {
+          "routeName": "aboutId",
+          "contact": "contact"
+        }
+      }
+    }
+  }
+}

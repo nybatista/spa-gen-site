@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {Draggable} from 'gsap/Draggable';
+import {gsap,Draggable, InertiaPlugin} from 'gsap/all';
 import {TweenMax, TimelineMax} from 'gsap';
 import {mapObjIndexed, reduce, add, slice, clamp, map, filter, reject, multiply, range, compose, pathEq, prop, path, values} from 'ramda';
 
@@ -7,6 +7,8 @@ export class DraggableTrait extends SpyneTrait {
 
   constructor(context) {
     let traitPrefix = 'drag$';
+    gsap.registerPlugin(Draggable);
+    gsap.registerPlugin(InertiaPlugin);
     super(context, traitPrefix);
 
   }

@@ -5,6 +5,11 @@ import {MainView} from './app/main-view';
 import SpaGenData from 'data/route-gen.json';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 
+
+
+
+console.log("WINDOW IS IFRAME ",window.isIframe);
+
 //const spaGenData = require('data/route-gen.json');
 const R = require('ramda');
 

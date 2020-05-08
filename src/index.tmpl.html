@@ -9,6 +9,14 @@
 
 </head>
 <body>
+<script>
+
+  const {pathname} = window.location;
+  window.isIframe = String(pathname).indexOf('iframe')>=0;
+  console.log("IFRAME BOOL MAIN INDEX ",{isIframe,pathname},window);
+
+</script>
+
 
 </body>
 </html>

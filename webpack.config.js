@@ -24,6 +24,22 @@
 
 
 
+  const shell = require('child_process').execSync ;
+
+
+  const copyDir = (srcDirectory, destDirectory)=>{
+    const P = {
+      src: path.resolve(__dirname, srcDirectory)
+    };
+
+    shell(`mkdir -p ${destDirectory}`);
+    shell(`cp -r ${P.src}/* ${destDirectory}`);
+  };
+
+  const assetsFolder = "assets/";
+
+
+
 
   const extractSass = new ExtractTextPlugin({
     filename: 'assets/css/main.css',
@@ -86,6 +102,7 @@
 
     module: {
       rules: [
+
         {
           test: /\.css$/,
           use: [

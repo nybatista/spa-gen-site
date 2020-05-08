@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>spyne app iframe</title>
+
+</head>
+<body>
+    <H1>LOADING THE IFRAME</H1>
+
+    <script>
+
+        const {pathname} = window.location;
+        const isIframe = String(pathname).indexOf('iframe')>=0;
+        console.log("IFRAME BOOL ",{isIframe,pathname},window);
+
+    </script>
+
+</body>
+</html>

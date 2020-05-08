@@ -1,4 +1,5 @@
 import {ViewStream} from 'spyne';
+import {SpaAppIframe} from '../../01_iframe/spa-app-iframe';
 
 export class IframeContainer extends ViewStream {
 
@@ -21,7 +22,8 @@ export class IframeContainer extends ViewStream {
   }
 
   onRendered() {
-
+    console.log("IFRAME CONTAINER ",this.props.el);
+    this.appendView(new SpaAppIframe());
   }
 
 }

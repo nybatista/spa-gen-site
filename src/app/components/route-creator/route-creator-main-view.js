@@ -8,6 +8,8 @@ export class RouteCreatorMainView extends ViewStream {
   constructor(props = {}) {
     props.id = 'route-creator-main';
     props.traits = [RouteCreatorTraits, RouteAnimTraits]
+    props.data = props.data!==undefined ? props.data : {};
+    props.data.holderId = props.data.holderId!==undefined ? props.data.holderId : 'main';
     props.template = require('./templates/route-creator-main.tmpl.html');
     super(props);
 

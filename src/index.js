@@ -19,6 +19,13 @@ import {RouteCreatorTraits} from 'traits/route-creator-traits';
 * */
 
 
+/*
+*
+* TODO: CREATE A CHANNEL_ROUTE_UPDATE_CONFIG sendInfoToChannel ACTION getRouteConfig() 166
+*
+*
+* */
+
 
 console.log("WINDOW IS IFRAME ",window.isIframe);
 

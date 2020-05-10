@@ -23,6 +23,9 @@ export class DynamicAppContainer extends ViewStream {
 
   onRendered() {
     console.log("DYNAMIC APP CONTAINER ",this.props.el);
+
+
+    this.appendView(new DynamicAppMain());
   }
 
 }

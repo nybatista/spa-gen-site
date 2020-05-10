@@ -37,8 +37,10 @@ export class RouteJsonViewer extends ViewStream {
    const codeEl = this.props.el$('code.json').el;
    codeEl.innerHTML = JSON.stringify(json, null, 4);
    hljs.highlightBlock(codeEl);
-   const routes = json;
+
+   const {routes} = json;
    const action = 'CHANNEL_ROUTE_UPDATE_CONFIG_EVENT';
+
    this.sendInfoToChannel("CHANNEL_ROUTE", {action,routes}, action);
 
   }

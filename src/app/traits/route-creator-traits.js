@@ -16,8 +16,9 @@ export class RouteCreatorTraits extends SpyneTrait {
   static routeCreator$CreateRouteBar(props=this.props, data, autoInit=false){
     const {routeLevel, vsid, subNavHolder, menuNameInc} = props;
     const parentVsid = vsid;
-    const len = this.props.el$(`li.group-${vsid}`).arr.length+1;
 
+    const liEls$ = this.props.el$(`li.group-${vsid}`)
+    const len = liEls$.exists === true ? liEls$.arr.length+1 : 1;
     const defaulRoutePathName = path(['data','routePath','routeName'], props);
     const defaultMenuVal = routeLevel === 0 ? 'menu' : 'sub-menu';
 

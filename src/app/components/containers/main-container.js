@@ -1,6 +1,6 @@
 import {ViewStream} from 'spyne';
 import {CustomizeContainer} from './customize-container';
-import {IframeContainer} from './iframe-container';
+import {DynamicAppContainer} from './dynamic-app-container';
 
 export class MainContainer extends ViewStream {
 
@@ -23,7 +23,7 @@ export class MainContainer extends ViewStream {
 
   onRendered() {
     this.appendView(new CustomizeContainer());
-    this.appendView(new IframeContainer());
+    this.appendView(new DynamicAppContainer());
   }
 
 }

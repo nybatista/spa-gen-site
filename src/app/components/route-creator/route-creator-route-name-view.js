@@ -60,7 +60,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
       }
 
     }
-    console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
+    //console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
 
   }
 

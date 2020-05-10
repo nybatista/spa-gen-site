@@ -13,22 +13,6 @@ import {RouteCreatorTraits} from 'traits/route-creator-traits';
 * */
 
 
-/*
-* TODO: CREATE A LOCALSTORAGE CHECK FOR SPYNE CONFIG OR JUST ROUTES CONFIG
-*
-* */
-
-
-/*
-*
-* TODO: CREATE A CHANNEL_ROUTE_UPDATE_CONFIG sendInfoToChannel ACTION getRouteConfig() 166
-*
-*
-* */
-
-
-console.log("WINDOW IS IFRAME ",window.isIframe);
-
 //const spaGenData = require('data/route-gen.json');
 const R = require('ramda');
 
@@ -73,10 +57,6 @@ const initIframeCode = ()=>{
 }
 
 
-if (window.isIframe===true){
-  initIframeCode();
-} else{
-  initSpyneAppGenerator();
+initSpyneAppGenerator();
 
-}
 window.R = require('ramda');

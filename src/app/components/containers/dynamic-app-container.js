@@ -1,12 +1,12 @@
 import {ViewStream} from 'spyne';
-import {SpaAppIframe} from '../../01_iframe/spa-app-iframe';
+import {DynamicAppMain} from '../../01-dynamic-app/dynamic-app-main';
 
-export class IframeContainer extends ViewStream {
+export class DynamicAppContainer extends ViewStream {
 
   constructor(props = {}) {
     props.tagName='section';
     props.class='container';
-    props.id='iframe-container';
+    props.id='dynamic-app-container';
     super(props);
 
   }
@@ -22,8 +22,7 @@ export class IframeContainer extends ViewStream {
   }
 
   onRendered() {
-    console.log("IFRAME CONTAINER ",this.props.el);
-    this.appendView(new SpaAppIframe());
+    console.log("DYNAMIC APP CONTAINER ",this.props.el);
   }
 
 }

@@ -79,7 +79,8 @@ export class RouteAnimTraits extends SpyneTrait {
   static routeAnim$CreateBarItemsSorter(dragVsid){
       const liItems = this.routeAnim$GetBarItems(this.props, this.props.vsid);
       this.props.liItems = liItems.exists === true ? liItems : [];
-      this.props.barItemsSorter = new BarItemsSorter(liItems.nodeList, dragVsid);
+      const disableFirstItem = this.props.routeLevel === 0;
+      this.props.barItemsSorter = new BarItemsSorter(liItems.nodeList, dragVsid, disableFirstItem);
       const {sortArr} = this.props.barItemsSorter;
 
       //console.log("SORT ARR ",{sortArr, liItems}, this.props.barItemsSorter);

@@ -3,9 +3,10 @@ const mapIndexed = addIndex(map);
 
 export class BarItemsSorter{
 
-  constructor(liItems, id) {
+  constructor(liItems, id, disableFirstItem=false) {
     this.listItems = liItems;
     this.draggerId = id;
+    this.clampStartNum = disableFirstItem === false ? 0 : 1;
    // console.log("SORTER ",this);
     this.barItemsSortArr = BarItemsSorter.createSorterObject(this.listItems, id);
     this.getBarItemsYPositions = BarItemsSorter.getBarItemsYPositions.bind(this);
@@ -68,9 +69,10 @@ export class BarItemsSorter{
     const arr = this.getBarItemsYPositions();
     arr.push(1000000);
     const len = arr.length-2;
+    const {clampStartNum} = this;
 
     // getTheIndex COMPARES THE Y VALUES IN THE ARRAY WITH THE CURRENT DRAGGER Y
-    const getTheIndex = compose(clamp(1,len),findIndex(lte(y)));
+    const getTheIndex = compose(clamp(clampStartNum,len),findIndex(lte(y)));
     const yIndex = getTheIndex(arr);
 
 

@@ -1,5 +1,32 @@
 #customize-container{
   position:relative;
-  background: #0b2e13;
-  min-height: 320px;
+  background: #666;
+  //background: #0b2e13;
+  //min-height: 120px;
+  overflow: hidden;;
+  height: 0;
+  transition: height .5s ease-in-out;
+
+  &.reveal{
+    height: 600px;
+  }
+
+  #customize-main-view{
+    #customize-main-view-ui{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      button, li, a{
+        pointer-events: all;
+      }
+      button.btn.btn-blue{
+        align-self: flex-end;;
+      }
+
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import {ViewStream, SpyneApp, ChannelFetch} from "spyne";
-import {ChannelRouteCreator} from './app/channels/channel-route-creator';
+import {ChannelRouteCreator} from 'channels/channel-route-creator';
+import {ChannelContainers} from 'channels/channel-containers';
 import {ChannelDynamicAppRoute} from 'channels/channel-dynamic-app-route';
 import {MainView} from './app/main-view';
 import SpaGenData from 'data/route-gen.json';
@@ -23,6 +24,7 @@ const spyneApp = new SpyneApp({debug:true});
 const initSpyneAppGenerator = ()=> {
 
   spyneApp.registerChannel(new ChannelRouteCreator());
+  spyneApp.registerChannel(new ChannelContainers());
   spyneApp.registerChannel(new ChannelDynamicAppRoute());
   spyneApp.registerChannel(new ChannelFetch('CHANNEL_ROUTEGEN_JSON', {
     url: SpaGenData,

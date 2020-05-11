@@ -6,6 +6,7 @@ export class CustomizeMainView extends ViewStream {
 
   constructor(props = {}) {
       props.id = 'customize-main-view';
+      props.template=require('./templates/cutomize-main.tmpl.html');
     super(props);
 
   }
@@ -17,7 +18,9 @@ export class CustomizeMainView extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+        ['.toggle-btn', 'click']
+    ];
   }
 
   onRendered() {

@@ -4,6 +4,8 @@
 @import "02-variables/variables.scss";
 @import "02-variables/fluid-type.scss";
 @import "02-variables/buttons.scss";
+@import "02-variables/globals.scss";
+@import "02-variables/mixins.scss";
 @import "03-components/containers/main-container.scss";
 @import "03-components/containers/customize-container.scss";
 @import "03-components/containers/dynamic-app-container";
@@ -17,4 +19,15 @@
 body{
   background: #ddd;
   font-family: sans-serif;
+}
+
+html,body,main,section,article,div,h1,h2,h3,h4,h5,h6,p,div,span{
+  @include add-main-font;
+}
+
+pre,code{
+  @include add-mono-font;
+  span{
+    @include add-mono-font;
+  }
 }

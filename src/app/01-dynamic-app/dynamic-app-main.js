@@ -22,7 +22,7 @@ export class DynamicAppMain extends ViewStream {
   }
 
   onRendered() {
-    console.log("DYNAMIC APP ",this, {window});
+    //console.log("DYNAMIC APP ",this, {window});
     this.appendView(new DynamicAppUI());
     this.appendView(new DynamicAppPageContainer());
   }

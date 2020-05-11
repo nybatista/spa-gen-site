@@ -32,7 +32,6 @@ export class RouteJsonViewer extends ViewStream {
   }
 
   onStartJson(e){
-    console.log("E IS ",e);
     const delay = ()=> this.routeCreatorToData$DomToRouteJson();
     this.setTimeout(this.onGenerateJson.bind(this), 100);
 

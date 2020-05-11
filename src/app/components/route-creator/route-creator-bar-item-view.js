@@ -131,11 +131,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     }
 
     this.routeCreator$InitBarItem();
-
-    console.log("THIS PROPS IS ",this.props.routeLevel,this.props.data);
-
-      this.routeBarDrag$InitDraggable();
-
+    this.routeBarDrag$InitDraggable();
 
     if (this.props.data.isLastItem===true){
       this.sendLastItemRenderedEvent();

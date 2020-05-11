@@ -12,12 +12,20 @@ export class DynamicAppHeader extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-        ['CHANNEL_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated']
+        ['CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated']
     ];
   }
 
   onRouteConfigUpdated(e){
-    console.log("dynamic app is updated on route ",e);
+    const {routes} = e.props();
+    console.log("dynamic app header listening to route update ", {routes,e});
+
+    /*
+    *
+    * TODO: CREATE A HEADER CONTENT VIEW THAT RECREATES EACH TIME
+    *
+    * */
+
   }
 
   broadcastEvents() {
@@ -26,7 +34,7 @@ export class DynamicAppHeader extends ViewStream {
   }
 
   onRendered() {
-    this.addChannel("CHANNEL_ROUTE");
+    this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
   }
 
 }

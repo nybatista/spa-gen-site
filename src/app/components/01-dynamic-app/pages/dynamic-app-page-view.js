@@ -1,10 +1,11 @@
 import {ViewStream} from 'spyne';
-import {DynamicAppPageView} from 'components/01-dynamic-app/pages/dynamic-app-page-view';
+import {DynamicAppPageTraits} from 'traits/dynamic-app-page-traits';
 
-export class DynamicAppPageContainer extends ViewStream {
+export class DynamicAppPageView extends ViewStream {
 
   constructor(props = {}) {
-    props.id = 'dynamic-app-page-container';
+    props.class = 'dynamic-app-page';
+    props.traits = DynamicAppPageTraits;
     super(props);
 
   }
@@ -20,7 +21,7 @@ export class DynamicAppPageContainer extends ViewStream {
   }
 
   onRendered() {
-    this.appendView(new DynamicAppPageView());
+
   }
 
 }

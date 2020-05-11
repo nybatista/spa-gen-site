@@ -73,7 +73,10 @@ export class RouteBarDragTraits extends SpyneTrait {
 
     }
     this.props.dragger = Draggable.create(el, config);
-
+    const isHome = this.props.routeLevel === 0 && this.props.data.key==='home';
+    if (isHome===true){
+      this.props.dragger[0].disable();
+    }
 
   }
 }

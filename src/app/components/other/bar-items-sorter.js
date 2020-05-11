@@ -70,7 +70,7 @@ export class BarItemsSorter{
     const len = arr.length-2;
 
     // getTheIndex COMPARES THE Y VALUES IN THE ARRAY WITH THE CURRENT DRAGGER Y
-    const getTheIndex = compose(clamp(0,len),findIndex(lte(y)));
+    const getTheIndex = compose(clamp(1,len),findIndex(lte(y)));
     const yIndex = getTheIndex(arr);
 
 

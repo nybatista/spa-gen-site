@@ -13,8 +13,18 @@ export class CustomizeContainer extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+      ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onToggleView']
+
+    ];
   }
+
+  onToggleView(e){
+    const {eventType,type,value} = e.props();
+    console.log("TOGGLINGE CustomizeContainer VIEW ",{e});
+    this.props.el$.toggleClass('reveal');
+  }
+
 
   broadcastEvents() {
     // return nexted array(s)
@@ -28,9 +38,13 @@ export class CustomizeContainer extends ViewStream {
 
   onRendered() {
 
-   this.setTimeout(this.animateTest.bind(this), 1000);
+  // this.setTimeout(this.animateTest.bind(this), 1000);
 
     this.appendView(new CustomizeMainView());
+
+    this.addChannel("CHANNEL_CONTAINERS");
+
+
   }
 
 }

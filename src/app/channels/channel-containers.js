@@ -26,14 +26,26 @@ export class ChannelContainers extends Channel {
 
   }
 
+  static getContainerActionByEvent(str){
+    const actionsHash = {
+      toggleMain: "CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT"
+    }
+     return actionsHash[str];
+  }
+
   onContainerEvent(e){
     const {eventType,type,value} = e.props();
-    console.log("CONTAINER EVENT ", {eventType,type,value})
-
+    //console.log("CONTAINER EVENT ", {eventType,type,value})
+    const action = ChannelContainers.getContainerActionByEvent(type);
+    this.sendChannelPayload(action, {eventType,type,value});
   }
 
   addRegisteredActions() {
-    return [];
+    return [
+
+        'CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT'
+
+    ];
   }
 
   onViewStreamInfo(obj) {

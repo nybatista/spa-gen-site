@@ -12,21 +12,6 @@
   }
 
   #customize-main-view{
-    #customize-main-view-ui{
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      pointer-events: none;
-      display: flex;
-      flex-direction: column;
-      button, li, a{
-        pointer-events: all;
-      }
-      button.btn.btn-blue{
-        align-self: flex-end;;
-      }
 
-    }
   }
 }

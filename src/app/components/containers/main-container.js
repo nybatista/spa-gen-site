@@ -7,6 +7,7 @@ export class MainContainer extends ViewStream {
   constructor(props = {}) {
     props.id='main-container';
     props.tagName='div';
+    props.template = require('./templates/container-main.tmpl.html');
     super(props);
 
   }
@@ -18,7 +19,9 @@ export class MainContainer extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+      ['.toggle-btn', 'click']
+    ];
   }
 
   onRendered() {

@@ -9,7 +9,26 @@
   align-items: center;
   padding: 0;
   margin:0;
-  background: orange;
+  background: #000;
+
+  #customize-main-view-ui{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    z-index: $z-index-ui;
+    button, li, a{
+      pointer-events: all;
+    }
+    button.btn.btn-blue{
+      align-self: flex-end;;
+    }
+
+  }
+
 
   .container{
     width:100%;

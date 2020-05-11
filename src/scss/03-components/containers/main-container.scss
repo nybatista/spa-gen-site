@@ -32,7 +32,8 @@
 
   .container{
     width:100%;
-   flex-grow:0;
+    //height: inherit;;
+   //flex-grow:1;
     &#dynamic-app-container {
       flex-grow: 1;
     }

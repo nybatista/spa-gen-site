@@ -2,6 +2,7 @@ import {ViewStream} from 'spyne';
 import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
+import {elementAt} from 'rxjs/operators';
 
 export class RouteCreatorMainView extends ViewStream {
 
@@ -18,10 +19,37 @@ export class RouteCreatorMainView extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-        ["CHANNEL_ROUTEGEN_JSON_DATA_EVENT", 'onRouteGenData'],
-      ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'routeAnim$InitBarItemsAnimation']
-
+      ["CHANNEL_ROUTEGEN_JSON_DATA_EVENT", 'onRouteGenData'],
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'routeAnim$InitBarItemsAnimation'],
+      ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onItemAdded'],
+      ['CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT', 'onItemAdded']
     ];
+  }
+
+  onItemAdded(e){
+
+
+    console.log("E IS ",e);
+    const minHeight = 600;
+
+    const delayer = ()=> {
+      const elArr = this.props.el$('.route-bar-items-list.main li').arr;
+      const elItemIndex = elArr.length > 2 ? elArr.length - 2 : 1;
+      const secondToLastEl = elArr[elItemIndex];
+
+      const box = secondToLastEl.getBoundingClientRect();
+      const newHeight = box.y + box.height * 2;
+      const mainHeight = newHeight <= minHeight ? minHeight : newHeight;
+      const newHeightStr = `height:${mainHeight}px;`;
+      const mainEl = document.getElementById('customize-container');
+      mainEl.style.cssText = newHeightStr
+      console.log("ITEM IS ", {e,newHeight, newHeightStr, elItemIndex, elArr, box, secondToLastEl},
+          this.props.el);
+
+    }
+
+    this.setTimeout(delayer, 0);
+
   }
 
 

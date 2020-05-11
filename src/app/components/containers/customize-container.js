@@ -38,7 +38,7 @@ export class CustomizeContainer extends ViewStream {
 
   onRendered() {
 
-  // this.setTimeout(this.animateTest.bind(this), 1000);
+   this.setTimeout(this.animateTest.bind(this), 500);
 
     this.appendView(new CustomizeMainView());
 

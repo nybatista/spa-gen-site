@@ -5,7 +5,8 @@ import {DynamicAppFooter} from 'components/01-dynamic-app/ui/dynamic-app-footer'
 export class DynamicAppUI extends ViewStream {
 
   constructor(props = {}) {
-
+    props.id='dynamic-app-ui';
+    props.template = require('./templates/dynamic-app-ui.tmpl.html')
     super(props);
 
   }

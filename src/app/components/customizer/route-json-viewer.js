@@ -25,9 +25,17 @@ export class RouteJsonViewer extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-        ["CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT", 'onGenerateJson']
+        ["CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT", 'onGenerateJson'],
+        ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onStartJson']
 
     ];
+  }
+
+  onStartJson(e){
+    console.log("E IS ",e);
+    const delay = ()=> this.routeCreatorToData$DomToRouteJson();
+    this.setTimeout(this.onGenerateJson.bind(this), 100);
+
   }
 
   onGenerateJson(e){

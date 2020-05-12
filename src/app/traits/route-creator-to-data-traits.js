@@ -62,14 +62,21 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
   }
 
   static routeCreatorToData$DomToRouteJson(mainSel='route-creator-container'){
-
+    let iter = 0;
     const addStringOrObjForEachListItem = (liEl)=>{
       const inputVal = RouteCreatorToDataTraits.routeCreatorToData$GetInputVal(liEl);
       let arr = [inputVal, inputVal];
       const listItemsArr = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(liEl.dataset.vsid);
       if (listItemsArr.length>=1){
+        iter = 0;
         arr= [inputVal, createObjFromUl(liEl.dataset.vsid)];
       }
+      arr[1] = iter === 0 ? "^$" : arr[1];
+      console.log("STRING OR OBJ ",{iter,arr})
+
+      iter++;
+
+
       return arr;
     }
 

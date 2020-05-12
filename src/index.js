@@ -14,12 +14,43 @@ import {RouteCreatorTraits} from 'traits/route-creator-traits';
 * */
 
 
+const config = {
+
+  "debug" : true,
+  "channels" : {
+  "ROUTE": {
+    "type" : "slash",
+    "routes": {
+      "routePath": {
+        "routeName": "pageIdTest",
+        "home": "^$",
+        "work": {
+          "routePath": {
+            "routeName": "workId",
+            "acme": "^$",
+            "widgets": "widgets",
+            "globex": "globex"
+          }
+        },
+        "about": {
+          "routePath": {
+            "routeName": "aboutId",
+            "contact": "^$"
+          }
+        }
+      }
+    }
+  }
+}}
+
+
+
 //const spaGenData = require('data/route-gen.json');
 const R = require('ramda');
 
 const css = require('./scss/main.scss');
 
-const spyneApp = new SpyneApp({debug:true});
+const spyneApp = new SpyneApp(config);
 
 const initSpyneAppGenerator = ()=> {
 
@@ -36,27 +67,11 @@ const initSpyneAppGenerator = ()=> {
   const mainView = new MainView();
   mainView.appendToDom(document.body);
 
-  window.addEventListener('popstate', function (event) {
-    console.log("window has changed MAIN ",{event})
-  });
 
-  window.addEventListener('pushstate', function (event) {
-    console.log("window has changed pushstate MAIN ",{event})
-  });
 
 
 }
 
-const initIframeCode = ()=>{
-  window.addEventListener('popstate', function (event) {
-    console.log("window has changed IFRAME ",{event})
-  });
-
-  window.addEventListener('pushstate', function (event) {
-    console.log("window has changed pushstate IFRAME ",{event})
-  });
-  console.log("init iframe code ");
-}
 
 
 initSpyneAppGenerator();

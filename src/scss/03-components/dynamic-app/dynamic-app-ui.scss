@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: space-between;;
   color:#333;
+  z-index: $z-index-dynamic-app-ui;
 
   #dynamic-app-header{
     position: relative;

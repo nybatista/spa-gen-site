@@ -1,5 +1,6 @@
 import {ViewStream} from 'spyne';
 import {DynamicAppHeader} from 'components/01-dynamic-app/ui/header/dynamic-app-header';
+import {DynamicAppSubnav} from 'components/01-dynamic-app/ui/dynamic-app-subnav';
 import {DynamicAppFooter} from 'components/01-dynamic-app/ui/dynamic-app-footer';
 
 export class DynamicAppUI extends ViewStream {
@@ -23,6 +24,7 @@ export class DynamicAppUI extends ViewStream {
 
   onRendered() {
     this.appendView(new DynamicAppHeader());
+    this.appendView(new DynamicAppSubnav());
     this.appendView(new DynamicAppFooter());
   }
 

@@ -19,7 +19,9 @@ export class RouteCreatorMainView extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
+/*
       ["CHANNEL_ROUTEGEN_JSON_DATA_EVENT", 'onRouteGenData'],
+*/
       ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'routeAnim$InitBarItemsAnimation'],
       ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onItemAdded'],
       ['CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT', 'onItemAdded']
@@ -55,8 +57,15 @@ export class RouteCreatorMainView extends ViewStream {
 
 
   onRouteGenData(e){
-    const {routes} = e.props();
+   // const {routes} = e.props();
+    //this.props.data = routes;
+
+    const routeData = RouteCreatorTraits.routeCreator$GetRouteDataFromConfig();
+    const {routes} = routeData;
     this.props.data = routes;
+
+    console.log("ROUTE DATA IS ",{routeData,routes});
+
     this.createMainBarHolder();
 
   }
@@ -76,10 +85,10 @@ export class RouteCreatorMainView extends ViewStream {
   }
 
   onRendered() {
-    this.addChannel("CHANNEL_ROUTEGEN_JSON");
+   // this.addChannel("CHANNEL_ROUTEGEN_JSON");
     this.addChannel("CHANNEL_ROUTE_CREATOR");
     this.routeCreator$InitBarItem();
-
+    this.setTimeout(this.onRouteGenData.bind(this),10);
   }
 
 }

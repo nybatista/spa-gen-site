@@ -1,4 +1,4 @@
-import {partialRight, map,addIndex,clamp,reject,findLastIndex,findIndex,gte, sortBy,prop, lte, pick,pluck, compose,head,filter,clone,propEq} from 'ramda';
+import {partialRight, map,addIndex,clamp,reject,findLastIndex,findIndex,gte,sum,take, sortBy,prop, lte, pick,pluck, compose,head,filter,clone,propEq} from 'ramda';
 const mapIndexed = addIndex(map);
 
 export class BarItemsSorter{
@@ -289,7 +289,7 @@ export class BarItemsSorter{
     const heightsArr = pluck('height', arr);
     //console.log('heights arr ',heightsArr);
     // CREATE CORRECT Y POSITION BY ADDING UP PREVIOUS HEIGHTS
-    const getGsapYPos = (index)=>R.sum(R.take(index,heightsArr))
+    const getGsapYPos = (index)=>sum(take(index,heightsArr))
     // ADD THE CORRECT Y POS FOR GSAP AND CREATE THE MIDPOINTS FOR ARR CHECK
     const addGsapY = (obj)=>{
      // obj.yGsap = getGsapYPos(obj.index);

@@ -1,16 +1,22 @@
 import {ViewStream} from 'spyne';
 
-export class DynamicAppSubnav extends ViewStream {
+export class DynamicAppSubnavContent extends ViewStream {
 
   constructor(props = {}) {
-    props.class='dynamic-app-subnav';
+    props.class='dynamic-app-subnav-content';
     super(props);
 
   }
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+        ['CHANNEL_ROUTE_DEEPLINK_EVENT', 'onDeepLink']
+    ];
+  }
+
+  onDeepLink(e){
+    console.log("DEEP LINK");
   }
 
   broadcastEvents() {
@@ -19,6 +25,7 @@ export class DynamicAppSubnav extends ViewStream {
   }
 
   onRendered() {
+    this.addChannel("CHANNEL_ROUTE");
     this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
   }
 

@@ -1,4 +1,5 @@
 import {SpyneTrait} from 'spyne';
+import {LocalStorageTraits} from 'traits/local-storage-traits';
 
 export class SpyneConfigTrait extends SpyneTrait {
 
@@ -8,9 +9,27 @@ export class SpyneConfigTrait extends SpyneTrait {
 
     this.baseConfig = SpyneConfigTrait.config$CreateBaseConfig();
 
+  }
+
+  static config$getConfigFromStorage(){
+
+
+
+
+
+
+
 
 
   }
+
+
+
+
+  static config$GetDefaultRoute(){
+
+  }
+
 
   static config$Add404(obj){
     obj['404'] = '.*';

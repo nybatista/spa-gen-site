@@ -1,12 +1,13 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter} from 'spyne';
+import {trim} from 'ramda';
 
 export class ChannelDynamicAppRoute extends Channel {
 
   constructor(name, props = {}) {
     name = 'CHANNEL_DYNAMIC_APP_ROUTE';
-    props.sendCachedPayload = false;
+    props.sendCachedPayload = true;
     super(name, props);
 
   }
@@ -20,12 +21,30 @@ export class ChannelDynamicAppRoute extends Channel {
 
     });
 
+    const actionsArr = [
+      'CHANNEL_ROUTE_DEEPLINK_EVENT',
+      'CHANNEL_ROUTE_CHANGE_EVENT'
+    ]
+
+    const routeChangeFilter = new ChannelPayloadFilter({
+      propFilters: {
+        action:  (val)=>actionsArr.indexOf(val)>=0
+      }
+    })
 
 
     this.getChannel("CHANNEL_ROUTE", channelRouteUpdateFilter)
         .subscribe(this.onChannelRouteUpdateEvent.bind(this));
 
 
+    this.getChannel("CHANNEL_ROUTE", routeChangeFilter)
+    .subscribe(this.onRouteChangeEvent.bind(this));
+
+
+  }
+
+  onRouteChangeEvent(e){
+    console.log("ROUTE CHANGED EVENT ",{e});
   }
 
 

@@ -6,7 +6,7 @@ export class DynamicAppHeaderContentView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName='nav';
-    props.data = DynamicAppTraits.dynApp$FormatRouteConfigForDom(props.data);
+    props.data = DynamicAppTraits.dynApp$FormatRouteConfigForDom(props.routes);
     props.class='dynamic-app-header-content';
     super(props);
 
@@ -19,8 +19,10 @@ export class DynamicAppHeaderContentView extends ViewStream {
     ];
   }
 
-  onDisposeViewStream(){
-    this.disposeViewStream();
+  onDisposeViewStream(e){
+    console.log("BEFORE DISPOSE ", {e}, this.props.data);
+
+   // this.disposeViewStream();
   }
 
   broadcastEvents() {

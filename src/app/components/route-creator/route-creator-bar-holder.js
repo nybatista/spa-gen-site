@@ -166,7 +166,9 @@ export class RouteCreateBarHolder extends ViewStream {
    // console.log("LAST ITEM IS ",{lastItem}, this.props);
     const createBar = (data)=>{
       //data['initYPos'] = this.props.el.offsetHeight;
-      data['isLastItem'] = lastItem === data.keyValue;
+      data['isLastItem'] = lastItem === data.key;
+      console.log("CREATE BAR ",data.isLastItem,{data});
+
       this.routeCreator$CreateRouteBar(props, data);
       //console.log("create bar ",this.props.vsid,this.props.el.offsetHeight);
     }

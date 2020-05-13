@@ -5,7 +5,7 @@ import {ChannelDynamicAppRoute} from 'channels/channel-dynamic-app-route';
 import {MainView} from './app/main-view';
 import SpaGenData from 'data/route-gen.json';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
-
+import {LocalStorageTraits} from 'traits/local-storage-traits';
 
 /*
 *
@@ -22,7 +22,7 @@ const config = {
     "type" : "slash",
     "routes": {
       "routePath": {
-        "routeName": "pageIdTest",
+        "routeName": "pageId",
         "home": "^$",
         "work": {
           "routePath": {

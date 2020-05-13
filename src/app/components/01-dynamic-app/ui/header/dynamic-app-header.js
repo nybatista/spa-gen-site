@@ -14,13 +14,13 @@ export class DynamicAppHeader extends ViewStream {
     // return nexted array(s)
     return [
         ['CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated'],
-        ['CHANNEL_ROUTE_CHANGE_EVENT', 'onChannelUI']
+        ['CHANNEL_ROUTE_.*_EVENT', 'onChannelUI']
     ];
   }
 
   onChannelUI(e){
-    const {routeData} = e.props();
-    console.log("CHANNEL _UI IS ",{routeData});
+    const {action,routeData} = e.props();
+    console.log("CHANNEL _UI IS ",{action,routeData});
   }
 
 
@@ -28,8 +28,7 @@ export class DynamicAppHeader extends ViewStream {
     const {routes} = e.props();
     //console.log("dynamic app header listening to route update ", {routes,e});
 
-    const data = routes;
-    this.appendView(new DynamicAppHeaderContentView({data}), 'header');
+    this.appendView(new DynamicAppHeaderContentView({routes}), 'header');
 
 
 

@@ -83,7 +83,16 @@ export class RouteCreatorTraits extends SpyneTrait {
   }
 
 
+  static routeCreator$GetRouteDataFromConfig(){
+    const routes = path(['Spyne','config', 'channels', 'ROUTE', 'routes'], window);
+
+    return RouteCreatorTraits.routeCreator$SetLastItemInObj({routes});
+  }
+
+
   static routeCreator$SetLastItemInObj(obj){
+    console.log("SET LAST ITEM OBJ ",{obj});
+
     const nestedArr = []
     let lastProp;
     const pluckPathVal = (val, key)=>{

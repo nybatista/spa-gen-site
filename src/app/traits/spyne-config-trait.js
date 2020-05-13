@@ -12,14 +12,15 @@ export class SpyneConfigTrait extends SpyneTrait {
   }
 
   static config$getConfigFromStorage(){
+    const defaults = LocalStorageTraits.localStorage$GetStoreObj('defaults');
+
+    const {config} = defaults;
 
 
 
 
 
-
-
-
+    return config;
 
   }
 

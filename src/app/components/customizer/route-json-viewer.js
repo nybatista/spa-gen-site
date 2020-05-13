@@ -2,6 +2,7 @@ import {ViewStream} from 'spyne';
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import {RouteCreatorToDataTraits} from 'traits/route-creator-to-data-traits';
+import {LocalStorageTraits} from 'traits/local-storage-traits';
 
 export class RouteJsonViewer extends ViewStream {
 
@@ -47,6 +48,8 @@ export class RouteJsonViewer extends ViewStream {
 
    const {routes} = json;
    const action = 'CHANNEL_ROUTE_UPDATE_CONFIG_EVENT';
+
+   LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
 
    this.sendInfoToChannel("CHANNEL_ROUTE", {action,routes}, action);
 

@@ -6,6 +6,8 @@ import {MainView} from './app/main-view';
 import SpaGenData from 'data/route-gen.json';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
+import {SpyneConfigData} from 'spyne/src/tests/mocks/utils-data';
+import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 
 /*
 *
@@ -14,10 +16,14 @@ import {LocalStorageTraits} from 'traits/local-storage-traits';
 * */
 
 
-const config = {
-
+const defaultConfig = {
+  "localStorageKey" : "spaGenStore",
   "debug" : true,
   "channels" : {
+    "WINDOW" : {
+      events: ['beforeunload'],
+    },
+
   "ROUTE": {
     "type" : "slash",
     "routes": {
@@ -44,6 +50,11 @@ const config = {
 }}
 
 
+// SAVE DEFAULT CONFIG TO WINDOW VARIABLE
+LocalStorageTraits.localStorage$InitializeConfig(defaultConfig, 'spyneStore');
+
+// CHECK TO LOAD DEFAULT CONFIG OR LOAD LOCALSTORAGE CONFIG
+const config = SpyneConfigTrait.config$getConfigFromStorage();
 
 //const spaGenData = require('data/route-gen.json');
 const R = require('ramda');

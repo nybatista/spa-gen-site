@@ -1,5 +1,6 @@
 import {ViewStream} from 'spyne';
-import {MainContainer} from './components/containers/main-container';
+import {MainContainer} from 'components/containers/main-container';
+import {LocalStorageTraits} from 'traits/local-storage-traits';
 
 export class MainView extends ViewStream {
 
@@ -12,7 +13,20 @@ export class MainView extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+
+        ['CHANNEL_WINDOW_BEFOREUNLOAD_EVENT', 'onBeforeUnload']
+
+    ];
+  }
+
+  onBeforeUnload(e){
+    LocalStorageTraits.localStorage$SetStore();
+
+    /*const storeObj =path(['Spyne','config','localStorageStore'], window);
+    const storeKey =path(['Spyne','config','localStorageKey'], window);
+    localStorage.setItem(storeKey, JSON.stringify(storeObj));*/
+    //console.log("SAVING TO LOCALSTORAGE ",{storeObj, storeKey}, localStorage);
   }
 
   broadcastEvents() {
@@ -22,6 +36,9 @@ export class MainView extends ViewStream {
 
   onRendered() {
     this.appendView(new MainContainer());
+    this.addChannel("CHANNEL_WINDOW");
+
+
   }
 
 }

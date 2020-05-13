@@ -9,14 +9,30 @@ export class LocalStorageTraits extends SpyneTrait {
 
   }
 
-  static localStorage$GetStore(key='spyneAppGen'){
+
+  static localStorage$InitializeConfig(config){
+    const {localStorageKey} = config;
+    window.spyneLocalStorageKey = localStorageKey;
+    const routes = path(['channels', 'ROUTE', 'routes'], config);
+
+    const defaults = {localStorageKey, config, routes};
+
+    window.spaGenStore = LocalStorageTraits.localStorage$GetStore(localStorageKey);
+
+    LocalStorageTraits.localStorage$SetStoreObj('defaults', defaults);
+
+
+  }
+
+
+  static localStorage$GetStore(key=window.spyneLocalStorageKey){
     //only getter for localStorage item
    //console.log("GET LOCAL STORAGE ", clone(JSON.parse(localStorage.getItem(key)) ))
     return JSON.parse(localStorage.getItem(key)) ||
         LocalStorageTraits.localStorage$SetStore({},key);
   }
 
-  static localStorage$SetStore(obj = {}, key=window.Spyne.config.localStorageKey, ) {
+  static localStorage$SetStore(obj = window.spaGenStore, key=window.spaGenStore.defaults.localStorageKey, ) {
     // only setter for localStorage item
     //console.log("OBJ AND KEY ARE ",{obj,key});
 
@@ -28,13 +44,21 @@ export class LocalStorageTraits extends SpyneTrait {
 
   static localStorage$GetStoreObj(objKey){
     // not localstorage, but localStore from Spyne.config
-    const localStoreObj = path(['Spyne','config','localStorageStore',objKey], window);
+    const localStoreObj = path(['spaGenStore',objKey], window);
     return localStoreObj || LocalStorageTraits.localStorage$SetStoreObj(objKey);
 
   }
 
+  static localStorage$SetStoreObjAndUpdate(key, val={}){
+    const localStore = path(['spaGenStore'], window);
+    localStore[key] = val;
+    LocalStorageTraits.localStorage$SetStore();
+    return localStore[key];
+  }
+
+
   static localStorage$SetStoreObj(key, val={}){
-    const localStore = path(['Spyne','config','localStorageStore'], window);
+    const localStore = path(['spaGenStore'], window);
     localStore[key] = val;
     return localStore[key];
   }

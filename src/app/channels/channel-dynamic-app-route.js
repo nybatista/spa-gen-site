@@ -14,7 +14,7 @@ export class ChannelDynamicAppRoute extends Channel {
   onRegistered() {
     const channelRouteUpdateFilter = new ChannelPayloadFilter({
       propFilters: {
-        action: "CHANNEL_ROUTE_CONFIG_UPDATED_EVENT"
+        action: "CHANNEL_ROUTE_CONFIG_UPDATED_EVENT",
 
       }
 
@@ -28,6 +28,15 @@ export class ChannelDynamicAppRoute extends Channel {
 
   }
 
+
+  onAddSubnavEvent(e){
+    const {payload} = e;
+    const action = "CHANNEL_DYNAMIC_APP_ROUTE_ADD_SUBNAV_EVENT";
+    this.sendChannelPayload(action, payload);
+
+  }
+
+
   onChannelRouteUpdateEvent(e){
     const {payload} = e;
     const action = "CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT";
@@ -37,7 +46,8 @@ export class ChannelDynamicAppRoute extends Channel {
 
   addRegisteredActions() {
     return [
-        'CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT'
+      'CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT',
+      'CHANNEL_DYNAMIC_APP_ROUTE_ADD_SUBNAV_EVENT'
     ];
   }
 

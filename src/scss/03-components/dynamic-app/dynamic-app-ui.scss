@@ -39,9 +39,12 @@
         pointer-events: all;
         cursor: pointer;
         margin: 10px;
+        color: skyblue;
+        text-decoration: none;
+        opacity: .8;
 
         &:hover {
-          opacity: .5;
+          opacity: 1;
         }
       }
     }

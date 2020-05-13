@@ -5,7 +5,7 @@ import {DynamicAppTraits} from 'traits/dynamic-app-traits';
 export class DynamicAppHeaderContentView extends ViewStream {
 
   constructor(props = {}) {
-
+    props.tagName='nav';
     props.data = DynamicAppTraits.dynApp$FormatRouteConfigForDom(props.data);
     props.class='dynamic-app-header-content';
     super(props);
@@ -35,7 +35,8 @@ export class DynamicAppHeaderContentView extends ViewStream {
       const anchor = new DomEl({
         tagName: 'a',
         dataset: d,
-        data: d.text
+        data: d.text,
+        href: d.href
 
       })
 

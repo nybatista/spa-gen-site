@@ -23,8 +23,7 @@ export class DynamicAppTraits extends SpyneTrait {
 
 
   static dynApp$FormatRouteConfigForDom(route){
-
-    console.log("ROUTE DATA IS ",route);
+    //console.log("ROUTE DATA IS ",route);
     const {routePath} = route;
     const {routeName} = routePath;
     const channel = "ROUTE";
@@ -42,7 +41,7 @@ export class DynamicAppTraits extends SpyneTrait {
       return compose(head, toPairs, omit(['routeName']), prop('routePath'))(obj);
     }
 
-    const checkForSubSection = (data, val)=>{
+    const checkForSubSection = (data, val, mainKey)=>{
 
       const addSubNavKeyValue = (obj, key)=>obj[`${key}Value`]='';
 
@@ -53,7 +52,8 @@ export class DynamicAppTraits extends SpyneTrait {
         if (subNavObjArr[1]==='^$'){
           addSubNavKeyValue(data, subNavKey);
         }
-
+      } else if (val==="^$"){
+        addSubNavKeyValue(data, mainKey);
       }
       return data
     }
@@ -61,8 +61,9 @@ export class DynamicAppTraits extends SpyneTrait {
 
     const mapRouteProps = (val, key,n, i)=>{
       const mainValue = key;
-      const data = checkForSubSection({channel, eventPreventDefault}, val);
+      const data = checkForSubSection({channel, eventPreventDefault}, val, mainKey);
       data[mainKey]=mainValue;
+      data['href'] = val === '^$' ? "/" : `/${mainValue}`;
       data['text']=String(mainValue).toUpperCase();
       // data.mainKey = iter === 0 ? ""
       accum.push(data);

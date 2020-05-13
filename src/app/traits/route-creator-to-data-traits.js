@@ -72,7 +72,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
         arr= [inputVal, createObjFromUl(liEl.dataset.vsid)];
       }
       arr[1] = iter === 0 ? "^$" : arr[1];
-      console.log("STRING OR OBJ ",{iter,arr})
+      //console.log("STRING OR OBJ ",{iter,arr})
 
       iter++;
 

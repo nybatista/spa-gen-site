@@ -33,27 +33,24 @@ export class RouteJsonViewer extends ViewStream {
   }
 
   onStartJson(e){
-    const delay = ()=> this.routeCreatorToData$DomToRouteJson();
-    this.setTimeout(this.onGenerateJson.bind(this), 100);
+    const delay = ()=> this.routeCreatorToData$GenerateJSON();
+    this.setTimeout(delay, 100);
 
   }
 
   onGenerateJson(e){
-    const json = this.routeCreatorToData$DomToRouteJson();
-    hljs.registerLanguage('javascript', javascript);
-    hljs.initHighlightingOnLoad();
-   const codeEl = this.props.el$('code.json').el;
-   codeEl.innerHTML = JSON.stringify(json, null, 4);
-   hljs.highlightBlock(codeEl);
-
-   const {routes} = json;
-   const action = 'CHANNEL_ROUTE_UPDATE_CONFIG_EVENT';
-
-   LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
-
-   this.sendInfoToChannel("CHANNEL_ROUTE", {action,routes}, action);
-
+    const routes = this.routeCreatorToData$GenerateJSON();
+    this.updateRouteChannel(routes);
   }
+
+
+
+
+  updateRouteChannel(routes){
+    const action = 'CHANNEL_ROUTE_UPDATE_CONFIG_EVENT';
+    this.sendInfoToChannel("CHANNEL_ROUTE", {action,routes}, action);
+  }
+
 
   static getTestRouteObj(){
     const obj = {

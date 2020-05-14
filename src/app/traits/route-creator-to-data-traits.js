@@ -1,5 +1,9 @@
 import {SpyneTrait} from 'spyne';
+import hljs from 'highlight.js';
+import javascript from 'highlight.js/lib/languages/javascript';
 import {compose, fromPairs,map, toPairs,merge,mergeAll} from 'ramda';
+import {LocalStorageTraits} from 'traits/local-storage-traits';
+
 export class RouteCreatorToDataTraits extends SpyneTrait {
 
   constructor(context) {
@@ -112,5 +116,24 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     return `${snakeToCamel(inputVal)}Id`;
 
   }
+
+
+  static routeCreatorToData$GenerateJSON(){
+
+    const json = this.routeCreatorToData$DomToRouteJson();
+
+    console.log("THE JSON IS ",json);
+    hljs.registerLanguage('javascript', javascript);
+    hljs.initHighlightingOnLoad();
+    const codeEl = this.props.el$('code.json').el;
+    codeEl.innerHTML = JSON.stringify(json, null, 4);
+    hljs.highlightBlock(codeEl);
+
+    const {routes} = json;
+
+    LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
+    return routes;
+  }
+
 
 }

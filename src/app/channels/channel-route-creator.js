@@ -1,6 +1,7 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter} from 'spyne';
+import {prop, path, pick, compose} from 'ramda';
 
 export class ChannelRouteCreator extends Channel {
 
@@ -12,7 +13,7 @@ export class ChannelRouteCreator extends Channel {
   }
 
   onRegistered() {
-    const payloadFilter = new ChannelPayloadFilter({propFilters:{
+/*    const payloadFilter = new ChannelPayloadFilter({propFilters:{
         type: "routeBar"
       }})
 
@@ -21,13 +22,23 @@ export class ChannelRouteCreator extends Channel {
         type: "generateJson"
       }})
 
-
     this.getChannel("CHANNEL_UI", payloadFilter)
           .subscribe(this.onRouteBarUIEvent.bind(this));
 
 
     this.getChannel("CHANNEL_UI", jsonGenPayloadFilter)
     .subscribe(this.onGenJson.bind(this));
+    */
+
+    const routeCreatorPayloadFilter = new ChannelPayloadFilter({
+      propFilters: {
+        eventType: "routeCreator"
+      }
+
+    });
+
+    this.getChannel("CHANNEL_UI", routeCreatorPayloadFilter)
+        .subscribe(this.onUIEvent.bind(this));
 
 
   }
@@ -38,8 +49,48 @@ export class ChannelRouteCreator extends Channel {
   }
 
 
+  onUIEvent(e){
+
+    const {type, payload, action} = e.props();
+    console.log("UI ROUTE BAR EVENT START ", {type,payload,action});
+
+    const getActionBasedOnType = ()=>{
+      const actionHash = {
+        routeBar: "CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT",
+        generateJson: "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT",
+        resetJson: "CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT"
+      }
+      return actionHash[type];
+
+    }
+
+
+    const getPayloadBasedOnType = ()=>{
+      const fnHash = {
+        routeBar: ()=>pick(['holderId', 'barId', 'masterItem', 'routeBarEvent'])(payload),
+        generateJson: getActionBasedOnType,
+        resetJson: getActionBasedOnType
+      }
+
+      const fn = fnHash[type];
+      console.log("FN AND HASH TYPE ",{type,fn})
+      return fn();
+    }
+
+    const routeAction = getActionBasedOnType()
+    const routePayload = getPayloadBasedOnType();
+
+    console.log("UI ROUTE BAR EVENT ", {type,payload,action,routeAction, routePayload});
+    this.sendChannelPayload(routeAction, routePayload);
+
+  }
+
+
   onRouteBarUIEvent(e){
-    //console.log("ROUTE BAR EVENT ",e);
+
+    const {type, payload} = e.props();
+
+    console.log("ROUTE BAR EVENT ",{type,payload,e});
     const {holderId, barId, masterItem, routeBarEvent} = e.props();
     const action = "CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT";
     this.sendChannelPayload(action, {holderId,barId,masterItem,routeBarEvent});
@@ -71,6 +122,7 @@ export class ChannelRouteCreator extends Channel {
       'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
       'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',
       'CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT',
+      'CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
       'CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT',
       'CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT',
@@ -87,7 +139,7 @@ export class ChannelRouteCreator extends Channel {
   onViewStreamInfo(obj) {
     let {data,payload,action} = obj.props();
 
-    //console.log("DATA RETURNED ", {action,payload});
+    console.log("DATA RETURNED ", {action,payload});
 
     const allowedActionsArr = [
         'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',

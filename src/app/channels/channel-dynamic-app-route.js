@@ -1,7 +1,7 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter} from 'spyne';
-import {trim} from 'ramda';
+import {trim,path} from 'ramda';
 
 export class ChannelDynamicAppRoute extends Channel {
 
@@ -22,6 +22,7 @@ export class ChannelDynamicAppRoute extends Channel {
     });
 
     const actionsArr = [
+      'CHANNEL_ROUTE_CONFIG_UPDATED_EVENT',
       'CHANNEL_ROUTE_DEEPLINK_EVENT',
       'CHANNEL_ROUTE_CHANGE_EVENT'
     ]
@@ -33,12 +34,14 @@ export class ChannelDynamicAppRoute extends Channel {
     })
 
 
+/*
     this.getChannel("CHANNEL_ROUTE", channelRouteUpdateFilter)
         .subscribe(this.onChannelRouteUpdateEvent.bind(this));
+*/
 
 
     this.getChannel("CHANNEL_ROUTE", routeChangeFilter)
-    .subscribe(this.onRouteChangeEvent.bind(this));
+    .subscribe(this.onChannelRouteUpdateEvent.bind(this));
 
 
   }
@@ -50,6 +53,7 @@ export class ChannelDynamicAppRoute extends Channel {
 
   onAddSubnavEvent(e){
     const {payload} = e;
+
     const action = "CHANNEL_DYNAMIC_APP_ROUTE_ADD_SUBNAV_EVENT";
     this.sendChannelPayload(action, payload);
 
@@ -58,8 +62,11 @@ export class ChannelDynamicAppRoute extends Channel {
 
   onChannelRouteUpdateEvent(e){
     const {payload} = e;
+    const routeConfig = path(["window","Spyne","config","channels","ROUTE"], window);
+
+    console.log("PAYLOAD IS ",{routeConfig,e});
     const action = "CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT";
-    this.sendChannelPayload(action, payload);
+    this.sendChannelPayload(action, routeConfig);
 
   }
 

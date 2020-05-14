@@ -1,4 +1,6 @@
 import {ViewStream} from 'spyne';
+import {DynamicAppTraits} from 'traits/dynamic-app-traits';
+import {DynamicAppSubnavContent} from 'components/01-dynamic-app/ui/dynamic-app-subnav-content';
 
 export class DynamicAppSubnav extends ViewStream {
 
@@ -10,8 +12,23 @@ export class DynamicAppSubnav extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+      ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onRouteChangeEvent'],
+
+    ];
   }
+
+  onRouteChangeEvent(e){
+
+    const {subNavDataArr, pageHasChanged} = DynamicAppTraits.dynApp$CheckToAddSubnav(e);
+
+    console.log("DYN ROUTE CHANGE ",{subNavDataArr, pageHasChanged,e});
+    if (subNavDataArr.length>0){
+      this.appendView(new DynamicAppSubnavContent({data:subNavDataArr}))
+    }
+
+  }
+
 
   broadcastEvents() {
     // return nexted array(s)

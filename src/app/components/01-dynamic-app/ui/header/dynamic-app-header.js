@@ -21,17 +21,22 @@ export class DynamicAppHeader extends ViewStream {
   }
 
   onChannelUI(e){
-    const {action,routeData} = e.props();
+    const {action,routeData, pageId} = e.props();
     console.log("CHANNEL _UI IS ",{action,routeData});
   }
 
   onRouteChangeEvent(e){
-    const {isDeepLink} = e.props();
-    //console.log("ROUTE CHANGEO ",e);
+    const {isDeepLink, routeData} = e.props();
+    const {pageId} = routeData;
+
     if (isDeepLink===true) {
       const routes = this.dynApp$GetCurrentRouteJson();
       this.appendView(new DynamicAppHeaderContentView({routes}), 'header');
     }
+
+    const activeSel = `nav > [data-page-id='${pageId}']`;
+    this.props.el$('nav > a').setActiveItem('selected', activeSel);
+
   }
 
 

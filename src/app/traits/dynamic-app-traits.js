@@ -7,8 +7,12 @@ import {
   omit,
   path,
   prop,
+  propEq,
+  tap,
   toPairs,
   fromPairs,
+    length,
+    lte,
   values,
   keys, add, clone,
 } from 'ramda';
@@ -19,6 +23,53 @@ export class DynamicAppTraits extends SpyneTrait {
     let traitPrefix = 'dynApp$';
     super(context, traitPrefix);
 
+  }
+
+
+  static dynApp$CheckToAddSubnav(e){
+    const {routeData, pathsChanged} = e.props();
+    const {pageId} = routeData;
+    const pageHasChanged = pathsChanged.indexOf('pageId')>=0;
+    const subNavDataArr = [];
+
+
+
+    const getSubNavRouteObj = ()=>{
+      const {routes} = clone(window.Spyne.config.channels.ROUTE);
+      const routeObj = compose(path(['routePath', pageId, 'routePath']))(routes);
+      const {routeName} = routeObj;
+      const routeProps = omit(['routeName'], routeObj)
+      return {routeName, routeProps}
+
+    }
+    let {routeName, routeProps} = getSubNavRouteObj();
+    let addSubNav = compose(lte(2), length, keys)(routeProps);
+    if (pageHasChanged === false || addSubNav === false){
+      return {subNavDataArr, pageHasChanged};
+    }
+
+
+    const channel = "ROUTE";
+    const mainKey = routeName;
+    const eventPreventDefault="true";
+    const forEachSubNavProp = (val, key)=>{
+      const mainValue = key;
+      const data = {channel, eventPreventDefault};
+      data[mainKey]=mainValue;
+      data['href'] = val === '^$' ? "/" : `/${mainValue}`;
+      if (val === '^$'){
+        data[`${mainKey}Value`]="";
+      }
+      data['text']=String(mainValue).toUpperCase();
+      // data.mainKey = iter === 0 ? ""
+      subNavDataArr.push(data);
+    }
+
+     forEachObjIndexed(forEachSubNavProp, routeProps);
+
+    console.log("NEW ROUTE OBJ ",{subNavDataArr,addSubNav,pageHasChanged, routeName, routeProps})
+
+    return {subNavDataArr, pageHasChanged};
   }
 
 

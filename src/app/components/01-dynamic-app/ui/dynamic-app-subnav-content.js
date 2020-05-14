@@ -1,8 +1,9 @@
-import {ViewStream} from 'spyne';
+import {DomEl, ViewStream} from 'spyne';
 
 export class DynamicAppSubnavContent extends ViewStream {
 
   constructor(props = {}) {
+    props.tagName='nav';
     props.class='dynamic-app-subnav-content';
     super(props);
 
@@ -11,7 +12,6 @@ export class DynamicAppSubnavContent extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-        ['CHANNEL_ROUTE_DEEPLINK_EVENT', 'onDeepLink']
     ];
   }
 
@@ -24,9 +24,29 @@ export class DynamicAppSubnavContent extends ViewStream {
     return [];
   }
 
+  addAnchors(){
+    const addAnchor=(d)=>{
+      const anchor = new DomEl({
+        tagName: 'a',
+        dataset: d,
+        data: d.text,
+        href: d.href
+
+      })
+
+      this.props.el.appendChild(anchor.render());
+
+    }
+
+    this.props.data.forEach(addAnchor);
+
+
+  }
+
   onRendered() {
-    this.addChannel("CHANNEL_ROUTE");
-    this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
+    this.addAnchors();
+    //this.addChannel("CHANNEL_ROUTE");
+    //this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
   }
 
 }

@@ -1,4 +1,4 @@
-import {ViewStream, DomEl} from 'spyne';
+import {ViewStream, DomEl, ChannelPayloadFilter} from 'spyne';
 import {prop,path,map,head,values,toPairs,toPairsIn, flatten,fromPairs, omit,compose,is, mapAccum, forEachObjIndexed} from 'ramda';
 import {DynamicAppTraits} from 'traits/dynamic-app-traits';
 
@@ -14,15 +14,22 @@ export class DynamicAppHeaderContentView extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
+    const curentUpdateConfigNum = this.props.updateConfigNum;
+    const updatePayloadFilter = new ChannelPayloadFilter({
+      propFilters: {
+        updateConfigNum: (val)=>val!==curentUpdateConfigNum
+      }
+    })
+
     return [
-        ['CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT', 'onDisposeViewStream']
+        ['CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT', 'onDisposeViewStream', updatePayloadFilter]
     ];
   }
 
   onDisposeViewStream(e){
     console.log("BEFORE DISPOSE ", {e}, this.props.data);
 
-   // this.disposeViewStream();
+    this.disposeViewStream();
   }
 
   broadcastEvents() {

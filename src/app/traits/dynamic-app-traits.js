@@ -10,7 +10,7 @@ import {
   toPairs,
   fromPairs,
   values,
-  keys, add,
+  keys, add, clone,
 } from 'ramda';
 
 export class DynamicAppTraits extends SpyneTrait {
@@ -21,6 +21,12 @@ export class DynamicAppTraits extends SpyneTrait {
 
   }
 
+
+
+  static dynApp$GetCurrentRouteJson(){
+    return compose(clone, path(['Spyne','config', 'channels', 'ROUTE', 'routes']))(window);
+
+  }
 
   static dynApp$FormatRouteConfigForDom(route){
     //console.log("ROUTE DATA IS ",route);

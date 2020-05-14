@@ -2,7 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {RouteCreatorBarItemView} from 'components/route-creator/route-creator-bar-item-view';
 import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
 import {RouteCreatorRouteNameView} from 'components/route-creator/route-creator-route-name-view';
-import {omit,path, filter,last,either,defaultTo, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
+import {omit,path,clone, filter,last,either,defaultTo, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
 import {gsap} from "gsap/all";
 
 export class RouteCreatorTraits extends SpyneTrait {
@@ -84,7 +84,7 @@ export class RouteCreatorTraits extends SpyneTrait {
 
 
   static routeCreator$GetRouteDataFromConfig(){
-    const routes = path(['Spyne','config', 'channels', 'ROUTE', 'routes'], window);
+    const routes = compose(clone, path(['Spyne','config', 'channels', 'ROUTE', 'routes']))(window);
 
     return RouteCreatorTraits.routeCreator$SetLastItemInObj({routes});
   }

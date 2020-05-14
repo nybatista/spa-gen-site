@@ -36,6 +36,7 @@ export class RouteCreateBarHolder extends ViewStream {
         ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onChannelLifecycle'],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
         'onRouteBarClickedEvent',internalUIEventPayloadFilter],
+      ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetDefaultJson'],
       ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onItemAdded',itemRenderedPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT', 'onItemRemoved',itemRenderedPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT', 'onDragStartEvent',checkVsidPayloadFilter],
@@ -43,6 +44,13 @@ export class RouteCreateBarHolder extends ViewStream {
       ['CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT', 'onDragEndEvent',checkVsidPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onAllItemsRenderedEvent']
     ];
+  }
+
+
+  onResetDefaultJson(e){
+    console.log("RESET DEFAULT JSON -- REMOVE BAR HOLDERS ",e);
+    this.disposeViewStream();
+
   }
 
 

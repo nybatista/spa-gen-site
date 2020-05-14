@@ -22,10 +22,20 @@ export class RouteCreatorMainView extends ViewStream {
 /*
       ["CHANNEL_ROUTEGEN_JSON_DATA_EVENT", 'onRouteGenData'],
 */
+
+       ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetDefaultJson'],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'routeAnim$InitBarItemsAnimation'],
       ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onItemAdded'],
       ['CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT', 'onItemAdded']
     ];
+  }
+
+  onResetDefaultJson(e){
+    console.log("RESET DEFAULT JSON -- RETRIEVE DATA AND RELOAD BARS ",e);
+
+    this.setTimeout(this.onRouteGenData.bind(this), 500);
+   //onRouteGenData
+
   }
 
   onItemAdded(e){
@@ -72,8 +82,7 @@ export class RouteCreatorMainView extends ViewStream {
 
   broadcastEvents() {
     return [
-        ['.btn.btn-blue.route-bar-btn', 'click'],
-        ['.btn.generate-route', 'click']
+        ['.btn.btn-blue.main-route-btn', 'click'],
     ];
   }
 

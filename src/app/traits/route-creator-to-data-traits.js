@@ -117,10 +117,18 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
 
   }
 
+  static routeCreatorToData$GetDefaultRouteJson(){
+    const defaults =  LocalStorageTraits.localStorage$GetStoreObj('defaults');
+    const {routes} = defaults;
+    return {routes};
+  }
 
-  static routeCreatorToData$GenerateJSON(){
 
-    const json = this.routeCreatorToData$DomToRouteJson();
+  static routeCreatorToData$GenerateJSON(resetToDefault=false){
+
+    const jsonFn = resetToDefault === true ? this.routeCreatorToData$GetDefaultRouteJson : this.routeCreatorToData$DomToRouteJson;
+
+    const json = jsonFn();
 
     console.log("THE JSON IS ",json);
     hljs.registerLanguage('javascript', javascript);

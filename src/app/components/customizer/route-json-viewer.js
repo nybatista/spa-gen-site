@@ -26,11 +26,21 @@ export class RouteJsonViewer extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-        ["CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT", 'onGenerateJson'],
-        ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onStartJson']
+      ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetDefaultJson'],
+      ["CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT", 'onGenerateJson'],
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onStartJson']
 
     ];
   }
+
+  onResetDefaultJson(e){
+    const routes = this.routeCreatorToData$GenerateJSON(true);
+    this.updateRouteChannel(routes);
+
+    console.log("RESET DEFAULT JSON -- REMOVE BAR HOLDERS ",e);
+
+  }
+
 
   onStartJson(e){
     const delay = ()=> this.routeCreatorToData$GenerateJSON();

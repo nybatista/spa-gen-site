@@ -11,7 +11,22 @@ export class DynamicAppPageContainer extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+      ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onRouteChangeEvent'],
+
+    ];
+  }
+
+  onRouteChangeEvent(e){
+    const {pathsChanged, routeData} = e.props();
+
+    if (pathsChanged.indexOf('pageId')>=0){
+      this.appendView(new DynamicAppPageView({data:routeData}));
+
+    }
+
+    console.log("ROUTE CHANGE EVENT FROM PAGE CONTAINER ",{e});
+
   }
 
   broadcastEvents() {
@@ -20,7 +35,7 @@ export class DynamicAppPageContainer extends ViewStream {
   }
 
   onRendered() {
-    this.appendView(new DynamicAppPageView());
+    this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
   }
 
 }

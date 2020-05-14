@@ -52,7 +52,7 @@ export class ChannelRouteCreator extends Channel {
   onUIEvent(e){
 
     const {type, payload, action} = e.props();
-    console.log("UI ROUTE BAR EVENT START ", {type,payload,action});
+    //console.log("UI ROUTE BAR EVENT START ", {type,payload,action});
 
     const getActionBasedOnType = ()=>{
       const actionHash = {
@@ -73,14 +73,14 @@ export class ChannelRouteCreator extends Channel {
       }
 
       const fn = fnHash[type];
-      console.log("FN AND HASH TYPE ",{type,fn})
+      //console.log("FN AND HASH TYPE ",{type,fn})
       return fn();
     }
 
     const routeAction = getActionBasedOnType()
     const routePayload = getPayloadBasedOnType();
 
-    console.log("UI ROUTE BAR EVENT ", {type,payload,action,routeAction, routePayload});
+    //console.log("UI ROUTE BAR EVENT ", {type,payload,action,routeAction, routePayload});
     this.sendChannelPayload(routeAction, routePayload);
 
   }
@@ -138,8 +138,6 @@ export class ChannelRouteCreator extends Channel {
 
   onViewStreamInfo(obj) {
     let {data,payload,action} = obj.props();
-
-    console.log("DATA RETURNED ", {action,payload});
 
     const allowedActionsArr = [
         'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',

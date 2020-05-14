@@ -77,14 +77,9 @@ export class DynamicAppTraits extends SpyneTrait {
 
     }
 
-
-
-
     let propObj = omit(['routeName'], routePath);
 
     forEachObjIndexed(mapRouteProps, propObj);
-
-    console.log("DATA IS ",{accum, routeName, routePath})
     return accum;
 
 

@@ -27,7 +27,7 @@ export class DynamicAppHeaderContentView extends ViewStream {
   }
 
   onDisposeViewStream(e){
-    console.log("BEFORE DISPOSE ", {e}, this.props.data);
+    //console.log("BEFORE DISPOSE ", {e}, this.props.data);
 
     this.disposeViewStream();
   }

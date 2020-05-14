@@ -21,7 +21,7 @@ export class CustomizeContainer extends ViewStream {
 
   onToggleView(e){
     const {eventType,type,value} = e.props();
-    console.log("TOGGLINGE CustomizeContainer VIEW ",{e});
+    //console.log("TOGGLINGE CustomizeContainer VIEW ",{e});
     this.props.el$.toggleClass('reveal');
     this.props.el$.inline='';
   }

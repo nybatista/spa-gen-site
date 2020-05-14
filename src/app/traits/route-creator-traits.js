@@ -91,7 +91,6 @@ export class RouteCreatorTraits extends SpyneTrait {
 
 
   static routeCreator$SetLastItemInObj(obj){
-    console.log("SET LAST ITEM OBJ ",{obj});
 
     const nestedArr = []
     let lastProp;

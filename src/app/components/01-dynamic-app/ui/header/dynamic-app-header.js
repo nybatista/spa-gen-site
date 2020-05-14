@@ -17,7 +17,6 @@ export class DynamicAppHeader extends ViewStream {
     return [
         ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onRouteChangeEvent'],
         ['CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated'],
-        ['CHANNEL_ROUTE_.*_EVENT', 'onChannelUI']
     ];
   }
 
@@ -27,10 +26,12 @@ export class DynamicAppHeader extends ViewStream {
   }
 
   onRouteChangeEvent(e){
-    console.log("ROUTE CHANGEO ",e);
-    const routes = this.dynApp$GetCurrentRouteJson();
-    this.appendView(new DynamicAppHeaderContentView({routes}), 'header');
-
+    const {isDeepLink} = e.props();
+    //console.log("ROUTE CHANGEO ",e);
+    if (isDeepLink===true) {
+      const routes = this.dynApp$GetCurrentRouteJson();
+      this.appendView(new DynamicAppHeaderContentView({routes}), 'header');
+    }
   }
 
 

@@ -17,8 +17,6 @@ export class SpyneConfigTrait extends SpyneTrait {
     const routes = LocalStorageTraits.localStorage$GetStoreObj('routes');
     const {config} = defaults;
     if (routes!==undefined){
-
-      console.log("CONFIG IS HERE ",{config})
       config.channels.ROUTE.routes = routes;
     }
     return config;
@@ -29,7 +27,7 @@ export class SpyneConfigTrait extends SpyneTrait {
   static config$SetRouteToLocalStorage(){
     const routes = compose(clone, path(["window","Spyne","config","channels","ROUTE", 'routes']))(window);
     LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
-    console.log("ON ROUTE CONFIG UPDATED ",{routes})
+    //console.log("ON ROUTE CONFIG UPDATED ",{routes})
 
   }
 

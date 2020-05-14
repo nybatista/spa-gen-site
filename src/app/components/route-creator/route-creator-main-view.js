@@ -31,7 +31,7 @@ export class RouteCreatorMainView extends ViewStream {
   }
 
   onResetDefaultJson(e){
-    console.log("RESET DEFAULT JSON -- RETRIEVE DATA AND RELOAD BARS ",e);
+    //console.log("RESET DEFAULT JSON -- RETRIEVE DATA AND RELOAD BARS ",e);
 
     this.setTimeout(this.onRouteGenData.bind(this), 500);
    //onRouteGenData
@@ -39,9 +39,7 @@ export class RouteCreatorMainView extends ViewStream {
   }
 
   onItemAdded(e){
-
-
-    console.log("E IS ",e);
+    //console.log("E IS ",e);
     const minHeight = 600;
 
     const delayer = ()=> {
@@ -55,8 +53,7 @@ export class RouteCreatorMainView extends ViewStream {
       const newHeightStr = `height:${mainHeight}px;`;
       const mainEl = document.getElementById('customize-container');
       mainEl.style.cssText = newHeightStr
-      console.log("ITEM IS ", {e,newHeight, newHeightStr, elItemIndex, elArr, box, secondToLastEl},
-          this.props.el);
+     // console.log("ITEM IS ", {e,newHeight, newHeightStr, elItemIndex, elArr, box, secondToLastEl}, this.props.el);
 
     }
 
@@ -73,8 +70,6 @@ export class RouteCreatorMainView extends ViewStream {
     const routeData = RouteCreatorTraits.routeCreator$GetRouteDataFromConfig();
     const {routes} = routeData;
     this.props.data = routes;
-
-    console.log("ROUTE DATA IS ",{routeData,routes});
 
     this.createMainBarHolder();
 

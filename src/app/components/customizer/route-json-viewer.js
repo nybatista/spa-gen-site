@@ -37,7 +37,7 @@ export class RouteJsonViewer extends ViewStream {
     const routes = this.routeCreatorToData$GenerateJSON(true);
     this.updateRouteChannel(routes);
 
-    console.log("RESET DEFAULT JSON -- REMOVE BAR HOLDERS ",e);
+   // console.log("RESET DEFAULT JSON -- REMOVE BAR HOLDERS ",e);
 
   }
 

@@ -48,8 +48,6 @@ export class ChannelDynamicAppRoute extends Channel {
     const action = "CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT";
     const {payload} = e;
     this.sendChannelPayload(action, payload);
-
-    console.log("ROUTE CHANGED EVENT ",{action,payload,e});
   }
 
 

@@ -130,7 +130,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
 
     const json = jsonFn();
 
-    console.log("THE JSON IS ",json);
+    //console.log("THE JSON IS ",json);
     hljs.registerLanguage('javascript', javascript);
     hljs.initHighlightingOnLoad();
     const codeEl = this.props.el$('code.json').el;

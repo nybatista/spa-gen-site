@@ -48,7 +48,6 @@ export class RouteCreateBarHolder extends ViewStream {
 
 
   onResetDefaultJson(e){
-    console.log("RESET DEFAULT JSON -- REMOVE BAR HOLDERS ",e);
     this.disposeViewStream();
 
   }
@@ -133,7 +132,7 @@ export class RouteCreateBarHolder extends ViewStream {
 
   }
   onDragEndEvent(){
-    console.log("DRAG END ",this.props.reSortOnDragEnd);
+    //console.log("DRAG END ",this.props.reSortOnDragEnd);
    // this.routeAnim$OnDragEnd();
     if (this.props.reSortOnDragEnd === true) {
       this.routeCreator$ReorderChildElements();
@@ -175,7 +174,6 @@ export class RouteCreateBarHolder extends ViewStream {
     const createBar = (data)=>{
       //data['initYPos'] = this.props.el.offsetHeight;
       data['isLastItem'] = lastItem === data.key;
-      console.log("CREATE BAR ",data.isLastItem,{data});
 
       this.routeCreator$CreateRouteBar(props, data);
       //console.log("create bar ",this.props.vsid,this.props.el.offsetHeight);

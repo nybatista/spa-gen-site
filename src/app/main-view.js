@@ -1,6 +1,7 @@
 import {ViewStream} from 'spyne';
 import {MainContainer} from 'components/containers/main-container';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
+import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 
 export class MainView extends ViewStream {
 
@@ -14,10 +15,15 @@ export class MainView extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-
+        ['CHANNEL_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated'],
         ['CHANNEL_WINDOW_BEFOREUNLOAD_EVENT', 'onBeforeUnload']
 
     ];
+  }
+
+  onRouteConfigUpdated(e){
+    SpyneConfigTrait.config$SetRouteToLocalStorage();
+
   }
 
   onBeforeUnload(e){
@@ -35,6 +41,7 @@ export class MainView extends ViewStream {
   }
 
   onRendered() {
+    this.addChannel('CHANNEL_ROUTE');
     this.appendView(new MainContainer());
     this.addChannel("CHANNEL_WINDOW");
 

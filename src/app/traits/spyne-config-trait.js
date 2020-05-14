@@ -1,5 +1,6 @@
 import {SpyneTrait} from 'spyne';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
+import {compose,clone,path} from 'ramda';
 
 export class SpyneConfigTrait extends SpyneTrait {
 
@@ -13,21 +14,29 @@ export class SpyneConfigTrait extends SpyneTrait {
 
   static config$getConfigFromStorage(){
     const defaults = LocalStorageTraits.localStorage$GetStoreObj('defaults');
-
+    const routes = LocalStorageTraits.localStorage$GetStoreObj('routes');
     const {config} = defaults;
+    if (routes!==undefined){
 
-
-
-
-
+      console.log("CONFIG IS HERE ",{config})
+      config.channels.ROUTE.routes = routes;
+    }
     return config;
 
   }
 
 
+  static config$SetRouteToLocalStorage(){
+    const routes = compose(clone, path(["window","Spyne","config","channels","ROUTE", 'routes']))(window);
+    LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
+    console.log("ON ROUTE CONFIG UPDATED ",{routes})
 
+  }
 
   static config$GetDefaultRoute(){
+    const routes = compose(clone, path(["window","Spyne","config","channels","ROUTE", 'routes']))(window);
+   // LocalStorageTraits.localStorage$SetStoreObj('routes',routes);
+
 
   }
 

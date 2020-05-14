@@ -139,7 +139,6 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
 
     const {routes} = json;
 
-    LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
     return routes;
   }
 

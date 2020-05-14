@@ -1,4 +1,4 @@
-import {DomEl, ViewStream} from 'spyne';
+import {DomEl, ViewStream, ChannelPayloadFilter} from 'spyne';
 
 export class DynamicAppSubnavContent extends ViewStream {
 
@@ -11,8 +11,23 @@ export class DynamicAppSubnavContent extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
+    const currentPageId = this.props.pageId;
+    const updatePayloadFilter = new ChannelPayloadFilter({
+      propFilters: {
+        routeData: (d)=>d.pageId !== currentPageId
+      }
+    })
+
+
     return [
+      ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onDisposeViewStream', updatePayloadFilter]
+
     ];
+  }
+
+
+  onDisposeViewStream(e){
+    this.disposeViewStream();
   }
 
   onDeepLink(e){
@@ -48,7 +63,7 @@ export class DynamicAppSubnavContent extends ViewStream {
   onRendered() {
     this.addAnchors();
     //this.addChannel("CHANNEL_ROUTE");
-    //this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
+    this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
   }
 
 }

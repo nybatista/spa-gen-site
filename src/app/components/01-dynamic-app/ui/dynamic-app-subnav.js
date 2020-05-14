@@ -6,6 +6,7 @@ export class DynamicAppSubnav extends ViewStream {
 
   constructor(props = {}) {
     props.class='dynamic-app-subnav';
+    props.traits = DynamicAppTraits;
     super(props);
 
   }
@@ -19,13 +20,19 @@ export class DynamicAppSubnav extends ViewStream {
   }
 
   onRouteChangeEvent(e){
-
-    const {subNavDataArr, pageHasChanged} = DynamicAppTraits.dynApp$CheckToAddSubnav(e);
+    const {subNavDataArr, pageHasChanged, pageId} = this.dynApp$CheckToAddSubnav(e);
 
     console.log("DYN ROUTE CHANGE ",{subNavDataArr, pageHasChanged,e});
     if (subNavDataArr.length>0){
-      this.appendView(new DynamicAppSubnavContent({data:subNavDataArr}))
+      this.appendView(new DynamicAppSubnavContent({data:subNavDataArr,pageId}))
+      this.dynApp$SelectActiveSubNav(e);
     }
+
+    if (pageHasChanged === false){
+      this.dynApp$SelectActiveSubNav(e);
+    }
+
+
 
   }
 

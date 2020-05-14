@@ -24,6 +24,10 @@ export class MainView extends ViewStream {
   onRouteConfigUpdated(e){
     SpyneConfigTrait.config$SetRouteToLocalStorage();
 
+    const pageId='home';
+    const pageIdValue = '';
+    this.sendInfoToChannel("CHANNEL_ROUTE", {pageId, pageIdValue});
+
   }
 
   onBeforeUnload(e){

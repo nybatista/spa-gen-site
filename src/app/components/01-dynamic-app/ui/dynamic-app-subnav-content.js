@@ -20,9 +20,17 @@ export class DynamicAppSubnavContent extends ViewStream {
 
 
     return [
-      ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onDisposeViewStream', updatePayloadFilter]
+         ['CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT', 'onDisposeViewStream'],
+
+          ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onDisposeViewStream', updatePayloadFilter]
 
     ];
+  }
+
+
+  onRouteConfigUpdated(e){
+    console.log("subnav route config update ",{e},this.props);
+
   }
 
 

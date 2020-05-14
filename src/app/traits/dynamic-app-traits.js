@@ -46,7 +46,7 @@ export class DynamicAppTraits extends SpyneTrait {
     const activeSel = `[data-${snakeProp}='${val}']`
     this.props.el$('nav > a').setActiveItem('selected', activeSel);
 
-    console.log("SUBNAV PROPS ",{activeSel,snakeProp,pathInnermost,routeData,val})
+    //console.log("SUBNAV PROPS ",{activeSel,snakeProp,pathInnermost,routeData,val})
 
 
   }

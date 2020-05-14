@@ -22,7 +22,7 @@ export class DynamicAppSubnav extends ViewStream {
   onRouteChangeEvent(e){
     const {subNavDataArr, pageHasChanged, pageId} = this.dynApp$CheckToAddSubnav(e);
 
-    console.log("DYN ROUTE CHANGE ",{subNavDataArr, pageHasChanged,e});
+    //console.log("DYN ROUTE CHANGE ",{subNavDataArr, pageHasChanged,e});
     if (subNavDataArr.length>0){
       this.appendView(new DynamicAppSubnavContent({data:subNavDataArr,pageId}))
       this.dynApp$SelectActiveSubNav(e);

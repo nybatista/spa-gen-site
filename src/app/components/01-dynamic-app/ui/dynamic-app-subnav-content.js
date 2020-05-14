@@ -21,7 +21,9 @@ export class DynamicAppSubnavContent extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+      ['a', 'click']
+    ];
   }
 
   addAnchors(){

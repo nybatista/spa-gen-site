@@ -1,7 +1,7 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter} from 'spyne';
-import {trim,path} from 'ramda';
+import {trim,path,clone} from 'ramda';
 
 export class ChannelDynamicAppRoute extends Channel {
 
@@ -45,10 +45,13 @@ export class ChannelDynamicAppRoute extends Channel {
   }
 
   onRouteChangeEvent(e){
-    const action = "CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT";
-    const {payload} = e;
+    const {payload} = e.props();
+    const {pathsChanged} = payload;
+    const pageHasChanged = pathsChanged.indexOf("pageId")>=0;
+    const action = pageHasChanged === true ? "CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT" : "CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT"
+    payload[pageHasChanged]=pageHasChanged;
 
-    //console.log("PAYLOAD ROUTE ",e);
+    console.log("PAYLOAD ROUTE ",{payload});
     this.sendChannelPayload(action, payload);
   }
 
@@ -80,6 +83,7 @@ export class ChannelDynamicAppRoute extends Channel {
     return [
       'CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT',
       'CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT',
+      'CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT',
       'CHANNEL_DYNAMIC_APP_ROUTE_ADD_SUBNAV_EVENT'
     ];
   }

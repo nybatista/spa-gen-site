@@ -1,6 +1,6 @@
 import {SpyneTrait} from 'spyne';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
-import {compose,clone,path} from 'ramda';
+import {compose,clone,path,either,not, allPass,isEmpty,isNil} from 'ramda';
 
 export class SpyneConfigTrait extends SpyneTrait {
 
@@ -16,9 +16,10 @@ export class SpyneConfigTrait extends SpyneTrait {
     const defaults = LocalStorageTraits.localStorage$GetStoreObj('defaults');
     const routes = LocalStorageTraits.localStorage$GetStoreObj('routes');
     const {config} = defaults;
-    if (routes!==undefined){
+    const isDefined = compose(not, either(isNil, isEmpty))
+    if (isDefined(routes)===true){
       config.channels.ROUTE.routes = routes;
-    }
+     }
     return config;
 
   }

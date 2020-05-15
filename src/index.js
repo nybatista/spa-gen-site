@@ -61,6 +61,8 @@ const R = require('ramda');
 
 const css = require('./scss/main.scss');
 
+console.log("CONFIG IS ",config);
+
 const spyneApp = new SpyneApp(config);
 
 const initSpyneAppGenerator = ()=> {

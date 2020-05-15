@@ -15,6 +15,8 @@ export class DynamicAppSubnav extends ViewStream {
     // return nexted array(s)
     return [
       ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onRouteChangeEvent'],
+      ['CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT', 'onRouteChangeEvent']
+
 
     ];
   }

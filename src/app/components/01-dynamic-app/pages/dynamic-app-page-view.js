@@ -23,7 +23,6 @@ export class DynamicAppPageView extends ViewStream {
 
     return [
       ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onRouteChangeEvent', pageIdChangeFilter],
-        ['CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT', 'onSubnavChangeEvent']
 
     ];
   }
@@ -47,9 +46,9 @@ export class DynamicAppPageView extends ViewStream {
 
   onRendered() {
     this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
-    if (this.props.isDeepLink===true) {
+    //if (this.props.isDeepLink===true) {
       this.dynPage$CheckToAddSubnavContent();
-    }
+   // }
   }
 
 }

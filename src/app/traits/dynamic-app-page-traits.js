@@ -1,5 +1,6 @@
 import {SpyneTrait} from 'spyne';
 import {path, compose, omit, is, keys,values, merge} from 'ramda';
+import {DynamicAppPageSubnavContainer} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-container';
 import {DynamicAppPageSubnavContent} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-content';
 
 export class DynamicAppPageTraits extends SpyneTrait {
@@ -24,7 +25,7 @@ export class DynamicAppPageTraits extends SpyneTrait {
       const subNavRouteValue =  routeData[subNavRouteKey];
       const data= merge({subNavRouteValue,subNavRouteKey}, routeData);
       console.log("FINAL DATA ",{data});
-      this.appendView(new DynamicAppPageSubnavContent({data}));
+      this.appendView(new DynamicAppPageSubnavContainer({data}));
     }
 
 

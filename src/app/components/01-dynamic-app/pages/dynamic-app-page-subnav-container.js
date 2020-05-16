@@ -7,7 +7,7 @@ export class DynamicAppPageSubnavContainer extends ViewStream {
 
   constructor(props = {}) {
     props.tagName='section';
-    props.class='page-subnav-container';
+    props.class='dynamic-app-page-subnav-container';
     props.traits= DynamicAppPageTraits;
     super(props);
 

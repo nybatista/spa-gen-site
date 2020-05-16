@@ -1,6 +1,6 @@
 #dynamic-app-page-container {
 
-  padding: 76px 2em 0 2rem;
+  padding: 100px 2em 0 2rem;
 
   width:100%;
   height: 100%;
@@ -10,8 +10,24 @@
   .dynamic-app-page {
     position: relative;
     width: 100%;
-    height: 100%;
-    padding: 2rem 0;
+    //height: 100%;
+    //padding: 2rem 0;
+    h1{
+      position: absolute;
+      top: 1rem;
+    }
+
+
+    margin: 1rem 0;
+    height: calc(100% - 116px);
+    padding: 2rem;
+    background: rgba(0,0,0,.05);
+    color: blueviolet;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
 
 
   }

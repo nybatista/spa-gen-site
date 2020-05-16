@@ -38,6 +38,11 @@
     background: #dedede;
     color:#666;
 
+    &.disabled{
+      pointer-events: none;
+      user-select: none;
+    }
+
 
   }
 

@@ -1,3 +1,5 @@
+
+
 li.route-creator-bar-item {
 
   position: relative;
@@ -9,6 +11,14 @@ li.route-creator-bar-item {
   &.anim-mode{
     position: absolute;
   }
+
+  &.disabled > section i, &.disabled > section input {
+    pointer-events: none;
+    user-select: none;
+    opacity: .8;
+  }
+
+
   &.route-level-0{
    // min-width:380px;
   }

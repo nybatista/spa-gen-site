@@ -1,7 +1,12 @@
 import {SpyneTrait} from 'spyne';
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
-import {compose, fromPairs,map, toPairs,merge,mergeAll} from 'ramda';
+import {compose, fromPairs,map, toPairs,merge,mergeLeft,mergeRight,mergeAll,
+  mergeDeepRight,
+    mergeDeepWith,
+    mergeWithKey,
+    mapObj,
+  tap,is,append,concat,prepend,assoc} from 'ramda';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 
 export class RouteCreatorToDataTraits extends SpyneTrait {
@@ -68,6 +73,11 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
   static routeCreatorToData$DomToRouteJson(mainSel='route-creator-container'){
     let iter = 0;
     const addStringOrObjForEachListItem = (liEl)=>{
+
+      if (is(Array, liEl)){
+        iter++;
+        return liEl;
+      }
       const inputVal = RouteCreatorToDataTraits.routeCreatorToData$GetInputVal(liEl);
       let arr = [inputVal, inputVal];
       const listItemsArr = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(liEl.dataset.vsid);
@@ -84,15 +94,24 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
       return arr;
     }
 
+    const mapAgain = (arr)=> {
+      console.log("ARR IS ", arr);
+      const obj = {};
+      obj[arr[0]]=arr[1];
+      return obj;
+    }
+
+
     const createObjFromUl = (vsid)=>{
       const listItemsArr = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(vsid)
       const routeName = RouteCreatorToDataTraits.routeCreatorToData$GetRouteName(vsid);
-      const routePath = compose(merge({routeName}),fromPairs,map(addStringOrObjForEachListItem))(listItemsArr);
+      const routePath = compose(merge({routeName}),fromPairs, append(['404', '.*']),map(addStringOrObjForEachListItem))(listItemsArr);
       return {routePath};
     };
 
     const mainEl = document.getElementById(mainSel);
     const routes =  createObjFromUl(mainEl.dataset.vsid);
+   // routes.routePath['404']='.*';
 
     return {routes};
 

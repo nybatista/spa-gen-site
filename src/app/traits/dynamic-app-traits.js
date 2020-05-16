@@ -64,7 +64,7 @@ export class DynamicAppTraits extends SpyneTrait {
       const {routes} = clone(window.Spyne.config.channels.ROUTE);
       const routeObj = compose(path(['routePath', pageId, 'routePath']))(routes);
       const routeName = prop('routeName', routeObj);
-      const routeProps = omit(['routeName'], routeObj)
+      const routeProps = omit(['routeName','404'], routeObj)
       return {routeName, routeProps}
 
     }
@@ -121,7 +121,7 @@ export class DynamicAppTraits extends SpyneTrait {
     }
 
     const getFirstNavItem = (obj)=>{
-      return compose(head, toPairs, omit(['routeName']), prop('routePath'))(obj);
+      return compose(head, toPairs, omit(['routeName', '404']), prop('routePath'))(obj);
     }
 
     const checkForSubSection = (data, val, mainKey)=>{
@@ -154,7 +154,7 @@ export class DynamicAppTraits extends SpyneTrait {
 
     }
 
-    let propObj = omit(['routeName'], routePath);
+    let propObj = omit(['routeName', '404'], routePath);
 
     forEachObjIndexed(mapRouteProps, propObj);
     return accum;

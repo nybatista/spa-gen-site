@@ -35,15 +35,18 @@ const defaultConfig = {
             "routeName": "workId",
             "acme": "^$",
             "widgets": "widgets",
-            "globex": "globex"
+            "globex": "globex",
+            "404" : ".*"
           }
         },
         "about": {
           "routePath": {
             "routeName": "aboutId",
-            "contact": "^$"
+            "contact": "^$",
+            "404" : ".*"
           }
-        }
+        },
+        "404" : ".*"
       }
     }
   }

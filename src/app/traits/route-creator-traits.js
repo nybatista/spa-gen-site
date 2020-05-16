@@ -78,7 +78,7 @@ export class RouteCreatorTraits extends SpyneTrait {
       return data;
     }
 
-    return compose(mapObjIndexed(conformBarItemsData),omit(['routeName']))(this.props.data.routePath);
+    return compose(mapObjIndexed(conformBarItemsData),omit(['routeName', '404']))(this.props.data.routePath);
 
   }
 
@@ -96,7 +96,7 @@ export class RouteCreatorTraits extends SpyneTrait {
     let lastProp;
     const pluckPathVal = (val, key)=>{
       // OMIT routeName
-      const props = omit(['routeName'], val);
+      const props = omit(['routeName', '404'], val);
       // CHECK IF THERE ARE ANY NESTED OBJECTS
       const getLastObjKey = compose(last,keys, filter(hasPath(['routePath', 'routeName'])))(props);
       if (getLastObjKey!==undefined){

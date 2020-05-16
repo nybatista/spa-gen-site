@@ -67,7 +67,7 @@ export class RouteJsonViewer extends ViewStream {
       "routes": {
         "routePath": {
           "routeName": "pageId",
-          "home": "home",
+          "home1": "home",
           "work": {
             "routePath": {
               "routeName": "workId",
@@ -81,7 +81,8 @@ export class RouteJsonViewer extends ViewStream {
               "routeName": "aboutId",
               "contact": "contact"
             }
-          }
+          },
+          "404" : ".*"
         }
       }
     }

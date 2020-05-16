@@ -1,4 +1,5 @@
 import {DomEl, ViewStream, ChannelPayloadFilter} from 'spyne';
+import {omit} from 'ramda';
 
 export class DynamicAppSubnavContent extends ViewStream {
 
@@ -11,11 +12,11 @@ export class DynamicAppSubnavContent extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    const currentPageId = this.props.pageId;
+    //const currentPageId = this.props.pageId;
     const updatePayloadFilter = new ChannelPayloadFilter({
       propFilters: {
-        routeData: (d)=>d.pageId !== currentPageId
-      }
+        routeData: (d)=>d.pageId !==  this.props.pageId
+      }, label:'checkMenu'
     })
 
 

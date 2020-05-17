@@ -1,7 +1,9 @@
 import {SpyneTrait} from 'spyne';
-import {path, compose, omit, is, keys,values, merge} from 'ramda';
+import {path, compose, omit, defaultTo, is, keys,values, merge} from 'ramda';
 import {DynamicAppPageSubnavContainer} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-container';
 import {DynamicAppPageSubnavContent} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-content';
+import {PageContentHomeView} from 'components/01-dynamic-app/pages/page-types/page-content-home-view';
+import {PageContentDefaultView} from 'components/01-dynamic-app/pages/page-types/page-content-default-view';
 
 export class DynamicAppPageTraits extends SpyneTrait {
 
@@ -10,6 +12,25 @@ export class DynamicAppPageTraits extends SpyneTrait {
     super(context, traitPrefix);
 
   }
+
+
+  static dynPage$GetPageClassById(pageId){
+    const defaultToClass = defaultTo(PageContentDefaultView);
+
+    const classHashObj = {
+      home: PageContentHomeView
+     }
+     return defaultToClass(classHashObj[pageId]);
+  }
+
+  static dynPage$AddPageContent(pageId){
+
+    const PageContentClass = this.dynPage$GetPageClassById(pageId);
+    this.appendView(new PageContentClass({pageId, pageData: this.props.data}));
+
+    console.log("PAGE ID IS ",{pageId,PageContentClass});
+  }
+
 
  static dynPage$CheckToAddSubnavContent(routeData=this.props.data){
     const getJsonByPageId = (pageId)=>{

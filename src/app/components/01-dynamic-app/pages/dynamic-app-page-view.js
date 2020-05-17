@@ -46,9 +46,9 @@ export class DynamicAppPageView extends ViewStream {
 
   onRendered() {
     this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
-    //if (this.props.isDeepLink===true) {
+      this.dynPage$AddPageContent(this.props.data.pageId);
       this.dynPage$CheckToAddSubnavContent();
-   // }
+
   }
 
 }

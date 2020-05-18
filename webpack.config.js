@@ -5,6 +5,7 @@
   const MiniCssExtractPlugin = require('mini-css-extract-plugin');
   const {CleanWebpackPlugin} = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const fs = require('fs');
 
   const miniCssPlugin = new MiniCssExtractPlugin({
     filename: 'assets/css/main.css'
@@ -65,6 +66,57 @@
     src: path.join(__dirname, 'src')
   };
 
+
+  const writeHtaccessToDist = ()=>{
+
+    const onComplete = (err, data)=>{
+      if(err){
+        return console.log("ERROR IN HTACCESS SAVE ",{err})
+      }else {
+        console.log("htaccess copied");
+      }
+    }
+
+    const htaccessText = `# html5 pushstate (history) support:
+<ifModule mod_rewrite.c>
+    RewriteEngine On
+
+    # the final correct redirect
+    RewriteEngine on
+    RewriteCond %{HTTP:X-Forwarded-Proto} ^http$
+    RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !index
+    RewriteRule (.*) index.html [L,QSA]
+</ifModule>
+
+
+<IfModule mod_headers.c>
+   Header add Access-Control-Allow-Origin: *
+</IfModule>`;
+
+    const fileName = `${PATHS.dist}/.htaccess`;
+    fs.writeFile(fileName, htaccessText, onComplete);
+  }
+
+  const ProgressHookPlugin = new webpack.ProgressPlugin(function(percentage, msg) {
+    if (percentage===0){
+      // pre-hook code (before webpack compiles )
+    } else if (percentage===1){
+      console.log("PROCESS COMPLETED ");
+      writeHtaccessToDist();
+      // post-hook code (after webpack compiles )
+     // copyDir('./src/static/fonts/', './dist/'+ assetsFolder+'/static/fonts/');
+    //  copyDir('./src/static/imgs/', './dist/'+ assetsFolder+'/static/imgs/');
+
+    }
+  });
+
+
+
   const config = {
     mode: envVals.mode,
 
@@ -86,7 +138,7 @@
       port: 8090
     },
 
-    plugins: [miniCssPlugin, cleanPlugin, htmlPlugin],
+    plugins: [miniCssPlugin, cleanPlugin, htmlPlugin,ProgressHookPlugin],
 
     optimization: {
       splitChunks: {

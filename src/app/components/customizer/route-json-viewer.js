@@ -1,6 +1,6 @@
 import {ViewStream} from 'spyne';
-import hljs from 'highlight.js';
-import javascript from 'highlight.js/lib/languages/javascript';
+//import hljs from 'highlight.js/lib/core';
+//import javascript from 'highlight.js/lib/languages/javascript';
 import {RouteCreatorToDataTraits} from 'traits/route-creator-to-data-traits';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 
@@ -10,8 +10,8 @@ export class RouteJsonViewer extends ViewStream {
     props.tagName = 'article';
     props.id = 'route-json-viewer';
     const code =  RouteJsonViewer.getTestRouteObj();
-    hljs.registerLanguage('javascript', javascript);
-    hljs.initHighlightingOnLoad()
+   // hljs.registerLanguage('javascript', javascript);
+   // hljs.initHighlightingOnLoad()
     const html = code;// Prism.highlight(code, Prism.languages.javascript, 'javascript');
     props.data = {code,html};
     props.traits=[RouteCreatorToDataTraits];

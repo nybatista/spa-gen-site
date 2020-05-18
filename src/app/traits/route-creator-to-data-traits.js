@@ -1,6 +1,8 @@
 import {SpyneTrait} from 'spyne';
-import hljs from 'highlight.js';
-import javascript from 'highlight.js/lib/languages/javascript';
+import hljs from 'highlight.js/lib/core';
+//import javascript from 'highlight.js/lib/languages/javascript';
+import json from 'highlight.js/lib/languages/json';
+
 import {compose, fromPairs,map, toPairs,merge,mergeLeft,mergeRight,mergeAll,
   mergeDeepRight,
     mergeDeepWith,
@@ -147,16 +149,17 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
 
     const jsonFn = resetToDefault === true ? this.routeCreatorToData$GetDefaultRouteJson : this.routeCreatorToData$DomToRouteJson;
 
-    const json = jsonFn();
+    const jsonObj = jsonFn();
 
     //console.log("THE JSON IS ",json);
-    hljs.registerLanguage('javascript', javascript);
+    //hljs.registerLanguage('javascript', javascript);
+    hljs.registerLanguage('json', json);
     hljs.initHighlightingOnLoad();
     const codeEl = this.props.el$('code.json').el;
-    codeEl.innerHTML = JSON.stringify(json, null, 4);
+    codeEl.innerHTML = JSON.stringify(jsonObj, null, 4);
     hljs.highlightBlock(codeEl);
 
-    const {routes} = json;
+    const {routes} = jsonObj;
 
     return routes;
   }

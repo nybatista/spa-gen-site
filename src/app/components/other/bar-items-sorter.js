@@ -208,13 +208,18 @@ export class BarItemsSorter{
       // IF SUB ITEMS EXIST, LOOP THOSE ITEMS, ELSE RETURN LAST TERMINATED ITEM
       if (subUlItems.length>0){
         Array.from(subUlItems).forEach(getTheHeight)
-        paddingNum=10;//paddingNum*2;
+        paddingNum=0;//paddingNum*2;
 
       } else{
         const itemHeight = pullHeightFromBox(listItem);
         height += listItem.offsetHeight+paddingNum;
-        paddingNum=0;//paddingNum-paddingNum;
+        paddingNum=10;//paddingNum-paddingNum;
       }
+
+      if (subUlItems.length===1){
+        paddingNum=10;
+      }
+
     }
       // INIT RECURSIVE FUNCTION
       if (hasMainSubNav===true) {

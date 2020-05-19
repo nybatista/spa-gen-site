@@ -14,7 +14,10 @@
 }
 .route-creator-route-name{
   position: absolute;
-  top: 38px;
+  //top: 38px;
+  top:15px;
+  left:24px;
+
   min-width:80px;
   min-height:20px;
   opacity: 0;
@@ -40,7 +43,8 @@
     //background: #dedede;
     //color:#666;
 
-    background: $clr-route-creator-panel-input;
+    //background: $clr-route-creator-panel-input;
+    background: rgba(0,0,0,.15);
     color: $clr-route-creator-panel-input-text;
     border:none;
 

@@ -142,6 +142,12 @@ li.route-creator-bar-item {
         background: $clr-route-creator-panel-input;
         color: $clr-route-creator-panel-input-text;
         border:none;
+        background: rgba(0,0,0,.3);
+
+        &::placeholder{
+          color:#dedede;
+
+        }
 
         // max-width:50px;
         // background: orange;

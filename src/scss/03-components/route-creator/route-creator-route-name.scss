@@ -6,7 +6,8 @@
     left:15px;
     //background: #ccc;
     input{
-      background: #ccc;
+      //background: #ccc;
+
     }
   }
 
@@ -20,6 +21,7 @@
   pointer-events: none;
   transition-delay: .2s;
   transition: opacity .3s ease-in-out;
+  z-index: $z-index-ui;
 
   &.show{
     opacity: 1;
@@ -35,8 +37,13 @@
     width:100%;
     border:0;
     top: 7px;
-    background: #dedede;
-    color:#666;
+    //background: #dedede;
+    //color:#666;
+
+    background: $clr-route-creator-panel-input;
+    color: $clr-route-creator-panel-input-text;
+    border:none;
+
 
     &.disabled{
       pointer-events: none;

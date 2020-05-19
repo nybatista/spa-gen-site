@@ -15,6 +15,8 @@ export class RouteBarDragTraits extends SpyneTrait {
 
   }
 
+
+
   static routeBarDrag$OnPress(e){
     const dragEvent = 'dragStart';
     const {parentVsid, vsid} = this.props;

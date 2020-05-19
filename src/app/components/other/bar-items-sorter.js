@@ -193,7 +193,7 @@ export class BarItemsSorter{
   }
 
 
-  static getBarItemHeight(liEl){
+  static getBarItemHeight(liEl, paddingNum=5){
     const pullHeightFromBox = el=>el.getBoundingClientRect().height;
     let height = pullHeightFromBox(liEl.querySelector('section.input-bar'))
     const subUlItemsSel = 'ul.route-bar-items-list li';
@@ -208,9 +208,12 @@ export class BarItemsSorter{
       // IF SUB ITEMS EXIST, LOOP THOSE ITEMS, ELSE RETURN LAST TERMINATED ITEM
       if (subUlItems.length>0){
         Array.from(subUlItems).forEach(getTheHeight)
+        paddingNum=10;//paddingNum*2;
+
       } else{
         const itemHeight = pullHeightFromBox(listItem);
-        height += listItem.offsetHeight;
+        height += listItem.offsetHeight+paddingNum;
+        paddingNum=0;//paddingNum-paddingNum;
       }
     }
       // INIT RECURSIVE FUNCTION
@@ -219,7 +222,7 @@ export class BarItemsSorter{
       }
 
       //console.log("HEIGHT IS ",{height});
-      return height;
+      return height+paddingNum;
 
   }
 

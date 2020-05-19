@@ -17,7 +17,11 @@
     height: 100%;
     min-height: 450px;
     min-width: 600px;
-    background: #dedede;
+    //background: #dedede;
+    //background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.4);
+    padding: 10px;
+    border-radius: 10px;
 
 
   }
@@ -34,7 +38,8 @@
    &.main{
     // min-height: 300px;
      height: 100%;
-     left:140px;
+     margin-left:104px;
+     //left:140px;
    }
 
     ul.node-container {

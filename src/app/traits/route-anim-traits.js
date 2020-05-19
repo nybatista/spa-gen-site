@@ -2,6 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {BarItemsSorter} from 'components/other/bar-items-sorter';
 import {pluck} from 'ramda';
 import {gsap} from 'gsap/all';
+import {compose,head,filter,propEq} from 'ramda';
 
 export class RouteAnimTraits extends SpyneTrait {
 
@@ -10,6 +11,12 @@ export class RouteAnimTraits extends SpyneTrait {
     super(context, traitPrefix);
 
   }
+
+
+  static routeAnim$GetSwapData(data, vsid){
+    return compose(head,filter(propEq('id', vsid)))(data);
+  }
+
 
   static routeAnim$GetBarItems(props=this.props, ulId){
    const sel = ulId === undefined ? '#route-creator-container li' : `li.group-${ulId}`;

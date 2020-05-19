@@ -81,8 +81,9 @@ export class DynamicAppTraits extends SpyneTrait {
     const forEachSubNavProp = (val, key)=>{
       const mainValue = key;
       const data = {channel, eventPreventDefault};
+      data['pageId']=pageId;
       data[mainKey]=mainValue;
-      data['href'] = val === '^$' ? "/" : `/${mainValue}`;
+      data['href'] = val === '^$' ? `/${pageId}` : `/${pageId}/${mainValue}`;
       if (val === '^$'){
         data[`${mainKey}Value`]="";
       }

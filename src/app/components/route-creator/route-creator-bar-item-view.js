@@ -6,6 +6,8 @@ import {gsap} from 'gsap/all';
 import {FiltersTrait} from 'traits/filters-trait';
 import {compose,head,filter,propEq} from 'ramda';
 
+import {RouteCreatorBarItemBackground} from 'components/route-creator/route-creator-bar-item-background';
+
 export class RouteCreatorBarItemView extends ViewStream {
 
   constructor(props = {}) {
@@ -43,12 +45,14 @@ export class RouteCreatorBarItemView extends ViewStream {
     const {vsid} = this.props;
     const animateFn = animEvent === 'animateIn' ? this.routeAnim$ItemAnimateIn : this.routeAnim$ItemAnimateToYVal;
 
-    const animateData = compose(head,filter(propEq('id', vsid)))(swapItems);
+  //  const animateData = compose(head,filter(propEq('id', vsid)))(swapItems);
+
+    const animateData = this.routeAnim$GetSwapData(swapItems, vsid);
     const {yGsap} = animateData;
     this.props.yGsap = yGsap;
     animateFn(yGsap);
    // this.routeAnim$ItemAnimateToYVal(yGsap);
-    //console.log("ANIMATE ITEM IS ",{yGsap,animateData,animEvent,swapItems,e});
+   // console.log("ANIMATE ITEM IS ",{yGsap,animateData,animEvent,swapItems,e});
 
   }
 
@@ -114,6 +118,11 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   }
 
+  addRouteItemBackground(){
+    const parentVsid = this.props.vsid;
+    this.prependView(new RouteCreatorBarItemBackground({parentVsid}));
+  }
+
   onRendered() {
     this.addChannel('CHANNEL_ROUTE_CREATOR');
 
@@ -123,6 +132,9 @@ export class RouteCreatorBarItemView extends ViewStream {
       //console.log("CREATE ROUTE NAME ",this.props.data);
 
       this.routeCreator$CreateRouteName();
+
+      this.addRouteItemBackground();
+
 
     }
 

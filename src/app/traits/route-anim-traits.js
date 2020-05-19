@@ -24,6 +24,30 @@ export class RouteAnimTraits extends SpyneTrait {
    return props.el$(sel);
   }
 
+  static routeAnim$GetBarItemHeight(el){
+
+    const elBox = el.getBoundingClientRect();
+    const elTop = elBox.top;
+    const elHeight = elBox.height;
+    const els =  el.querySelectorAll('.route-bar-items-list li');
+    const elsArr = Array.from(els);
+
+    if (elsArr.length===0){
+      return `height:${elHeight}px`;
+    }
+    const elIndex = elsArr.length>=1 ? elsArr.length-1 : 0;
+    const lastEl = elsArr[elsArr.length - 1];
+
+    const box = lastEl.getBoundingClientRect();
+    const newHeight = (box.y + box.height)-elTop;
+    console.log("ELS IS ",{newHeight, elTop,els,elsArr,lastEl});
+
+    return `height:${newHeight}px;`;;
+
+
+  }
+
+
 
   static routeAnim$InitBarItemsAnimation(){
     const allLiItemsEl = this.routeAnim$GetBarItems().el;

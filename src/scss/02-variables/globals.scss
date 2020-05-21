@@ -6,10 +6,21 @@ $z-index-dynamic-app-ui: 4500;
 $z-index-dynamic-app-pages: 4000;
 
 
+$clr-route-creator-blue: #3B8DC2;
+$clr-route-creator-lime: #5EC329;
+$clr-route-creator-txt-grey: #5B6370;
 
-$clr-route-creator-container-bg:        #2A2B31;
-$clr-route-creator-panel-bg:            #22242A;
-$clr-route-creator-panel-hilight:       #3B8DC2;
+
+$clr-route-creator-container-bg:        #666;
+$clr-route-creator-main-panel-bg:            #2A2B31;//#22242A;
+$clr-route-creator-panel-bg:             #1E2024;
+$clr-route-creator-panel-hilight:       $clr-route-creator-blue;
 $clr-route-creator-panel-text:          #5B6370;
 $clr-route-creator-panel-input:         #191A1F;
 $clr-route-creator-panel-input-text:    #8D939D;
+
+
+$clr-route-creator-routename-text: #5EC329;
+$clr-route-creator-routename-bg: #191A1F;
+$clr-route-creator-routename-label: rgba(255,255,255,.3);//#5E5F62;
+

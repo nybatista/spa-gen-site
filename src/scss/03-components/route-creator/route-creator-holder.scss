@@ -19,7 +19,10 @@
     min-width: 600px;
     //background: #dedede;
     //background: rgba(255,255,255,.1);
-    border: 1px solid rgba(255,255,255,.4);
+   // border: 1px solid rgba(255,255,255,.4);
+    background: $clr-route-creator-main-panel-bg;
+
+    @include add-border-shadow;
     padding: 10px;
     border-radius: 10px;
 

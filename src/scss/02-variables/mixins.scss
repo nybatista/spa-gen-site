@@ -13,3 +13,18 @@
   font-family: 'Cousine', monospace;
 }
 
+
+// ============================================
+// ROUTE CREATOR
+
+@mixin add-container-shadow(){
+  box-shadow: 2px 2px 3px rgba(0,0,0,.27);
+}
+
+@mixin add-route-creator-border(){
+  //border: .5px solid #3A8DC2;
+  border: 1px solid RGBA(58, 141, 194, .4);
+}
+
+
+// ============ END ROUTE CREATOR =============

@@ -31,10 +31,15 @@ export class RouteAnimTraits extends SpyneTrait {
     const elHeight = elBox.height;
     const els =  el.querySelectorAll('.route-bar-items-list li');
     const elsArr = Array.from(els);
+    let padBottom = 20;
     const arrLen = elsArr.length
     if (arrLen===0){
       return `height:${elHeight}px`;
+    } else if (arrLen===1){
+      padBottom=10;
     }
+
+
 
     const elIndex = arrLen>=1 ? arrLen-1 : 0;
     const lastEl = elsArr[arrLen- 1];
@@ -45,7 +50,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
     console.log("ELS IS ",{newHeight, elTop,els,elsArr,arrLen,lastEl});
 
-    return `height:${newHeight+20}px;`;;
+    return `height:${newHeight+padBottom}px;`;;
 
 
   }

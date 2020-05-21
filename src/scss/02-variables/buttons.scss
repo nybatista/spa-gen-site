@@ -43,7 +43,7 @@ button.btn {
 
 button.btn:hover,
 button.btn:focus {
-  background: #0053ba;
+  //background: #0053ba;
 }
 
 button.btn:focus {
@@ -60,14 +60,27 @@ button.btn:active {
   padding: map_get($paddingSizes, $size);
   font-size: map_get($fontSizes, $size);
   background: $color;
+  &:focus, &:hover{
+    background: darken($color, 10);
+
+  }
 
 }
 
 .btn-blue{
   background: orange;
   @include baseBtn('medium', $btnColor);
+}
+
+
+.btn-grey{
+ // background: #212121;
+  @include baseBtn('medium', #212121);
+  border-radius: 24px;
+
 
 }
+
 
 .btn-clear{
   background: none;

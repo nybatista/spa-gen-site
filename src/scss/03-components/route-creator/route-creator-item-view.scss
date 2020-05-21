@@ -24,14 +24,35 @@ p.input-label{
 
 }
 
+.dragger-bar{
+  position: absolute;
+  width:4px;
+  pointer-events: none;
+  z-index: $z-index-ui;
+
+  .dragger-dots{
+    fill-rule:evenodd;
+    clip-rule:evenodd;
+    //fill:#FCFCFC;
+    fill: $clr-route-creator-blue;
+  }
+
+
+}
+
+
 li.route-creator-bar-item {
 
   position: relative;
  // top: 0;
  // width: 100%;
-  min-width: 460px;
+  min-width: 374px;
   opacity: 0;
   z-index: $z-index-ui;
+
+  &.is-dragging{
+    z-index: $z-index-ui+1000;
+  }
 
   .bar-item-bg{
     position:absolute;
@@ -73,7 +94,14 @@ li.route-creator-bar-item {
   &.route-level-0{
    // min-width:380px;
 
+    .dragger-bar{
+      top:2px;
+      left: 4px;
+    }
+
     section.input-bar {
+      margin-left:10px;
+
       input{
         border:none;
       }
@@ -84,15 +112,31 @@ li.route-creator-bar-item {
   &.route-level-1{
    // min-width: 300px;
     //padding-left:120px;
-    min-width: initial;
+    min-width: 216px;
     background: $clr-route-creator-panel-bg;
+
+    .dragger-bar{
+      top:4px;
+      left:15px;
+    }
+
     section.input-bar {
+
       width:100%;
       left:0;
       border: 1px solid $clr-route-creator-blue;
 
       &.focus{
         outline: 2px solid $clr-route-creator-blue;;
+      }
+
+
+
+
+
+      div.input{
+        margin-left:10px;
+
       }
 
       input{
@@ -109,6 +153,7 @@ li.route-creator-bar-item {
         align-items: flex-end;
         left: -3px;
         top: -4px;
+        min-width: 20px;
 
 
 
@@ -121,7 +166,8 @@ li.route-creator-bar-item {
         }
       }
       div.dragger {
-       // background:  rgba(255,255,255,.1);
+        //background:  rgba(255,255,255,.1);
+        width: 100%;
       }
 
 
@@ -136,12 +182,12 @@ li.route-creator-bar-item {
     //background: #00aa88;
     max-height: 38px;
     z-index: $z-index-ui;
+    pointer-events: none;
 
 
     div.dragger {
       position: absolute;
       top: 0;
-      left: 0;
       padding-left:20%;
       width: calc(100% - 4px);
       margin:0;
@@ -150,6 +196,8 @@ li.route-creator-bar-item {
      // background: rgba(255,255,255,.1);
       cursor: pointer;
       z-index:10;
+      pointer-events: all;
+      left: -12px;
 
     }
 
@@ -160,7 +208,9 @@ li.route-creator-bar-item {
       z-index: $z-index-ui;
       top: -8px;
       left:2px;
-     // align-content: flex-end;
+      pointer-events: all;
+
+      // align-content: flex-end;
       min-width: 40px;
       align-items: center;
       justify-content: space-between;
@@ -220,6 +270,7 @@ li.route-creator-bar-item {
         background: $clr-route-creator-panel-input;
         color: #dedede;// $clr-route-creator-panel-input-text;
         //border:none;
+        pointer-events: all;
         background: rgba(0,0,0,.3);
 
 

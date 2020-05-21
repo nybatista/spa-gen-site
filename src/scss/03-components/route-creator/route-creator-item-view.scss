@@ -1,4 +1,28 @@
 
+p.input-label{
+
+  position: relative;
+  margin: 0;
+  color: $clr-route-creator-routename-label;
+  font-size: .7rem;
+  font-weight: 400;
+  padding: 0;
+  left: 3px;
+
+  &.submenu{
+    top: -3px;
+  }
+
+  &.menu{
+    top:-3px;
+  }
+
+  &.routename{
+    top:18px;
+  }
+
+
+}
 
 li.route-creator-bar-item {
 
@@ -47,6 +71,13 @@ li.route-creator-bar-item {
 
   &.route-level-0{
    // min-width:380px;
+
+    section.input-bar {
+      input{
+        border:none;
+      }
+    }
+
   }
 
   &.route-level-1{
@@ -57,7 +88,9 @@ li.route-creator-bar-item {
       width:100%;
       left:0;
 
-
+      input{
+        border: 1px solid $clr-route-creator-blue;
+      }
       div.icons {
 
         i{
@@ -71,6 +104,8 @@ li.route-creator-bar-item {
       div.dragger {
        // background:  rgba(255,255,255,.1);
       }
+
+
     }
   }
 
@@ -159,13 +194,15 @@ li.route-creator-bar-item {
       z-index: $z-index-ui;
 
 
+
       input {
         position: relative;
         z-index: 10;
         background: $clr-route-creator-panel-input;
         color: $clr-route-creator-panel-input-text;
-        border:none;
+        //border:none;
         background: rgba(0,0,0,.3);
+
 
         &::placeholder{
           color:#dedede;

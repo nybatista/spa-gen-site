@@ -67,6 +67,8 @@ export class RouteBarDragTraits extends SpyneTrait {
       lockAxis: true,
       maxDuration:.125,
       inertia: true,
+      zIndex: 20000,
+      zIndexBoost: true,
       onPress: this.routeBarDrag$OnPress.bind(this),
       onDrag: this.routeBarDrag$OnDrag.bind(this),
       onDragEnd: this.routeBarDrag$OnDragEnd.bind(this),

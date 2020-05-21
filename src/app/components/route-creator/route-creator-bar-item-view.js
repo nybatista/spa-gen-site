@@ -16,6 +16,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     props.class=`route-creator-bar-item route-level-${props.routeLevel} group-${props.parentVsid}`;
     props.traits = [RouteCreatorTraits,RouteBarDragTraits,RouteAnimTraits,FiltersTrait];
     props.data.holderId = props.parentVsid;
+    props.data.inputLabel = props.routeLevel === 0 ? "menu" : "submenu";
     props.data.label = props.data.keyValue!== '^$' ? props.data.keyValue : props.data.key;
     props.template=require('./templates/route-creator-bar-item.tmpl.html');
     //console.log("BAR ITEM PROPS ",props);

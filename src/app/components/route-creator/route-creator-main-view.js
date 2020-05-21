@@ -77,7 +77,7 @@ export class RouteCreatorMainView extends ViewStream {
 
   broadcastEvents() {
     return [
-        ['.btn.btn-blue.main-route-btn', 'click'],
+        ['.btn.main-route-btn', 'click'],
     ];
   }
 

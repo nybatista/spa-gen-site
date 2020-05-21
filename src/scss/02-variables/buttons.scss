@@ -69,6 +69,16 @@ button.btn:active {
 
 }
 
+.btn-clear{
+  background: none;
+  @include baseBtn('medium', rgba(255,255,255,0));
+  color:$clr-route-creator-blue;
+
+  &:hover{
+    background: none;
+  }
+}
+
 
 /*
 button {

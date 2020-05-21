@@ -42,6 +42,7 @@ li.route-creator-bar-item {
   //  background: rgba(255,255,255,.5);
     background: $clr-route-creator-panel-bg;
     @include add-route-creator-border;
+    @include add-container-shadow;
     //background: darkslateblue;
     border-radius: 3px;
     pointer-events: none;
@@ -82,16 +83,34 @@ li.route-creator-bar-item {
 
   &.route-level-1{
    // min-width: 300px;
-    padding-left:120px;
-
+    //padding-left:120px;
+    min-width: initial;
+    background: $clr-route-creator-panel-bg;
     section.input-bar {
       width:100%;
       left:0;
+      border: 1px solid $clr-route-creator-blue;
+
+      &.focus{
+        outline: 2px solid $clr-route-creator-blue;;
+      }
 
       input{
-        border: 1px solid $clr-route-creator-blue;
+
+
+
+        &:focus{
+          border:none;
+          outline:none;
+        }
       }
       div.icons {
+
+        align-items: flex-end;
+        left: -3px;
+        top: -4px;
+
+
 
         i{
         }
@@ -199,7 +218,7 @@ li.route-creator-bar-item {
         position: relative;
         z-index: 10;
         background: $clr-route-creator-panel-input;
-        color: $clr-route-creator-panel-input-text;
+        color: #dedede;// $clr-route-creator-panel-input-text;
         //border:none;
         background: rgba(0,0,0,.3);
 

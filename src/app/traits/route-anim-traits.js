@@ -31,12 +31,12 @@ export class RouteAnimTraits extends SpyneTrait {
     const elHeight = elBox.height;
     const els =  el.querySelectorAll('.route-bar-items-list li');
     const elsArr = Array.from(els);
-    let padBottom = 20;
+    let padBottom = 30;
     const arrLen = elsArr.length
     if (arrLen===0){
       return `height:${elHeight}px`;
     } else if (arrLen===1){
-      padBottom=10;
+      padBottom=20;
     }
 
 

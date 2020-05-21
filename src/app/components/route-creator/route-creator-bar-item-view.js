@@ -32,13 +32,31 @@ export class RouteCreatorBarItemView extends ViewStream {
     const internalUIEventPayloadFilter = this.filter$BarItemOnInternalUIEvent();
 
 
-    return [
+    const arr =  [
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent',internalUIEventPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT', 'onInitDragEvent', initItemsPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAGGING_SWAP_ITEMS_EVENT', 'onSwapDragItemsEvent', checkForSwappedItemsFilter],
       ['CHANNEL_ROUTE_CREATOR_ANIMATE_ITEM_EVENT', 'onAnimateItem', checkForSwappedItemsFilter]
 
     ];
+
+    if (this.props.routeLevel === 1){
+      const {vsid} = this.props;
+      const focusFilter = new ChannelPayloadFilter({propFilters:{"vsid" : vsid}})
+      arr.push(['CHANNEL_ROUTE_CREATOR_INPUT_FOCUS.*_EVENT', 'onFocusInputEvent',focusFilter]);
+    }
+
+
+    return arr;
+  }
+
+  onFocusInputEvent(e){
+    const {action} = e.props();
+    const addFocusBool = action === "CHANNEL_ROUTE_CREATOR_INPUT_FOCUSIN_EVENT";
+    this.props.el$('section.input-bar').toggleClass('focus', addFocusBool);
+
+    const currentVsid = this.props.vsid;
+    console.log("FOCUS IN ACTIONAL ELEMENT ", {currentVsid,e});
   }
 
   onAnimateItem(e){
@@ -69,10 +87,17 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [
+    const arr = [
         [this.props.id$+' > section .icons i', 'click'],
         [this.props.id$+' > section .icons p', 'click']
     ];
+
+    if (this.props.routeLevel===1){
+      arr.push(['div.input input', 'focusin'])
+      arr.push(['div.input input', 'focusout'])
+    }
+
+    return arr;
   }
 
 

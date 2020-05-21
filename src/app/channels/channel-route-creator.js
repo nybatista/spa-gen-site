@@ -13,33 +13,42 @@ export class ChannelRouteCreator extends Channel {
   }
 
   onRegistered() {
-/*    const payloadFilter = new ChannelPayloadFilter({propFilters:{
-        type: "routeBar"
-      }})
-
-
-    const jsonGenPayloadFilter = new ChannelPayloadFilter({propFilters:{
-        type: "generateJson"
-      }})
-
-    this.getChannel("CHANNEL_UI", payloadFilter)
-          .subscribe(this.onRouteBarUIEvent.bind(this));
-
-
-    this.getChannel("CHANNEL_UI", jsonGenPayloadFilter)
-    .subscribe(this.onGenJson.bind(this));
-    */
 
     const routeCreatorPayloadFilter = new ChannelPayloadFilter({
       propFilters: {
         eventType: "routeCreator"
       }
-
     });
 
     this.getChannel("CHANNEL_UI", routeCreatorPayloadFilter)
         .subscribe(this.onUIEvent.bind(this));
 
+
+
+
+    const focusEventFilter = new ChannelPayloadFilter({
+      propFilters: {
+        action: (val)=>String(val).indexOf("FOCUS")>=0
+      }
+    })
+
+    this.getChannel('CHANNEL_UI', focusEventFilter)
+        .subscribe(this.onFocusEvent.bind(this));
+
+
+  }
+
+  onFocusEvent(e){
+    const {srcElement} = e;
+    const {action, vsid} = e.props();
+
+    const focusAction = action === "CHANNEL_UI_FOCUSOUT_EVENT" ?
+        'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSOUT_EVENT' :
+        'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSIN_EVENT';
+
+   // console.log("ACTION SRC ",{focusAction, action, vsid,srcElement})
+
+    this.sendChannelPayload(focusAction, {vsid});
 
   }
 
@@ -132,6 +141,8 @@ export class ChannelRouteCreator extends Channel {
       'CHANNEL_ROUTE_CREATOR_DRAGGING_UPDATE_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAGGING_SWAP_ITEMS_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT',
+      'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSIN_EVENT',
+      'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSOUT_EVENT',
       ['CHANNEL_ROUTE_CREATOR_DRAG_EVENT', 'onDragEvent']
     ];
   }

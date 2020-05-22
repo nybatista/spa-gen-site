@@ -21,6 +21,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
     const filterUIClickForRouteName = this.filter$BarItemUIClickForRouteName();
     return [
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onItemEvent',filterUIClickForRouteName],
+        ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'disposeViewStream']
     ];
   }
 

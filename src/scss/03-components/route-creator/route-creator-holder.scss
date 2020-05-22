@@ -13,7 +13,27 @@
 
 
 
-
+  .generate-route{
+    position: absolute;
+    right:0;
+    bottom: -70px;
+    display: flex;
+    text-align: left;
+    background: $clr-route-creator-blue-dark;
+    background: RGBA(139, 48, 221, .7);
+    box-shadow: 1px 1px 4px rgba(0,0,5,.5);
+    border-radius: 3px;
+    padding: 5px 10px;
+    align-items: center;
+    opacity: 1;
+    span{
+      margin: 0 6px;
+      font-size:.55rem;
+    }
+    svg{
+      opacity: .7;
+    }
+  }
 
 
 
@@ -58,6 +78,25 @@
     }
 
   }
+
+
+
+
+  .reset-json{
+    position: absolute;
+    right:0;
+    bottom:0;
+    border-radius: 3px;
+    padding: 5px 10px;
+    background: RGBA(139, 48, 221, .7);
+    box-shadow: 1px 1px 4px rgba(0,0,5,.5);
+
+  }
+
+
+
+
+
 
   & > .route-creator-route-name{
     top: 50px;

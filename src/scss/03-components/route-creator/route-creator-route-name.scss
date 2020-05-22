@@ -31,6 +31,10 @@
     pointer-events: all;
   }
 
+  p.routename{
+    left: 6px;;
+  }
+
 
   input{
     position: absolute;
@@ -42,6 +46,7 @@
     top: 7px;
     //background: #dedede;
     //color:#666;
+    padding: 1px 0 3px 5px;
 
     //background: $clr-route-creator-panel-input;
     background: $clr-route-creator-routename-bg;
@@ -49,11 +54,19 @@
     font-size:.8rem;
     border:none;
 
+    &:focus{
+      outline: 2px solid $clr-route-creator-blue;
+      outline-offset: 0;
+
+    }
+
 
     &.disabled{
       pointer-events: none;
       user-select: none;
     }
+
+
 
 
   }

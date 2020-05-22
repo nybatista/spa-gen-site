@@ -4,7 +4,7 @@ p.input-label{
   position: relative;
   margin: 0;
   color: $clr-route-creator-routename-label;
-  font-size: .7rem;
+  font-size: .55rem;
   font-weight: 400;
   padding: 0;
   left: 3px;
@@ -18,7 +18,7 @@ p.input-label{
   }
 
   &.routename{
-    top:18px;
+    top:20px;
   }
 
 
@@ -104,6 +104,13 @@ li.route-creator-bar-item {
 
       input{
         border:none;
+        &:focus{
+          outline: 2px solid $clr-route-creator-blue;;
+          outline-offset:0;
+
+        }
+
+
       }
     }
 
@@ -128,6 +135,7 @@ li.route-creator-bar-item {
 
       &.focus{
         outline: 2px solid $clr-route-creator-blue;;
+
       }
 
 

@@ -16,6 +16,8 @@
 
 
 
+
+
 #route-creator-container{
     position: relative;
     width: 100%;
@@ -31,6 +33,32 @@
     padding: 10px;
     border-radius: 10px;
 
+  .add-menu-btn-path, .st0{
+    fill:$clr-route-creator-blue;
+  }
+
+  .main-route-btn{
+    display: flex;
+    align-items: center;
+    color:$clr-route-creator-blue;
+    z-index: $z-index-ui;
+    svg,span{
+      pointer-events: none;
+    }
+    span{
+      margin: 0 5px;
+    }
+
+    &:hover{
+      color:#fff;
+
+      .add-menu-btn-path{
+        fill: #fff;
+      }
+    }
+
+  }
+
   & > .route-creator-route-name{
     top: 50px;
   }
@@ -44,7 +72,7 @@
     display:flex;
     flex-direction: column;
    list-style-type:none;
-    padding:0 0 0 120px;
+    padding:0 0 0 130px;
     top:10px;
    //padding-left:120px;
 

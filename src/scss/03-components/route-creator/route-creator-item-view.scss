@@ -4,7 +4,7 @@ p.input-label{
   position: relative;
   margin: 0;
   color: $clr-route-creator-routename-label;
-  font-size: .55rem;
+  font-size: .625rem;
   font-weight: 400;
   padding: 0;
   left: 3px;
@@ -59,9 +59,9 @@ li.route-creator-bar-item {
     top:-5px;
     left:-5px;
     width:100%;
-    min-height: 38px;
+   // min-height: 38px;
   //  background: rgba(255,255,255,.5);
-    background: $clr-route-creator-panel-bg;
+    background:  $clr-route-creator-panel-bg;
     @include add-route-creator-border;
     @include add-container-shadow;
     //background: darkslateblue;
@@ -121,6 +121,7 @@ li.route-creator-bar-item {
     //padding-left:120px;
     min-width: 216px;
     background: $clr-route-creator-panel-bg;
+    right:2.5rem;
 
     .dragger-bar{
       top:4px;
@@ -229,13 +230,12 @@ li.route-creator-bar-item {
 
 
       p.add-subnav {
-        // background: coral;
         position: relative;
-        font-size: 9px;
+        font-size: 1rem;
         padding: 0;
         margin: 0;
         cursor: pointer;
-        min-height: 10px;
+       // min-height: 10px;
         //min-width: 40px;
         //background:brown;
         &.no-subnav {

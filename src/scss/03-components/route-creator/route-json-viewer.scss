@@ -12,6 +12,8 @@ $hj-railcasts: #072027;
       //top: 82px;
       position: absolute;
       min-width: 560px;
+      font-size: .75rem;
+      line-height: .75rem*1.2;
 
       code.json.hljs{
         background: $hj-railcasts;

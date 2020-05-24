@@ -65,9 +65,10 @@ export class RouteCreatorBarItemView extends ViewStream {
     const animateFn = animEvent === 'animateIn' ? this.routeAnim$ItemAnimateIn : this.routeAnim$ItemAnimateToYVal;
 
   //  const animateData = compose(head,filter(propEq('id', vsid)))(swapItems);
-
     const animateData = this.routeAnim$GetSwapData(swapItems, vsid);
     const {yGsap} = animateData;
+    console.log("ANIMATE Y ",{yGsap, animateData, e});
+
     this.props.yGsap = yGsap;
     animateFn(yGsap);
    // this.routeAnim$ItemAnimateToYVal(yGsap);

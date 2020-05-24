@@ -48,7 +48,7 @@ export class RouteAnimTraits extends SpyneTrait {
     let newHeight = (box.y + box.height)-elTop;
     //newHeight = arrLen > 1 ? newHeight+20 : newHeight;
 
-    console.log("ELS IS ",{newHeight, elTop,els,elsArr,arrLen,lastEl});
+    //console.log("ELS IS ",{newHeight, elTop,els,elsArr,arrLen,lastEl});
 
     return `height:${newHeight+padBottom}px;`;;
 

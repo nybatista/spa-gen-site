@@ -49,6 +49,7 @@ li.route-creator-bar-item {
   min-width: 374px;
   opacity: 0;
   z-index: $z-index-ui;
+  box-sizing: content-box;;
 
   &.is-dragging{
     z-index: $z-index-ui+1000;
@@ -69,7 +70,7 @@ li.route-creator-bar-item {
     pointer-events: none;
     z-index: 1;
     overflow: hidden;;
-
+    opacity: .5;
     &:after{
       position: absolute;
       content: ' ';
@@ -122,6 +123,9 @@ li.route-creator-bar-item {
     min-width: 216px;
     background: $clr-route-creator-panel-bg;
     right:2.5rem;
+    margin:0;
+    padding: 0;
+    border:0;
 
     .dragger-bar{
       top:4px;

@@ -41,7 +41,7 @@ export class RouteCreatorBarItemBackground extends ViewStream {
   setHeight(){
     const heightStr = this.routeAnim$GetBarItemHeight(this.props.el.parentElement);
     this.props.el$.inline=heightStr;
-    console.log("HEIGHT STR IS ",heightStr);
+    //console.log("HEIGHT STR IS ",heightStr);
   }
 
   onRendered() {

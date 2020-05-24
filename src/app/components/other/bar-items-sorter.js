@@ -125,7 +125,7 @@ export class BarItemsSorter{
 
   static resetItems(o,i){
     o.index = i;
-    //console.log("ITEM IS ",{o,i});
+    console.log("ITEM IS ",{o,i});
     o.height = BarItemsSorter.getBarItemHeight(o.el);
     o.hasChanged = false;
     o.initialized = false;
@@ -211,29 +211,32 @@ export class BarItemsSorter{
       // IF SUB ITEMS EXIST, LOOP THOSE ITEMS, ELSE RETURN LAST TERMINATED ITEM
       if (subUlItems.length>0){
         Array.from(subUlItems).forEach(getTheHeight)
-        paddingNum=0;//paddingNum*2;
+       // paddingNum=0;//paddingNum*2;
 
       } else{
         const itemHeight = pullHeightFromBox(listItem);
-        height += listItem.offsetHeight;
-        paddingNum=10;//paddingNum-paddingNum;
+        height += listItem.offsetHeight+paddingNum;
+        //paddingNum=500;//paddingNum-paddingNum;
       }
 
-      if (subUlItems.length===1){
-        paddingNum=35;
+/*      if (subUlItems.length===1){
+        paddingNum=30;
       } else{
-        paddingNum=45;
-      }
+        paddingNum=30;
+      }*/
 
     }
-      // INIT RECURSIVE FUNCTION
-      if (hasMainSubNav===true) {
-        getTheHeight(liEl);
+    // INIT RECURSIVE FUNCTION
+    if (hasMainSubNav===true) {
+      getTheHeight(liEl);
+      const subLen = document.querySelectorAll(subUlItemsSel).length-1;
+      console.log("NUM IS ",subLen)
 
-      }
+      paddingNum = paddingNum*6;
+    }
 
-      //console.log("HEIGHT IS ",{height});
-      return height+paddingNum;
+    // console.log("HEIGHT IS ",{height});
+    return height+paddingNum;
 
   }
 

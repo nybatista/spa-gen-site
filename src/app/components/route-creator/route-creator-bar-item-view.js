@@ -167,7 +167,13 @@ export class RouteCreatorBarItemView extends ViewStream {
 
     if (this.props.autoInit===true){
       //console.log("AUTO INIT IS ",this.props);
-      this.sendRenderedEvent();
+      const delayer = ()=> {
+        this.sendRenderedEvent();
+      }
+
+      gsap.set(this.props.el, {opacity:0, x:"-=15"});
+      gsap.to(this.props.el, {duration:.5, delay:.25, x:0, opacity:1})
+        this.setTimeout(delayer, 100);
     }
 
     this.routeCreator$InitBarItem();

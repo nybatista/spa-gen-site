@@ -31,7 +31,7 @@ export class RouteAnimTraits extends SpyneTrait {
     const elHeight = elBox.height;
     const els =  el.querySelectorAll('.route-bar-items-list li');
     const elsArr = Array.from(els);
-    let padBottom = 30;
+    let padBottom = 20;
     const arrLen = elsArr.length
     if (arrLen===0){
       return `height:${elHeight}px`;
@@ -69,8 +69,11 @@ export class RouteAnimTraits extends SpyneTrait {
 
   static routeAnim$ItemAnimateIn(yVal){
     this.props.el$.addClass('anim-mode');
+    const opacityNum = this.props.autoInit === true ? 0 : 1;
+
     //console.log("animate In ", this.props.el);
-    gsap.to(this.props.el, {duration:.125, opacity:1, y:yVal, ease:"Power1.easeInOut"});
+    this.props.autoInit=false;
+    gsap.to(this.props.el, {duration:.125, opacity:opacityNum, y:yVal, ease:"Power1.easeInOut"});
 
   }
 

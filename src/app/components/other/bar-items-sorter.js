@@ -230,7 +230,7 @@ export class BarItemsSorter{
     if (hasMainSubNav===true) {
       getTheHeight(liEl);
       const subLen = document.querySelectorAll(subUlItemsSel).length-1;
-      console.log("NUM IS ",subLen)
+     // console.log("NUM IS ",subLen)
 
       paddingNum = paddingNum*6;
     }

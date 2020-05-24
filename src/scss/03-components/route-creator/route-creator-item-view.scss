@@ -70,7 +70,8 @@ li.route-creator-bar-item {
     pointer-events: none;
     z-index: 1;
     overflow: hidden;;
-    opacity: .5;
+    transition: height .125s ease-in-out;
+    //opacity: .5;
     &:after{
       position: absolute;
       content: ' ';

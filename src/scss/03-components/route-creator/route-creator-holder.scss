@@ -52,6 +52,7 @@
     //background: rgba(255,255,255,.1);
    // border: 1px solid rgba(255,255,255,.4);
     background: $clr-route-creator-main-panel-bg;
+    transition: height .25s ease-in-out;
 
     @include add-container-shadow;
     padding: 10px;

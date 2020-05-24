@@ -24,7 +24,7 @@ export class RouteCreatorMainView extends ViewStream {
 */
 
        ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetDefaultJson'],
-      ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'routeAnim$InitBarItemsAnimation'],
+      ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onLastItemAdded'],
       ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onItemAdded'],
       ['CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT', 'onItemAdded']
     ];
@@ -38,9 +38,15 @@ export class RouteCreatorMainView extends ViewStream {
 
   }
 
+  onLastItemAdded(e){
+
+    this.routeAnim$InitBarItemsAnimation(e);
+    this.onItemAdded();
+  }
+
   onItemAdded(e){
     //console.log("E IS ",e);
-    const minHeight = 600;
+    const minHeight = 450;
 
     const delayer = ()=> {
       const elArr = this.props.el$('.route-bar-items-list.main li').arr;
@@ -50,14 +56,15 @@ export class RouteCreatorMainView extends ViewStream {
       const box = secondToLastEl.getBoundingClientRect();
       const newHeight = box.y + box.height * 2;
       const mainHeight = newHeight <= minHeight ? minHeight : newHeight;
-      const newHeightStr = `height:${mainHeight}px;`;
+      const newHeightStr = `height:${mainHeight+150}px;`;
       const mainEl = document.getElementById('customize-container');
+      this.props.el$('#route-creator-container').inline=`height:${mainHeight+30}px`;
       mainEl.style.cssText = newHeightStr
      // console.log("ITEM IS ", {e,newHeight, newHeightStr, elItemIndex, elArr, box, secondToLastEl}, this.props.el);
 
     }
 
-    this.setTimeout(delayer, 0);
+    this.setTimeout(delayer, 100);
 
   }
 
@@ -72,6 +79,7 @@ export class RouteCreatorMainView extends ViewStream {
     this.props.data = routes;
 
     this.createMainBarHolder();
+    this.onItemAdded();
 
   }
 

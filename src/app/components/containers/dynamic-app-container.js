@@ -1,5 +1,5 @@
 import {ViewStream} from 'spyne';
-import {DynamicAppMain} from '../../01-dynamic-app/dynamic-app-main';
+import {DynamicAppMain} from '../01-dynamic-app/dynamic-app-main';
 
 export class DynamicAppContainer extends ViewStream {
 

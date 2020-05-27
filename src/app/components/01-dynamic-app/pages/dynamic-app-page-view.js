@@ -6,7 +6,16 @@ export class DynamicAppPageView extends ViewStream {
   constructor(props = {}) {
     props.class = 'dynamic-app-page';
     props.traits = DynamicAppPageTraits;
-    props.template = require('./templates/page.tmpl.html');
+    const cache = {};
+    function importAll (r) {
+      r.keys().forEach(key => cache[key] = r(key));
+    }
+
+    //importAll(require.context('./templates/', true, /\.html$/));
+   // props.template = cache['./page.tmpl.html'];
+    const fileName = "./templates/page.tmpl.html";
+    props.template = require('' + fileName);
+    //props.template = require('./templates/page.tmpl.html');
     super(props);
 
   }

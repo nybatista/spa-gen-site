@@ -37,21 +37,21 @@ export class DynamicAppPageTraits extends SpyneTrait {
       return path(['Spyne','config','channels','ROUTE','routes', 'routePath', pageId], window);
     }
 
-    const jsonObj = getJsonByPageId(routeData.pageId);
+    const routes = getJsonByPageId(routeData.pageId);
 
-    const addSubNavContent =  is(Object, jsonObj);
+    const addSubNavContent =  is(Object, routes);
 
     if (addSubNavContent===true){
-      const subNavRouteKey = path(['routePath', 'routeName'], jsonObj);
+      const subNavRouteKey = path(['routePath', 'routeName'], routes);
       const subNavRouteValue =  routeData[subNavRouteKey];
       const data= merge({subNavRouteValue,subNavRouteKey}, routeData);
       console.log("FINAL DATA ",{data});
-      this.appendView(new DynamicAppPageSubnavContainer({data}));
+      this.appendView(new DynamicAppPageSubnavContainer({data,routes}), '.page-content');
     }
 
 
 
-    console.log("CHECKING TO ADD SUBCONTENT ", {jsonObj},routeData);
+    console.log("CHECKING TO ADD SUBCONTENT ", {routes},routeData);
 
   }
 

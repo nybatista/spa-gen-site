@@ -1,12 +1,14 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {DynamicAppPageTraits} from 'traits/dynamic-app-page-traits';
 import {DynamicAppPageSubnavContent} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-content';
+import {DynamicAppPageCardView} from 'components/01-dynamic-app/pages/dynamic-app-page-card-view';
 import {merge} from 'ramda';
+import {DynamicAppTraits} from 'traits/dynamic-app-traits';
 
 export class DynamicAppPageSubnavContainer extends ViewStream {
 
   constructor(props = {}) {
-    props.tagName='section';
+    props.tagName='ul';
     props.class='dynamic-app-page-subnav-container';
     props.traits= DynamicAppPageTraits;
     super(props);
@@ -33,7 +35,7 @@ export class DynamicAppPageSubnavContainer extends ViewStream {
     const {subNavRouteValue, subNavRouteKey} = this.props.data;
     const data = merge(routeData, {subNavRouteKey,subNavRouteValue});
     console.log("ROUTE DATA ", {data})
-    this.addSubNavContent(data);
+    //this.addSubNavContent(data);
 
   }
 
@@ -43,11 +45,28 @@ export class DynamicAppPageSubnavContainer extends ViewStream {
   }
 
   addSubNavContent(data){
-    this.appendView(new DynamicAppPageSubnavContent({data}));
+    //this.appendView(new DynamicAppPageSubnavContent({data}));
+  }
+
+  addSecondaryPageCards(){
+
+    const addCard = (data)=>{
+      this.appendView(new DynamicAppPageCardView({data}));
+    }
+
+    this.props.subNavDataArr.forEach(addCard);
+
   }
 
   onRendered() {
+
+  //  this.props.subNavItemsArr = DynamicAppTraits.dynApp$FormatRouteConfigForDom(this.props.routes);
+    const {subNavDataArr} = DynamicAppTraits.dynApp$CheckToAddSubnav(this.props.data);
+    this.props.subNavDataArr = subNavDataArr;
     console.log("SUB NAV ROUTE CONTAINER ",this.props);
+
+    this.addSecondaryPageCards();
+
     this.addSubNavContent(this.props.data);
     this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
 

@@ -7,6 +7,8 @@ export class DynamicAppHeaderContentView extends ViewStream {
   constructor(props = {}) {
     props.tagName='nav';
     props.data = DynamicAppTraits.dynApp$FormatRouteConfigForDom(props.routes);
+
+    console.log("HEADER SUBNAV ",props.data, props.routes);
     props.class='dynamic-app-header-content';
     super(props);
 
@@ -41,6 +43,7 @@ export class DynamicAppHeaderContentView extends ViewStream {
 
   addAnchors(){
     const addAnchor=(d)=>{
+      console.log("ANCHOR DATA ",{d})
       const anchor = new DomEl({
         tagName: 'a',
         dataset: d,

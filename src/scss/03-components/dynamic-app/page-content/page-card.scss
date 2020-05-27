@@ -1,0 +1,17 @@
+.dynamic-app-page-subnav-container{
+  position:relative;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+
+  .page-card{
+   max-width: 250px;
+
+    a{
+      text-decoration: none;
+      color:inherit;;
+    }
+  }
+
+
+}

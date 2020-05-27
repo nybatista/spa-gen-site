@@ -52,10 +52,9 @@ export class DynamicAppTraits extends SpyneTrait {
   }
 
 
-  static dynApp$CheckToAddSubnav(e){
-    const {routeData, pathsChanged} = e.props();
+  static dynApp$CheckToAddSubnav(routeData, pageHasChanged=true){
     const {pageId} = routeData;
-    const pageHasChanged = pathsChanged.indexOf('pageId')>=0;
+    //const pageHasChanged = pathsChanged.indexOf('pageId')>=0;
     const subNavDataArr = [];
 
 

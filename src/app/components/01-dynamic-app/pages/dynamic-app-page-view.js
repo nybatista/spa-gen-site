@@ -23,8 +23,13 @@ export class DynamicAppPageView extends ViewStream {
 
     return [
       ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onRouteChangeEvent', pageIdChangeFilter],
+        ['CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT', 'onSecondaryPageEvent']
 
     ];
+  }
+
+  onSecondaryPageEvent(e){
+    console.log("SECONDARY PAGE EVENT ",{e});
   }
 
   onRouteChangeEvent(e){

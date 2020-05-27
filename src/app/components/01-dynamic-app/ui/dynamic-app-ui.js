@@ -24,7 +24,7 @@ export class DynamicAppUI extends ViewStream {
 
   onRendered() {
     this.appendView(new DynamicAppHeader());
-    this.appendView(new DynamicAppSubnav(), '#dynamic-app-header');
+    //this.appendView(new DynamicAppSubnav(), '#dynamic-app-header');
     this.appendView(new DynamicAppFooter());
   }
 

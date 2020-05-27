@@ -132,7 +132,12 @@ export class DynamicAppTraits extends SpyneTrait {
       if (is(Object, val)===true){
         let subNavKey = getRouteName(val);
         let subNavObjArr = getFirstNavItem(val);
-        data[subNavKey] = subNavObjArr[0];
+
+        // ******* ADDING BACK THIS VALUE WILL MAKE THE DEFAULT PAGE THE FIRST SUBPAGE ***** //
+        //data[subNavKey] = subNavObjArr[0];
+        // ========================================================================== //
+
+
         if (subNavObjArr[1]==='^$'){
           addSubNavKeyValue(data, subNavKey);
         }

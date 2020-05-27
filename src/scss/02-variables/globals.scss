@@ -4,7 +4,8 @@ $z-index-ui: 5000;
 
 $z-index-dynamic-app-ui: 4500;
 $z-index-dynamic-app-pages: 4000;
-$clr-ui-bg: royalblue;// #000;
+$clr-ui-bg: #000;// royalblue;// #000;
+$clr-ui-header-hover: rgba(255,255,255,.3);
 
 $clr-route-creator-blue-orig: #3B8DC2;
 $clr-route-creator-blue-dark: darken(#3B8DC2, 15);
@@ -24,6 +25,6 @@ $clr-route-creator-panel-input-text:    #8D939D;
 
 $clr-route-creator-routename-text: #5EC329;
 $clr-route-creator-routename-bg: #191A1F;
-$clr-route-creator-routename-label: rgba(255,255,255,.3);//#5E5F62;
+$clr-route-creator-routename-label: rgba(255,255,255,.1);//#5E5F62;
 
 $lyt-header-height:68px;

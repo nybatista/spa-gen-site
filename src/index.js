@@ -33,17 +33,17 @@ const defaultConfig = {
         "work": {
           "routePath": {
             "routeName": "workId",
-            "acme": "^$",
+            "acme": "acme",
             "widgets": "widgets",
             "globex": "globex",
-            "404" : ".*"
+            "404" : ".+"
           }
         },
         "about": {
           "routePath": {
             "routeName": "aboutId",
-            "contact": "^$",
-            "404" : ".*"
+            "contact": "contact",
+            "404" : ".+"
           }
         },
         "404" : ".*"

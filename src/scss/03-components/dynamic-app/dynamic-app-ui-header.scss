@@ -55,7 +55,8 @@
 
       &:hover {
         opacity: 1;
-        background: rgba(0,0,0,.3);
+        //background: rgba(0,0,0,.3);
+        background: $clr-ui-header-hover;
       }
     }
   }

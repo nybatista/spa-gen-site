@@ -69,7 +69,8 @@ export class DynamicAppTraits extends SpyneTrait {
     }
     let {routeName, routeProps} = getSubNavRouteObj();
     let addSubNav = compose(lte(2), length, keys)(routeProps);
-    if (pageHasChanged === false || addSubNav === false){
+   //if (pageHasChanged === false || addSubNav === false){
+    if (pageHasChanged === false){
       return {subNavDataArr, pageHasChanged};
     }
 
@@ -93,7 +94,7 @@ export class DynamicAppTraits extends SpyneTrait {
 
      forEachObjIndexed(forEachSubNavProp, routeProps);
 
-    //console.log("NEW ROUTE OBJ ",{subNavDataArr,addSubNav,pageHasChanged, routeName, routeProps})
+    console.log("NEW ROUTE OBJ ",{subNavDataArr,addSubNav, routeName, routeProps})
 
     return {subNavDataArr, pageHasChanged,pageId};
   }

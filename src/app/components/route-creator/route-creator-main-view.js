@@ -105,7 +105,10 @@ export class RouteCreatorMainView extends ViewStream {
    // this.addChannel("CHANNEL_ROUTEGEN_JSON");
     this.addChannel("CHANNEL_ROUTE_CREATOR");
     this.routeCreator$InitBarItem();
-    this.setTimeout(this.onRouteGenData.bind(this),10);
+   //
+
+    // THIS LOADS AND ANIMATES IN THE ROUTE CREATOR
+    //this.setTimeout(this.onRouteGenData.bind(this),10);
 
   }
 

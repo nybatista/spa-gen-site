@@ -26,7 +26,7 @@ export class DynamicAppPageCardView extends ViewStream {
     const anchorEl = this.props.el$('a').el;
     const addToDataset = (val,key)=>{
       anchorEl.dataset[key]=val;
-      console.log("VALUE AND KEY ",{val,key})
+     //console.log("VALUE AND KEY ",{val,key})
     }
 
     forEachObjIndexed(addToDataset, this.props.data);

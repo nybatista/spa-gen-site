@@ -61,9 +61,10 @@ export class DynamicAppPageSubnavContainer extends ViewStream {
   onRendered() {
 
   //  this.props.subNavItemsArr = DynamicAppTraits.dynApp$FormatRouteConfigForDom(this.props.routes);
+    //this.props.data.subNavRouteValue = this.props.data.subNavRouteKey;
     const {subNavDataArr} = DynamicAppTraits.dynApp$CheckToAddSubnav(this.props.data);
     this.props.subNavDataArr = subNavDataArr;
-    console.log("SUB NAV ROUTE CONTAINER ",this.props);
+    console.log("SUB NAV ROUTE CONTAINER ",{subNavDataArr},this.props);
 
     this.addSecondaryPageCards();
 

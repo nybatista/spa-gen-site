@@ -53,7 +53,6 @@ export class DynamicAppHeader extends ViewStream {
   broadcastEvents() {
     // return nexted array(s)
     return [
-        ['a', 'click']
 
     ];
   }

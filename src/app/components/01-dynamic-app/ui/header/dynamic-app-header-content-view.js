@@ -44,6 +44,9 @@ export class DynamicAppHeaderContentView extends ViewStream {
   addAnchors(){
     const addAnchor=(d)=>{
       console.log("ANCHOR DATA ",{d})
+      //d['workId']="";
+      d['workIdValue']="";
+      d['aboutIdValue']="";
       const anchor = new DomEl({
         tagName: 'a',
         dataset: d,

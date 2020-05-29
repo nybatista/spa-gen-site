@@ -1,5 +1,7 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
+import {PageSecondaryTopicView} from 'components/01-dynamic-app/pages/page-secondary-topic-view';
 import {DynamicAppPageTraits} from 'traits/dynamic-app-page-traits';
+import {path} from 'ramda';
 
 export class DynamicAppPageView extends ViewStream {
 
@@ -38,8 +40,20 @@ export class DynamicAppPageView extends ViewStream {
   }
 
   onSecondaryPageEvent(e){
-    console.log("SECONDARY PAGE EVENT ",{e});
+    const {pageId, pageTopicKey} = this.props.subTopicData;
+   // const pageTopicKey = path(['routePath', 'routeName'], this.props.routes);
+    const {routeData} = e.props();
+    this.props.subTopicData.pageTopicVal = routeData[pageTopicKey];
+    this.dynPage$CheckToAddSecondaryTopicPage(this.props.subTopicData)
+
+    console.log("SECONDARY PAGE EVENT ",{e, pageTopicKey,routeData},this.props);
+
   }
+
+  onAddSecondaryTopic(){
+
+  }
+
 
   onRouteChangeEvent(e){
     this.disposeViewStream()
@@ -61,8 +75,13 @@ export class DynamicAppPageView extends ViewStream {
   onRendered() {
     this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
       this.dynPage$AddPageContent(this.props.data.pageId);
-      this.dynPage$CheckToAddSubnavContent();
+      const {routes} = this.dynPage$CheckToAddSubnavContent();
 
+      this.props.subTopicData = this.dynPage$GetSubTopicData(this.props.data);
+      this.dynPage$CheckToAddSecondaryTopicPage();
+
+      console.log("SUBTOPIC DATA ",this.props.subTopicData);
+      this.props.routes=routes;
   }
 
 }

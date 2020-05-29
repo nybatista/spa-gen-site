@@ -19,6 +19,15 @@
     align-items: flex-end;
     padding: 10px 0;
 
+
+    @media(max-width: 768px){
+      nav.dynamic-app-header-content {
+        display: none;
+      }
+
+    }
+
+
   }
 
   nav.dynamic-app-header-content {

@@ -1,5 +1,6 @@
 import {ViewStream} from 'spyne';
 import {DynamicAppHeaderContentView} from 'components/01-dynamic-app/ui/header/dynamic-app-header-content-view';
+import {HeaderHamburgerView} from 'components/01-dynamic-app/ui/heaader-hamburger-view';
 import {DynamicAppTraits} from 'traits/dynamic-app-traits';
 
 export class DynamicAppHeader extends ViewStream {
@@ -58,6 +59,7 @@ export class DynamicAppHeader extends ViewStream {
   }
 
   onRendered() {
+    this.appendView(new HeaderHamburgerView());
     this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
     this.addChannel("CHANNEL_ROUTE");
   }

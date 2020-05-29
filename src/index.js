@@ -15,13 +15,21 @@ import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 *
 * */
 
+const hamburgerBreakpoint = 768;
 
 const defaultConfig = {
   "localStorageKey" : "spaGenStore",
   "debug" : true,
   "channels" : {
-    "WINDOW" : {
+    WINDOW: {
+      mediaQueries: {
+        'msVert': `(max-width: ${hamburgerBreakpoint}px)`
+      },
+      listenForScroll: true,
+      listenForOrientation:true,
+      debounceMSTimeForScroll: 50,
       events: ['beforeunload'],
+
     },
 
   "ROUTE": {

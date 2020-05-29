@@ -1,0 +1,124 @@
+
+/* menu */
+#menu_toggle {
+  display:block;
+  width:30px;
+  height:30px;
+  position:fixed;
+  top: 17px;
+  left: 325px;
+  z-index:9999;
+  overflow:hidden;
+  text-align:left;
+  text-indent:-9999em;
+  -webkit-transition:all 100ms ease-in-out;
+  -o-transition:all 100ms ease-in-out;
+  transition:all 100ms ease-in-out;
+  cursor:pointer;
+  pointer-events: all;
+}
+#menu_toggle span,
+#menu_toggle span:before,
+#menu_toggle span:after {
+  display:block;
+  content:'';
+  width:30px;
+  height:2px;
+  position:absolute;
+  left:0;
+  top:-5px;
+  background:#ffffff;
+  -webkit-transition:all 0.2s cubic-bezier(0, 0.275, 0.125, 1);
+  -o-transition:all 0.2s cubic-bezier(0, 0.275, 0.125, 1);
+  transition:all 0.2s cubic-bezier(0, 0.275, 0.125, 1);
+  -webkit-transform-origin:50% 0;
+  -ms-transform-origin:50% 0;
+  transform-origin:50% 0;
+}
+#menu_toggle span {
+  background:none;
+}
+#menu_toggle span {
+  top:14px;
+}
+#menu_toggle span:after {
+  top:5px;
+  -webkit-transform-origin:50% 100%;
+  -ms-transform-origin:50% 100%;
+  transform-origin:50% 100%;
+}
+#menu_toggle:hover {
+  -webkit-opacity:0.6;
+  -moz-opacity:0.6;
+  opacity:0.6;
+  filter:alpha(opacity=60);
+}
+#menu_toggle.open span {
+  background-color:transparent!important;
+}
+#menu_toggle.open span:before {
+  -webkit-transform:translateY(5px) translateX(0px) rotate(45deg);
+  -ms-transform:translateY(5px) translateX(0px) rotate(45deg);
+  transform:translateY(5px) translateX(0px) rotate(45deg);
+}
+#menu_toggle.open span:after {
+  -webkit-transform:translateY(-5px) translateX(0px) rotate(-45deg);
+  -ms-transform:translateY(-5px) translateX(0px) rotate(-45deg);
+  transform:translateY(-5px) translateX(0px) rotate(-45deg);
+}
+#menu_toggle.black span:before,
+#menu_toggle.black span:after {
+  background:#221f1f;
+}
+
+/* menu */
+#menu {
+  display:block;
+  width:0;
+  position:fixed;
+  top:80px;
+  right:25px;
+  z-index:9999;
+  text-align:right;
+  overflow:hidden;
+  -webkit-transition:all 100ms linear;
+  -o-transition:all 100ms linear;
+  transition:all 100ms linear;
+}
+#menu.open {
+  width:140px;
+}
+#menu ul {
+  list-style:none;
+  border-top:1px solid #ffffff;
+}
+#menu li {
+  display:block;
+  padding:8px 0;
+  border-bottom:1px solid #ffffff;
+}
+#menu ul,
+#menu li {
+  -webkit-transition:all 100ms linear;
+  -o-transition:all 100ms linear;
+  transition:all 100ms linear;
+}
+#menu li a {
+  display:inline-block;
+  color:#ffffff;
+  font-size:16px;
+  line-height:1.8;
+  white-space:nowrap;
+}
+#menu li a:hover {
+  padding-right:5px;
+}
+#menu.black ul {
+  border-top:1px solid #221f1f;
+}
+#menu.black li {
+  border-bottom:1px solid #221f1f;
+}
+#menu.black li a {
+  color:#221f1f;
+}

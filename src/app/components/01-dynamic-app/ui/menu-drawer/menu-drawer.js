@@ -5,7 +5,7 @@ export class MenuDrawer extends ViewStream {
 
   constructor(props = {}) {
     props.id = 'menu-drawer';
-    props.class = 'menu-drawer open';
+    props.class = 'menu-drawer';
     props.data = DynamicAppTraits.dynApp$FormatRouteConfigForMenuDrawer();
 
     console.log("PROPS DATA IS ",props.data);
@@ -16,8 +16,19 @@ export class MenuDrawer extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+      ["CHANNEL_MENU_DRAWER_.*_EVENT", "onShowMenuDrawerEvent"]
+    ];
   }
+
+
+  onShowMenuDrawerEvent(e){
+    const {action} = e.props();
+    const showDrawer = action === 'CHANNEL_MENU_DRAWER_SHOW_EVENT';
+    this.props.el$.toggleClass('open', showDrawer);
+
+  }
+
 
   addAnchors(){
     const addAnchor=(d)=>{
@@ -25,6 +36,9 @@ export class MenuDrawer extends ViewStream {
       //d['workId']="";
       d['workIdValue']="";
       d['aboutIdValue']="";
+
+      d["eventType"] = "menuDrawer";
+
       const anchor = new DomEl({
         tagName: 'a',
         class: d.class,
@@ -46,7 +60,9 @@ export class MenuDrawer extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+        ['a', 'click']
+    ];
   }
 
 
@@ -54,7 +70,10 @@ export class MenuDrawer extends ViewStream {
   onRendered() {
     this.addAnchors();
     console.log("MENU DRAWER");
-    this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
+   // this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
+
+    this.addChannel('CHANNEL_MENU_DRAWER');
+
   }
 
 }

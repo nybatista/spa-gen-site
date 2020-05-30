@@ -1,6 +1,7 @@
 import {ViewStream, SpyneApp, ChannelFetch} from "spyne";
 import {ChannelRouteCreator} from 'channels/channel-route-creator';
 import {ChannelContainers} from 'channels/channel-containers';
+import {ChannelMenuDrawer} from 'channels/channel-menu-drawer';
 import {ChannelDynamicAppRoute} from 'channels/channel-dynamic-app-route';
 import {MainView} from './app/main-view';
 import SpaGenData from 'data/route-gen.json';
@@ -16,14 +17,16 @@ import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 * */
 
 const hamburgerBreakpoint = 768;
+const mqStr = `(max-width:${hamburgerBreakpoint}px)`;
 
 const defaultConfig = {
   "localStorageKey" : "spaGenStore",
   "debug" : true,
   "channels" : {
     WINDOW: {
-      mediaQueries: {
-        'msVert': `(max-width: ${hamburgerBreakpoint}px)`
+      mediqQueries: {
+        'showMenuDrawer': `(max-width: ${hamburgerBreakpoint}px)`,
+        'newTest': '(max-width: 2800px)'
       },
       listenForScroll: true,
       listenForOrientation:true,
@@ -81,6 +84,7 @@ const initSpyneAppGenerator = ()=> {
   spyneApp.registerChannel(new ChannelRouteCreator());
   spyneApp.registerChannel(new ChannelContainers());
   spyneApp.registerChannel(new ChannelDynamicAppRoute());
+  spyneApp.registerChannel(new ChannelMenuDrawer());
   spyneApp.registerChannel(new ChannelFetch('CHANNEL_ROUTEGEN_JSON', {
     url: SpaGenData,
     mapFn: RouteCreatorTraits.routeCreator$SetLastItemInObj

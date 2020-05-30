@@ -5,8 +5,8 @@ export class HeaderHamburgerView extends ViewStream {
   constructor(props = {}) {
     props.id="menu_toggle";
     props.dataset = {
-      "eventType" : "hamburger"
-
+      "eventType" : "menuDrawer",
+      "isHamburger": "true"
     }
     props.template = require('./templates/hamburger.tmpl.html');
     super(props);
@@ -16,13 +16,15 @@ export class HeaderHamburgerView extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-        ["CHANNEL_UI_CLICK_EVENT", "onChannelUIClickEvent"]
+        ["CHANNEL_MENU_DRAWER_.*_EVENT", "onShowMenuDrawerEvent"]
     ];
   }
 
 
-  onChannelUIClickEvent(e){
-    this.props.el$.toggleClass('open');
+  onShowMenuDrawerEvent(e){
+    const {action} = e.props();
+    const isActiveBurger = action === 'CHANNEL_MENU_DRAWER_SHOW_EVENT';
+    this.props.el$.toggleClass('open', isActiveBurger);
 
   }
 
@@ -34,7 +36,7 @@ export class HeaderHamburgerView extends ViewStream {
   }
 
   onRendered() {
-    this.addChannel("CHANNEL_UI");
+    this.addChannel('CHANNEL_MENU_DRAWER');
   }
 
 }

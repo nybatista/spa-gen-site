@@ -1,0 +1,27 @@
+#menu-drawer{
+  position: absolute;;
+  top:100px;
+  left:0;
+  width:248px;
+  height: 600px;
+  background: #000;
+  padding: 20px;
+  a{
+    color:#ccc;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.4rem;
+
+    &.nav{
+      margin-top:.7rem;
+    }
+
+    &.sub-nav{
+      left: 15px;
+
+    }
+  }
+
+}

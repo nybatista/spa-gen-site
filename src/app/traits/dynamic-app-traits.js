@@ -6,8 +6,12 @@ import {
   is,
   omit,
   path,
+    concat,
   prop,
   propEq,
+    map,
+    chain,
+    assoc,
   tap,
   toPairs,
   fromPairs,
@@ -106,8 +110,17 @@ export class DynamicAppTraits extends SpyneTrait {
 
   }
 
-  static dynApp$FormatRouteConfigForDom(route){
-    //console.log("ROUTE DATA IS ",route);
+  static dynApp$FormatRouteConfigForMenuDrawer(){
+   const addMainNavClass = compose(assoc('class', 'nav'), omit(['subNavDataArr']));
+   const addSubNavClass = compose(map(assoc('class', 'sub-nav')),prop('subNavDataArr'))
+   const flattenArr  = item => concat([addMainNavClass(item)], addSubNavClass(item));
+   return  chain(flattenArr, DynamicAppTraits.dynApp$FormatRouteConfigForDom());
+
+  }
+
+  static dynApp$FormatRouteConfigForDom(routeData){
+    const route = routeData !== undefined ? routeData : DynamicAppTraits.dynApp$GetCurrentRouteJson();
+    console.log("ROUTE DATA IS ",route);
     const {routePath} = route;
     const {routeName} = routePath;
     const channel = "ROUTE";
@@ -155,6 +168,8 @@ export class DynamicAppTraits extends SpyneTrait {
       data['href'] = val === '^$' ? "/" : `/${mainValue}`;
       data['text']=String(mainValue).toUpperCase();
       // data.mainKey = iter === 0 ? ""
+      data.subNavDataArr = this.dynApp$CheckToAddSubnav(data).subNavDataArr;
+      console.log("MAP DATA ",{data});
       accum.push(data);
       iter++;
 
@@ -163,6 +178,8 @@ export class DynamicAppTraits extends SpyneTrait {
     let propObj = omit(['routeName', '404'], routePath);
 
     forEachObjIndexed(mapRouteProps, propObj);
+    console.log("RETUJRNED ROUTE DATA ",{accum})
+
     return accum;
 
 

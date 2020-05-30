@@ -100,7 +100,7 @@ export class DynamicAppTraits extends SpyneTrait {
 
     console.log("NEW ROUTE OBJ ",{subNavDataArr,addSubNav, routeName, routeProps})
 
-    return {subNavDataArr, pageHasChanged,pageId};
+    return {subNavDataArr,routeName, pageHasChanged,pageId};
   }
 
 
@@ -168,8 +168,12 @@ export class DynamicAppTraits extends SpyneTrait {
       data['href'] = val === '^$' ? "/" : `/${mainValue}`;
       data['text']=String(mainValue).toUpperCase();
       // data.mainKey = iter === 0 ? ""
-      data.subNavDataArr = this.dynApp$CheckToAddSubnav(data).subNavDataArr;
-      console.log("MAP DATA ",{data});
+      const {routeName, subNavDataArr} =  this.dynApp$CheckToAddSubnav(data);
+      if (routeName!==undefined){
+        data[`${routeName}Value`] = "";
+      }
+      data.subNavDataArr = subNavDataArr;
+      console.log("MAP DATA ",{routeName,data});
       accum.push(data);
       iter++;
 

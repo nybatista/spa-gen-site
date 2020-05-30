@@ -108,7 +108,7 @@ export class RouteCreatorMainView extends ViewStream {
    //
 
     // THIS LOADS AND ANIMATES IN THE ROUTE CREATOR
-    //this.setTimeout(this.onRouteGenData.bind(this),10);
+    this.setTimeout(this.onRouteGenData.bind(this),10);
 
   }
 

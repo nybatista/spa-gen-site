@@ -95,7 +95,7 @@ export class RouteCreatorMainView extends ViewStream {
     this.routeCreator$CreateRouteName();
     this.props.el$('.main > li:first-child').addClass('disabled');
 
-    console.log("MAIN VIEW ",this.props.el$("#route-creator-container > .route-creator-route-name input").addClass('disabled'));
+    //console.log("MAIN VIEW ",this.props.el$("#route-creator-container > .route-creator-route-name input").addClass('disabled'));
    // this.props.el$('input.main-input').addClass('disabled');
 
 

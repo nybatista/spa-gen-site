@@ -46,7 +46,7 @@ export class DynamicAppPageView extends ViewStream {
     this.props.subTopicData.pageTopicVal = routeData[pageTopicKey];
     this.dynPage$CheckToAddSecondaryTopicPage(this.props.subTopicData)
 
-    console.log("SECONDARY PAGE EVENT ",{e, pageTopicKey,routeData},this.props);
+    //console.log("SECONDARY PAGE EVENT ",{e, pageTopicKey,routeData},this.props);
 
   }
 
@@ -62,7 +62,7 @@ export class DynamicAppPageView extends ViewStream {
   onSubnavChangeEvent(e){
     const {routeData} = e.props();
 
-    console.log("E SUBNAV DATA ",{e});
+    //console.log("E SUBNAV DATA ",{e});
     this.dynPage$CheckToAddSubnavContent(routeData);
 
   }
@@ -80,7 +80,7 @@ export class DynamicAppPageView extends ViewStream {
       this.props.subTopicData = this.dynPage$GetSubTopicData(this.props.data);
       this.dynPage$CheckToAddSecondaryTopicPage();
 
-      console.log("SUBTOPIC DATA ",this.props.subTopicData);
+      //console.log("SUBTOPIC DATA ",this.props.subTopicData);
       this.props.routes=routes;
   }
 

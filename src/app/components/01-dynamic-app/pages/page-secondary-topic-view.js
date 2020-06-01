@@ -17,7 +17,7 @@ export class PageSecondaryTopicView extends ViewStream {
     const newSubTopicPageFilter = new ChannelPayloadFilter({
       propFilters: {
         routeData: pred
-      }, label: "subTopic"
+      }
     })
 
     return [

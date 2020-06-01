@@ -98,7 +98,7 @@ export class DynamicAppTraits extends SpyneTrait {
 
      forEachObjIndexed(forEachSubNavProp, routeProps);
 
-    console.log("NEW ROUTE OBJ ",{subNavDataArr,addSubNav, routeName, routeProps})
+    //console.log("NEW ROUTE OBJ ",{subNavDataArr,addSubNav, routeName, routeProps})
 
     return {subNavDataArr,routeName, pageHasChanged,pageId};
   }
@@ -120,7 +120,7 @@ export class DynamicAppTraits extends SpyneTrait {
 
   static dynApp$FormatRouteConfigForDom(routeData){
     const route = routeData !== undefined ? routeData : DynamicAppTraits.dynApp$GetCurrentRouteJson();
-    console.log("ROUTE DATA IS ",route);
+    //console.log("ROUTE DATA IS ",route);
     const {routePath} = route;
     const {routeName} = routePath;
     const channel = "ROUTE";
@@ -173,7 +173,7 @@ export class DynamicAppTraits extends SpyneTrait {
         data[`${routeName}Value`] = "";
       }
       data.subNavDataArr = subNavDataArr;
-      console.log("MAP DATA ",{routeName,data});
+      //console.log("MAP DATA ",{routeName,data});
       accum.push(data);
       iter++;
 
@@ -182,7 +182,7 @@ export class DynamicAppTraits extends SpyneTrait {
     let propObj = omit(['routeName', '404'], routePath);
 
     forEachObjIndexed(mapRouteProps, propObj);
-    console.log("RETUJRNED ROUTE DATA ",{accum})
+    //console.log("RETUJRNED ROUTE DATA ",{accum})
 
     return accum;
 

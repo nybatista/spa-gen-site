@@ -36,7 +36,7 @@ export class DynamicAppPageCardView extends ViewStream {
 
   onRendered() {
     this.addDataSet();
-    console.log("subnav card ",this.props);
+    //console.log("subnav card ",this.props);
   }
 
 }

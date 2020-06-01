@@ -125,7 +125,7 @@ export class BarItemsSorter{
 
   static resetItems(o,i){
     o.index = i;
-    console.log("ITEM IS ",{o,i});
+    //console.log("ITEM IS ",{o,i});
     o.height = BarItemsSorter.getBarItemHeight(o.el);
     o.hasChanged = false;
     o.initialized = false;

@@ -44,8 +44,8 @@ export class PageContentHomeView extends ViewStream {
 
   onImagesLoaded(e){
     const {photos} = e.props();
-    console.log("images loaded ",{photos,e})
-    this.addImages(photos);
+   // console.log("images loaded ",{photos,e})
+   // this.addImages(photos);
   }
 
   broadcastEvents() {
@@ -54,7 +54,7 @@ export class PageContentHomeView extends ViewStream {
   }
 
   onRendered() {
-    console.log("HOME CONTENT ");
+    //console.log("HOME CONTENT ");
 
     this.addChannel('CHANNEL_SPA_GEN_DATA_IMAGES');
 

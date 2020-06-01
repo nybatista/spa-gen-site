@@ -29,7 +29,7 @@ export class DynamicAppPageTraits extends SpyneTrait {
     const PageContentClass = this.dynPage$GetPageClassById(pageId);
     this.appendView(new PageContentClass({pageId, pageData: this.props.data}));
 
-    console.log("PAGE ID IS ",{pageId,PageContentClass});
+    //console.log("PAGE ID IS ",{pageId,PageContentClass});
   }
 
   static dynPage$GetSubTopicData(routeData=this.props.data){
@@ -70,13 +70,13 @@ export class DynamicAppPageTraits extends SpyneTrait {
       const subNavRouteKey = path(['routePath', 'routeName'], routes);
       const subNavRouteValue =  routeData[subNavRouteKey];
       const data= merge({subNavRouteValue,subNavRouteKey}, routeData);
-      console.log("FINAL DATA ",{data});
+      //console.log("FINAL DATA ",{data});
       this.appendView(new DynamicAppPageSubnavContainer({data,routes}), '.page-content');
     }
 
 
 
-    console.log("CHECKING TO ADD SUBCONTENT ", {routes},routeData);
+    //console.log("CHECKING TO ADD SUBCONTENT ", {routes},routeData);
 
     return {routes};
 

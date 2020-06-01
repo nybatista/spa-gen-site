@@ -76,8 +76,6 @@ const R = require('ramda');
 
 const css = require('./scss/main.scss');
 
-console.log("CONFIG IS ",config,"DATA IS ",{images});
-
 const spyneApp = new SpyneApp(config);
 
 const initSpyneAppGenerator = ()=> {
@@ -87,11 +85,7 @@ const initSpyneAppGenerator = ()=> {
   spyneApp.registerChannel(new ChannelDynamicAppRoute());
   spyneApp.registerChannel(new ChannelMenuDrawer());
   spyneApp.registerChannel(new ChannelFetch("CHANNEL_SPA_GEN_DATA_IMAGES", {
-    url: images,
-    mapFn: (data)=>{
-      console.log('images data is ', {data});
-      return data;
-    }
+    url: images
   }))
 
 

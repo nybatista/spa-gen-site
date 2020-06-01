@@ -8,7 +8,7 @@ export class MenuDrawer extends ViewStream {
     props.class = 'menu-drawer';
     props.data = DynamicAppTraits.dynApp$FormatRouteConfigForMenuDrawer();
 
-    console.log("PROPS DATA IS ",props.data);
+    //console.log("PROPS DATA IS ",props.data);
   //  props.template = require('./templates/menu-drawer.tmpl.html');
     super(props);
 
@@ -32,7 +32,7 @@ export class MenuDrawer extends ViewStream {
 
   addAnchors(){
     const addAnchor=(d)=>{
-      console.log("ANCHOR DATA ",{d})
+      //console.log("ANCHOR DATA ",{d})
       //d['workId']="";
       d['workIdValue']="";
       d['aboutIdValue']="";
@@ -70,7 +70,7 @@ export class MenuDrawer extends ViewStream {
 
   onRendered() {
     this.addAnchors();
-    console.log("MENU DRAWER");
+    //console.log("MENU DRAWER");
    // this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
 
     this.addChannel('CHANNEL_MENU_DRAWER');

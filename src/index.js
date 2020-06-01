@@ -9,6 +9,7 @@ import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 import {SpyneConfigData} from 'spyne/src/tests/mocks/utils-data';
 import {SpyneConfigTrait} from 'traits/spyne-config-trait';
+import images from 'data/images.json';
 
 /*
 *
@@ -75,7 +76,7 @@ const R = require('ramda');
 
 const css = require('./scss/main.scss');
 
-console.log("CONFIG IS ",config);
+console.log("CONFIG IS ",config,"DATA IS ",{images});
 
 const spyneApp = new SpyneApp(config);
 
@@ -85,6 +86,15 @@ const initSpyneAppGenerator = ()=> {
   spyneApp.registerChannel(new ChannelContainers());
   spyneApp.registerChannel(new ChannelDynamicAppRoute());
   spyneApp.registerChannel(new ChannelMenuDrawer());
+  spyneApp.registerChannel(new ChannelFetch("CHANNEL_SPA_GEN_DATA_IMAGES", {
+    url: images,
+    mapFn: (data)=>{
+      console.log('images data is ', {data});
+      return data;
+    }
+  }))
+
+
   spyneApp.registerChannel(new ChannelFetch('CHANNEL_ROUTEGEN_JSON', {
     url: SpaGenData,
     mapFn: RouteCreatorTraits.routeCreator$SetLastItemInObj

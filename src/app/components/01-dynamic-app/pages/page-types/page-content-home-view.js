@@ -1,5 +1,5 @@
-import {ViewStream} from 'spyne';
-
+import {ViewStream, DomEl} from 'spyne';
+import {path, prop} from 'ramda';
 export class PageContentHomeView extends ViewStream {
 
   constructor(props = {}) {
@@ -11,7 +11,40 @@ export class PageContentHomeView extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+        ['CHANNEL_SPA_GEN_DATA_IMAGES_.*EVENT', 'onImagesLoaded']
+    ];
+  }
+
+  addImages(arr){
+    const sectionEl = this.props.el$('ul').el;
+
+
+
+    let num = 0;
+    const addImage = (d)=>{
+      const url = path(['src','landscape'], d);
+      const template  = `
+            <p>${num}</p>
+            <img src='${url}' />
+        `
+      const img = new DomEl({
+        tagName: 'li',
+        template
+      })
+
+      sectionEl.appendChild(img.render());
+      num++;
+
+    }
+
+    arr.forEach(addImage);
+  }
+
+  onImagesLoaded(e){
+    const {photos} = e.props();
+    console.log("images loaded ",{photos,e})
+    this.addImages(photos);
   }
 
   broadcastEvents() {
@@ -20,6 +53,9 @@ export class PageContentHomeView extends ViewStream {
   }
 
   onRendered() {
+    console.log("HOME CONTENT ");
+
+    this.addChannel('CHANNEL_SPA_GEN_DATA_IMAGES');
 
   }
 

@@ -39,6 +39,7 @@ export class MenuDrawer extends ViewStream {
 
       d["eventType"] = "menuDrawer";
 
+
       const anchor = new DomEl({
         tagName: 'a',
         class: d.class,

@@ -1,6 +1,6 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {path,converge, compose,__,apply,call,unapply} from 'ramda';
+import {path, pathEq,converge,propEq, compose,__,apply,call,unapply} from 'ramda';
 import {Channel, ChannelPayloadFilter} from 'spyne';
 
 export class ChannelMenuDrawer extends Channel {
@@ -30,8 +30,9 @@ export class ChannelMenuDrawer extends Channel {
 
     const menuDrawerRouteFilter = new ChannelPayloadFilter({
       propFilters: {
-        routeData: (val)=> val.eventType === "menuDrawer"
-      }
+        action: (val) => val!=="CHANNEL_ROUTE_CONFIG_UPDATED_EVENT",
+         payload: pathEq(['routeData', 'eventType'], 'menuDrawer')
+      }, label:'burger'
 
     })
 

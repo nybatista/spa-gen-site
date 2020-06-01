@@ -35,6 +35,8 @@ export class DynamicAppHeader extends ViewStream {
       this.appendView(new DynamicAppHeaderContentView({routes}), 'header');
     }
 
+
+    console.log("ROUTE CHANGE DEEPLINK EVENT ",{isDeepLink});
     const activeSel = `nav > [data-page-id='${pageId}']`;
     this.props.el$('nav > a').setActiveItem('selected', activeSel);
 
@@ -43,7 +45,7 @@ export class DynamicAppHeader extends ViewStream {
 
   onRouteConfigUpdated(e){
     const {routes, updateConfigNum} = e.props();
-    //console.log("dynamic app header listening to route update ", {routes,e});
+    console.log("dynamic app header listening to route update ", {routes,e});
 
     this.appendView(new DynamicAppHeaderContentView({routes, updateConfigNum}), 'header');
 

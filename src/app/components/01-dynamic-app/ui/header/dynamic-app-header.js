@@ -29,14 +29,14 @@ export class DynamicAppHeader extends ViewStream {
   onRouteChangeEvent(e){
     const {isDeepLink, routeData} = e.props();
     const {pageId} = routeData;
-
+qq
     if (isDeepLink===true) {
       const routes = this.dynApp$GetCurrentRouteJson();
       this.appendView(new DynamicAppHeaderContentView({routes}), 'header');
     }
 
 
-    console.log("ROUTE CHANGE DEEPLINK EVENT ",{isDeepLink});
+    //console.log("ROUTE CHANGE DEEPLINK EVENT ",{isDeepLink});
     const activeSel = `nav > [data-page-id='${pageId}']`;
     this.props.el$('nav > a').setActiveItem('selected', activeSel);
 

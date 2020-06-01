@@ -24,8 +24,9 @@ export class PageContentHomeView extends ViewStream {
     let num = 0;
     const addImage = (d)=>{
       const url = path(['src','landscape'], d);
+      const {photographer} = d;
       const template  = `
-            <p>${num}</p>
+            <p>${num}<br>${photographer}</p>
             <img src='${url}' />
         `
       const img = new DomEl({

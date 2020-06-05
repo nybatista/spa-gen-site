@@ -29,7 +29,7 @@ export class DynamicAppHeader extends ViewStream {
   onRouteChangeEvent(e){
     const {isDeepLink, routeData} = e.props();
     const {pageId} = routeData;
-qq
+
     if (isDeepLink===true) {
       const routes = this.dynApp$GetCurrentRouteJson();
       this.appendView(new DynamicAppHeaderContentView({routes}), 'header');

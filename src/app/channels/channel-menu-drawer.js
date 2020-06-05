@@ -32,7 +32,7 @@ export class ChannelMenuDrawer extends Channel {
       propFilters: {
         action: (val) => val!=="CHANNEL_ROUTE_CONFIG_UPDATED_EVENT",
          payload: pathEq(['routeData', 'eventType'], 'menuDrawer')
-      }, label:'burger'
+      }
 
     })
 

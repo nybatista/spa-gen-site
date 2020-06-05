@@ -15,7 +15,7 @@
        position: relative;
         top: 0;
       left:0;
-        padding: 2rem 2rem 1rem 2rem;
+        padding: 0;//2rem 2rem 1rem 2rem;
         margin:0;
         background: rgba(0,0,0,.3);
       //height: 30%;
@@ -24,13 +24,36 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      h1{
-        font-size:6rem;
-        color:rgba(0,0,0,.05);
-        text-transform: uppercase;
+
+      .bg-image{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin:0;
+        padding: 0;
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        align-items: center;
+
+
+      }
+
+
+      .callout{
+        position: absolute;
+
+          h1{
+            font-size:6rem;
+            color:rgba(255,255,255,.85);
+            text-transform: uppercase;
+          }
+
       }
 
     }
+
 
     margin:  0;
     height: calc(100% - #{$lyt-header-height});

@@ -5,11 +5,13 @@ import {ChannelMenuDrawer} from 'channels/channel-menu-drawer';
 import {ChannelDynamicAppRoute} from 'channels/channel-dynamic-app-route';
 import {MainView} from './app/main-view';
 import SpaGenData from 'data/route-gen.json';
+import AppContentData from 'data/dynamic-app-data.json';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 import {SpyneConfigData} from 'spyne/src/tests/mocks/utils-data';
 import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 import images from 'data/images.json';
+import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 
 /*
 *
@@ -80,6 +82,14 @@ const spyneApp = new SpyneApp(config);
 
 const initSpyneAppGenerator = ()=> {
 
+
+  spyneApp.registerChannel(new ChannelFetch('CHANNEL_ROUTEGEN_JSON', {
+    url: SpaGenData,
+    mapFn: RouteCreatorTraits.routeCreator$SetLastItemInObj
+  }));
+
+
+
   spyneApp.registerChannel(new ChannelRouteCreator());
   spyneApp.registerChannel(new ChannelContainers());
   spyneApp.registerChannel(new ChannelDynamicAppRoute());
@@ -89,16 +99,19 @@ const initSpyneAppGenerator = ()=> {
   }))
 
 
-  spyneApp.registerChannel(new ChannelFetch('CHANNEL_ROUTEGEN_JSON', {
-    url: SpaGenData,
-    mapFn: RouteCreatorTraits.routeCreator$SetLastItemInObj
+
+  spyneApp.registerChannel(new ChannelFetch('CHANNEL_APPDATA_JSON', {
+    url: AppContentData,
+    mapFn: DynamicAppDataTraits.dynAppData$CacheData
   }));
 
+
 //console.log("DATA SPA GEN ",{SpaGenData});
-
-  const mainView = new MainView();
-  mainView.appendToDom(document.body);
-
+  const delayer = ()=> {
+    const mainView = new MainView();
+    mainView.appendToDom(document.body);
+  }
+  window.setTimeout(delayer, 50);
 
 
 

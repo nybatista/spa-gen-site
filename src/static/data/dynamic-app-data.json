@@ -1,0 +1,50 @@
+{
+  "content": [
+    {
+      "pageId": "home",
+      "background": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      "headline": "Section Home",
+      "text": "At nonumes expetendis reprimique pri, indoctum vulputate definitionem vim et."
+    },
+    {
+      "pageId": "work",
+      "background": "//images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      "headline": "Section Work",
+      "text": "Adhuc autem audire sit no, mea eu duis autem antiopam. Has et duis summo",
+      "content": [
+        {
+          "workId": "acme",
+          "headline": "Acme Co",
+          "text": "Qui at sale aperiri",
+          "img": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+        },
+        {
+          "workId": "widgets",
+          "headline": "Widgets Co",
+          "text": "Nam eu nonumes laboramus",
+          "img": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+        },
+        {
+          "workId": "globex",
+          "headline": "Globex Co",
+          "text": "Vim! Eos graeci officiis et",
+          "img": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+        }
+      ]
+    },
+    {
+      "pageId": "about",
+      "background": "//images.pexels.com/photos/3894157/pexels-photo-3894157.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      "headline": "Section Work",
+      "text": "Pri praesent adipiscing ex, id eam autem inciderint. Similique inciderint ei.",
+      "content": [
+        {
+          "aboutId": "contact",
+          "background": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+          "headline": "Section About",
+          "text": "At nonumes expetendis reprimique pri, indoctum vulputate definitionem vim et."
+        }
+      ]
+    }
+  ]
+}

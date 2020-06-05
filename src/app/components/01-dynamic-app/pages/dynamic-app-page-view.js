@@ -2,16 +2,22 @@ import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {PageSecondaryTopicView} from 'components/01-dynamic-app/pages/page-secondary-topic-view';
 import {DynamicAppPageTraits} from 'traits/dynamic-app-page-traits';
 import {path} from 'ramda';
+import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 
 export class DynamicAppPageView extends ViewStream {
 
   constructor(props = {}) {
     props.class = 'dynamic-app-page';
     props.traits = DynamicAppPageTraits;
+
+    props.dataNew = DynamicAppDataTraits.dynAppData$GetData(props.data);
     const cache = {};
     function importAll (r) {
       r.keys().forEach(key => cache[key] = r(key));
     }
+
+    props.data = props.dataNew;
+    console.log("DATA  Page",props);
 
     //importAll(require.context('./templates/', true, /\.html$/));
    // props.template = cache['./page.tmpl.html'];
@@ -25,6 +31,8 @@ export class DynamicAppPageView extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     const pageId = this.props.data.pageId;
+
+
     const pageIdChangeFilter = new ChannelPayloadFilter({
       propFilters: {
           routeData: (v)=>v.pageId !== pageId

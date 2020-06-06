@@ -111,7 +111,7 @@ const initSpyneAppGenerator = ()=> {
     const mainView = new MainView();
     mainView.appendToDom(document.body);
   }
-  window.setTimeout(delayer, 50);
+  window.setTimeout(delayer, 250);
 
 
 

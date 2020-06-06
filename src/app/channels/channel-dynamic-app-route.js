@@ -51,6 +51,7 @@ export class ChannelDynamicAppRoute extends Channel {
     const pageHasChanged = pathsChanged.indexOf("pageId")>=0;
     const action = pageHasChanged === true ? "CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT" : "CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT"
     payload[pageHasChanged]=pageHasChanged;
+    //console.log("PAYLOAD ROUTE IS ",{pageHasChanged,action,pathsChanged,payload,e})
 
     //console.log("PAYLOAD ROUTE ",{payload});
     this.sendChannelPayload(action, payload);

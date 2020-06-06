@@ -1,10 +1,15 @@
 import {ViewStream} from 'spyne';
 import {forEachObjIndexed} from 'ramda';
+import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
+import {merge} from 'ramda';
 
 export class DynamicAppPageCardView extends ViewStream {
 
   constructor(props = {}) {
     props.tagName = 'li';
+    props.dataNew = DynamicAppDataTraits.dynAppData$GetData(props.data);
+    props.data = merge(props.data, props.dataNew);
+
     props.class='page-card';
     props.template = require('./templates/page-cards.tmpl.html');
     super(props);

@@ -1,7 +1,7 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {PageSecondaryTopicView} from 'components/01-dynamic-app/pages/page-secondary-topic-view';
 import {DynamicAppPageTraits} from 'traits/dynamic-app-page-traits';
-import {path} from 'ramda';
+import {path, pick, merge} from 'ramda';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 
 export class DynamicAppPageView extends ViewStream {
@@ -10,14 +10,13 @@ export class DynamicAppPageView extends ViewStream {
     props.class = 'dynamic-app-page';
     props.traits = DynamicAppPageTraits;
 
-    props.dataNew = DynamicAppDataTraits.dynAppData$GetData(props.data);
+    props.dataNew = DynamicAppDataTraits.dynAppData$GetData(pick(['pageId'], props.data));
     const cache = {};
     function importAll (r) {
       r.keys().forEach(key => cache[key] = r(key));
     }
 
-    props.data = props.dataNew;
-    console.log("DATA  Page",props);
+    props.data = merge(props.data, props.dataNew);
 
     //importAll(require.context('./templates/', true, /\.html$/));
    // props.template = cache['./page.tmpl.html'];
@@ -54,7 +53,6 @@ export class DynamicAppPageView extends ViewStream {
     this.props.subTopicData.pageTopicVal = routeData[pageTopicKey];
     this.dynPage$CheckToAddSecondaryTopicPage(this.props.subTopicData)
 
-    //console.log("SECONDARY PAGE EVENT ",{e, pageTopicKey,routeData},this.props);
 
   }
 
@@ -70,7 +68,6 @@ export class DynamicAppPageView extends ViewStream {
   onSubnavChangeEvent(e){
     const {routeData} = e.props();
 
-    //console.log("E SUBNAV DATA ",{e});
     this.dynPage$CheckToAddSubnavContent(routeData);
 
   }
@@ -88,7 +85,6 @@ export class DynamicAppPageView extends ViewStream {
       this.props.subTopicData = this.dynPage$GetSubTopicData(this.props.data);
       this.dynPage$CheckToAddSecondaryTopicPage();
 
-      //console.log("SUBTOPIC DATA ",this.props.subTopicData);
       this.props.routes=routes;
   }
 

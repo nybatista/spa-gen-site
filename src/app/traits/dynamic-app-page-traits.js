@@ -46,7 +46,7 @@ export class DynamicAppPageTraits extends SpyneTrait {
 
   static dynPage$CheckToAddSecondaryTopicPage(data=this.props.subTopicData){
     //subTopicData needs {pageId, pageTopicKey, pageTopicVal};
-
+      console.log("CHECK TO ADD SUBCONTENT ",{data},this.props);
 
     if (data.pageTopicVal!==undefined){
       this.appendView(new PageSecondaryTopicView({data}) );

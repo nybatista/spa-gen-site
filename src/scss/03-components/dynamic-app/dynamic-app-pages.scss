@@ -20,10 +20,11 @@
         background: rgba(0,0,0,.3);
       //height: 30%;
       width: 100%;
-      flex-grow:1;
+      flex-grow:0;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 37vh;
 
       .bg-image{
         position: relative;

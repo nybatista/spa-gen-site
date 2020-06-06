@@ -16,19 +16,19 @@
           "workId": "acme",
           "headline": "Acme Co",
           "text": "Qui at sale aperiri",
-          "img": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          "background": "//images.pexels.com/photos/3473569/pexels-photo-3473569.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
         },
         {
           "workId": "widgets",
           "headline": "Widgets Co",
           "text": "Nam eu nonumes laboramus",
-          "img": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          "background": "//images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
         },
         {
           "workId": "globex",
           "headline": "Globex Co",
           "text": "Vim! Eos graeci officiis et",
-          "img": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          "background": "//images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
         }
       ]
     },
@@ -40,8 +40,8 @@
       "content": [
         {
           "aboutId": "contact",
-          "background": "//images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
-          "headline": "Section About",
+          "background": "//images.pexels.com/photos/1292115/pexels-photo-1292115.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+          "headline": "Contact",
           "text": "At nonumes expetendis reprimique pri, indoctum vulputate definitionem vim et."
         }
       ]

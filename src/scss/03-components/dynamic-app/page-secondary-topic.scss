@@ -1,11 +1,37 @@
-.page-secondary-topic{
+.page-secondary-topic {
   position: absolute;
-  margin: 4rem;
-  background: cornflowerblue;
-  color: #ccc;
-  width: 80%;
-  height: 80%;
-  border-radius: 12px;
-  padding: 4rem;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;;
+
+  .secondary-page-content {
+    position: relative;
+    //margin: 4rem;
+    background: #ededed;
+    color: #333;
+    width: 80%;
+    height: 85%;
+    border-radius: 12px;
+    //padding: 4rem;
+
+    .card-image{
+      img{
+        border-top-right-radius: 12px;
+        border-top-left-radius: 12px;
+      }
+    }
+
+    .card-text{
+      padding: 0 1rem;
+
+    }
+
+  }
 
 }

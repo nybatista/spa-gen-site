@@ -1,13 +1,11 @@
 import {SpyneTrait} from 'spyne';
-import {whereEq, path, compose, assocPath, pick, merge, is, clone, mapObjIndexed, prop,filter, head, pathEq, propEq} from 'ramda';
+import {whereEq, path, compose, pick, nth, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
 
 export class DynamicAppDataTraits extends SpyneTrait {
 
   constructor(context) {
     let traitPrefix = 'dynAppData$';
     super(context, traitPrefix);
-
-
 
   }
 
@@ -22,7 +20,30 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const setRouteNamesArr = ()=> {
 
       const routesJson = path(['Spyne', 'config', 'channels', 'ROUTE', 'routes'], configObj);
-      const acc = [];
+
+      const valIsObj =  compose(is(Object), nth(1))
+      const keyIsRouteName = compose(equals('routeName'), nth(0))
+
+      const routeNamesReducer = (arrPair, acc)=>{
+        if (valIsObj(arrPair)){
+          reduceRouteNamesFn(arrPair[1]);
+        }
+        if (keyIsRouteName(arrPair)){
+          acc.push(arrPair[1])
+        }
+        return acc;
+      }
+
+      const reduceRouteNamesFn = compose(reverse, reduceRight( routeNamesReducer, []), toPairs);
+      const routeNamesReducedArr = reduceRouteNamesFn(routesJson);
+
+      if (window!==undefined){
+        window.Spyne.config.channels.ROUTE.routeNamesArr = routeNamesReducedArr;
+      }
+
+      return routeNamesReducedArr;
+/*
+      console.log("TEST TRANSUCE ",{routeNamesReducedArr})
 
       const mapper = (v, k, obj) => {
         const checkForRouteName = (obj) => {
@@ -45,14 +66,13 @@ export class DynamicAppDataTraits extends SpyneTrait {
           window.Spyne.config.channels.ROUTE.routeNamesArr = acc;
         }
 
-      return acc;
+      return acc;*/
 
     }
 
     const getRouteNamesArr = ()=>{
       const routeNamesArr = path(['Spyne', 'config', 'channels', 'ROUTE', 'routeNamesArr'], configObj);
       if (routeNamesArr === undefined){
-        console.log("ROUTE NAMES NO EXIST ");
         return setRouteNamesArr();
       }
 
@@ -68,40 +88,31 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
   static dynAppData$GetData(dataProps={}){
 
-    const mainObj = pick(['pageId'], dataProps);
-
     const routeNameArr = DynamicAppDataTraits.dynAppData$GetRouteNameProps();
+    const mainData = path(['Spyne', 'config', 'dynamicData'], window);
 
-    const transduceArr = [];
-    const mapForTransduce = (str)=>{
+    const routesReducer = (acc, str)=>{
       if (dataProps.hasOwnProperty(str)){
-        transduceArr.push(pick([str], dataProps))
+        acc.push(pick([str], dataProps))
       }
+      return acc;
     }
 
-    routeNameArr.forEach(mapForTransduce);
 
+    const dataGetterFn = (obj)=>compose(head,filter(whereEq(obj)),prop('content'));
 
-
-      const mainData = path(['Spyne', 'config', 'dynamicData'], window);
-      //console.log("MAIN DATA ",mainData);
-      const dataGetterFn = (obj)=>compose(head,filter(whereEq(obj)),prop('content'));
-      const dataGetter = dataGetterFn(mainObj);
-      const d =  dataGetter(mainData);
-
-
-    const reducer = (data, obj, i, arr)=>{
+    const dataReducer = (data, obj)=>{
       const fn = dataGetterFn(obj);
       return fn(data);
     }
 
-    const newObj = transduceArr.reduce(reducer, mainData);
+    const contentData = routeNameArr
+    .reduce(routesReducer, [])
+    .reduce(dataReducer, mainData);
 
-    console.log("DATA ",{d,newObj, dataProps, mainObj, mainData})
 
-     // d['pageId'] = prop('pageId', dataProps);
 
-      return merge(dataProps, newObj);
+    return merge(dataProps, contentData);
 
   }
 

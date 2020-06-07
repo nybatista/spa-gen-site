@@ -44,11 +44,15 @@ export class DynamicAppPageTraits extends SpyneTrait {
 
   }
 
-  static dynPage$CheckToAddSecondaryTopicPage(data=this.props.subTopicData){
+  static dynPage$CheckToAddSecondaryTopicPage(subTopicData=this.props.subTopicData){
     //subTopicData needs {pageId, pageTopicKey, pageTopicVal};
-      console.log("CHECK TO ADD SUBCONTENT ",{data},this.props);
+      console.log("CHECK TO ADD SUBCONTENT ",{subTopicData},this.props);
+    const {pageTopicKey, pageTopicVal} = subTopicData;
 
-    if (data.pageTopicVal!==undefined){
+    if (pageTopicVal!==undefined){
+      const {pageId} = this.props.data;
+      const data = {pageId, pageTopicKey, pageTopicVal, [pageTopicKey]: pageTopicVal};
+
       this.appendView(new PageSecondaryTopicView({data}) );
 
     }

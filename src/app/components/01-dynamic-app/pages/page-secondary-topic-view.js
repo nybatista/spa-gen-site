@@ -1,9 +1,17 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
+import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
+import {merge} from 'ramda';
 
 export class PageSecondaryTopicView extends ViewStream {
 
   constructor(props = {}) {
     props.class = 'page-secondary-topic';
+    const {pageId, pageTopicKey, pageTopicVal} = props.data;
+    const subTopicData = {pageId, [pageTopicKey]: pageTopicVal };
+    props.data = merge(props.data, DynamicAppDataTraits.dynAppData$GetData(subTopicData));
+
+
+    console.log("SECONDARY TOPIC ",{subTopicData},props.data);
     props.template = require('./templates/page-secondary-topic.tmpl.html');
     super(props);
 

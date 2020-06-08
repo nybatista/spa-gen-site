@@ -135,7 +135,7 @@
     devServer: {
       contentBase: PATHS.src,
       historyApiFallback: true,
-      port: 8090
+      port: 8080
     },
 
     plugins: [miniCssPlugin, cleanPlugin, htmlPlugin,ProgressHookPlugin],

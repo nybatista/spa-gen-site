@@ -37,7 +37,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
       const reduceRouteNamesFn = compose(reverse, reduceRight( routeNamesReducer, []), toPairs);
       const routeNamesReducedArr = reduceRouteNamesFn(routesJson);
 
-      if (window!==undefined){
+      if (window!==undefined && window.Spyne.config!==undefined){
         window.Spyne.config.channels.ROUTE.routeNamesArr = routeNamesReducedArr;
       }
 

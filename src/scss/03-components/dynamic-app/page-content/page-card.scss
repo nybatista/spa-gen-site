@@ -1,51 +1,45 @@
-.dynamic-app-page-subnav-container{
-  position:relative;
+.dynamic-app-page-subnav-container {
+  position: relative;
   list-style-type: none;
   padding: 0;
   display: flex;
 
-  .page-card{
-   max-width: 250px;
-    margin:0 10px;
+  .page-card {
+    max-width: 250px;
+    margin: 0 10px;
 
-    a{
+    a {
       text-decoration: none;
-
     }
 
     .card-content {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
       height: 300px;
 
       padding-bottom: 12px;
-    &:hover{
-      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
-
-    img {
-      border-radius: 5px 5px 0 0;
-    }
-    a{
-      text-decoration: none;
-      color:inherit;;
-    }
-
-    dd{
-      h2,p{
-        text-decoration: none;
-
+      &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
       }
 
-      position: relative;
-      padding: 2px 22px;
-      margin:0;
+      img {
+        border-radius: 5px 5px 0 0;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
 
+      dd {
+        h2,
+        p {
+          text-decoration: none;
+        }
 
+        position: relative;
+        padding: 2px 22px;
+        margin: 0;
+      }
     }
-
-
-  }}
-
-
+  }
 }

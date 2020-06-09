@@ -4,7 +4,7 @@ const R = require('ramda');
 
 const pexelsCLient = new PexelsAPI("563492ad6f91700001000001722565f2e3f54931a27f534c8195d6aa");
 
-const terms = [
+const termsArr = [
     ['about', 'team'],
     ['gallery', 'photographer'],
     ['services','service industry'],
@@ -27,12 +27,8 @@ const terms = [
 
 ]
 
-
-
-//const type = 'bananas';
-//const searchTerm = type;
-
-const fileName = `./${type}.json`;
+let mainPhotos = [];
+const fileName = "./all-photos.json";
 
 
 const onComplete = (err)=>{
@@ -43,16 +39,12 @@ const onErr = (err)=>{
   console.log("ERROR IS ",err);
 }
 
-const mainPhotos = [];
 const saveToFile = (data) =>fs.writeFile(fileName, data, 'utf8', onComplete);
 
 const onAllComplete = ()=>{
-
-
   const data = {
     photos: mainPhotos
   }
-
   saveToFile(JSON.stringify(data));
 
 }
@@ -66,23 +58,20 @@ const callSearchItem = (arr)=> {
   let [type, searchTerm] = arr;
 
   const onReturnedResult = (results)=>{
-
     const addType = (obj)=>{
       obj['type']=type;
-      //console.log("OBJ TYPE ",type,obj);
       return obj;
-
     }
 
     let {photos} = results;
-
     photos = photos.map(addType);
 
-    const data = JSON.stringify({photos});
-
-    //saveToFile(data, fileName);
-
-
+    mainPhotos = R.concat(mainPhotos, photos);
+    if (termsArr.length>=1){
+      callSearchItem(termsArr.shift());
+    } else {
+      onAllComplete();
+    }
 
     return photos;
   }
@@ -93,3 +82,5 @@ const callSearchItem = (arr)=> {
       catch(onErr);
 
 }
+
+callSearchItem(termsArr.shift());

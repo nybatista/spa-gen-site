@@ -5,8 +5,9 @@
     </div>
     <div class="card-text">
         <h2>{{headline}}</h2>
-        <p>{{text}}</p>
-
+        {{#article}}
+            <p>{{.*}}</p>
+        {{/article}}
     </div>
 
 

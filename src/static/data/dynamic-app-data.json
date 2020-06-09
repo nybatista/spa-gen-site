@@ -16,19 +16,31 @@
           "workId": "acme",
           "headline": "Acme Co",
           "text": "Qui at sale aperiri",
-          "background": "//images.pexels.com/photos/3473569/pexels-photo-3473569.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          "background": "//images.pexels.com/photos/3473569/pexels-photo-3473569.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+          "article": [
+            "Minim laoreet ad mei, volumus invenire elaboraret has ut. Cu est nibh tibique, possim eruditi conceptam ad mei, in partem appareat scriptorem mei. Verear urbanitas per ea, ludus diceret mea cu. Duo id assentior reprehendunt, vide dolorum dolores ad vel. Deleniti complectitur ut pro.",
+            "Quis suscipit eos ne. Usu an facilis nominavi reprimique, his eu ignota dolorem eleifend, phaedrum instructior no qui. Sea ex pericula voluptatibus, in ocurreret tincidunt mel. Te vel viris dictas voluptatibus, te dolor invenire dissentiet sit."
+          ]
         },
         {
           "workId": "widgets",
           "headline": "Widgets Co",
           "text": "Nam eu nonumes laboramus",
-          "background": "//images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          "background": "//images.pexels.com/photos/1025469/pexels-photo-1025469.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+          "article": [
+            "Minim laoreet ad mei, volumus invenire elaboraret has ut. Cu est nibh tibique, possim eruditi conceptam ad mei, in partem appareat scriptorem mei. Verear urbanitas per ea, ludus diceret mea cu. Duo id assentior reprehendunt, vide dolorum dolores ad vel. Deleniti complectitur ut pro.",
+            "Quis suscipit eos ne. Usu an facilis nominavi reprimique, his eu ignota dolorem eleifend, phaedrum instructior no qui. Sea ex pericula voluptatibus, in ocurreret tincidunt mel. Te vel viris dictas voluptatibus, te dolor invenire dissentiet sit."
+          ]
         },
         {
           "workId": "globex",
           "headline": "Globex Co",
           "text": "Vim! Eos graeci officiis et",
-          "background": "//images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+          "background": "//images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+          "article": [
+            "Minim laoreet ad mei, volumus invenire elaboraret has ut. Cu est nibh tibique, possim eruditi conceptam ad mei, in partem appareat scriptorem mei. Verear urbanitas per ea, ludus diceret mea cu. Duo id assentior reprehendunt, vide dolorum dolores ad vel. Deleniti complectitur ut pro.",
+            "Quis suscipit eos ne. Usu an facilis nominavi reprimique, his eu ignota dolorem eleifend, phaedrum instructior no qui. Sea ex pericula voluptatibus, in ocurreret tincidunt mel. Te vel viris dictas voluptatibus, te dolor invenire dissentiet sit."
+          ]
         }
       ]
     },
@@ -42,7 +54,11 @@
           "aboutId": "contact",
           "background": "//images.pexels.com/photos/1292115/pexels-photo-1292115.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
           "headline": "Contact",
-          "text": "At nonumes expetendis reprimique pri, indoctum vulputate definitionem vim et."
+          "text": "At nonumes expetendis reprimique pri, indoctum vulputate definitionem vim et.",
+          "article": [
+            "Minim laoreet ad mei, volumus invenire elaboraret has ut. Cu est nibh tibique, possim eruditi conceptam ad mei, in partem appareat scriptorem mei. Verear urbanitas per ea, ludus diceret mea cu. Duo id assentior reprehendunt, vide dolorum dolores ad vel. Deleniti complectitur ut pro.",
+            "Quis suscipit eos ne. Usu an facilis nominavi reprimique, his eu ignota dolorem eleifend, phaedrum instructior no qui. Sea ex pericula voluptatibus, in ocurreret tincidunt mel. Te vel viris dictas voluptatibus, te dolor invenire dissentiet sit."
+          ]
         }
       ]
     }

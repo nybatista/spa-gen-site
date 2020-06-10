@@ -1,4 +1,4 @@
-import {ViewStream, SpyneApp, ChannelFetch} from "spyne";
+import {ViewStream, SpyneApp, ChannelFetch, ChannelFetchUtil} from "spyne";
 import {ChannelRouteCreator} from 'channels/channel-route-creator';
 import {ChannelContainers} from 'channels/channel-containers';
 import {ChannelMenuDrawer} from 'channels/channel-menu-drawer';
@@ -68,7 +68,7 @@ const defaultConfig = {
 
 
 // SAVE DEFAULT CONFIG TO WINDOW VARIABLE
-LocalStorageTraits.localStorage$InitializeConfig(defaultConfig, 'spyneStore');
+LocalStorageTraits.localStorage$InitializeConfig(defaultConfig);
 
 // CHECK TO LOAD DEFAULT CONFIG OR LOAD LOCALSTORAGE CONFIG
 const config = SpyneConfigTrait.config$getConfigFromStorage();
@@ -79,6 +79,19 @@ const R = require('ramda');
 const css = require('./scss/main.scss');
 
 const spyneApp = new SpyneApp(config);
+
+
+const onAppDataReturned = (d)=>{
+  DynamicAppDataTraits.dynAppData$CacheData(d);
+  initSpyneAppGenerator();
+
+
+}
+
+const responseType = 'json';
+
+new ChannelFetchUtil({url:AppContentData, responseType},onAppDataReturned);
+
 
 const initSpyneAppGenerator = ()=> {
 
@@ -100,18 +113,8 @@ const initSpyneAppGenerator = ()=> {
 
 
 
-  spyneApp.registerChannel(new ChannelFetch('CHANNEL_APPDATA_JSON', {
-    url: AppContentData,
-    mapFn: DynamicAppDataTraits.dynAppData$CacheData
-  }));
-
-
-//console.log("DATA SPA GEN ",{SpaGenData});
-  const delayer = ()=> {
     const mainView = new MainView();
     mainView.appendToDom(document.body);
-  }
-  window.setTimeout(delayer, 250);
 
 
 
@@ -119,6 +122,5 @@ const initSpyneAppGenerator = ()=> {
 
 
 
-initSpyneAppGenerator();
 
 window.R = require('ramda');

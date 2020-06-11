@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {whereEq, path, compose, pick, omit,map, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
+import {whereEq, path, compose, pick, flatten, omit,map, defaultTo, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
 
 export class DynamicAppDataTraits extends SpyneTrait {
 
@@ -14,72 +14,19 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const routesJson = DynamicAppDataTraits.dynAppData$GetRoutesJson(configObj);
 
 
-    /*
-        const configForRoutes = {
-          Spyne: {config}
-        }
-        const  routeNamesArr = DynamicAppDataTraits.dynAppData$GetRouteNameProps(configForRoutes);
-    */
-
     const valIsObj =  compose(is(Object), nth(1))
-    const keyIsRouteName = compose(equals('routeName'), nth(0))
-    const objIsRoutePath = compose(equals('routePath'), nth(0))
     const getProps = compose(toPairs, omit(['^$', '404', 'routeName']))
 
-    const validateAllProps = (obj)=>{
 
-      const appDataContent = appData.content;
-
-      const {routeName} = obj;
-      const containsRouteName = routeName!==undefined;
-      const props = getProps(obj);
-
-      const checkPropsForContent = (propsPair)=>{
-        const val = propsPair[0];
-        const whereEqFn = compose(head, filter(whereEq({[routeName]:val})))
-        const propExists = whereEqFn!==undefined;
-
-       // console.log('obj pair is ',routeName, val, whereEqFn(appDataContent));
-          return propsPair;
-      }
-
-      const propsPair = compose(map(checkPropsForContent))(props);
+    const boolAcc = []
 
 
-      //console.log('validating props ',{routeName,propsPair}, JSON.stringify(props));
-
-
-      return true;
-    }
-
-    let contentInc = 0;
-
-    const routeNamesReducer = (arrPair, acc)=>{
-
-      if (valIsObj(arrPair)){
-         const isRoutePath = objIsRoutePath(arrPair);
-        if (isRoutePath){
-          console.log("ARR PAIR IS ",{arrPair, contentInc, isRoutePath});
-
-          acc.push(validateAllProps(arrPair[1]));
-        }
-        reduceRouteNamesFn(arrPair[1]);
-      }
-      if (keyIsRouteName(arrPair)){
-       // acc.push(arrPair[1])
-      }
-      return acc;
-    }
-
-    const reduceRouteNamesFn = ()=>{};//compose(reverse, reduceRight( routeNamesReducer, []), toPairs);
-    const routeNamesReducedArr = 3;//reduceRouteNamesFn(routesJson);
-
-
+    const defaultContentObj = defaultTo({});
   const compareRouteNameAndContent = (routesObj, contentObj)=> {
 
     const {routePath} = routesObj;
-    const {content} = contentObj;
-
+    const content = compose(defaultContentObj, prop('content'))(contentObj);
+    console.log("CONTENT IS ",{content})
     const onMapObj = (rObj, cObj) => {
       //console.log("OBJ IS ", {k})
 
@@ -93,33 +40,32 @@ export class DynamicAppDataTraits extends SpyneTrait {
         const whereEqFn = compose(head, filter(whereEq({[routeName]:prop})))
         const sectionContent = whereEqFn(content);
         const propExists = sectionContent!==undefined;
-
-        console.log("PROP IS ", {prop, propExists}, sectionContent);
+        boolAcc.push(propExists);
+        //console.log("PROP IS ", {prop, propExists});
 
         if (valIsObj(arrPair)){
-          console.log("GOING THROUGH DATA ",{routeName, containsRouteName, propExists}, JSON.stringify(sectionContent))
-          compareRouteNameAndContent(propVal, sectionContent);
+          //console.log("GOING THROUGH DATA ",{routeName, containsRouteName, propExists}, JSON.stringify(sectionContent))
+          return compareRouteNameAndContent(propVal, sectionContent);
         }
 
-        return arrPair;
+
+        return propExists;
 
       }
-
-      props.map(mapThroughProps);
-
-      return rObj;
+      return props.map(mapThroughProps);
     }
 
 
+    const propsBool= onMapObj(routePath, content);
 
-    onMapObj(routePath, content);
+   // console.log("props bool ",{propsBool});
+    return propsBool;
   }
 
 
-    compareRouteNameAndContent(routesJson, appData);
+   const validateAppData = flatten(compareRouteNameAndContent(routesJson, appData));
 
-    console.log('validate againast config ',);
-
+    console.log('validate app data ',{validateAppData,boolAcc})
   }
 
   static dynAppData$GetRoutesJson(configObj){

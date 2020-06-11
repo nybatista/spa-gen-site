@@ -1,5 +1,6 @@
 import {SpyneTrait} from 'spyne';
-import {whereEq, path, compose, pick, flatten, omit,map, defaultTo, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
+import {whereEq, path, compose, pick, flatten, omit,map,all, defaultTo, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
+import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
 
 export class DynamicAppDataTraits extends SpyneTrait {
 
@@ -17,21 +18,17 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const valIsObj =  compose(is(Object), nth(1))
     const getProps = compose(toPairs, omit(['^$', '404', 'routeName']))
 
-
     const boolAcc = []
 
-
     const defaultContentObj = defaultTo({});
-  const compareRouteNameAndContent = (routesObj, contentObj)=> {
+    const compareRouteNameAndContent = (routesObj, contentObj)=> {
 
     const {routePath} = routesObj;
     const content = compose(defaultContentObj, prop('content'))(contentObj);
-    console.log("CONTENT IS ",{content})
-    const onMapObj = (rObj, cObj) => {
-      //console.log("OBJ IS ", {k})
 
+    // MAP EACH ROUTEPATH OBJ
+    const onMapObj = (rObj, cObj) => {
       const {routeName} = rObj;
-      const containsRouteName = routeName!==undefined;
       const props = getProps(rObj);
 
       const mapThroughProps = (arrPair)=>{
@@ -41,31 +38,25 @@ export class DynamicAppDataTraits extends SpyneTrait {
         const sectionContent = whereEqFn(content);
         const propExists = sectionContent!==undefined;
         boolAcc.push(propExists);
-        //console.log("PROP IS ", {prop, propExists});
-
         if (valIsObj(arrPair)){
-          //console.log("GOING THROUGH DATA ",{routeName, containsRouteName, propExists}, JSON.stringify(sectionContent))
           return compareRouteNameAndContent(propVal, sectionContent);
         }
 
-
         return propExists;
-
       }
       return props.map(mapThroughProps);
     }
-
-
-    const propsBool= onMapObj(routePath, content);
-
-   // console.log("props bool ",{propsBool});
-    return propsBool;
+    return onMapObj(routePath, content);
   }
 
 
-   const validateAppData = flatten(compareRouteNameAndContent(routesJson, appData));
+   compareRouteNameAndContent(routesJson, appData);
 
-    console.log('validate app data ',{validateAppData,boolAcc})
+    const appDataIsValid = all(equals(true), boolAcc);
+
+    console.log('validate app data ',{appDataIsValid, boolAcc})
+
+    return appDataIsValid;
   }
 
   static dynAppData$GetRoutesJson(configObj){
@@ -75,18 +66,25 @@ export class DynamicAppDataTraits extends SpyneTrait {
   static dynAppData$ConformAppData(d, configObj=window){
     let defaultDynamicData = d;
 
-    const routesJson = DynamicAppDataTraits.dynAppData$GetRoutesJson(configObj);
 
 
-
-
-
-    const validateBool = DynamicAppDataTraits.dynAppData$Validate(d, configObj);
 
     let dynamicAppData = d;
 
+    let generateAppData = AppDataGeneratorTraits.appDataGen$CreateDataFromRoutes(configObj);
+    const appDataIsValid = DynamicAppDataTraits.dynAppData$Validate(generateAppData, configObj);
 
-    return DynamicAppDataTraits.dynAppData$CacheData(dynamicAppData);
+    console.log('generate app data ', {generateAppData, d});
+
+    if (appDataIsValid){
+
+
+      return DynamicAppDataTraits.dynAppData$CacheData(generateAppData);
+    }
+
+    return d;
+
+
 
   }
 

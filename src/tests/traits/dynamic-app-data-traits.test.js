@@ -2,6 +2,7 @@ import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
 import {AppData} from '../mocks/app-data-mock';
 import {DataSource} from '../mocks/app-data-source-mock';
+const R = require('ramda');
 
 import {Routes} from '../mocks/routes-data-mock';
 
@@ -24,13 +25,19 @@ describe('should get data based on routeProps', () => {
     return true;
   })
 
-  it('should validate app data and compare against routeData',()=>{
-      const dataConformed = DynamicAppDataTraits.dynAppData$ConformAppData(AppData, Routes);
-    console.log('app data is ',AppData);
-
-    return true;
-
+  it('should validate app data',()=>{
+      const dataValidated  = DynamicAppDataTraits.dynAppData$Validate(AppData, Routes);
+      expect(dataValidated).to.eq(true);
   })
+
+
+  it('should invalidate app data',()=>{
+    const appDataInvalid = R.clone(AppData);
+    appDataInvalid['content'][0].pageId='foo';
+    const dataValidated  = DynamicAppDataTraits.dynAppData$Validate(appDataInvalid, Routes);
+    expect(dataValidated).to.eq(false);
+  })
+
 
 
 });

@@ -2,6 +2,7 @@ import {ViewStream} from 'spyne';
 import {MainContainer} from 'components/containers/main-container';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 import {SpyneConfigTrait} from 'traits/spyne-config-trait';
+import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 
 export class MainView extends ViewStream {
 
@@ -27,6 +28,15 @@ export class MainView extends ViewStream {
     const pageId='home';
     const pageIdValue = '';
     this.sendInfoToChannel("CHANNEL_ROUTE", {pageId, pageIdValue});
+
+
+
+    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData({});
+
+    console.log('updated Dynamic Data ',updatedDynamicData);
+
+
+
 
   }
 

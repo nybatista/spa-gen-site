@@ -45,7 +45,7 @@ export class RouteCreatorMainView extends ViewStream {
   }
 
   onItemAdded(e){
-    //console.log("E IS ",e);
+    console.log("E IS ",e);
     const minHeight = 450;
 
     const delayer = ()=> {

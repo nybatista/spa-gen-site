@@ -1,6 +1,7 @@
 import {SpyneTrait} from 'spyne';
-import {whereEq, path, compose, pick, flatten, omit,map,all, defaultTo, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
+import {whereEq, path, compose, pick, flatten,isEmpty, omit,map,all, defaultTo, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
 import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
+import {LocalStorageTraits} from 'traits/local-storage-traits';
 
 export class DynamicAppDataTraits extends SpyneTrait {
 
@@ -64,25 +65,39 @@ export class DynamicAppDataTraits extends SpyneTrait {
   }
 
   static dynAppData$ConformAppData(d, configObj=window){
-    let defaultDynamicData = d;
+
+    const defaultIsValid = DynamicAppDataTraits.dynAppData$Validate(d, configObj);
+
+    if (defaultIsValid === true){
+      return DynamicAppDataTraits.dynAppData$CacheData(d);
+
+    }
 
 
+    let localStorageDynamicData = LocalStorageTraits.localStorage$GetStoreObj('dynamicData');
+    const localStorageDataIsValid =  DynamicAppDataTraits.dynAppData$Validate(localStorageDynamicData, configObj);
+
+    console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});
+    if (localStorageDataIsValid === true){
+         return DynamicAppDataTraits.dynAppData$CacheData(localStorageDynamicData);
+    } else {
+      let generatedAppData = AppDataGeneratorTraits.appDataGen$CreateDataFromRoutes(configObj);
+     // const generatedAppDataIsValid =DynamicAppDataTraits.dynAppData$Validate(generateAppData, configObj);
+      LocalStorageTraits.localStorage$SetStoreObj('dynamicData', generatedAppData)
+      return DynamicAppDataTraits.dynAppData$CacheData(generatedAppData);
+
+    }
 
 
-    let dynamicAppData = d;
-
-    let generateAppData = AppDataGeneratorTraits.appDataGen$CreateDataFromRoutes(configObj);
-    const appDataIsValid = DynamicAppDataTraits.dynAppData$Validate(generateAppData, configObj);
-
+/*
     console.log('generate app data ', {generateAppData, d});
 
     if (appDataIsValid){
 
-
-      return DynamicAppDataTraits.dynAppData$CacheData(generateAppData);
     }
 
     return d;
+*/
 
 
 

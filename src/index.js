@@ -82,7 +82,7 @@ const spyneApp = new SpyneApp(config);
 
 
 const onAppDataReturned = (d)=>{
-  DynamicAppDataTraits.dynAppData$CacheData(d);
+  DynamicAppDataTraits.dynAppData$ConformAppData(d, {Spyne:{config}});
   initSpyneAppGenerator();
 
 

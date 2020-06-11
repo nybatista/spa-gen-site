@@ -10,7 +10,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
   }
 
   static appDataGen$GetMainPropVals(key, data){
-    console.log("KEY AND DATA ", {key, data})
+   // console.log("KEY AND DATA ", {key, data})
 
 
 

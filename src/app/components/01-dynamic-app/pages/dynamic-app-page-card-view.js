@@ -11,6 +11,7 @@ export class DynamicAppPageCardView extends ViewStream {
     props.data = merge(props.data, props.dataNew);
 
     props.class='page-card';
+    console.log("PROPS DATA IS ",props.data,{props});
     props.template = require('./templates/page-cards.tmpl.html');
     super(props);
 

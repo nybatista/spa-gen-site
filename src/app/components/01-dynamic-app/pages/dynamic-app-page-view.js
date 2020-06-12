@@ -40,6 +40,7 @@ export class DynamicAppPageView extends ViewStream {
     })
 
     return [
+        ['CHANNEL_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteChangeEvent'],
       ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onRouteChangeEvent', pageIdChangeFilter],
         ['CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT', 'onSecondaryPageEvent']
 
@@ -62,7 +63,16 @@ export class DynamicAppPageView extends ViewStream {
 
 
   onRouteChangeEvent(e){
-    this.disposeViewStream()
+/*
+    const {routeData, routeConfigHasUpdated} = e.props();
+    const {pageId} = routeData;
+
+    if (pageId!==this.props.data.pageId || routeConfigHasUpdated === true){
+      this.disposeViewStream()
+    }
+*/
+
+   this.disposeViewStream()
   }
 
   onSubnavChangeEvent(e){
@@ -79,11 +89,14 @@ export class DynamicAppPageView extends ViewStream {
 
   onRendered() {
     this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
+    this.addChannel("CHANNEL_ROUTE");
       this.dynPage$AddPageContent(this.props.data.pageId);
       const {routes} = this.dynPage$CheckToAddSubnavContent();
 
       this.props.subTopicData = this.dynPage$GetSubTopicData(this.props.data);
       this.dynPage$CheckToAddSecondaryTopicPage();
+
+      console.log("SUB NAV CONTENT ",this.props);
 
       this.props.routes=routes;
   }

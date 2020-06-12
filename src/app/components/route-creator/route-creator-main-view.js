@@ -31,7 +31,7 @@ export class RouteCreatorMainView extends ViewStream {
   }
 
   onResetDefaultJson(e){
-    //console.log("RESET DEFAULT JSON -- RETRIEVE DATA AND RELOAD BARS ",e);
+    console.log("RESET DEFAULT JSON -- RETRIEVE DATA AND RELOAD BARS ",e);
 
     this.setTimeout(this.onRouteGenData.bind(this), 500);
    //onRouteGenData

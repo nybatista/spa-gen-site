@@ -1,7 +1,7 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter} from 'spyne';
-import {trim,path,clone} from 'ramda';
+import {trim,path, pathEq,clone} from 'ramda';
 
 export class ChannelDynamicAppRoute extends Channel {
 
@@ -51,7 +51,9 @@ export class ChannelDynamicAppRoute extends Channel {
     const pageHasChanged = pathsChanged.indexOf("pageId")>=0;
     const action = pageHasChanged === true ? "CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT" : "CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT"
     payload[pageHasChanged]=pageHasChanged;
-    //console.log("PAYLOAD ROUTE IS ",{pageHasChanged,action,pathsChanged,payload,e})
+    payload["routeConfigHasUpdated"] = pathEq(['srcElement', 'id'], 'spyne-spa-gen-site')(e);
+
+    console.log("PAYLOAD ROUTE IS ",{pageHasChanged,action,pathsChanged,payload,e})
 
     //console.log("PAYLOAD ROUTE ",{payload});
     this.sendChannelPayload(action, payload);

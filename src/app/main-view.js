@@ -22,8 +22,22 @@ export class MainView extends ViewStream {
     ];
   }
 
+  onChannelRouteUpdated(){
+
+
+  }
+
   onRouteConfigUpdated(e){
+
+
+    const dynamicData = LocalStorageTraits.localStorage$GetStoreObj('defaultDynamicData');
+    console.log('updated Dynamic Data on ROUTE UPDATED  ', {dynamicData,e});
+
+
     SpyneConfigTrait.config$SetRouteToLocalStorage();
+
+
+
 
     const pageId='home';
     const pageIdValue = '';
@@ -31,9 +45,8 @@ export class MainView extends ViewStream {
 
 
 
-    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData({});
+    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData);
 
-    console.log('updated Dynamic Data ',updatedDynamicData);
 
 
 

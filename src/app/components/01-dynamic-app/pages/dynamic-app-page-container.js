@@ -18,8 +18,8 @@ export class DynamicAppPageContainer extends ViewStream {
   }
 
   onRouteChangeEvent(e){
-    const {pathsChanged, routeData, isDeepLink} = e.props();
-    if (pathsChanged.indexOf('pageId')>=0){
+    const {pathsChanged, routeData, routeConfigHasUpdated, isDeepLink} = e.props();
+    if (pathsChanged.indexOf('pageId')>=0 || routeConfigHasUpdated){
       this.appendView(new DynamicAppPageView({data:routeData, isDeepLink}));
     }
   }

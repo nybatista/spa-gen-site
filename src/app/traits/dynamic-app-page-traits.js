@@ -74,7 +74,7 @@ export class DynamicAppPageTraits extends SpyneTrait {
       const subNavRouteKey = path(['routePath', 'routeName'], routes);
       const subNavRouteValue =  routeData[subNavRouteKey];
       const data= merge({subNavRouteValue,subNavRouteKey}, routeData);
-      //console.log("FINAL DATA ",{data});
+      console.log("FINAL DATA ",{data});
       this.appendView(new DynamicAppPageSubnavContainer({data,routes}), '.page-content');
     }
 

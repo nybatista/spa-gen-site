@@ -8,6 +8,7 @@ import {compose, fromPairs,map, toPairs,merge,mergeLeft,mergeRight,mergeAll,
     mergeDeepWith,
     mergeWithKey,
     mapObj,
+    assocPath,
   tap,is,append,concat,prepend,assoc} from 'ramda';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 
@@ -112,9 +113,9 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     };
 
     const mainEl = document.getElementById(mainSel);
-    const routes =  createObjFromUl(mainEl.dataset.vsid);
+    let routes =  createObjFromUl(mainEl.dataset.vsid);
    // routes.routePath['404']='.*';
-
+    routes = assocPath(['routePath', 'home'], '^$', routes);
     return {routes};
 
   }

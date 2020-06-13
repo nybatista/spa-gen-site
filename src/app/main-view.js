@@ -37,6 +37,7 @@ export class MainView extends ViewStream {
     SpyneConfigTrait.config$SetRouteToLocalStorage();
 
 
+    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData);
 
 
     const pageId='home';
@@ -45,7 +46,6 @@ export class MainView extends ViewStream {
 
 
 
-    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData);
 
 
 

@@ -48,10 +48,22 @@ export class ChannelDynamicAppRoute extends Channel {
     const {payload} = e.props();
     //console.log("PAYLOAD ROUTE IS ",{payload,e})
     const {pathsChanged} = payload;
+
+    const routeConfigHasUpdated = pathEq(['srcElement', 'id'], 'spyne-spa-gen-site')(e);
+    if (routeConfigHasUpdated === true && pathsChanged.indexOf('pageId')<=-1){
+      pathsChanged.push('pageId');
+    }
+
     const pageHasChanged = pathsChanged.indexOf("pageId")>=0;
-    const action = pageHasChanged === true ? "CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT" : "CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT"
+
+    const action = pageHasChanged === true || routeConfigHasUpdated === true ? "CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT" : "CHANNEL_DYNAMIC_APP_ROUTE_SUBNAV_CHANGE_EVENT"
     payload[pageHasChanged]=pageHasChanged;
-    payload["routeConfigHasUpdated"] = pathEq(['srcElement', 'id'], 'spyne-spa-gen-site')(e);
+
+
+
+    payload["routeConfigHasUpdated"] = routeConfigHasUpdated;
+
+
 
     console.log("PAYLOAD ROUTE IS ",{pageHasChanged,action,pathsChanged,payload,e})
 

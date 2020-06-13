@@ -14,9 +14,17 @@ export class CustomizeContainer extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-      ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onToggleView']
+      ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onToggleView'],
+        ['CHANNEL_CONTAINERS_DRAG_EVENT', 'onContainerDragEvent']
 
     ];
+  }
+
+  onContainerDragEvent(e){
+    const {y, containerHeight} = e.props();
+    console.log('container drag event ',{y},e)
+    gsap.set(this.props.el, {height:containerHeight});
+
   }
 
   onToggleView(e){

@@ -33,6 +33,13 @@ export class ChannelContainers extends Channel {
      return actionsHash[str];
   }
 
+  onCusomtizeDraggerUpdated(e){
+    const action = 'CHANNEL_CONTAINERS_DRAG_EVENT';
+    const {payload} = e;
+    this.sendChannelPayload(action, payload);
+
+  }
+
   onContainerEvent(e){
     const {eventType,type,value} = e.props();
     //console.log("CONTAINER EVENT ", {eventType,type,value})
@@ -43,7 +50,9 @@ export class ChannelContainers extends Channel {
   addRegisteredActions() {
     return [
 
-        'CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT'
+        'CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT',
+        'CHANNEL_CONTAINERS_DRAG_EVENT',
+        ['CHANNEL_CONTAINERS_DRAG_UPDATED_EVENT', 'onCusomtizeDraggerUpdated']
 
     ];
   }

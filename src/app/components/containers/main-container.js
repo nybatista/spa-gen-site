@@ -1,13 +1,14 @@
 import {ViewStream} from 'spyne';
 import {CustomizeContainer} from './customize-container';
 import {DynamicAppContainer} from './dynamic-app-container';
+import {CustomizeContainerUI} from 'components/containers/containers-ui/customize-container-ui';
 
 export class MainContainer extends ViewStream {
 
   constructor(props = {}) {
     props.id='main-container';
     props.tagName='div';
-    props.template = require('./templates/container-main.tmpl.html');
+    //props.template = require('./templates/container-main.tmpl.html');
     super(props);
 
   }
@@ -20,13 +21,14 @@ export class MainContainer extends ViewStream {
   broadcastEvents() {
     // return nexted array(s)
     return [
-      ['.toggle-btn', 'click']
     ];
   }
 
   onRendered() {
     this.appendView(new CustomizeContainer());
     this.appendView(new DynamicAppContainer());
+
+    this.appendView(new CustomizeContainerUI());
   }
 
 }

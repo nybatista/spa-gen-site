@@ -22,16 +22,25 @@ export class CustomizeContainer extends ViewStream {
 
   onContainerDragEvent(e){
     const {y, containerHeight} = e.props();
-    console.log('container drag event ',{y},e)
+    //console.log('container drag event ',{y},e)
     gsap.set(this.props.el, {height:containerHeight});
 
   }
 
+  onRevealContainer(bool){
+    const num = bool === true ? 600 : 0;
+    gsap.to(this.props.el, {duration:.5, height:num});
+  }
+
+
+
   onToggleView(e){
-    const {eventType,type,value} = e.props();
+    const {eventType,type,value, revealContainerBool} = e.props();
+    this.onRevealContainer(revealContainerBool);
+
     //console.log("TOGGLINGE CustomizeContainer VIEW ",{e});
-    this.props.el$.toggleClass('reveal');
-    this.props.el$.inline='';
+   // this.props.el$.toggleClass('reveal');
+   // this.props.el$.inline='';
   }
 
 
@@ -41,7 +50,7 @@ export class CustomizeContainer extends ViewStream {
   }
 
   animateTest(){
-    this.props.el$.addClass('reveal');
+  //  this.props.el$.addClass('reveal');
    // gsap.to(this.props.el, {duration:.5, height:40, delay:4})
   }
 

@@ -1,5 +1,6 @@
 import {ViewStream} from 'spyne';
 import {DraggerBarTraits} from 'traits/dragger-bar-traits';
+import {gsap} from 'gsap/all';
 
 export class CustomizeUIDragger extends ViewStream {
 
@@ -14,6 +15,7 @@ export class CustomizeUIDragger extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
+        ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onCustomizeContainerToggled'],
       ['CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT', 'onInitDragItems'],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onInitDragItems'],
       ['CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT', 'onInitDragItems'],
@@ -22,6 +24,24 @@ export class CustomizeUIDragger extends ViewStream {
       ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onInitDragItems']
 
     ];
+  }
+
+  onCustomizeContainerToggled(e){
+    const {eventType,type,value, revealContainerBool} = e.props();
+
+    const delayTime = revealContainerBool === true ? 550 : 0;
+    const opacityNum = revealContainerBool === true ? 1 : 0;
+    console.log("LOADING DRAGGER OPACITY ",{revealContainerBool, delayTime, opacityNum});
+
+
+    const onStartFadeAnim = ()=>{
+      this.dragBar$InitYPos();
+      gsap.to(this.props.el, {duration:.5, opacity:opacityNum });
+    }
+
+    this.setTimeout(onStartFadeAnim, delayTime);
+
+
   }
 
   onInitDragItems(e){
@@ -37,7 +57,10 @@ export class CustomizeUIDragger extends ViewStream {
   }
 
   onRendered() {
+    gsap.set(this.props.el, {opacity:0})
     this.addChannel('CHANNEL_ROUTE_CREATOR');
+    this.addChannel("CHANNEL_CONTAINERS");
+
     this.dragBar$InitDraggable();
 
   }

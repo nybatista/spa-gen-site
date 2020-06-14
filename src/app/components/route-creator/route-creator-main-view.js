@@ -59,7 +59,7 @@ export class RouteCreatorMainView extends ViewStream {
       const newHeightStr = `height:${mainHeight+150}px;`;
       const mainEl = document.getElementById('customize-container');
       this.props.el$('#route-creator-container').inline=`height:${mainHeight+30}px`;
-      mainEl.style.cssText = newHeightStr
+     // mainEl.style.cssText = newHeightStr
      // console.log("ITEM IS ", {e,newHeight, newHeightStr, elItemIndex, elArr, box, secondToLastEl}, this.props.el);
 
     }

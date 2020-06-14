@@ -24,7 +24,7 @@ export class DraggerBarTraits extends SpyneTrait {
     const dragEvent = 'dragging';
     const dragYPos = endY;
     const {vsid} = this.props;
-    console.log("DRAGGING ",{endY,deltaY,y,pageY,target,currentTarget,e},this.props.dragger);
+    //console.log("DRAGGING ",{endY,deltaY,y,pageY,target,currentTarget,e},this.props.dragger);
     const dragVsid = vsid;
     const containerHeight = y-11;;
     //document.getElementById('customize-container').style.cssText=`height:${y-11}px`;

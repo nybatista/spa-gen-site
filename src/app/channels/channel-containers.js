@@ -7,6 +7,7 @@ export class ChannelContainers extends Channel {
   constructor(name, props = {}) {
     name='CHANNEL_CONTAINERS';
     props.sendCachedPayload = false;
+    props.revealContainerBool = false;
     super(name, props);
 
   }
@@ -33,7 +34,7 @@ export class ChannelContainers extends Channel {
      return actionsHash[str];
   }
 
-  onCusomtizeDraggerUpdated(e){
+  onCustomizeDraggerUpdated(e){
     const action = 'CHANNEL_CONTAINERS_DRAG_EVENT';
     const {payload} = e;
     this.sendChannelPayload(action, payload);
@@ -44,7 +45,12 @@ export class ChannelContainers extends Channel {
     const {eventType,type,value} = e.props();
     //console.log("CONTAINER EVENT ", {eventType,type,value})
     const action = ChannelContainers.getContainerActionByEvent(type);
-    this.sendChannelPayload(action, {eventType,type,value});
+    const payload = {eventType,type,value};
+    if (action === "CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT"){
+      this.props.revealContainerBool = !this.props.revealContainerBool;
+      payload['revealContainerBool'] = this.props.revealContainerBool;
+    }
+    this.sendChannelPayload(action, payload);
   }
 
   addRegisteredActions() {
@@ -52,7 +58,7 @@ export class ChannelContainers extends Channel {
 
         'CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT',
         'CHANNEL_CONTAINERS_DRAG_EVENT',
-        ['CHANNEL_CONTAINERS_DRAG_UPDATED_EVENT', 'onCusomtizeDraggerUpdated']
+        ['CHANNEL_CONTAINERS_DRAG_UPDATED_EVENT', 'onCustomizeDraggerUpdated']
 
     ];
   }

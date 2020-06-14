@@ -24,7 +24,10 @@ import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 const hamburgerBreakpoint = 768;
 const mqStr = `(max-width:${hamburgerBreakpoint}px)`;
 
+const siteTitle = "Website Title";
+
 const defaultConfig = {
+  siteTitle,
   "localStorageKey" : "spaGenStore",
   "debug" : true,
   "channels" : {

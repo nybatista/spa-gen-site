@@ -16,7 +16,10 @@
     height:100%;
     @include add-border-shadow;
     display: flex;
-    align-items: flex-end;
+    //align-items: flex-end;
+    align-items: flex-start;
+    justify-content: center;
+
     padding: 10px 0;
 
 
@@ -28,11 +31,32 @@
     }
 
 
+    #logo{
+      position:relative;
+      align-self: center;
+      font-size: 1.55rem;
+      font-family: 'Lara',serif;
+      color:skyblue;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity .25s ease-in-out;
+      &.hide{
+        opacity: 0;
+      }
+
+
+    }
+
+
+
+
+
   }
 
   nav.dynamic-app-header-content {
     position: absolute;
     top:0;
+    left:0;
     height: 100%;
     display: flex;
     align-items: center;

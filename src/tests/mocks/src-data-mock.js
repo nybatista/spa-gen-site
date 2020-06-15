@@ -194,6 +194,7 @@ const SrcData = {
         ""
       ],
       "web": [
+        "web",
         "web design",
         "web development",
         "technology"

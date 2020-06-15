@@ -116,6 +116,7 @@ const AllPhotos = {
       ""
     ],
     "web": [
+      "web",
       "web design",
       "web development",
       "technology"

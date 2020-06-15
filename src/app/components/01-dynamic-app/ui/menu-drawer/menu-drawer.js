@@ -1,5 +1,7 @@
 import {DomEl, ViewStream} from 'spyne';
+import {MenuDrawerContent} from 'components/01-dynamic-app/ui/menu-drawer/menu-drawer-content';
 import {DynamicAppTraits} from 'traits/dynamic-app-traits';
+import {DynamicAppHeaderContentView} from 'components/01-dynamic-app/ui/header/dynamic-app-header-content-view';
 
 export class MenuDrawer extends ViewStream {
 
@@ -17,8 +19,35 @@ export class MenuDrawer extends ViewStream {
   addActionListeners() {
     // return nexted array(s)
     return [
-      ["CHANNEL_MENU_DRAWER_.*_EVENT", "onShowMenuDrawerEvent"]
+      ["CHANNEL_MENU_DRAWER_.*_EVENT", "onShowMenuDrawerEvent"],
+      ['CHANNEL_DYNAMIC_APP_ROUTE_PAGE_CHANGE_EVENT', 'onRouteChangeEvent'],
+      ['CHANNEL_DYNAMIC_APP_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated']
     ];
+  }
+
+  onRouteChangeEvent(e){
+    const {isDeepLink, routeData} = e.props();
+    const {pageId} = routeData;
+
+    if (isDeepLink===true) {
+     // const routes = this.dynApp$GetCurrentRouteJson();
+      console.log("MENU DRAWER DEEP LINK");
+      this.appendView(new MenuDrawerContent());
+    }
+
+
+  }
+
+  onRouteConfigUpdated(e){
+    const {routes, updateConfigNum} = e.props();
+    //console.log("dynamic app header listening to route update ", {routes,e});
+
+    this.appendView(new MenuDrawerContent({routes, updateConfigNum}), 'header');
+
+
+
+
+
   }
 
 
@@ -30,48 +59,20 @@ export class MenuDrawer extends ViewStream {
   }
 
 
-  addAnchors(){
-    const addAnchor=(d)=>{
-      //console.log("ANCHOR DATA ",{d})
-      //d['workId']="";
-      d['workIdValue']="";
-      d['aboutIdValue']="";
-
-      d["eventType"] = "menuDrawer";
-
-
-      const anchor = new DomEl({
-        tagName: 'a',
-        class: d.class,
-        dataset: d,
-        data: d.text,
-        href: d.href
-
-      })
-
-      this.props.el.appendChild(anchor.render());
-
-    }
-
-    this.props.data.forEach(addAnchor);
-
-
-  }
 
 
   broadcastEvents() {
     // return nexted array(s)
-    return [
-        ['a', 'click']
-    ];
+    return [];
   }
 
 
 
   onRendered() {
-    this.addAnchors();
+   // this.addAnchors();
     //console.log("MENU DRAWER");
    // this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
+    this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
 
     this.addChannel('CHANNEL_MENU_DRAWER');
 

@@ -76,6 +76,7 @@ export class DraggerBarTraits extends SpyneTrait {
     //console.log("SELC IS ",this.props.id$+' > .dragger')
     const config =  {
       type: "y",
+      cursor: 'row-resize',
       bounds: {minY:10, maxY: window.innerHeight-100},
 /*      bounds2: {minY:0, maxY:1600},
       bounds3: document.querySelector('#route-creator-container'),

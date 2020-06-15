@@ -87,6 +87,12 @@ export class DynamicAppPageView extends ViewStream {
     return [];
   }
 
+  initPage(){
+    this.props.el$('.bg-image').addAnimClass('reveal');
+
+  }
+
+
   onRendered() {
     this.addChannel("CHANNEL_DYNAMIC_APP_ROUTE");
       this.dynPage$AddPageContent(this.props.data.pageId);
@@ -98,6 +104,11 @@ export class DynamicAppPageView extends ViewStream {
       console.log("SUB NAV CONTENT ",this.props);
 
       this.props.routes=routes;
+      this.initPage();
+
+     // this.setTimeout(this.initPage.bind(this), 0);
+
+
   }
 
 }

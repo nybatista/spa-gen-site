@@ -2,6 +2,8 @@ import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
 import {AppData} from '../mocks/app-data-mock';
 import {DataSource} from '../mocks/app-data-source-mock';
+import {SrcData} from '../mocks/src-data-mock';
+
 const R = require('ramda');
 
 import {Routes} from '../mocks/routes-data-mock';
@@ -20,7 +22,7 @@ describe('should get data based on routeProps', () => {
 
   it('should generate data based on routes config', () => {
 
-    let dataFromRoutes = AppDataGeneratorTraits.appDataGen$CreateDataFromRoutes(Routes, DataSource);
+    let dataFromRoutes = AppDataGeneratorTraits.appDataGen$CreateDataFromRoutes(Routes, DataSource, SrcData);
     //console.log('data from routes ',JSON.stringify(dataFromRoutes));
     return true;
   })

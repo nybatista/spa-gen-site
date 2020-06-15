@@ -56,13 +56,13 @@ export class AppDataGeneratorTraits extends SpyneTrait {
 
 
 
-  static appDataGen$CreateDataFromRoutes(configObj=window, dataSource){
+  static appDataGen$CreateDataFromRoutes(configObj=window, dataSource, srcData=this.appDataGen$GetSrcData()){
     const routesJson = path(['Spyne', 'config', 'channels', 'ROUTE', 'routes'], configObj);
     const omitProps = omit(['routeName', '^$', '404']);
     const getRouteName = prop('routeName');
     const getRouteProps = compose(omitProps);
 
-    const srcData = this.appDataGen$GetSrcData();
+    //const srcData = this.appDataGen$GetSrcData();
 
 
     console.log("SRC DATA ",{srcData});

@@ -38,6 +38,11 @@
         justify-content: flex-end;
         flex-direction: column;
         align-items: center;
+        opacity: 0;
+        transition: opacity .25s ease-in-out;
+        &.reveal{
+          opacity: 1;
+        }
 
 
       }

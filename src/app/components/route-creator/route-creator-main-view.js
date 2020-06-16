@@ -1,5 +1,6 @@
 import {ViewStream} from 'spyne';
 import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
+import {RouteCreatorGenBtn} from 'components/route-creator/route-creator-gen-btn';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
 import {elementAt} from 'rxjs/operators';
@@ -69,6 +70,10 @@ export class RouteCreatorMainView extends ViewStream {
   }
 
 
+  addMainBtn(){
+    this.appendView(new RouteCreatorGenBtn(), '#route-creator-container');
+  }
+
 
   onRouteGenData(e){
    // const {routes} = e.props();
@@ -80,6 +85,8 @@ export class RouteCreatorMainView extends ViewStream {
 
     this.createMainBarHolder();
     this.onItemAdded();
+
+    this.addMainBtn();
 
   }
 

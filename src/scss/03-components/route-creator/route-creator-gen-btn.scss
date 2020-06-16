@@ -1,0 +1,40 @@
+#route-gen-main-btn{
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  width: 160px;
+  height: 40px;
+  background: $clr-indigo;
+  z-index: $z-index-ui;
+  overflow: hidden;
+  .icons{
+    position: relative;
+    width: 100%;
+    display: flex;;
+
+    div{
+      padding: 4px;
+    }
+
+    .reset{
+      &:after{
+        position: absolute;
+        content: ' ';
+        width:6px;
+        height: 42px;
+        padding: 0;
+        margin:0 0 0 5px;
+        top:-1px;
+        background: darken($clr-indigo, 5);
+        box-shadow: inset 1px 0 2px rgba(0,0,0,.6);
+      }
+
+    }
+
+    .generate{
+      margin-left:10px;
+    }
+
+  }
+
+}

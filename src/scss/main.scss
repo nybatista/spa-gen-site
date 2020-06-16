@@ -30,15 +30,35 @@
 @import "03-components/dynamic-app/menu-drawer.scss";
 
 body{
-  background: #ddd;
+  //background: #ddd;
   font-family: sans-serif;
 
+  background: #222;
+  //background: #333;
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 
+  main{
+    position:relative;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    max-width: 1920px;
+    align-self: center;
+    justify-self: center;
+    border: 0;
+    margin: 0;
+    overflow: hidden;
+    border-left:  1px solid #000;
+    border-right: 1px solid #000;
+  }
 
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-column-gap: 1em;
-    grid-row-gap: 1em;
 
 
 }

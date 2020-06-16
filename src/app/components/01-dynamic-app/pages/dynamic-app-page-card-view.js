@@ -9,6 +9,7 @@ export class DynamicAppPageCardView extends ViewStream {
     props.tagName = 'li';
     props.dataNew = DynamicAppDataTraits.dynAppData$GetData(props.data);
     props.data = merge(props.data, props.dataNew);
+    props.data.cardTitle = props.data.keyword.toUpperCase();
 
     props.class='page-card';
     console.log("PROPS DATA IS ",props.data,{props});

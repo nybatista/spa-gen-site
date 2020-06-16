@@ -80,7 +80,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
 
 
   static appDataGen$CreateHeadline(str){
-    return `Section ${str.toUpperCase()}`;
+    return `${str.toUpperCase()} PAGE CONTENT`;
   }
 
 
@@ -133,6 +133,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
           background:  this.appDataGen$CreatePhoto(srcData, pair[0]),
           headline: AppDataGeneratorTraits.appDataGen$CreateHeadline(pair[0]),
           text: AppDataGeneratorTraits.appDataGen$CreateText(srcData),
+          keyword: pair[0],
           article: AppDataGeneratorTraits.appDataGen$CreateParagraph(srcData)
         }
 

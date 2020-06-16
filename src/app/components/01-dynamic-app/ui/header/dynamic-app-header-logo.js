@@ -3,7 +3,10 @@ import {path} from 'ramda';
 export class DynamicAppHeaderLogo extends ViewStream {
 
   constructor(props = {}) {
-    props.tagName='p';
+    props.tagName='input';
+    const placeholder = 'Website Title';
+    const value = placeholder;
+    props['value']=value;
     props.id='logo';
     props.data = path(['Spyne', 'config', 'siteTitle'], window);
     super(props);

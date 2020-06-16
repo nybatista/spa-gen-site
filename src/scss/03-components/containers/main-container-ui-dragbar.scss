@@ -17,8 +17,17 @@
         position: absolute;
         top:0;
         width:60px;
+
         //height: 40px;
-        pointer-events: all;
+
+        pointer-events: none;
+
+
+        &.reveal{
+          pointer-events: all;
+
+        }
+
        // cursor: pointer;
         svg {
           max-width: 100px;

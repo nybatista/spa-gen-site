@@ -69,7 +69,7 @@ button.btn:active {
 
 .btn-blue{
   background: orange;
-  @include baseBtn('medium', $btnColor);
+  @include baseBtn('medium', $clr-indigo);
 }
 
 
@@ -126,4 +126,37 @@ button:active {
   transform: scale(0.99);
 }
 */
+
+
+
+
+.cta-button {
+  min-height: 35px;
+  padding: 10px 30px 11px;
+  font-style: inherit;
+  letter-spacing: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: auto;
+  margin-bottom: auto;
+  outline: 0;
+  border: none;
+  border-radius: 6px;
+  display: inline-block;
+  cursor: pointer;
+  line-height: 1em;
+  transition: all .2s ease-in-out;
+  background-color: $clr-indigo;// $clr-route-creator-blue-orig;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  white-space: normal;
+  max-width: 220px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,.14);
+  &:hover{
+    background-color: darken($clr-indigo, 5);
+
+  }
+}
+
 

@@ -33,9 +33,11 @@ export class CustomizeUIDragger extends ViewStream {
     const opacityNum = revealContainerBool === true ? 1 : 0;
     console.log("LOADING DRAGGER OPACITY ",{revealContainerBool, delayTime, opacityNum});
 
-
+    this.props.el$.toggleClass('reveal', revealContainerBool);
     const onStartFadeAnim = ()=>{
       this.dragBar$InitYPos();
+
+
       gsap.to(this.props.el, {duration:.5, opacity:opacityNum });
     }
 

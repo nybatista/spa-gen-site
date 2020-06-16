@@ -37,12 +37,27 @@
       font-size: 2rem;
       font-family: $logo-font;
       color:#fff;
-      pointer-events: none;
+      pointer-events: all;
       //user-select: none;
       letter-spacing: .025rem;
       transition: opacity .25s ease-in-out;
+      width:24%;
+      max-width: 480px;
+      min-width: 320px;
+
+      background: none;
+      border:none;
+
+      text-align: center;
+
+      &:focus{
+        border:none;
+        outline: 1px solid skyblue;
+      }
+
       &.hide{
         opacity: 0;
+        pointer-events: none;
       }
 
 

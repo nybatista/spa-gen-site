@@ -60,7 +60,9 @@ export class PageContentHomeView extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+        ['.cta-button', 'click']
+    ];
   }
 
   onRendered() {

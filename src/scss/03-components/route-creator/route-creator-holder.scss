@@ -58,11 +58,41 @@
     padding: 10px;
     border-radius: 10px;
 
+  .route-creator-title{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding: 16px 16px 0 16px;
+
+    p{
+      position:relative;
+      margin:0 0 2px 0;
+      padding:0;
+      color:#fff;
+
+      &.title{
+        font-size: 1.35rem;
+      }
+
+      &.instx{
+        font-size: .85rem;
+      }
+    }
+
+    hr{
+      border-color: $clr-route-creator-panel-hilight;
+    }
+
+  }
+
+
   .add-menu-btn-path, .st0{
     fill:$clr-route-creator-blue;
   }
 
   .main-route-btn{
+    margin-top:80px;
     display: flex;
     align-items: center;
     color:$clr-route-creator-blue;
@@ -108,7 +138,7 @@
 
 
   & > .route-creator-route-name{
-    top: 45px;
+    top: 125px;// 45px;
     left: 42px;
   }
 
@@ -127,7 +157,7 @@
 
    &.main{
      position: absolute;
-     top: 10px;
+     top: 80px;//10px;
     // min-height: 300px;
      height: 100%;
      left:125px;

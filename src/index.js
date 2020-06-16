@@ -15,11 +15,7 @@ import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 import images from 'data/images.json';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 
-/*
-*
-* TODO: CREATE A ROUTE CONFIG VALIDATOR -- CHECKS FOR EITHER STRING OR ROUTEPATH:ROUTENAME
-*
-* */
+
 
 const hamburgerBreakpoint = 768;
 const mqStr = `(max-width:${hamburgerBreakpoint}px)`;
@@ -47,25 +43,25 @@ const defaultConfig = {
     "type" : "slash",
     "routes": {
       "routePath": {
+        "404": ".+",
         "routeName": "pageId",
         "home": "^$",
         "work": {
           "routePath": {
+            "404": ".+",
             "routeName": "workId",
-            "acme": "acme",
-            "widgets": "widgets",
-            "globex": "globex",
-            "404" : ".+"
+            "services": "services",
+            "portfolio": "portfolio",
+            "blog": "blog"
           }
         },
         "about": {
           "routePath": {
+            "404": ".+",
             "routeName": "aboutId",
-            "contact": "contact",
-            "404" : ".+"
+            "contact": "contact"
           }
-        },
-        "404" : ".*"
+        }
       }
     }
   }
@@ -152,7 +148,7 @@ const initSpyneAppGenerator = ()=> {
   spyneApp.registerChannel(new ChannelDynamicAppRoute());
   spyneApp.registerChannel(new ChannelMenuDrawer());
   spyneApp.registerChannel(new ChannelFetch("CHANNEL_SPA_GEN_DATA_IMAGES", {
-    url: images
+    url: AllPhotos
   }))
 
 

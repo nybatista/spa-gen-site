@@ -32,6 +32,15 @@
 body{
   background: #ddd;
   font-family: sans-serif;
+
+
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+
+
 }
 
 html,body,main,section,article,div,h1,h2,h3,h4,h5,h6,p,div,span{

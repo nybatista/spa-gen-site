@@ -34,11 +34,12 @@
     #logo{
       position:relative;
       align-self: center;
-      font-size: 1.55rem;
-      font-family: 'Lara',serif;
-      color:skyblue;
+      font-size: 2rem;
+      font-family: $logo-font;
+      color:#fff;
       pointer-events: none;
-      user-select: none;
+      //user-select: none;
+      letter-spacing: .025rem;
       transition: opacity .25s ease-in-out;
       &.hide{
         opacity: 0;

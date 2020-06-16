@@ -1,5 +1,5 @@
 import {ViewStream, DomEl} from 'spyne';
-import {path, prop} from 'ramda';
+import {path, clone, prop} from 'ramda';
 export class PageContentHomeView extends ViewStream {
 
   constructor(props = {}) {
@@ -17,6 +17,10 @@ export class PageContentHomeView extends ViewStream {
   }
 
   addImages(arr){
+
+    this.props.el.parentElement.querySelector('.page-header').classList.add('img-mode');
+
+
     const sectionEl = this.props.el$('ul').el;
 
 
@@ -37,15 +41,21 @@ export class PageContentHomeView extends ViewStream {
       sectionEl.appendChild(img.render());
       num++;
 
+      console.log("NUM IS ",num);
+
     }
+
+    console.log("ARR LEN ",arr.length);
 
     arr.forEach(addImage);
   }
 
   onImagesLoaded(e){
     const {photos} = e.props();
-   // console.log("images loaded ",{photos,e})
-   // this.addImages(photos);
+    const pix = clone(photos);
+    console.log("images loaded ",{photos,e,pix},pix.length, photos.length);
+
+    //this.addImages(photos);
   }
 
   broadcastEvents() {

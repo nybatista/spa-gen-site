@@ -32,8 +32,11 @@
     ],
     "tours": [
       "tours",
+      "tour",
       "destinations",
-      "location"
+      "destination",
+      "location",
+      "travel"
     ],
     "conference": [
       "conference",
@@ -65,6 +68,9 @@
     ],
     "models": [
       "models",
+      "model",
+      "actor",
+      "actors",
       "our models",
       "acting"
     ],

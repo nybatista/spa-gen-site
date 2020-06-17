@@ -193,7 +193,7 @@ export class BarItemsSorter{
   }
 
 
-  static getBarItemHeight(liEl, paddingNum=5){
+  static getBarItemHeight(liEl, paddingNum=5.25){
     const pullHeightFromBox = el=>{
       const pct = 1;//el.classList.contains('route-level-0') === true ? 1 : 3;
       return el.getBoundingClientRect().height;
@@ -232,8 +232,19 @@ export class BarItemsSorter{
       const subLen = document.querySelectorAll(subUlItemsSel).length-1;
      // console.log("NUM IS ",subLen)
 
-      paddingNum = paddingNum*6;
+
+      paddingNum = paddingNum*7;
+    } else {
+
+      if (liEl.classList.contains('route-level-0') === true){
+        height = height+paddingNum;
+      }
+
+
     }
+
+
+    console.log("HEIGHT PADDING ",subUlItemsSel.length,{height, paddingNum},liEl)
 
     // console.log("HEIGHT IS ",{height});
     return height+paddingNum;

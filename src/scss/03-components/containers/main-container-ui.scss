@@ -18,6 +18,17 @@
       align-self: flex-end;;
     }
 
+
+    button.toggle-btn{
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease-in-out;
+      &.reveal{
+        pointer-events: all;
+        opacity: 1;
+      }
+    }
+
   }
 
 

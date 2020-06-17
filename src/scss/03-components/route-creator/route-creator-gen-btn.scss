@@ -7,32 +7,91 @@
   background: $clr-indigo;
   z-index: $z-index-ui;
   overflow: hidden;
+  border-radius: 6px;
+
   .icons{
     position: relative;
-    width: 100%;
-    display: flex;;
-
+    width: 200%;
+    //display: flex;;
+    float: left;
+    margin: 0;
+    pointer-events: none;
+    padding: 0;
     div{
-      padding: 4px;
+      position: relative;
+      padding: 0 8px;
+      display: inline-block;
+      height: 40px;
+      align-items: center;
+      color:#fff;
+      transition: all .3s ease-out;
+      pointer-events: all;
+      cursor:pointer;
+
+
+      section{
+        display: flex;
+        position:relative;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+
+      }
+
     }
 
     .reset{
+
+      //background: orange;
+      width: 40px;
+      z-index: 100;
+
+      &:hover{
+        width: 168px;
+      }
+
+      background: lighten(#9D25AD, 5);
+
       &:after{
         position: absolute;
         content: ' ';
         width:6px;
         height: 42px;
         padding: 0;
-        margin:0 0 0 5px;
+        margin:0;
         top:-1px;
+        right:0;
         background: darken($clr-indigo, 5);
         box-shadow: inset 1px 0 2px rgba(0,0,0,.6);
       }
 
+      span{
+        position: relative;
+        left:20px;
+        letter-spacing: 2px;
+        font-weight: 800;
+      }
+
+      overflow: hidden;
+
     }
 
     .generate{
-      margin-left:10px;
+      position: absolute;
+      top:0;
+      left:30px;
+
+      section{
+        left:6px;
+      }
+
+
+      svg{
+        position: relative;
+        margin:0 4px;
+        //left: 10px;
+      }
+
     }
 
   }

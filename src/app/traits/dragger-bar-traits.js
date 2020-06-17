@@ -10,8 +10,7 @@ export class DraggerBarTraits extends SpyneTrait {
   }
 
 
-  static dragBar$SendInfoToChannel(payload){
-    const action = 'CHANNEL_CONTAINERS_DRAG_UPDATED_EVENT';
+  static dragBar$SendInfoToChannel(payload, action='CHANNEL_CONTAINERS_DRAG_UPDATED_EVENT'){
     this.sendInfoToChannel('CHANNEL_CONTAINERS', payload, action);
 
   }
@@ -26,11 +25,26 @@ export class DraggerBarTraits extends SpyneTrait {
     const {vsid} = this.props;
     //console.log("DRAGGING ",{endY,deltaY,y,pageY,target,currentTarget,e},this.props.dragger);
     const dragVsid = vsid;
-    const containerHeight = y-11;;
+    const containerHeight = y;// y-11;;
     //document.getElementById('customize-container').style.cssText=`height:${y-11}px`;
 
-    this.dragBar$SendInfoToChannel({y, containerHeight});
+
+
+    if(y<=0){
+      const action = "CHANNEL_CONTAINERS_HIDE_CUSTOM_CONTAINER_EVENT";
+      this.dragBar$SendInfoToChannel({action}, action);
+    } else {
+      this.dragBar$SendInfoToChannel({y, containerHeight});
+
+    }
+
     //this.routeBarDrag$SendInfoToChannel({dragEvent,dragVsid,parentVsid, dragYPos});
+
+  }
+
+  static getHeaderHeightAdjust(){
+    const headerHeight = document.getElementById('dynamic-app-header').getBoundingClientRect().height;
+    return  (headerHeight-this.props.elHeight)/2;
 
   }
 
@@ -57,8 +71,9 @@ export class DraggerBarTraits extends SpyneTrait {
   static dragBar$InitDraggable(props=this.props){
     gsap.registerPlugin(Draggable);
     //gsap.registerPlugin(InertiaPlugin);
-
-
+    this.props.elHeight = this.props.el.getBoundingClientRect().height;
+    this.props.headerHeightAdj = 68-this.getHeaderHeightAdjust();
+    console.log("HEADER DRAG ADJ ",this.props.headerHeightAdj, this.props.elHeight)
 
     const onSnapItem = (y)=>{
 
@@ -77,7 +92,7 @@ export class DraggerBarTraits extends SpyneTrait {
     const config =  {
       type: "y",
       cursor: 'row-resize',
-      bounds: {minY:10, maxY: window.innerHeight-100},
+      bounds: {minY:0, maxY: window.innerHeight-this.props.elHeight},
 /*      bounds2: {minY:0, maxY:1600},
       bounds3: document.querySelector('#route-creator-container'),
       trigger: this.props.id$+' > section div.dragger',*/

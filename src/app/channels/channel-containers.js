@@ -53,11 +53,23 @@ export class ChannelContainers extends Channel {
     this.sendChannelPayload(action, payload);
   }
 
+  onHideCustomContainer(e){
+    const action = "CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT";
+    const type="toggleMain", value="true", eventType="container";
+    const payload = {eventType,type,value};
+    this.props.revealContainerBool = false;
+    payload['revealContainerBool'] = this.props.revealContainerBool;
+    this.sendChannelPayload(action, payload);
+
+  }
+
+
   addRegisteredActions() {
     return [
 
         'CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT',
         'CHANNEL_CONTAINERS_DRAG_EVENT',
+        ['CHANNEL_CONTAINERS_HIDE_CUSTOM_CONTAINER_EVENT', 'onHideCustomContainer'],
         ['CHANNEL_CONTAINERS_DRAG_UPDATED_EVENT', 'onCustomizeDraggerUpdated']
 
     ];

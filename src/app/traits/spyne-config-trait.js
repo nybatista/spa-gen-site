@@ -1,5 +1,6 @@
 import {SpyneTrait} from 'spyne';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
+import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 import {compose,clone,path,either,not, allPass,isEmpty,isNil} from 'ramda';
 
 export class SpyneConfigTrait extends SpyneTrait {
@@ -27,7 +28,12 @@ export class SpyneConfigTrait extends SpyneTrait {
 
   static config$SetRouteToLocalStorage(){
     const routes = compose(clone, path(["window","Spyne","config","channels","ROUTE", 'routes']))(window);
+
+    console.log("ROUTE TO LOCAL STORAGE IS ",{routes})
     LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
+
+    DynamicAppDataTraits.dynAppData$GetRouteNameProps(window, true);
+
     console.log("ON ROUTE CONFIG UPDATED --- ALSO UPDATE APP DATA JSON -- ",{routes})
 
   }

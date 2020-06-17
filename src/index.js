@@ -20,7 +20,7 @@ import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 const hamburgerBreakpoint = 768;
 const mqStr = `(max-width:${hamburgerBreakpoint}px)`;
 
-const siteTitle = "Website Title";
+const siteTitle = "Acme Co.";
 
 const defaultConfig = {
   siteTitle,

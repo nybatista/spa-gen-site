@@ -244,7 +244,7 @@ export class BarItemsSorter{
     }
 
 
-    console.log("HEIGHT PADDING ",subUlItemsSel.length,{height, paddingNum},liEl)
+   // console.log("HEIGHT PADDING ",subUlItemsSel.length,{height, paddingNum},liEl)
 
     // console.log("HEIGHT IS ",{height});
     return height+paddingNum;

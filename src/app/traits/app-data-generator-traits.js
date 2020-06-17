@@ -137,7 +137,6 @@ export class AppDataGeneratorTraits extends SpyneTrait {
           article: AppDataGeneratorTraits.appDataGen$CreateParagraph(srcData)
         }
 
-        const propsObj = AppDataGeneratorTraits.appDataGen$GetMainPropVals(pair[0], dataSource);
 
 
 

@@ -115,13 +115,13 @@ export class DynamicAppDataTraits extends SpyneTrait {
   }
 
 
-  static dynAppData$GetRouteNameProps(configObj = window){
+  static dynAppData$GetRouteNameProps(configObj = window, forceReset=false){
 
     const setRouteNamesArr = ()=> {
 
       const routesJson = DynamicAppDataTraits.dynAppData$GetRoutesJson(configObj);
 
-      // console.log('config obj for routes ',{configObj, routesJson})
+       console.log('config obj for routes ',{configObj, routesJson})
       const valIsObj =  compose(is(Object), nth(1))
       const keyIsRouteName = compose(equals('routeName'), nth(0))
 
@@ -141,6 +141,8 @@ export class DynamicAppDataTraits extends SpyneTrait {
       if (window!==undefined && window.Spyne.config!==undefined){
         window.Spyne.config.channels.ROUTE.routeNamesArr = routeNamesReducedArr;
       }
+
+      console.log("ROUTES JSON ",{routeNamesReducedArr, routesJson})
 
       return routeNamesReducedArr;
 /*
@@ -173,7 +175,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
     const getRouteNamesArr = ()=>{
       const routeNamesArr = path(['Spyne', 'config', 'channels', 'ROUTE', 'routeNamesArr'], configObj);
-      if (routeNamesArr === undefined){
+      if (routeNamesArr === undefined || forceReset === true){
         return setRouteNamesArr();
       }
 
@@ -193,6 +195,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const mainData = path(['Spyne', 'config', 'dynamicData'], window);
 
     const routesReducer = (acc, str)=>{
+      console.log("ROUTES REDUCE DER ",{str, acc})
       if (dataProps.hasOwnProperty(str)){
         acc.push(pick([str], dataProps))
       }
@@ -211,7 +214,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     .reduce(routesReducer, [])
     .reduce(dataReducer, mainData);
 
-
+    console.log("ROUTES REDUCE ",{contentData,routeNameArr,mainData})
 
     return merge(dataProps, contentData);
 

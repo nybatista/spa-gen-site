@@ -16,6 +16,8 @@ export class CustomizeUIDragger extends ViewStream {
     // return nexted array(s)
     return [
         ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onCustomizeContainerToggled'],
+      ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onRouteCreatorItemAdded'],
+      ['CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT', 'onRouteCreatorItemAdded'],
       ['CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT', 'onInitDragItems'],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onInitDragItems'],
       ['CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT', 'onInitDragItems'],
@@ -31,7 +33,7 @@ export class CustomizeUIDragger extends ViewStream {
 
     const delayTime = revealContainerBool === true ? 550 : 0;
     const opacityNum = revealContainerBool === true ? 1 : 0;
-    console.log("LOADING DRAGGER OPACITY ",{revealContainerBool, delayTime, opacityNum});
+    //console.log("LOADING DRAGGER OPACITY ",{revealContainerBool, delayTime, opacityNum});
 
     this.props.el$.toggleClass('reveal', revealContainerBool);
     const onStartFadeAnim = ()=>{
@@ -46,10 +48,60 @@ export class CustomizeUIDragger extends ViewStream {
 
   }
 
+
+  onRouteCreatorItemRemoved(e){
+    const {parentVsid} = e.props();
+    const {y} = document.getElementById(parentVsid).lastElementChild.getBoundingClientRect();
+    const minY = y+90;
+    const dragY = this.props.dragger[0].y
+
+
+
+    this.dragBar$UpdateYPos(minY);
+
+
+
+    console.log('item removed ',{e},this.props);
+  }
+
+
+
+  onRouteCreatorItemAdded(e){
+    const {barId, parentVsid, action} = e.props();
+
+
+
+    const checkYPos = ()=> {
+      const getYPos=()=>{
+        //const yEl = document.getElementById(parentVsid).lastElementChild;
+        const yEl = document.getElementById('route-creator-container');
+        //console.log('y el is ',{yEl,parentVsid,barId}, document.getElementById(parentVsid));
+
+        return yEl.getBoundingClientRect();
+      }
+
+      const {y,height} =  getYPos();
+      const minY = y+height+40;
+      const dragY = this.props.dragger[0].y
+
+      const adjustYBool = dragY<minY;
+      console.log("ROUTE CREATOR ITEM ADDED ",{barId,y,minY,dragY,parentVsid, adjustYBool},this.props);
+
+    //  if (adjustYBool===true){
+
+        this.dragBar$UpdateYPos(minY);
+
+     // }
+
+    }
+    this.setTimeout(checkYPos, 300);
+
+  }
+
   onInitDragItems(e){
 
-    console.log("DRAGGER INIT DRAG ITEMS ",{e});
-    this.setTimeout(this.dragBar$InitYPos.bind(this), 1150);
+    //console.log("DRAGGER INIT DRAG ITEMS ",{e});
+   // this.setTimeout(this.dragBar$InitYPos.bind(this), 1150);
 
   }
 

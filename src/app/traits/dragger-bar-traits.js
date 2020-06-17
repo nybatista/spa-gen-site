@@ -60,6 +60,28 @@ export class DraggerBarTraits extends SpyneTrait {
 
   }
 
+
+  static dragBar$UpdateYPos(val){
+
+    const conCompleteDragTween = ()=>{
+      this.props.dragger[0].update();
+    }
+
+    const onYUpdated = (obj)=>{
+      const {y} = this.props.el.getBoundingClientRect();
+      const containerHeight = y;// y-11;;
+
+      this.dragBar$SendInfoToChannel({y,containerHeight});
+
+      console.log("Y UPDATED ",{obj,y,containerHeight});
+
+    }
+
+
+    gsap.to(this.props.el, {duration:.25, y:val, onUpdate:onYUpdated, onComplete:conCompleteDragTween});
+
+  }
+
   static dragBar$InitYPos(props=this.props){
     props.headerBar = document.querySelector("#dynamic-app-header");
     props.draggerHeight = props.el.getBoundingClientRect().height;

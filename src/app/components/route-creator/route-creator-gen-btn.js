@@ -16,7 +16,11 @@ export class RouteCreatorGenBtn extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+        ['.icons .reset',    'click'],
+        ['.icons .generate', 'click']
+
+    ];
   }
 
   onRendered() {

@@ -1,9 +1,13 @@
+$gen-btn-height: 36px;
+$gen-btn-width: 140px;
+
+
 #route-gen-main-btn{
   position: absolute;
   top: 8px;
   right: 16px;
-  width: 160px;
-  height: 40px;
+  width: $gen-btn-width;
+  height: $gen-btn-height;
   background: $clr-indigo;
   z-index: $z-index-ui;
   overflow: hidden;
@@ -21,7 +25,7 @@
       position: relative;
       padding: 0 8px;
       display: inline-block;
-      height: 40px;
+      height: $gen-btn-height;
       align-items: center;
       color:#fff;
       transition: all .3s ease-out;
@@ -43,11 +47,11 @@
     .reset{
 
       //background: orange;
-      width: 40px;
+      width: 42px;
       z-index: 100;
 
       &:hover{
-        width: 168px;
+        width: $gen-btn-width + 8px;
       }
 
       background: lighten(#9D25AD, 5);
@@ -56,7 +60,7 @@
         position: absolute;
         content: ' ';
         width:6px;
-        height: 42px;
+        height: $gen-btn-height + 2px;
         padding: 0;
         margin:0;
         top:-1px;

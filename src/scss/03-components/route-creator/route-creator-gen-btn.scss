@@ -4,14 +4,18 @@ $gen-btn-width: 140px;
 
 #route-gen-main-btn{
   position: absolute;
-  top: 8px;
-  right: 16px;
+  //top: 8px;
+  //right: 16px;
   width: $gen-btn-width;
   height: $gen-btn-height;
   background: $clr-indigo;
   z-index: $z-index-ui;
   overflow: hidden;
   border-radius: 6px;
+  top: 20px;
+  right: 8px;
+  transform:scale(.85);
+
 
   .icons{
     position: relative;
@@ -31,6 +35,16 @@ $gen-btn-width: 140px;
       transition: all .3s ease-out;
       pointer-events: all;
       cursor:pointer;
+
+      &:hover{
+        section {
+          svg {
+            transform: rotate(360deg);
+            transition: all .5s ease-in-out;
+          }
+        }
+
+      }
 
 
       section{
@@ -52,6 +66,9 @@ $gen-btn-width: 140px;
 
       &:hover{
         width: $gen-btn-width + 8px;
+
+
+
       }
 
       background: lighten(#9D25AD, 5);

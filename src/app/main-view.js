@@ -3,6 +3,7 @@ import {MainContainer} from 'components/containers/main-container';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
+import {GeneratorLoadingAnimMain} from 'components/generator-loading-anim/generator-loading-anim-main';
 
 export class MainView extends ViewStream {
 
@@ -17,6 +18,7 @@ export class MainView extends ViewStream {
     // return nexted array(s)
     return [
         ['CHANNEL_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated'],
+        ['CHANNEL_ROUTE_CREATOR_BEFORE_GENERATE_JSON_EVENT', 'addGeneratorLoadingAnim'],
         ['CHANNEL_WINDOW_BEFOREUNLOAD_EVENT', 'onBeforeUnload']
 
     ];
@@ -45,12 +47,6 @@ export class MainView extends ViewStream {
     this.sendInfoToChannel("CHANNEL_ROUTE", {pageId, pageIdValue});
 
 
-
-
-
-
-
-
   }
 
   onBeforeUnload(e){
@@ -67,8 +63,14 @@ export class MainView extends ViewStream {
     return [];
   }
 
+  addGeneratorLoadingAnim(){
+    this.appendView(new GeneratorLoadingAnimMain());
+
+  }
+
   onRendered() {
     this.addChannel('CHANNEL_ROUTE');
+    this.addChannel('CHANNEL_ROUTE_CREATOR');
     this.appendView(new MainContainer());
     this.addChannel("CHANNEL_WINDOW");
 

@@ -67,6 +67,7 @@ export class ChannelRouteCreator extends Channel {
       const actionHash = {
         routeBar: "CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT",
         generateJson: "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT",
+        beforeGenerateJson: "CHANNEL_ROUTE_CREATOR_BEFORE_GENERATE_JSON_EVENT",
         resetJson: "CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT"
       }
       return actionHash[type];
@@ -78,6 +79,7 @@ export class ChannelRouteCreator extends Channel {
       const fnHash = {
         routeBar: ()=>pick(['holderId', 'barId', 'masterItem', 'routeBarEvent'])(payload),
         generateJson: getActionBasedOnType,
+        beforeGenerateJson: getActionBasedOnType,
         resetJson: getActionBasedOnType
       }
 
@@ -117,6 +119,13 @@ export class ChannelRouteCreator extends Channel {
     return actionHash[str];
   }
 
+
+  onGenerateJson(e){
+    const action = "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT";
+    const payload = {action};
+    this.sendChannelPayload(action, payload);
+  }
+
   onDragEvent(e){
     const {dragEvent, payload} = e.props();
     const action = this.getDragEventAction(dragEvent);
@@ -130,6 +139,7 @@ export class ChannelRouteCreator extends Channel {
     return [
       'CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
       'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',
+      "CHANNEL_ROUTE_CREATOR_BEFORE_GENERATE_JSON_EVENT",
       'CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT',
       'CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
@@ -143,6 +153,7 @@ export class ChannelRouteCreator extends Channel {
       'CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT',
       'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSIN_EVENT',
       'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSOUT_EVENT',
+      ['CHANNEL_ROUTE_CREATOR_SEND_GENERATE_JSON_EVENT', 'onGenerateJson'],
       ['CHANNEL_ROUTE_CREATOR_DRAG_EVENT', 'onDragEvent']
     ];
   }

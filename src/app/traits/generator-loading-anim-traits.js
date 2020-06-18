@@ -25,10 +25,10 @@ export class GeneratorLoadingAnimTraits extends SpyneTrait {
         this.disposeViewStream();
     }
 
-      gsap.to(this.props.el, {duration:.5, y:0, opacity:1, onComplete:onIntroComplete, ease:"Power1.easeInOut"});
+      gsap.to(this.props.el, {duration:.35, y:0, opacity:1, onComplete:onIntroComplete, ease:"Power1.easeInOut"});
 
 
-    gsap.to(this.props.el, {duration:.5, y:"-100%", opacity:0, delay:2.4, onComplete:onDisposeViewStream, ease:"Power1.easeInOut"});
+    gsap.to(this.props.el, {duration:.5, y:"-100%", opacity:0, delay:.75, onComplete:onDisposeViewStream, ease:"Power1.easeInOut"});
 
   }
 

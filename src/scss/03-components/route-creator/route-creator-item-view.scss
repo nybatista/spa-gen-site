@@ -86,11 +86,28 @@ li.route-creator-bar-item {
     position: absolute;
   }
 
-  &.disabled > section i, &.disabled > section input {
+  &.disabled > section i  {
     pointer-events: none;
     user-select: none;
-    opacity: .8;
+    opacity: .5;
   }
+
+
+  &.disabled > div.dragger-bar{
+    pointer-events: none;
+    opacity: .5;
+  }
+
+  &.disabled > section.input-bar div.input {
+
+    input{
+      pointer-events: none;
+      user-select: none;
+      opacity: .5;
+
+    }
+  }
+
 
 
   &.route-level-0{

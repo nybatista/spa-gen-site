@@ -23,6 +23,7 @@ export class RouteCreatorMainView extends ViewStream {
 /*
       ["CHANNEL_ROUTEGEN_JSON_DATA_EVENT", 'onRouteGenData'],
 */
+      ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onCustomizeContainerToggled'],
 
        ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetDefaultJson'],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onLastItemAdded'],
@@ -36,6 +37,13 @@ export class RouteCreatorMainView extends ViewStream {
 
     this.setTimeout(this.onRouteGenData.bind(this), 500);
    //onRouteGenData
+
+  }
+
+  onCustomizeContainerToggled(e){
+    const {revealContainerBool} = e.props();
+    this.props.el$('#route-creator-container').toggleClass('reveal', revealContainerBool);
+
 
   }
 
@@ -113,6 +121,7 @@ export class RouteCreatorMainView extends ViewStream {
     this.addChannel("CHANNEL_ROUTE_CREATOR");
     this.routeCreator$InitBarItem();
    //
+    this.addChannel("CHANNEL_CONTAINERS");
 
     // THIS LOADS AND ANIMATES IN THE ROUTE CREATOR
    this.setTimeout(this.onRouteGenData.bind(this),10);

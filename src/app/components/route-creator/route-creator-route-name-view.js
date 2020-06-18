@@ -3,6 +3,7 @@ import {FiltersTrait} from 'traits/filters-trait';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
 import {RouteCreatorToDataTraits} from 'traits/route-creator-to-data-traits';
+import {pathEq} from 'ramda';
 
 export class RouteCreatorRouteNameView extends ViewStream {
 
@@ -73,6 +74,12 @@ export class RouteCreatorRouteNameView extends ViewStream {
   onRendered() {
     this.checkIfRouteIsActive();
     this.addChannel("CHANNEL_ROUTE_CREATOR");
+
+    const routeNameValIsPageId = pathEq(['props','data','routeNameVal'], 'pageId')(this);
+    this.props.el$.toggleClass('disable', routeNameValIsPageId);
+
+
+    console.log("CHECKING ROUTE NAME ",{routeNameValIsPageId},this.props);
   }
 
 }

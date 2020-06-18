@@ -9,6 +9,7 @@
       //background: #ccc;
 
     }
+
   }
 
 }
@@ -35,6 +36,12 @@
     left: 6px;;
   }
 
+
+  &.disable{
+    pointer-events: none;
+    user-select: none;
+    opacity: .7;
+  }
 
   input{
     position: absolute;

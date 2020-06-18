@@ -83,6 +83,7 @@ export class ChannelContainers extends Channel {
     const action = this.channelActions[actionStr];
     const srcElement = {};
     const event = undefined;
+    this.addChannel("CHANNEL_CONTAINERS");
     this.sendChannelPayload(action, payload, srcElement, event);
   }
 

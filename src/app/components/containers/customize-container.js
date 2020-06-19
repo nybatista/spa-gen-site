@@ -28,7 +28,15 @@ export class CustomizeContainer extends ViewStream {
   }
 
   onRevealContainer(bool){
-    const num = bool === true ? 600 : 0;
+    const getYPos=()=>{
+      const yEl = document.getElementById('route-creator-container');
+      const {y,height} =  yEl.getBoundingClientRect();
+      return y + height + 60;
+    }
+
+
+
+    const num = bool === true ? getYPos() : 0;
     gsap.to(this.props.el, {duration:.5, height:num});
   }
 

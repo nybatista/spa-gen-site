@@ -2,7 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {RouteCreatorBarItemView} from 'components/route-creator/route-creator-bar-item-view';
 import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
 import {RouteCreatorRouteNameView} from 'components/route-creator/route-creator-route-name-view';
-import {omit,path,clone, filter,last,either,defaultTo, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
+import {omit,path,clone, filter,last,either,defaultTo, reduceRight, nth, hasPath, toPairs, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
 import {gsap} from "gsap/all";
 
 export class RouteCreatorTraits extends SpyneTrait {
@@ -92,7 +92,25 @@ export class RouteCreatorTraits extends SpyneTrait {
 
   static routeCreator$SetLastItemInObj(obj){
 
-    const nestedArr = []
+    const reduceToFindLastItem = (reduceObj)=>{
+
+      const getLastValFromRoutePath = (o)=>{
+        const lastItem = compose(nth(1),last,toPairs,omit(['routeName', '404']), prop('routePath'))(o);
+        if (is(String, lastItem)===true){
+          o['lastItem'] = lastItem;
+        } else if (is(Object, lastItem)){
+          getLastValFromRoutePath(lastItem);
+        }
+        return o;
+      }
+
+      return getLastValFromRoutePath(reduceObj);
+    }
+
+     const updatedRoutes = reduceToFindLastItem(clone(obj.routes));
+
+
+/*    const nestedArr = []
     let lastProp;
     const pluckPathVal = (val, key)=>{
       // OMIT routeName
@@ -115,7 +133,10 @@ export class RouteCreatorTraits extends SpyneTrait {
 
     // ADD THE LAST ITEM PROP AND ADD PARSED ROUTEPATH OBJ
     path(nestedArr, routeObj)['lastItem']=lastProp;
-    obj.routes.routePath = routeObj;
+
+    console.log("SET LAST ITEM IS ",{nestedArr, lastProp, obj})
+    obj.routes.routePath = routeObj;*/
+    obj.routes = updatedRoutes;
 
     return obj;
 

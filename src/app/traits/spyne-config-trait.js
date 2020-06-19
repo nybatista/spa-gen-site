@@ -21,6 +21,9 @@ export class SpyneConfigTrait extends SpyneTrait {
     if (isDefined(routes)===true){
       config.channels.ROUTE.routes = routes;
      }
+
+   // DynamicAppDataTraits.dynAppData$GetRouteNameProps({Spyne:{config}}, true);
+
     return config;
 
   }

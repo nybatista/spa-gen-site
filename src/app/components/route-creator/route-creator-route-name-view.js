@@ -79,7 +79,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
     this.props.el$.toggleClass('disable', routeNameValIsPageId);
 
 
-    console.log("CHECKING ROUTE NAME ",{routeNameValIsPageId},this.props);
+    //console.log("CHECKING ROUTE NAME ",{routeNameValIsPageId},this.props);
   }
 
 }

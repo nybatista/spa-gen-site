@@ -31,7 +31,7 @@ export class MenuDrawer extends ViewStream {
 
     if (isDeepLink===true) {
      // const routes = this.dynApp$GetCurrentRouteJson();
-      console.log("MENU DRAWER DEEP LINK");
+      //console.log("MENU DRAWER DEEP LINK");
       this.appendView(new MenuDrawerContent());
     }
 

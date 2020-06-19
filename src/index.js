@@ -101,7 +101,7 @@ const onDynamicSourceContent = ()=>{
     const {url, prop} = obj;
     const onDataRetrieved = (data)=>{
       window[localStorageKey].srcData[prop] = data;
-      console.log("DATA IS ",data);
+      //console.log("DATA IS ",data);
       if (srcData.length>=1){
         fetchSrcData(srcData.shift());
       } else {
@@ -121,7 +121,7 @@ const onDynamicSourceContent = ()=>{
 
 onDynamicSourceContent();
 
-console.log("CONFIGUR ",{config})
+//console.log("CONFIGUR ",{config})
 
 const onAppDataReturned = (d)=>{
   LocalStorageTraits.localStorage$SetStoreObjAndUpdate('defaultDynamicData', d);

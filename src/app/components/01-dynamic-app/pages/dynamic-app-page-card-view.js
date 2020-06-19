@@ -12,7 +12,7 @@ export class DynamicAppPageCardView extends ViewStream {
     props.data.cardTitle = props.data.keyword.toUpperCase();
 
     props.class='page-card';
-    console.log("PROPS DATA IS ",props.data,{props});
+    //console.log("PROPS DATA IS ",props.data,{props});
     props.template = require('./templates/page-cards.tmpl.html');
     super(props);
 

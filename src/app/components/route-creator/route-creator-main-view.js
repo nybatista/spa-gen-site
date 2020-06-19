@@ -3,6 +3,7 @@ import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-h
 import {RouteCreatorGenBtn} from 'components/route-creator/route-creator-gen-btn';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
+import {gsap} from 'gsap/all';
 import {elementAt} from 'rxjs/operators';
 
 export class RouteCreatorMainView extends ViewStream {
@@ -33,7 +34,7 @@ export class RouteCreatorMainView extends ViewStream {
   }
 
   onResetDefaultJson(e){
-    console.log("RESET DEFAULT JSON -- RETRIEVE DATA AND RELOAD BARS ",e);
+    //console.log("RESET DEFAULT JSON -- RETRIEVE DATA AND RELOAD BARS ",e);
 
     this.setTimeout(this.onRouteGenData.bind(this), 500);
    //onRouteGenData
@@ -54,7 +55,7 @@ export class RouteCreatorMainView extends ViewStream {
   }
 
   onItemAdded(e){
-    console.log("E IS ",e);
+    //console.log("E IS ",e);
     const minHeight = 450;
 
     const delayer = ()=> {
@@ -67,13 +68,15 @@ export class RouteCreatorMainView extends ViewStream {
       const mainHeight = newHeight <= minHeight ? minHeight : newHeight;
       const newHeightStr = `height:${mainHeight+150}px;`;
       const mainEl = document.getElementById('customize-container');
-      this.props.el$('#route-creator-container').inline=`height:${mainHeight+30}px`;
+     // this.props.el$('#route-creator-container').inline=`height:${mainHeight+30}px`;
+
+      gsap.to(this.props.el$('#route-creator-container').el, {duration:.25, height:mainHeight+40})
      // mainEl.style.cssText = newHeightStr
      // console.log("ITEM IS ", {e,newHeight, newHeightStr, elItemIndex, elArr, box, secondToLastEl}, this.props.el);
 
     }
 
-    this.setTimeout(delayer, 100);
+    this.setTimeout(delayer, 265);
 
   }
 

@@ -32,12 +32,12 @@ export class SpyneConfigTrait extends SpyneTrait {
   static config$SetRouteToLocalStorage(){
     const routes = compose(clone, path(["window","Spyne","config","channels","ROUTE", 'routes']))(window);
 
-    console.log("ROUTE TO LOCAL STORAGE IS ",{routes})
+    //console.log("ROUTE TO LOCAL STORAGE IS ",{routes})
     LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
 
     DynamicAppDataTraits.dynAppData$GetRouteNameProps(window, true);
 
-    console.log("ON ROUTE CONFIG UPDATED --- ALSO UPDATE APP DATA JSON -- ",{routes})
+    //console.log("ON ROUTE CONFIG UPDATED --- ALSO UPDATE APP DATA JSON -- ",{routes})
 
   }
 
@@ -72,7 +72,7 @@ export class SpyneConfigTrait extends SpyneTrait {
 
 
       let baseConfig = SpyneConfigTrait.config$CreateBaseConfig();
-    console.log("VALUES OF ",baseConfig);
+    //console.log("VALUES OF ",baseConfig);
 
 
     return baseConfig;

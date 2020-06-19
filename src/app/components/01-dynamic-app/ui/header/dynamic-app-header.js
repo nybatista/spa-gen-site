@@ -24,7 +24,7 @@ export class DynamicAppHeader extends ViewStream {
 
   onChannelUI(e){
     const {action,routeData, pageId} = e.props();
-    console.log("CHANNEL _UI IS ",{action,routeData});
+    //console.log("CHANNEL _UI IS ",{action,routeData});
   }
 
   onRouteChangeEvent(e){
@@ -46,7 +46,7 @@ export class DynamicAppHeader extends ViewStream {
 
   onRouteConfigUpdated(e){
     const {routes, updateConfigNum} = e.props();
-    console.log("dynamic app header listening to route update ", {routes,e});
+    //console.log("dynamic app header listening to route update ", {routes,e});
 
     this.appendView(new DynamicAppHeaderContentView({routes, updateConfigNum}), 'header');
 

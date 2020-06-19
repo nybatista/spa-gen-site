@@ -41,11 +41,11 @@ export class PageContentHomeView extends ViewStream {
       sectionEl.appendChild(img.render());
       num++;
 
-      console.log("NUM IS ",num);
+      //console.log("NUM IS ",num);
 
     }
 
-    console.log("ARR LEN ",arr.length);
+    //console.log("ARR LEN ",arr.length);
 
     arr.forEach(addImage);
   }
@@ -53,7 +53,7 @@ export class PageContentHomeView extends ViewStream {
   onImagesLoaded(e){
     const {photos} = e.props();
     const pix = clone(photos);
-    console.log("images loaded ",{photos,e,pix},pix.length, photos.length);
+    //console.log("images loaded ",{photos,e,pix},pix.length, photos.length);
 
     //this.addImages(photos);
   }

@@ -30,7 +30,7 @@ export class DynamicAppSubnavContent extends ViewStream {
 
 
   onRouteConfigUpdated(e){
-    console.log("subnav route config update ",{e},this.props);
+    //console.log("subnav route config update ",{e},this.props);
 
   }
 
@@ -40,7 +40,7 @@ export class DynamicAppSubnavContent extends ViewStream {
   }
 
   onDeepLink(e){
-    console.log("DEEP LINK");
+    //console.log("DEEP LINK");
   }
 
   broadcastEvents() {

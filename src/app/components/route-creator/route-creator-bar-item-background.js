@@ -27,7 +27,7 @@ export class RouteCreatorBarItemBackground extends ViewStream {
     const animateData = this.routeAnim$GetSwapData(swapItems, parentVsid);
     const {height} = animateData;
 
-    console.log("ANIMATE EVENT ",{payload,swapItemsIds,parentVsid, animateData})
+    //console.log("ANIMATE EVENT ",{payload,swapItemsIds,parentVsid, animateData})
     this.props.el$.inline = `height:${height*.9}px`;*/
 
     this.setHeight();

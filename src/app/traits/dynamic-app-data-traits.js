@@ -55,7 +55,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
     const appDataIsValid = all(equals(true), boolAcc);
 
-    console.log('validate app data ',{appDataIsValid, boolAcc})
+    //console.log('validate app data ',{appDataIsValid, boolAcc})
 
     return appDataIsValid;
   }
@@ -77,7 +77,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     let localStorageDynamicData = LocalStorageTraits.localStorage$GetStoreObj('dynamicData');
     const localStorageDataIsValid =  DynamicAppDataTraits.dynAppData$Validate(localStorageDynamicData, configObj);
 
-    console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});
+    //console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});
     if (localStorageDataIsValid === true){
          return DynamicAppDataTraits.dynAppData$CacheData(localStorageDynamicData);
     } else {
@@ -121,7 +121,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
       const routesJson = DynamicAppDataTraits.dynAppData$GetRoutesJson(configObj);
 
-       console.log('config obj for routes ',{configObj, routesJson})
+      // console.log('config obj for routes ',{configObj, routesJson})
       const valIsObj =  compose(is(Object), nth(1))
       const keyIsRouteName = compose(equals('routeName'), nth(0))
 
@@ -142,7 +142,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
         window.Spyne.config.channels.ROUTE.routeNamesArr = routeNamesReducedArr;
       }
 
-      console.log("ROUTES JSON ",{routeNamesReducedArr, routesJson})
+      //console.log("ROUTES JSON ",{routeNamesReducedArr, routesJson})
 
       return routeNamesReducedArr;
 /*
@@ -195,7 +195,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const mainData = path(['Spyne', 'config', 'dynamicData'], window);
 
     const routesReducer = (acc, str)=>{
-      console.log("ROUTES REDUCE DER ",{str, acc})
+      //console.log("ROUTES REDUCE DER ",{str, acc})
       if (dataProps.hasOwnProperty(str)){
         acc.push(pick([str], dataProps))
       }
@@ -214,7 +214,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     .reduce(routesReducer, [])
     .reduce(dataReducer, mainData);
 
-    console.log("ROUTES REDUCE ",{contentData,routeNameArr,mainData})
+    //console.log("ROUTES REDUCE ",{contentData,routeNameArr,mainData})
 
     return merge(dataProps, contentData);
 

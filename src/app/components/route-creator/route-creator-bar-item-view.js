@@ -56,7 +56,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     this.props.el$('section.input-bar').toggleClass('focus', addFocusBool);
 
     const currentVsid = this.props.vsid;
-    console.log("FOCUS IN ACTIONAL ELEMENT ", {currentVsid,e});
+    //console.log("FOCUS IN ACTIONAL ELEMENT ", {currentVsid,e});
   }
 
   onAnimateItem(e){
@@ -172,8 +172,8 @@ export class RouteCreatorBarItemView extends ViewStream {
       }
 
       gsap.set(this.props.el, {opacity:0, x:"-=15"});
-      gsap.to(this.props.el, {duration:.5, delay:.25, x:0, opacity:1})
-        this.setTimeout(delayer, 100);
+      gsap.to(this.props.el, {duration:.5, delay:.5, x:0, opacity:1})
+        this.setTimeout(delayer, 5);
     }
 
     this.routeCreator$InitBarItem();

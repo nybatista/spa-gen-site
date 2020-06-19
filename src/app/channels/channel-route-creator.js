@@ -91,7 +91,7 @@ export class ChannelRouteCreator extends Channel {
     const routeAction = getActionBasedOnType()
     const routePayload = getPayloadBasedOnType();
 
-    console.log("UI ROUTE BAR EVENT ", {type,payload,action,routeAction, routePayload});
+    //console.log("UI ROUTE BAR EVENT ", {type,payload,action,routeAction, routePayload});
     this.sendChannelPayload(routeAction, routePayload);
 
   }
@@ -125,7 +125,7 @@ export class ChannelRouteCreator extends Channel {
     const action = onCompleteAction;// "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT";
     const payload = {action};
 
-    console.log("GEN ACTION EVET ",{action,payload, e});
+    //console.log("GEN ACTION EVET ",{action,payload, e});
     this.sendChannelPayload(action, payload);
   }
 

@@ -98,7 +98,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     }
 
     const mapAgain = (arr)=> {
-      console.log("ARR IS ", arr);
+      //console.log("ARR IS ", arr);
       const obj = {};
       obj[arr[0]]=arr[1];
       return obj;

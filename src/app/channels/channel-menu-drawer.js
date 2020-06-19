@@ -68,7 +68,7 @@ export class ChannelMenuDrawer extends Channel {
     }
 
 
-    console.log("IS HAMBURGER ",{target,eventType,showBurgerBool,e},checkBurgerClassFn.contains('open'));
+    //console.log("IS HAMBURGER ",{target,eventType,showBurgerBool,e},checkBurgerClassFn.contains('open'));
   }
 
   sendMenuDrawerEvent(b=true){

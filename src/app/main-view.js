@@ -34,7 +34,7 @@ export class MainView extends ViewStream {
 
 
     const dynamicData = LocalStorageTraits.localStorage$GetStoreObj('defaultDynamicData');
-    console.log('updated Dynamic Data on ROUTE UPDATED  ', {dynamicData,e});
+    //console.log('updated Dynamic Data on ROUTE UPDATED  ', {dynamicData,e});
 
 
     SpyneConfigTrait.config$SetRouteToLocalStorage();
@@ -71,7 +71,7 @@ export class MainView extends ViewStream {
         "CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT";
 
 
-    console.log("LOADING GEN ANIM ",{action,onCompleteAction,e});
+    //console.log("LOADING GEN ANIM ",{action,onCompleteAction,e});
     this.appendView(new GeneratorLoadingAnimMain({onCompleteAction}));
 
   }

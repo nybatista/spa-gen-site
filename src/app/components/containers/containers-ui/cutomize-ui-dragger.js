@@ -61,7 +61,7 @@ export class CustomizeUIDragger extends ViewStream {
 
 
 
-    console.log('item removed ',{e},this.props);
+    //console.log('item removed ',{e},this.props);
   }
 
 
@@ -81,11 +81,11 @@ export class CustomizeUIDragger extends ViewStream {
       }
 
       const {y,height} =  getYPos();
-      const minY = y+height+40;
+      const minY = y+height+60;
       const dragY = this.props.dragger[0].y
 
       const adjustYBool = dragY<minY;
-      console.log("ROUTE CREATOR ITEM ADDED ",{barId,y,minY,dragY,parentVsid, adjustYBool},this.props);
+     // console.log("ROUTE CREATOR ITEM ADJUST ",{y,height,minY,dragY,barId,parentVsid, adjustYBool},this.props);
 
     //  if (adjustYBool===true){
 
@@ -94,7 +94,7 @@ export class CustomizeUIDragger extends ViewStream {
      // }
 
     }
-    this.setTimeout(checkYPos, 300);
+    this.setTimeout(checkYPos, 600);
 
   }
 

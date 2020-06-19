@@ -46,7 +46,7 @@ export class DynamicAppPageTraits extends SpyneTrait {
 
   static dynPage$CheckToAddSecondaryTopicPage(subTopicData=this.props.subTopicData){
     //subTopicData needs {pageId, pageTopicKey, pageTopicVal};
-      console.log("CHECK TO ADD SUBCONTENT ",{subTopicData},this.props);
+      //console.log("CHECK TO ADD SUBCONTENT ",{subTopicData},this.props);
     const {pageTopicKey, pageTopicVal} = subTopicData;
 
     if (pageTopicVal!==undefined){
@@ -74,7 +74,7 @@ export class DynamicAppPageTraits extends SpyneTrait {
       const subNavRouteKey = path(['routePath', 'routeName'], routes);
       const subNavRouteValue =  routeData[subNavRouteKey];
       const data= merge({subNavRouteValue,subNavRouteKey}, routeData);
-      console.log("FINAL DATA ",{data});
+      //console.log("FINAL DATA ",{data});
       this.appendView(new DynamicAppPageSubnavContainer({data,routes}), '.page-content');
     }
 

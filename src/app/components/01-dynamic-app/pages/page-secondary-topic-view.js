@@ -11,7 +11,7 @@ export class PageSecondaryTopicView extends ViewStream {
     props.data = merge(props.data, DynamicAppDataTraits.dynAppData$GetData(subTopicData));
 
 
-    console.log("SECONDARY TOPIC ",{subTopicData},props.data);
+    //console.log("SECONDARY TOPIC ",{subTopicData},props.data);
     props.template = require('./templates/page-secondary-topic.tmpl.html');
     super(props);
 
@@ -35,7 +35,7 @@ export class PageSecondaryTopicView extends ViewStream {
   }
 
   onSecondaryPageEvent(e){
-    console.log("SUB TOPIC SUBNAV CHANGE 1 EVENT ",e);
+    //console.log("SUB TOPIC SUBNAV CHANGE 1 EVENT ",e);
     this.disposeViewStream();
   }
 

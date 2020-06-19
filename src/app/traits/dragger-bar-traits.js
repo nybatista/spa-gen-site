@@ -42,7 +42,7 @@ export class DraggerBarTraits extends SpyneTrait {
 
   }
 
-  static getHeaderHeightAdjust(){
+  static dragBar$GetHeaderHeightAdjust(){
     const headerHeight = document.getElementById('dynamic-app-header').getBoundingClientRect().height;
     return  (headerHeight-this.props.elHeight)/2;
 
@@ -53,7 +53,7 @@ export class DraggerBarTraits extends SpyneTrait {
     const {y,height} = this.props.headerBar.getBoundingClientRect();
     const yPos = y+(height-draggerHeight)/2;
 
-    console.log("DRAGGER STUFF ", {y,height,draggerHeight,yPos})
+    //console.log("DRAGGER STUFF ", {y,height,draggerHeight,yPos})
 
     gsap.set(this.props.el, {y:yPos});
 
@@ -73,12 +73,15 @@ export class DraggerBarTraits extends SpyneTrait {
 
       this.dragBar$SendInfoToChannel({y,containerHeight});
 
-      console.log("Y UPDATED ",{obj,y,containerHeight});
+      //console.log("Y UPDATED ",{obj,y,containerHeight});
 
     }
+    const y = val;
+    const containerHeight = val;
 
+    this.dragBar$SendInfoToChannel({y,containerHeight});
 
-    gsap.to(this.props.el, {duration:.25, y:val, onUpdate:onYUpdated, onComplete:conCompleteDragTween});
+    gsap.to(this.props.el, {duration:.25, y:val, onComplete:conCompleteDragTween});
 
   }
 
@@ -94,8 +97,8 @@ export class DraggerBarTraits extends SpyneTrait {
     gsap.registerPlugin(Draggable);
     //gsap.registerPlugin(InertiaPlugin);
     this.props.elHeight = this.props.el.getBoundingClientRect().height;
-    this.props.headerHeightAdj = 68-this.getHeaderHeightAdjust();
-    console.log("HEADER DRAG ADJ ",this.props.headerHeightAdj, this.props.elHeight)
+    this.props.headerHeightAdj = 68-this.dragBar$GetHeaderHeightAdjust();
+    //console.log("HEADER DRAG ADJ ",this.props.headerHeightAdj, this.props.elHeight)
 
     const onSnapItem = (y)=>{
 

@@ -123,7 +123,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
     //const srcData = this.appDataGen$GetSrcData();
 
 
-    console.log("SRC DATA ",{srcData});
+    //console.log("SRC DATA ",{srcData});
     const mainObj = {};
 
     const parseRouteConfig = (routeObj, parentLabel)=>{
@@ -132,7 +132,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
       const routeProps = getRouteProps(routePath);
 
       const generatePropObj = (pair)=>{
-        console.log("PARENT LABEL ",{parentLabel});
+        //console.log("PARENT LABEL ",{parentLabel});
         const propObj = {
           [routeName]: pair[0],
           background:  this.appDataGen$CreatePhoto(srcData, pair[0], parentLabel),

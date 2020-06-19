@@ -101,7 +101,7 @@ export class DynamicAppPageView extends ViewStream {
       this.props.subTopicData = this.dynPage$GetSubTopicData(this.props.data);
       this.dynPage$CheckToAddSecondaryTopicPage();
 
-      console.log("SUB NAV CONTENT ",this.props);
+      //console.log("SUB NAV CONTENT ",this.props);
 
       this.props.routes=routes;
       this.initPage();

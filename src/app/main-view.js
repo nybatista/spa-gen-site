@@ -19,6 +19,7 @@ export class MainView extends ViewStream {
     return [
         ['CHANNEL_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated'],
         ['CHANNEL_ROUTE_CREATOR_BEFORE_GENERATE_JSON_EVENT', 'addGeneratorLoadingAnim'],
+        ['CHANNEL_ROUTE_CREATOR_GENERATE_BEFORE_DEFAULT_JSON_EVENT', 'addGeneratorLoadingAnim'],
         ['CHANNEL_WINDOW_BEFOREUNLOAD_EVENT', 'onBeforeUnload']
 
     ];
@@ -63,8 +64,15 @@ export class MainView extends ViewStream {
     return [];
   }
 
-  addGeneratorLoadingAnim(){
-    this.appendView(new GeneratorLoadingAnimMain());
+  addGeneratorLoadingAnim(e){
+    const {action} = e;
+    const onCompleteAction = action === "CHANNEL_ROUTE_CREATOR_BEFORE_GENERATE_JSON_EVENT" ?
+        "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT" :
+        "CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT";
+
+
+    console.log("LOADING GEN ANIM ",{action,onCompleteAction,e});
+    this.appendView(new GeneratorLoadingAnimMain({onCompleteAction}));
 
   }
 

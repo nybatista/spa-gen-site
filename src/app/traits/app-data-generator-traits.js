@@ -64,10 +64,14 @@ export class AppDataGeneratorTraits extends SpyneTrait {
     return data.splice(mainPhotoArrIndex, 1)[0];
   }
 
-  static appDataGen$CreatePhoto(srcData, key){
+  static appDataGen$CreatePhoto(srcData, key, parentLabel){
     const labels = R.path(['allPhotos', 'labels'], srcData);
     const photos = path(['allPhotos','photos'], srcData);
-    const photoLabel = this.appDataGen$GetPhotoLabel(key, labels);
+    let photoLabel = this.appDataGen$GetPhotoLabel(key, labels);
+    if (photoLabel === 'abstract' && parentLabel!==undefined){
+      photoLabel = this.appDataGen$GetPhotoLabel(parentLabel, labels);
+    }
+
     const photoObj = this.appDataGen$SelectPhotoByLabel(photoLabel, photos);
 
 /*
@@ -122,15 +126,16 @@ export class AppDataGeneratorTraits extends SpyneTrait {
     console.log("SRC DATA ",{srcData});
     const mainObj = {};
 
-    const parseRouteConfig = (routeObj)=>{
+    const parseRouteConfig = (routeObj, parentLabel)=>{
       const {routePath} = routeObj;
       const routeName = getRouteName(routePath);
       const routeProps = getRouteProps(routePath);
 
       const generatePropObj = (pair)=>{
+        console.log("PARENT LABEL ",{parentLabel});
         const propObj = {
           [routeName]: pair[0],
-          background:  this.appDataGen$CreatePhoto(srcData, pair[0]),
+          background:  this.appDataGen$CreatePhoto(srcData, pair[0], parentLabel),
           headline: AppDataGeneratorTraits.appDataGen$CreateHeadline(pair[0]),
           text: AppDataGeneratorTraits.appDataGen$CreateText(srcData),
           keyword: pair[0],
@@ -141,7 +146,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
 
 
         if (is(Object, pair[1])){
-          propObj['content'] = parseRouteConfig(pair[1]);
+          propObj['content'] = parseRouteConfig(pair[1], pair[0]);
         }
          return propObj;
       }

@@ -68,7 +68,7 @@ export class ChannelRouteCreator extends Channel {
         routeBar: "CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT",
         generateJson: "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT",
         beforeGenerateJson: "CHANNEL_ROUTE_CREATOR_BEFORE_GENERATE_JSON_EVENT",
-        resetJson: "CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT"
+        resetJson: "CHANNEL_ROUTE_CREATOR_GENERATE_BEFORE_DEFAULT_JSON_EVENT"
       }
       return actionHash[type];
 
@@ -91,7 +91,7 @@ export class ChannelRouteCreator extends Channel {
     const routeAction = getActionBasedOnType()
     const routePayload = getPayloadBasedOnType();
 
-    //console.log("UI ROUTE BAR EVENT ", {type,payload,action,routeAction, routePayload});
+    console.log("UI ROUTE BAR EVENT ", {type,payload,action,routeAction, routePayload});
     this.sendChannelPayload(routeAction, routePayload);
 
   }
@@ -121,8 +121,11 @@ export class ChannelRouteCreator extends Channel {
 
 
   onGenerateJson(e){
-    const action = "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT";
+    const {onCompleteAction} = e.props();
+    const action = onCompleteAction;// "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT";
     const payload = {action};
+
+    console.log("GEN ACTION EVET ",{action,payload, e});
     this.sendChannelPayload(action, payload);
   }
 
@@ -141,6 +144,7 @@ export class ChannelRouteCreator extends Channel {
       'CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT',
       "CHANNEL_ROUTE_CREATOR_BEFORE_GENERATE_JSON_EVENT",
       'CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT',
+      'CHANNEL_ROUTE_CREATOR_GENERATE_BEFORE_DEFAULT_JSON_EVENT',
       'CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT',
       'CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT',
       'CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT',

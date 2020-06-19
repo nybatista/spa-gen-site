@@ -12,7 +12,7 @@ export class GeneratorLoadingAnimTraits extends SpyneTrait {
   static genLoad$InitAnim(){
       gsap.set(this.props.el, {
         y: "-100%",
-        opacity: 0
+        opacity: 1
 
       })
 
@@ -28,14 +28,15 @@ export class GeneratorLoadingAnimTraits extends SpyneTrait {
       gsap.to(this.props.el, {duration:.35, y:0, opacity:1, onComplete:onIntroComplete, ease:"Power1.easeInOut"});
 
 
-    gsap.to(this.props.el, {duration:.5, y:"-100%", opacity:0, delay:.75, onComplete:onDisposeViewStream, ease:"Power1.easeInOut"});
+    gsap.to(this.props.el, {duration:.35, y:"-100%", opacity:0, delay:.75, onComplete:onDisposeViewStream, ease:"Power1.easeInOut"});
 
   }
 
   static genLoad$SendStartRouteGenAction(){
     const channel = "CHANNEL_ROUTE_CREATOR";
     const action = "CHANNEL_ROUTE_CREATOR_SEND_GENERATE_JSON_EVENT";
-    this.sendInfoToChannel(channel, {action}, action);
+    const {onCompleteAction} = this.props;
+    this.sendInfoToChannel(channel, {action,onCompleteAction}, action);
 
   }
 

@@ -15,19 +15,41 @@
   #dynamic-app-footer{
     position:relative;
     width:100%;
-    height:100%;
     @include add-border-shadow;
     display: flex;
     align-items: flex-end;
-    padding: 10px 0;
+    //padding: 10px 0;
     height: 68px;
     background: #000;
     color:#ccc;
 
     footer{
       position: relative;
+      display: flex;
       height: 100%;
+      width: 100%;
       margin: 0 1.5rem;
+      flex-direction: column;
+      justify-content: center;
+
+      #footer-content{
+        color: skyblue;
+       // opacity: .6;
+        padding: 0 .5rem;
+        background: none;
+        pointer-events: all;
+        border: none;
+        margin: 0;
+        height: 1.2rem;
+        width: 100%;
+        &:focus{
+          border:none;
+          outline: 1px solid skyblue;
+        }
+
+      }
+
+
     }
     p{
       color: skyblue;

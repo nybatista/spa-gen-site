@@ -1,4 +1,5 @@
 import {ViewStream} from 'spyne';
+import {DynamicAppFooterContent} from 'components/01-dynamic-app/ui/dynamic-app-footer-content';
 
 export class DynamicAppFooter extends ViewStream {
 
@@ -20,7 +21,7 @@ export class DynamicAppFooter extends ViewStream {
   }
 
   onRendered() {
-
+    this.appendView(new DynamicAppFooterContent(), 'footer');
   }
 
 }

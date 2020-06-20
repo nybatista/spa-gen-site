@@ -41,7 +41,7 @@ const defaultConfig = {
 
   "ROUTE": {
       "header" : "Your Title",
-      "footer" : "Spyne Website Footer",
+      "footer" : "Your Footer Text",
     "type" : "slash",
     "routes": {
       "routePath": {

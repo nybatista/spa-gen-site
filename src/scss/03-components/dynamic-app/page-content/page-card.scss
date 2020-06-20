@@ -22,6 +22,16 @@
 
 
 
+
+  &.subnav-items-1, &.subnav-items-3{
+
+    display: flex;
+    justify-content: center;;
+    flex-wrap: wrap;
+  }
+
+
+  /*
   li:nth-last-child(-n+1):first-child,
   li:nth-last-child(-n+1):first-child ~ li {
     //border: 8px solid green;
@@ -49,6 +59,7 @@
       max-width: 400px;
     }
   }
+  */
 
 
   .page-card {

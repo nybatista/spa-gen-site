@@ -2,14 +2,22 @@ import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {DynamicAppPageTraits} from 'traits/dynamic-app-page-traits';
 import {DynamicAppPageSubnavContent} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-content';
 import {DynamicAppPageCardView} from 'components/01-dynamic-app/pages/dynamic-app-page-card-view';
-import {merge} from 'ramda';
+import {merge, defaultTo, prop, length, compose} from 'ramda';
 import {DynamicAppTraits} from 'traits/dynamic-app-traits';
 
 export class DynamicAppPageSubnavContainer extends ViewStream {
 
   constructor(props = {}) {
+
+    const createSubNavContainerClass = (d)=>{
+      const arrLen = compose(length,defaultTo([]),prop('content'))(d);
+      return `dynamic-app-page-subnav-container subnav-items-${arrLen}`;
+    }
+
     props.tagName='ul';
-    props.class='dynamic-app-page-subnav-container';
+    //props.class='dynamic-app-page-subnav-container';
+    props.class = createSubNavContainerClass(props.data);
+    console.log('sub nav data ',props.data);
     props.traits= DynamicAppPageTraits;
     super(props);
 

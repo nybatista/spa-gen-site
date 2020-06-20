@@ -39,7 +39,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
    }
 
 
-   static appDataGem$SaveInputValue(props=this.props){
+   static appDataGen$SaveInputValue(props=this.props){
      const {titleType} = props;
      const value = props.el.value;
 

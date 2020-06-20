@@ -15,13 +15,27 @@ export class SpyneConfigTrait extends SpyneTrait {
 
   static config$getConfigFromStorage(){
     const defaults = LocalStorageTraits.localStorage$GetStoreObj('defaults');
-    const routes = LocalStorageTraits.localStorage$GetStoreObj('routes');
     const {config} = defaults;
     const isDefined = compose(not, either(isNil, isEmpty))
+
+
+    const configuredProps = ['routes', 'header', 'footer'];
+
+    const updateConfigIfPropExists = (str)=>{
+      const prop = LocalStorageTraits.localStorage$GetStoreObj(str);
+      if (isDefined(prop)===true){
+        config.channels.ROUTE[str] = prop;
+      }
+    }
+
+    configuredProps.forEach(updateConfigIfPropExists);
+
+
+   /* const routes = LocalStorageTraits.localStorage$GetStoreObj('routes');
     if (isDefined(routes)===true){
       config.channels.ROUTE.routes = routes;
      }
-
+*/
    // DynamicAppDataTraits.dynAppData$GetRouteNameProps({Spyne:{config}}, true);
 
     return config;

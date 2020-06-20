@@ -15,7 +15,7 @@ export class CustomizeContainer extends ViewStream {
     // return nexted array(s)
     return [
       ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onToggleView'],
-        ['CHANNEL_CONTAINERS_DRAG_EVENT', 'onContainerDragEvent']
+      ['CHANNEL_CONTAINERS_DRAG_EVENT', 'onContainerDragEvent']
 
     ];
   }

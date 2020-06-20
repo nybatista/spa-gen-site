@@ -1,45 +1,54 @@
 import {ViewStream} from 'spyne';
+import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
 import {path} from 'ramda';
-export class DynamicAppHeaderLogo extends ViewStream {
 
+export class DynamicAppHeaderLogo extends ViewStream {
   constructor(props = {}) {
     props.tagName='input';
-    const placeholder = 'Website Title';
-    const value = placeholder;
-    props['value']=value;
+    props.traits=AppDataGeneratorTraits;
+    props.titleType='header';
+    props.contentPath = ['Spyne', 'config', 'channels', 'ROUTE', 'header'];
+    props.data = path(props.contentPath, window);
+    props.placeholder = props.data;
+    props.dataset={inputType:"header"};
+    props.value = props.placeholder;
     props.id='logo';
-    props.data = path(['Spyne', 'config', 'siteTitle'], window);
     super(props);
 
   }
 
   addActionListeners() {
-    // return nexted array(s)
     return [
+      ["CHANNEL_UI_FOCUSOUT_EVENT", 'onInputFocusOut', "#logo" ],
+      ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetHeaderValue'],
       ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onToggleView'],
-
     ];
+  }
+
+  onResetHeaderValue(){
+    this.appDataGen$ResetTitleToDefault();
+  }
+
+  onInputFocusOut(e){
+    this.appDataGem$SaveInputValue();
   }
 
   onToggleView(e){
     const {revealContainerBool} = e.props();
-
     this.props.el$.toggleClass('hide', revealContainerBool);
-
-    //console.log("TOGGLINGE CustomizeContainer VIEW ",{e});
-    // this.props.el$.toggleClass('reveal');
-    // this.props.el$.inline='';
   }
 
 
   broadcastEvents() {
-    // return nexted array(s)
-    return [];
+    return [
+        ['#logo', 'focusout']
+    ];
   }
 
   onRendered() {
+    this.addChannel("CHANNEL_UI");
     this.addChannel("CHANNEL_CONTAINERS");
-
+    this.addChannel("CHANNEL_ROUTE_CREATOR");
   }
 
 }

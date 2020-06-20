@@ -1,4 +1,5 @@
 import {SpyneTrait} from 'spyne';
+import {LocalStorageTraits} from 'traits/local-storage-traits';
 import {whereEq, path, compose, pick, evolve, map, find, reduce, ifElse, contains, findIndex, nth, clone, reverse, omit, keys, reduceRight, toPairs, equals, merge,propEq, is, prop,filter, head} from 'ramda';
 import {SrcData} from '../../tests/mocks/src-data-mock';
 
@@ -24,6 +25,26 @@ export class AppDataGeneratorTraits extends SpyneTrait {
     const key = window.Spyne.config.localStorageKey;
     const {srcData} = window[key];
     return clone(srcData);
+   }
+
+
+   static appDataGen$ResetTitleToDefault(props=this.props){
+    const {titleType} = props;
+    const defaults = LocalStorageTraits.localStorage$GetStoreObj('defaults');
+    const defaultValue = defaults[titleType];
+    props.el.value = defaultValue;
+
+    LocalStorageTraits.localStorage$SetStoreObjAndUpdate(titleType, defaultValue);
+
+   }
+
+
+   static appDataGem$SaveInputValue(props=this.props){
+     const {titleType} = props;
+     const value = props.el.value;
+
+     LocalStorageTraits.localStorage$SetStoreObjAndUpdate(titleType, value);
+
    }
 
 

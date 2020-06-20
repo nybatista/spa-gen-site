@@ -23,7 +23,8 @@ export class CustomizeContainer extends ViewStream {
   onContainerDragEvent(e){
     const {y, containerHeight} = e.props();
     //console.log('container drag event ',{y},e)
-    gsap.to(this.props.el, {duration:.25, height:containerHeight});
+    gsap.set(this.props.el, {height:containerHeight});
+   // gsap.to(this.props.el, {duration:.25, height:containerHeight});
 
   }
 

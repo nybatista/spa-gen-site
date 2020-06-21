@@ -24,6 +24,45 @@ export class RouteAnimTraits extends SpyneTrait {
    return props.el$(sel);
   }
 
+  static routeAnim$CreateAnimInTimeline(){
+    const container$ = this.props.el$("#route-creator-container").el;
+    const title$ = this.props.el$(".route-creator-title").el;
+    const mainBtn$ = this.props.el$("#route-gen-main-btn").el;
+    const routeBtn$ = this.props.el$(".main-route-btn").el;
+    const routeNameLabel$ = this.props.el$("#route-creator-container > .route-creator-route-name").el;
+    const tl = gsap.timeline({paused:true});
+
+
+    const barItems$ = this.props.el$(".route-creator-bar-item.route-level-0").arr;
+    const setItems = (el)=>{
+      console.log("EL IS ",{el})
+      tl.to(el, {opacity:0, duration:0})
+    }
+    [container$, title$, mainBtn$, routeBtn$, routeNameLabel$].forEach(setItems);
+    barItems$.forEach(setItems);
+    const baseTime = .25;
+
+    tl.addLabel('start');
+    tl.to(container$, {duration:.5, opacity:1});
+    tl.to(title$, {duration:baseTime, opacity:1}, "start");
+    tl.to(mainBtn$, {duration:baseTime, opacity:1}, "start");
+    tl.to(routeNameLabel$, {duration:baseTime, opacity:1}, "start");
+    tl.to(routeBtn$, {duration:baseTime, opacity:1}, "start");
+    tl.to(barItems$, {duration:.2, opacity:1, stagger:.12, ease:"Power1.easeOut"}, 0);
+
+
+
+    return tl;
+  }
+
+
+  static routeAnim$AnimateInRouteCreator(bool, props=this.props){
+    props.mainRouteTL = this.routeAnim$CreateAnimInTimeline();
+    bool === true ? props.mainRouteTL.restart() : props.mainRouteTL.reverse();
+
+
+  }
+
   static routeAnim$GetBarItemHeight(el){
 
     const elBox = el.getBoundingClientRect();

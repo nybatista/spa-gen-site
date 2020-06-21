@@ -76,7 +76,7 @@
 
   &:before{
     position: absolute;
-    content:' ';
+    //content:' ';
     top:0;
     left:0;
     width:100%;
@@ -84,7 +84,7 @@
     background: $clr-route-creator-panel-bg;
     border-radius: 10px;
 
-    transition: opacity .5s .65s ease-in-out;
+    //transition: opacity .5s .65s ease-in-out;
     z-index: $z-index-ui + 100;
     pointer-events: none;
 

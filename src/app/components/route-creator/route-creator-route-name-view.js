@@ -49,7 +49,8 @@ export class RouteCreatorRouteNameView extends ViewStream {
 
     if (activeModeHasChanged===true){
       this.props.isActive = currentActiveMode;
-      this.props.el$.toggleClass('show', this.props.isActive);
+      const delayToggle = ()=>this.props.el$.toggleClass('show', this.props.isActive);
+      this.setTimeout(delayToggle, 300);
 
       if (this.props.isActive===true){
         if (this.props.initShow===true || this.props.data.routeNameVal === undefined) {

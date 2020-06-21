@@ -44,11 +44,11 @@ export class RouteCreatorMainView extends ViewStream {
   onCustomizeContainerToggled(e){
     const {revealContainerBool} = e.props();
     this.props.el$('#route-creator-container').toggleClass('reveal', revealContainerBool);
-    this.routeAnim$AnimateInRouteCreator(revealContainerBool);
 
-    if (revealContainerBool === true){
+    //if (revealContainerBool === true){
+      this.routeAnim$AnimateInRouteCreator(revealContainerBool);
 
-    }
+    //}
 
   }
 

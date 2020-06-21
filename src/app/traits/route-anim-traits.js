@@ -30,7 +30,7 @@ export class RouteAnimTraits extends SpyneTrait {
     const mainBtn$ = this.props.el$("#route-gen-main-btn").el;
     const routeBtn$ = this.props.el$(".main-route-btn").el;
     const routeNameLabel$ = this.props.el$("#route-creator-container > .route-creator-route-name").el;
-    const tl = gsap.timeline({paused:true});
+    const tl = gsap.timeline();
 
 
     const barItems$ = this.props.el$(".route-creator-bar-item.route-level-0").arr;
@@ -41,14 +41,14 @@ export class RouteAnimTraits extends SpyneTrait {
     [container$, title$, mainBtn$, routeBtn$, routeNameLabel$].forEach(setItems);
     barItems$.forEach(setItems);
     const baseTime = .25;
+    tl.addLabel('start', .5);
 
-    tl.addLabel('start');
-    tl.to(container$, {duration:.5, opacity:1});
+    tl.to(container$, {duration:.75, opacity:1});
     tl.to(title$, {duration:baseTime, opacity:1}, "start");
-    tl.to(mainBtn$, {duration:baseTime, opacity:1}, "start");
     tl.to(routeNameLabel$, {duration:baseTime, opacity:1}, "start");
+    tl.to(mainBtn$, {duration:baseTime, opacity:1}, "start");
     tl.to(routeBtn$, {duration:baseTime, opacity:1}, "start");
-    tl.to(barItems$, {duration:.2, opacity:1, stagger:.12, ease:"Power1.easeOut"}, 0);
+    tl.to(barItems$, {duration:.2, opacity:1, stagger:.12, ease:"Power1.easeOut"}, "start");
 
 
 
@@ -58,7 +58,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
   static routeAnim$AnimateInRouteCreator(bool, props=this.props){
     props.mainRouteTL = this.routeAnim$CreateAnimInTimeline();
-    bool === true ? props.mainRouteTL.restart() : props.mainRouteTL.reverse();
+    bool === true ? props.mainRouteTL.play() : props.mainRouteTL.reverse('start');
 
 
   }

@@ -4,6 +4,8 @@
  > .route-creator-route-name{
     top:86px;
     left:15px;
+
+
     //background: #ccc;
     input{
       //background: #ccc;
@@ -41,6 +43,8 @@
     pointer-events: none;
     user-select: none;
     opacity: .7;
+    transition-delay: unset;
+    transition: none;
   }
 
   input{

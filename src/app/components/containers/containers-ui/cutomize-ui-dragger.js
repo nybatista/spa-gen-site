@@ -36,15 +36,24 @@ export class CustomizeUIDragger extends ViewStream {
     //console.log("LOADING DRAGGER OPACITY ",{revealContainerBool, delayTime, opacityNum});
 
     this.props.el$.toggleClass('reveal', revealContainerBool);
+
+    const tempDisableDrag = ()=>{
+      const enableDrag = ()=>this.props.dragger[0].enable();
+
+      if (revealContainerBool === false){
+        this.props.dragger[0].disable();
+        this.setTimeout(enableDrag, 200);
+      }
+
+    }
+
     const onStartFadeAnim = ()=>{
       this.dragBar$InitYPos();
-
-
       gsap.to(this.props.el, {duration:.5, opacity:opacityNum });
     }
 
     this.setTimeout(onStartFadeAnim, delayTime);
-
+    tempDisableDrag();
 
   }
 

@@ -30,7 +30,7 @@ export class DynamicAppFooterContent extends ViewStream {
   }
 
   onInputFocusOut(e){
-    this.appDataGem$SaveInputValue();
+    this.appDataGen$SaveInputValue();
   }
 
 

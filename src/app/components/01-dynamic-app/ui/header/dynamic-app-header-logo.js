@@ -30,7 +30,7 @@ export class DynamicAppHeaderLogo extends ViewStream {
   }
 
   onInputFocusOut(e){
-    this.appDataGem$SaveInputValue();
+    this.appDataGen$SaveInputValue();
   }
 
   onToggleView(e){

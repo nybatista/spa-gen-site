@@ -34,6 +34,8 @@ export class AppDataGeneratorTraits extends SpyneTrait {
     const defaultValue = defaults[titleType];
     props.el.value = defaultValue;
 
+    window.Spyne.config.channels.ROUTE[titleType] = defaultValue;
+
     LocalStorageTraits.localStorage$SetStoreObjAndUpdate(titleType, defaultValue);
 
    }
@@ -42,6 +44,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
    static appDataGen$SaveInputValue(props=this.props){
      const {titleType} = props;
      const value = props.el.value;
+     window.Spyne.config.channels.ROUTE[titleType] = value;
 
      LocalStorageTraits.localStorage$SetStoreObjAndUpdate(titleType, value);
 

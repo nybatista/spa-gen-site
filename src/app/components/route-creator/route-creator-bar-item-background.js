@@ -45,7 +45,7 @@ export class RouteCreatorBarItemBackground extends ViewStream {
       this.props.el$.inline = heightStr;
       //console.log("HEIGHT STR IS ", {heightStr}, this.props.el);
     }
-    this.setTimeout(delayer, 100);
+    this.setTimeout(delayer, 300);
   }
 
   onRendered() {

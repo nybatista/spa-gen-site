@@ -21,10 +21,14 @@ export class CustomizeContainer extends ViewStream {
   }
 
   onContainerDragEvent(e){
-    const {y, containerHeight} = e.props();
+    const {y, containerHeight, animateToPositionBool} = e.props();
     //console.log('container drag event ',{y},e)
-    gsap.set(this.props.el, {height:containerHeight});
-   // gsap.to(this.props.el, {duration:.25, height:containerHeight});
+
+    if (animateToPositionBool===true){
+       gsap.to(this.props.el, {duration:.25, height:containerHeight});
+    } else {
+      gsap.set(this.props.el, {height:containerHeight});
+    }
 
   }
 

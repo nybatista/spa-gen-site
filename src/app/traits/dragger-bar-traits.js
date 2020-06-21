@@ -61,7 +61,7 @@ export class DraggerBarTraits extends SpyneTrait {
   }
 
 
-  static dragBar$UpdateYPos(val){
+  static dragBar$UpdateYPos(val, animateToPositionBool=true){
 
     const conCompleteDragTween = ()=>{
       this.props.dragger[0].update();
@@ -70,17 +70,16 @@ export class DraggerBarTraits extends SpyneTrait {
     const onYUpdated = (obj)=>{
       const {y} = this.props.el.getBoundingClientRect();
       const containerHeight = y;// y-11;;
-
-      this.dragBar$SendInfoToChannel({y,containerHeight});
+      this.dragBar$SendInfoToChannel({y,containerHeight,animateToPositionBool});
 
       //console.log("Y UPDATED ",{obj,y,containerHeight});
 
     }
-   // const y = val;
-   // const containerHeight = val;
-   // this.dragBar$SendInfoToChannel({y,containerHeight});
+   const y = val;
+   const containerHeight = val;
+   this.dragBar$SendInfoToChannel({y,containerHeight,animateToPositionBool});
 
-    gsap.to(this.props.el, {duration:.0625, y:val, onUpdate:onYUpdated, onComplete:conCompleteDragTween});
+    gsap.to(this.props.el, {duration:.25, y:val, onComplete:conCompleteDragTween});
 
   }
 

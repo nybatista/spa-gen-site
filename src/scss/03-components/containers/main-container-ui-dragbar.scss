@@ -1,0 +1,54 @@
+#main-container {
+
+
+  #customize-main-view-ui {
+
+    #dragbar-holder{
+      position: absolute;;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      #dragger {
+        position: absolute;
+        top:0;
+        width:100px;
+        height:68px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        //background: orange;
+
+        //height: 40px;
+
+        pointer-events: none;
+
+
+        &.reveal{
+          pointer-events: all;
+
+        }
+
+       // cursor: pointer;
+        svg {
+          //max-width: 100px;
+
+          .dragger-icon {
+            fill: #333;
+          }
+
+
+
+        }
+      }
+
+    }
+
+  }
+
+
+}

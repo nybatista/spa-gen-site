@@ -1,9 +1,8 @@
-$hj-railcasts: #072027;
 
 .customize-panel{
   position:relative;
-  width: 40%;
-  margin: 30px;
+  width: 44%;
+  margin: 0 2rem;
   //background: #ddd;
   height: 100%;
   z-index: $z-index-ui;
@@ -11,18 +10,9 @@ $hj-railcasts: #072027;
 
 
 }
-
 #route-json-viewer{
- // background: #222;
 
-
-  pre {
-    top: 105px;
-    position: absolute;
-    min-width: 560px;
-
-    code.json.hljs{
-    background: $hj-railcasts;
-  }
+  &.customize-panel{
+    z-index: $z-index-ui - 10;
   }
 }

@@ -1,11 +1,12 @@
-import {partialRight, map,addIndex,clamp,reject,findLastIndex,findIndex,gte, sortBy,prop, lte, pick,pluck, compose,head,filter,clone,propEq} from 'ramda';
+import {partialRight, map,addIndex,clamp,reject,findLastIndex,findIndex,gte,sum,take, sortBy,prop, lte, pick,pluck, compose,head,filter,clone,propEq} from 'ramda';
 const mapIndexed = addIndex(map);
 
 export class BarItemsSorter{
 
-  constructor(liItems, id) {
+  constructor(liItems, id, disableFirstItem=false) {
     this.listItems = liItems;
     this.draggerId = id;
+    this.clampStartNum = disableFirstItem === false ? 0 : 1;
    // console.log("SORTER ",this);
     this.barItemsSortArr = BarItemsSorter.createSorterObject(this.listItems, id);
     this.getBarItemsYPositions = BarItemsSorter.getBarItemsYPositions.bind(this);
@@ -68,9 +69,10 @@ export class BarItemsSorter{
     const arr = this.getBarItemsYPositions();
     arr.push(1000000);
     const len = arr.length-2;
+    const {clampStartNum} = this;
 
     // getTheIndex COMPARES THE Y VALUES IN THE ARRAY WITH THE CURRENT DRAGGER Y
-    const getTheIndex = compose(clamp(0,len),findIndex(lte(y)));
+    const getTheIndex = compose(clamp(clampStartNum,len),findIndex(lte(y)));
     const yIndex = getTheIndex(arr);
 
 
@@ -191,8 +193,11 @@ export class BarItemsSorter{
   }
 
 
-  static getBarItemHeight(liEl){
-    const pullHeightFromBox = el=>el.getBoundingClientRect().height;
+  static getBarItemHeight(liEl, paddingNum=5.25){
+    const pullHeightFromBox = el=>{
+      const pct = 1;//el.classList.contains('route-level-0') === true ? 1 : 3;
+      return el.getBoundingClientRect().height;
+    }
     let height = pullHeightFromBox(liEl.querySelector('section.input-bar'))
     const subUlItemsSel = 'ul.route-bar-items-list li';
     const hasMainSubNav = liEl.querySelector(subUlItemsSel)!==null;
@@ -206,18 +211,43 @@ export class BarItemsSorter{
       // IF SUB ITEMS EXIST, LOOP THOSE ITEMS, ELSE RETURN LAST TERMINATED ITEM
       if (subUlItems.length>0){
         Array.from(subUlItems).forEach(getTheHeight)
+       // paddingNum=0;//paddingNum*2;
+
       } else{
         const itemHeight = pullHeightFromBox(listItem);
-        height += listItem.offsetHeight;
-      }
-    }
-      // INIT RECURSIVE FUNCTION
-      if (hasMainSubNav===true) {
-        getTheHeight(liEl);
+        height += listItem.offsetHeight+paddingNum;
+        //paddingNum=500;//paddingNum-paddingNum;
       }
 
-      //console.log("HEIGHT IS ",{height});
-      return height;
+/*      if (subUlItems.length===1){
+        paddingNum=30;
+      } else{
+        paddingNum=30;
+      }*/
+
+    }
+    // INIT RECURSIVE FUNCTION
+    if (hasMainSubNav===true) {
+      getTheHeight(liEl);
+      const subLen = document.querySelectorAll(subUlItemsSel).length-1;
+     // console.log("NUM IS ",subLen)
+
+
+      paddingNum = paddingNum*7;
+    } else {
+
+      if (liEl.classList.contains('route-level-0') === true){
+        height = height+paddingNum;
+      }
+
+
+    }
+
+
+   // console.log("HEIGHT PADDING ",subUlItemsSel.length,{height, paddingNum},liEl)
+
+    // console.log("HEIGHT IS ",{height});
+    return height+paddingNum;
 
   }
 
@@ -287,7 +317,7 @@ export class BarItemsSorter{
     const heightsArr = pluck('height', arr);
     //console.log('heights arr ',heightsArr);
     // CREATE CORRECT Y POSITION BY ADDING UP PREVIOUS HEIGHTS
-    const getGsapYPos = (index)=>R.sum(R.take(index,heightsArr))
+    const getGsapYPos = (index)=>sum(take(index,heightsArr))
     // ADD THE CORRECT Y POS FOR GSAP AND CREATE THE MIDPOINTS FOR ARR CHECK
     const addGsapY = (obj)=>{
      // obj.yGsap = getGsapYPos(obj.index);

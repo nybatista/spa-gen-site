@@ -2,7 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {RouteCreatorBarItemView} from 'components/route-creator/route-creator-bar-item-view';
 import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
 import {RouteCreatorRouteNameView} from 'components/route-creator/route-creator-route-name-view';
-import {omit,path, filter,last,either,defaultTo, hasPath, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
+import {omit,path,clone, filter,last,either,defaultTo, reduceRight, nth, hasPath, toPairs, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
 import {gsap} from "gsap/all";
 
 export class RouteCreatorTraits extends SpyneTrait {
@@ -16,8 +16,9 @@ export class RouteCreatorTraits extends SpyneTrait {
   static routeCreator$CreateRouteBar(props=this.props, data, autoInit=false){
     const {routeLevel, vsid, subNavHolder, menuNameInc} = props;
     const parentVsid = vsid;
-    const len = this.props.el$(`li.group-${vsid}`).arr.length+1;
 
+    const liEls$ = this.props.el$(`li.group-${vsid}`)
+    const len = liEls$.exists === true ? liEls$.arr.length+1 : 1;
     const defaulRoutePathName = path(['data','routePath','routeName'], props);
     const defaultMenuVal = routeLevel === 0 ? 'menu' : 'sub-menu';
 
@@ -77,17 +78,43 @@ export class RouteCreatorTraits extends SpyneTrait {
       return data;
     }
 
-    return compose(mapObjIndexed(conformBarItemsData),omit(['routeName']))(this.props.data.routePath);
+    return compose(mapObjIndexed(conformBarItemsData),omit(['routeName', '404']))(this.props.data.routePath);
 
   }
 
 
+  static routeCreator$GetRouteDataFromConfig(){
+    const routes = compose(clone, path(['Spyne','config', 'channels', 'ROUTE', 'routes']))(window);
+
+    return RouteCreatorTraits.routeCreator$SetLastItemInObj({routes});
+  }
+
+
   static routeCreator$SetLastItemInObj(obj){
-    const nestedArr = []
+
+    const reduceToFindLastItem = (reduceObj)=>{
+
+      const getLastValFromRoutePath = (o)=>{
+        const lastItem = compose(nth(1),last,toPairs,omit(['routeName', '404']), prop('routePath'))(o);
+        if (is(String, lastItem)===true){
+          o['lastItem'] = lastItem;
+        } else if (is(Object, lastItem)){
+          getLastValFromRoutePath(lastItem);
+        }
+        return o;
+      }
+
+      return getLastValFromRoutePath(reduceObj);
+    }
+
+     const updatedRoutes = reduceToFindLastItem(clone(obj.routes));
+
+
+/*    const nestedArr = []
     let lastProp;
     const pluckPathVal = (val, key)=>{
       // OMIT routeName
-      const props = omit(['routeName'], val);
+      const props = omit(['routeName', '404'], val);
       // CHECK IF THERE ARE ANY NESTED OBJECTS
       const getLastObjKey = compose(last,keys, filter(hasPath(['routePath', 'routeName'])))(props);
       if (getLastObjKey!==undefined){
@@ -106,7 +133,10 @@ export class RouteCreatorTraits extends SpyneTrait {
 
     // ADD THE LAST ITEM PROP AND ADD PARSED ROUTEPATH OBJ
     path(nestedArr, routeObj)['lastItem']=lastProp;
-    obj.routes.routePath = routeObj;
+
+    console.log("SET LAST ITEM IS ",{nestedArr, lastProp, obj})
+    obj.routes.routePath = routeObj;*/
+    obj.routes = updatedRoutes;
 
     return obj;
 

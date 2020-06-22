@@ -1,26 +1,192 @@
+
+p.input-label{
+
+  position: relative;
+  margin: 0;
+  color: $clr-route-creator-routename-label;
+  font-size: .625rem;
+  font-weight: 400;
+  padding: 0;
+  left: 3px;
+
+  &.submenu{
+    top: -3px;
+  }
+
+  &.menu{
+    top:-3px;
+  }
+
+  &.routename{
+    top:20px;
+  }
+
+
+}
+
+.dragger-bar{
+  position: absolute;
+  width:4px;
+  pointer-events: none;
+  z-index: $z-index-ui;
+
+  .dragger-dots{
+    fill-rule:evenodd;
+    clip-rule:evenodd;
+    //fill:#FCFCFC;
+    fill: $clr-route-creator-blue;
+  }
+
+
+}
+
+
 li.route-creator-bar-item {
 
   position: relative;
  // top: 0;
  // width: 100%;
-  min-width: 460px;
+  min-width: 374px;
   opacity: 0;
+  z-index: $z-index-ui;
+  box-sizing: content-box;;
+
+  &.is-dragging{
+    z-index: $z-index-ui+1000;
+  }
+
+  .bar-item-bg{
+    position:absolute;
+    top:-5px;
+    left:-5px;
+    width:100%;
+   // min-height: 38px;
+  //  background: rgba(255,255,255,.5);
+    background:  $clr-route-creator-panel-bg;
+    @include add-route-creator-border;
+    @include add-container-shadow;
+    //background: darkslateblue;
+    border-radius: 3px;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;;
+    transition: height .25s ease-in-out;
+    //opacity: .5;
+    &:after{
+      position: absolute;
+      content: ' ';
+      top: 39px;
+      border-bottom: 1px solid $clr-route-creator-blue;
+      width: calc(100% - 12px);
+      margin: 0 6px;
+    }
+  }
 
   &.anim-mode{
     position: absolute;
   }
+
+  &.disabled > section i  {
+    pointer-events: none;
+    user-select: none;
+    opacity: .5;
+  }
+
+
+  &.disabled > div.dragger-bar{
+    pointer-events: none;
+    opacity: .5;
+  }
+
+  &.disabled > section.input-bar div.input {
+
+    input{
+      pointer-events: none;
+      user-select: none;
+      opacity: .5;
+
+    }
+  }
+
+
+
   &.route-level-0{
    // min-width:380px;
+
+    .dragger-bar{
+      top:2px;
+      left: 4px;
+    }
+
+    section.input-bar {
+      margin-left:10px;
+
+      input{
+        border:none;
+        &:focus{
+          outline: 2px solid $clr-route-creator-blue;;
+          outline-offset:0;
+
+        }
+
+
+      }
+    }
+
   }
 
   &.route-level-1{
    // min-width: 300px;
-    padding-left:120px;
+    //padding-left:120px;
+    min-width: 216px;
+    background: $clr-route-creator-panel-bg;
+    right:2.5rem;
+    margin:0;
+    padding: 0;
+    border:0;
+
+    .dragger-bar{
+      top:4px;
+      left:15px;
+    }
 
     section.input-bar {
+
       width:100%;
       left:0;
+      border: 1px solid $clr-route-creator-blue;
+
+      &.focus{
+        outline: 2px solid $clr-route-creator-blue;;
+
+      }
+
+
+
+
+
+      div.input{
+        margin-left:10px;
+
+      }
+
+      input{
+
+
+
+        &:focus{
+          border:none;
+          outline:none;
+        }
+      }
       div.icons {
+
+        align-items: flex-end;
+        left: -3px;
+        top: -4px;
+        min-width: 20px;
+
+
 
         i{
         }
@@ -31,8 +197,11 @@ li.route-creator-bar-item {
         }
       }
       div.dragger {
-        background: skyblue;
+        //background:  rgba(255,255,255,.1);
+        width: 100%;
       }
+
+
     }
   }
 
@@ -41,36 +210,55 @@ li.route-creator-bar-item {
   //  width: 80%;
     display: flex;
     justify-content: space-between;
-    background: #00aa88;
+    //background: #00aa88;
     max-height: 38px;
+    z-index: $z-index-ui;
+    pointer-events: none;
 
 
     div.dragger {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
+      padding-left:20%;
+      width: calc(100% - 4px);
+      margin:0;
       height: 100%;
-      background: darkgray;
+      //background: darkgray;
+     // background: rgba(255,255,255,.1);
       cursor: pointer;
+      z-index:10;
+      pointer-events: all;
+      left: -12px;
+
     }
 
     div.icons {
       position: relative;
-      justify-self: flex-end;
       display: flex;
-      justify-content: start;
       flex-direction: column;
+      z-index: $z-index-ui;
+      top: -8px;
+      left:2px;
+      pointer-events: all;
+
+      // align-content: flex-end;
+      min-width: 40px;
+      align-items: center;
+      justify-content: space-between;
+      //background: rgba(0,0,0,.4);
+
+
+
+
 
       p.add-subnav {
-        // background: coral;
         position: relative;
-        font-size: 9px;
+        font-size: 1rem;
         padding: 0;
         margin: 0;
         cursor: pointer;
-        min-height: 10px;
-        min-width: 40px;
+       // min-height: 10px;
+        //min-width: 40px;
         //background:brown;
         &.no-subnav {
           opacity: 0;
@@ -81,10 +269,11 @@ li.route-creator-bar-item {
       i {
         //background: orange;
         position: relative;
-        align-self: flex-end;;
+        //align-self: flex-end;;
         //min-height: 10px;
-        min-width: 40px;
+       //min-width: 40px;
         //background:blue;
+        height: 75%;
 
         cursor: pointer;
         // font-size:8px;
@@ -101,10 +290,25 @@ li.route-creator-bar-item {
     div.input {
       //  max-width:200px;
       margin-bottom: 4px;
+      z-index: $z-index-ui;
+
+
 
       input {
         position: relative;
         z-index: 10;
+        background: $clr-route-creator-panel-input;
+        color: #dedede;// $clr-route-creator-panel-input-text;
+        //border:none;
+        pointer-events: all;
+        background: rgba(0,0,0,.3);
+
+
+        &::placeholder{
+          color:#dedede;
+
+        }
+
         // max-width:50px;
         // background: orange;
       }

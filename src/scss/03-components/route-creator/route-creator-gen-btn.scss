@@ -1,0 +1,120 @@
+$gen-btn-height: 36px;
+$gen-btn-width: 140px;
+
+
+#route-gen-main-btn{
+  position: absolute;
+  //top: 8px;
+  //right: 16px;
+  width: $gen-btn-width;
+  height: $gen-btn-height;
+  background: $clr-indigo;
+  z-index: $z-index-ui;
+  overflow: hidden;
+  border-radius: 6px;
+  top: 20px;
+  right: 8px;
+  transform:scale(.85);
+
+
+  .icons{
+    position: relative;
+    width: 200%;
+    //display: flex;;
+    float: left;
+    margin: 0;
+    pointer-events: none;
+    padding: 0;
+    div{
+      position: relative;
+      padding: 0 8px;
+      display: inline-block;
+      height: $gen-btn-height;
+      align-items: center;
+      color:#fff;
+      transition: all .3s ease-out;
+      pointer-events: all;
+      cursor:pointer;
+
+      &:hover{
+        section {
+          svg {
+            transform: rotate(360deg);
+            transition: all .25s ease-in-out;
+          }
+        }
+
+      }
+
+
+      section{
+        display: flex;
+        position:relative;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+
+      }
+
+    }
+
+    .reset{
+
+      //background: orange;
+      width: 42px;
+      z-index: 100;
+
+      &:hover{
+        width: $gen-btn-width + 8px;
+
+
+
+      }
+
+      background: lighten(#9D25AD, 5);
+
+      &:after{
+        position: absolute;
+        content: ' ';
+        width:6px;
+        height: $gen-btn-height + 2px;
+        padding: 0;
+        margin:0;
+        top:-1px;
+        right:0;
+        background: darken($clr-indigo, 5);
+        box-shadow: inset 1px 0 2px rgba(0,0,0,.6);
+      }
+
+      span{
+        position: relative;
+        left:20px;
+        letter-spacing: 2px;
+        font-weight: 800;
+      }
+
+      overflow: hidden;
+
+    }
+
+    .generate{
+      position: absolute;
+      top:0;
+      left:30px;
+
+      section{
+        left:6px;
+      }
+
+
+      svg{
+        position: relative;
+        margin:0 4px;
+        //left: 10px;
+      }
+
+    }
+
+  }
+
+}

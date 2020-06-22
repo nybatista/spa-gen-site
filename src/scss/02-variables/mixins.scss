@@ -1,0 +1,31 @@
+
+
+@mixin add-border-shadow(){
+  box-shadow: 0 0 0 1px rgba(67,41,163,.1), 0 1px 8px 0 rgba(67,41,163,.1);
+}
+
+
+@mixin add-main-font(){
+  font-family: 'Roboto', sans-serif;
+}
+
+@mixin add-mono-font(){
+  font-family: 'Cousine', monospace;
+}
+
+
+// ============================================
+// ROUTE CREATOR
+
+@mixin add-container-shadow(){
+  box-shadow: 2px 2px 3px rgba(0,0,0,.27);
+}
+
+@mixin add-route-creator-border(){
+  //border: .5px solid #3A8DC2;
+  //border: 1px solid  $clr-route-creator-blue;// RGBA(58, 141, 194, .4);
+  border: 1px solid  RGBA(58, 141, 194, .8);
+}
+
+
+// ============ END ROUTE CREATOR =============

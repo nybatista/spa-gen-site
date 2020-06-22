@@ -2,36 +2,201 @@
   position: relative;
   header{
     color:  #333;
+    h3{
+      margin-top:1rem;
+    }
   }
   button{
     position:relative;
     cursor:pointer;
   }
 
-  #route-creator-container{
+
+
+  .generate-route{
+    position: absolute;
+    right:0;
+    bottom: -50px;
+    display: flex;
+    text-align: left;
+    background: $clr-route-creator-blue-dark;
+    background: RGBA(139, 48, 221, .7);
+    box-shadow: 1px 1px 4px rgba(0,0,5,.5);
+    border-radius: 3px;
+    padding: 5px 10px;
+    align-items: center;
+    opacity: .9;
+    &:hover{
+      opacity: 1;
+    }
+
+    span{
+      margin: 0 6px;
+      font-size:.55rem;
+    }
+    svg{
+      opacity: .7;
+    }
+  }
+
+
+
+
+#route-creator-container{
     position: relative;
     width: 100%;
     height: 100%;
     min-height: 450px;
-    min-width: 600px;
-    background: #dedede;
+    min-width: 650px;
+    //background: #dedede;
+    //background: rgba(255,255,255,.1);
+   // border: 1px solid rgba(255,255,255,.4);
+    background: $clr-route-creator-main-panel-bg;
+   // transition: height .25s ease-in-out;
+    //transition-delay: .5s;
+  //  transition-property:  height, scale, opacity; // relative order
+    //transition-duration: .5s; // effects relatively ordered animation properties
+   // animation-timing-function: ease-in-out;
+    opacity: 0;
+   // transform: scale(.1);
 
+    @include add-container-shadow;
+    padding: 10px;
+    border-radius: 10px;
+
+  &.reveal{
+    opacity: 1;
+
+    //transform: scale(1);
+    &:before{
+      opacity: 0;
+    }
 
   }
+
+  &:before{
+    position: absolute;
+    //content:' ';
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: $clr-route-creator-panel-bg;
+    border-radius: 10px;
+
+    //transition: opacity .5s .65s ease-in-out;
+    z-index: $z-index-ui + 100;
+    pointer-events: none;
+
+  }
+
+  .route-creator-title{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding: 16px 16px 0 16px;
+
+    p{
+      position:relative;
+      margin:0 0 3px 0;
+      padding:0;
+      color:#fff;
+
+      &.title{
+        font-size: 1.15rem;
+      }
+
+      &.instx{
+        font-size: .85rem;
+        color:  $clr-route-creator-panel-hilight;
+      }
+    }
+
+    hr{
+      border-color: $clr-route-creator-panel-hilight;
+      margin:0;
+    }
+
+  }
+
+
+  .add-menu-btn-path, .st0{
+    fill:$clr-route-creator-blue;
+  }
+
+  .main-route-btn{
+    margin-top:80px;
+    display: flex;
+    align-items: center;
+    color:$clr-route-creator-blue;
+    z-index: $z-index-ui;
+    svg,span{
+      pointer-events: none;
+    }
+    span{
+      margin: 0 5px;
+    }
+
+    &:hover{
+      color:#fff;
+
+      .add-menu-btn-path{
+        fill: #fff;
+      }
+    }
+
+  }
+
+
+
+
+  .reset-json{
+    position: absolute;
+    right:0;
+    bottom:0;
+    border-radius: 3px;
+    padding: 5px 10px;
+    background: RGBA(139, 48, 221, .7);
+    box-shadow: 1px 1px 4px rgba(0,0,5,.5);
+    color:#fff;
+    opacity: .8;
+    &:hover{
+      opacity: 1;
+    }
+  }
+
+
+
+
+
+
+  & > .route-creator-route-name{
+    top: 125px;// 45px;
+    left: 42px;
+  }
+
+
+
+}
 
  ul.route-bar-items-list {
     position: relative;
     display:flex;
     flex-direction: column;
    list-style-type:none;
-    padding:0;
-
+    //padding:0 0 0 130px;
+    top:10px;
    //padding-left:120px;
 
    &.main{
+     position: absolute;
+     top: 80px;//10px;
     // min-height: 300px;
      height: 100%;
-     left:140px;
+     left:125px;
+    // margin-left:104px;
+     //left:140px;
    }
 
     ul.node-container {

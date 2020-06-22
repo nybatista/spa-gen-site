@@ -36,6 +36,7 @@ export class RouteCreateBarHolder extends ViewStream {
         ['CHANNEL_LIFECYCLE_DISPOSED_EVENT', 'onChannelLifecycle'],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT',
         'onRouteBarClickedEvent',internalUIEventPayloadFilter],
+      ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetDefaultJson'],
       ['CHANNEL_ROUTE_CREATOR_ITEM_ADDED_EVENT', 'onItemAdded',itemRenderedPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_ITEM_REMOVED_EVENT', 'onItemRemoved',itemRenderedPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAG_START_EVENT', 'onDragStartEvent',checkVsidPayloadFilter],
@@ -43,6 +44,12 @@ export class RouteCreateBarHolder extends ViewStream {
       ['CHANNEL_ROUTE_CREATOR_DRAG_END_EVENT', 'onDragEndEvent',checkVsidPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_ROUTE_LASTITEM_RENDERED_EVENT', 'onAllItemsRenderedEvent']
     ];
+  }
+
+
+  onResetDefaultJson(e){
+    this.disposeViewStream();
+
   }
 
 
@@ -125,7 +132,7 @@ export class RouteCreateBarHolder extends ViewStream {
 
   }
   onDragEndEvent(){
-    console.log("DRAG END ",this.props.reSortOnDragEnd);
+    //console.log("DRAG END ",this.props.reSortOnDragEnd);
    // this.routeAnim$OnDragEnd();
     if (this.props.reSortOnDragEnd === true) {
       this.routeCreator$ReorderChildElements();
@@ -166,7 +173,8 @@ export class RouteCreateBarHolder extends ViewStream {
    // console.log("LAST ITEM IS ",{lastItem}, this.props);
     const createBar = (data)=>{
       //data['initYPos'] = this.props.el.offsetHeight;
-      data['isLastItem'] = lastItem === data.keyValue;
+      data['isLastItem'] = lastItem === data.key;
+
       this.routeCreator$CreateRouteBar(props, data);
       //console.log("create bar ",this.props.vsid,this.props.el.offsetHeight);
     }

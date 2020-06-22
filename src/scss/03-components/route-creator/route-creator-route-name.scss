@@ -4,28 +4,48 @@
  > .route-creator-route-name{
     top:86px;
     left:15px;
+
+
     //background: #ccc;
     input{
-      background: #ccc;
+      //background: #ccc;
+
     }
+
   }
 
 }
 .route-creator-route-name{
   position: absolute;
-  top: 38px;
+  //top: 38px;
+  top:34px;
+  left:24px;
+
   min-width:80px;
   min-height:20px;
   opacity: 0;
   pointer-events: none;
   transition-delay: .2s;
   transition: opacity .3s ease-in-out;
+  z-index: $z-index-ui;
 
   &.show{
     opacity: 1;
     pointer-events: all;
   }
 
+  p.routename{
+    left: 6px;;
+  }
+
+
+  &.disable{
+    pointer-events: none;
+    user-select: none;
+    opacity: .7;
+    transition-delay: unset;
+    transition: none;
+  }
 
   input{
     position: absolute;
@@ -35,8 +55,29 @@
     width:100%;
     border:0;
     top: 7px;
-    background: #dedede;
-    color:#666;
+    //background: #dedede;
+    //color:#666;
+    padding: 1px 0 3px 5px;
+
+    //background: $clr-route-creator-panel-input;
+    background: $clr-route-creator-routename-bg;
+    color: $clr-route-creator-routename-text;
+    font-size:.8rem;
+    border:none;
+
+    &:focus{
+      outline: 2px solid $clr-route-creator-blue;
+      outline-offset: 0;
+
+    }
+
+
+    &.disabled{
+      pointer-events: none;
+      user-select: none;
+    }
+
+
 
 
   }

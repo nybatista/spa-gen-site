@@ -1,4 +1,7 @@
 import {SpyneTrait} from 'spyne';
+import {LocalStorageTraits} from 'traits/local-storage-traits';
+import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
+import {compose,clone,path,either,not, allPass,isEmpty,isNil} from 'ramda';
 
 export class SpyneConfigTrait extends SpyneTrait {
 
@@ -8,9 +11,57 @@ export class SpyneConfigTrait extends SpyneTrait {
 
     this.baseConfig = SpyneConfigTrait.config$CreateBaseConfig();
 
+  }
+
+  static config$getConfigFromStorage(){
+    const defaults = LocalStorageTraits.localStorage$GetStoreObj('defaults');
+    const {config} = defaults;
+    const isDefined = compose(not, either(isNil, isEmpty))
+
+
+    const configuredProps = ['routes', 'header', 'footer'];
+
+    const updateConfigIfPropExists = (str)=>{
+      const prop = LocalStorageTraits.localStorage$GetStoreObj(str);
+      if (isDefined(prop)===true){
+        config.channels.ROUTE[str] = prop;
+      }
+    }
+
+    configuredProps.forEach(updateConfigIfPropExists);
+
+
+   /* const routes = LocalStorageTraits.localStorage$GetStoreObj('routes');
+    if (isDefined(routes)===true){
+      config.channels.ROUTE.routes = routes;
+     }
+*/
+   // DynamicAppDataTraits.dynAppData$GetRouteNameProps({Spyne:{config}}, true);
+
+    return config;
+
+  }
+
+
+  static config$SetRouteToLocalStorage(){
+    const routes = compose(clone, path(["window","Spyne","config","channels","ROUTE", 'routes']))(window);
+
+    //console.log("ROUTE TO LOCAL STORAGE IS ",{routes})
+    LocalStorageTraits.localStorage$SetStoreObjAndUpdate('routes', routes);
+
+    DynamicAppDataTraits.dynAppData$GetRouteNameProps(window, true);
+
+    //console.log("ON ROUTE CONFIG UPDATED --- ALSO UPDATE APP DATA JSON -- ",{routes})
+
+  }
+
+  static config$GetDefaultRoute(){
+    const routes = compose(clone, path(["window","Spyne","config","channels","ROUTE", 'routes']))(window);
+   // LocalStorageTraits.localStorage$SetStoreObj('routes',routes);
 
 
   }
+
 
   static config$Add404(obj){
     obj['404'] = '.*';
@@ -35,7 +86,7 @@ export class SpyneConfigTrait extends SpyneTrait {
 
 
       let baseConfig = SpyneConfigTrait.config$CreateBaseConfig();
-    console.log("VALUES OF ",baseConfig);
+    //console.log("VALUES OF ",baseConfig);
 
 
     return baseConfig;

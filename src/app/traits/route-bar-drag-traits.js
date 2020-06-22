@@ -15,11 +15,15 @@ export class RouteBarDragTraits extends SpyneTrait {
 
   }
 
+
+
   static routeBarDrag$OnPress(e){
     const dragEvent = 'dragStart';
     const {parentVsid, vsid} = this.props;
     const dragVsid = vsid;
     const payload = {dragEvent, parentVsid, dragVsid};
+    this.props.el$.addClass('is-dragging');
+
     this.routeBarDrag$SendInfoToChannel(payload);
   }
 
@@ -38,6 +42,8 @@ export class RouteBarDragTraits extends SpyneTrait {
   static routeBarDrag$OnDragEnd(e){
     const dragEvent = 'dragEnd';
     const {parentVsid} = this.props;
+    this.props.el$.removeClass('is-dragging');
+
     this.routeBarDrag$SendInfoToChannel({dragEvent,parentVsid});
   }
 
@@ -65,6 +71,7 @@ export class RouteBarDragTraits extends SpyneTrait {
       lockAxis: true,
       maxDuration:.125,
       inertia: true,
+      zIndexBoost: false,
       onPress: this.routeBarDrag$OnPress.bind(this),
       onDrag: this.routeBarDrag$OnDrag.bind(this),
       onDragEnd: this.routeBarDrag$OnDragEnd.bind(this),
@@ -73,7 +80,10 @@ export class RouteBarDragTraits extends SpyneTrait {
 
     }
     this.props.dragger = Draggable.create(el, config);
-
+    const isHome = this.props.routeLevel === 0 && this.props.data.key==='home';
+    if (isHome===true){
+      this.props.dragger[0].disable();
+    }
 
   }
 }

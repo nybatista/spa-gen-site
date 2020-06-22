@@ -6,6 +6,8 @@ import {gsap} from 'gsap/all';
 import {FiltersTrait} from 'traits/filters-trait';
 import {compose,head,filter,propEq} from 'ramda';
 
+import {RouteCreatorBarItemBackground} from 'components/route-creator/route-creator-bar-item-background';
+
 export class RouteCreatorBarItemView extends ViewStream {
 
   constructor(props = {}) {
@@ -14,6 +16,8 @@ export class RouteCreatorBarItemView extends ViewStream {
     props.class=`route-creator-bar-item route-level-${props.routeLevel} group-${props.parentVsid}`;
     props.traits = [RouteCreatorTraits,RouteBarDragTraits,RouteAnimTraits,FiltersTrait];
     props.data.holderId = props.parentVsid;
+    props.data.inputLabel = props.routeLevel === 0 ? "menu" : "submenu";
+    props.data.label = props.data.keyValue!== '^$' ? props.data.keyValue : props.data.key;
     props.template=require('./templates/route-creator-bar-item.tmpl.html');
     //console.log("BAR ITEM PROPS ",props);
     super(props);
@@ -28,13 +32,31 @@ export class RouteCreatorBarItemView extends ViewStream {
     const internalUIEventPayloadFilter = this.filter$BarItemOnInternalUIEvent();
 
 
-    return [
+    const arr =  [
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onRouteBarClickedEvent',internalUIEventPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_INIT_DRAG_ITEM_EVENT', 'onInitDragEvent', initItemsPayloadFilter],
       ['CHANNEL_ROUTE_CREATOR_DRAGGING_SWAP_ITEMS_EVENT', 'onSwapDragItemsEvent', checkForSwappedItemsFilter],
       ['CHANNEL_ROUTE_CREATOR_ANIMATE_ITEM_EVENT', 'onAnimateItem', checkForSwappedItemsFilter]
 
     ];
+
+    if (this.props.routeLevel === 1){
+      const {vsid} = this.props;
+      const focusFilter = new ChannelPayloadFilter({propFilters:{"vsid" : vsid}})
+      arr.push(['CHANNEL_ROUTE_CREATOR_INPUT_FOCUS.*_EVENT', 'onFocusInputEvent',focusFilter]);
+    }
+
+
+    return arr;
+  }
+
+  onFocusInputEvent(e){
+    const {action} = e.props();
+    const addFocusBool = action === "CHANNEL_ROUTE_CREATOR_INPUT_FOCUSIN_EVENT";
+    this.props.el$('section.input-bar').toggleClass('focus', addFocusBool);
+
+    const currentVsid = this.props.vsid;
+    //console.log("FOCUS IN ACTIONAL ELEMENT ", {currentVsid,e});
   }
 
   onAnimateItem(e){
@@ -42,12 +64,15 @@ export class RouteCreatorBarItemView extends ViewStream {
     const {vsid} = this.props;
     const animateFn = animEvent === 'animateIn' ? this.routeAnim$ItemAnimateIn : this.routeAnim$ItemAnimateToYVal;
 
-    const animateData = compose(head,filter(propEq('id', vsid)))(swapItems);
+  //  const animateData = compose(head,filter(propEq('id', vsid)))(swapItems);
+    const animateData = this.routeAnim$GetSwapData(swapItems, vsid);
     const {yGsap} = animateData;
+    //console.log("ANIMATE Y ",{yGsap, animateData, e});
+
     this.props.yGsap = yGsap;
     animateFn(yGsap);
    // this.routeAnim$ItemAnimateToYVal(yGsap);
-    //console.log("ANIMATE ITEM IS ",{yGsap,animateData,animEvent,swapItems,e});
+   // console.log("ANIMATE ITEM IS ",{yGsap,animateData,animEvent,swapItems,e});
 
   }
 
@@ -63,10 +88,17 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [
+    const arr = [
         [this.props.id$+' > section .icons i', 'click'],
         [this.props.id$+' > section .icons p', 'click']
     ];
+
+    if (this.props.routeLevel===1){
+      arr.push(['div.input input', 'focusin'])
+      arr.push(['div.input input', 'focusout'])
+    }
+
+    return arr;
   }
 
 
@@ -113,6 +145,11 @@ export class RouteCreatorBarItemView extends ViewStream {
 
   }
 
+  addRouteItemBackground(){
+    const parentVsid = this.props.vsid;
+    this.prependView(new RouteCreatorBarItemBackground({parentVsid}));
+  }
+
   onRendered() {
     this.addChannel('CHANNEL_ROUTE_CREATOR');
 
@@ -123,15 +160,25 @@ export class RouteCreatorBarItemView extends ViewStream {
 
       this.routeCreator$CreateRouteName();
 
+      this.addRouteItemBackground();
+
+
     }
 
     if (this.props.autoInit===true){
       //console.log("AUTO INIT IS ",this.props);
-      this.sendRenderedEvent();
+      const delayer = ()=> {
+        this.sendRenderedEvent();
+      }
+
+      gsap.set(this.props.el, {opacity:0, x:"-=15"});
+      gsap.to(this.props.el, {duration:.5, delay:.5, x:0, opacity:1})
+        this.setTimeout(delayer, 5);
     }
 
     this.routeCreator$InitBarItem();
     this.routeBarDrag$InitDraggable();
+
     if (this.props.data.isLastItem===true){
       this.sendLastItemRenderedEvent();
     }

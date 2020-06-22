@@ -3,6 +3,7 @@ import {FiltersTrait} from 'traits/filters-trait';
 import {RouteCreatorTraits} from 'traits/route-creator-traits';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
 import {RouteCreatorToDataTraits} from 'traits/route-creator-to-data-traits';
+import {pathEq} from 'ramda';
 
 export class RouteCreatorRouteNameView extends ViewStream {
 
@@ -21,6 +22,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
     const filterUIClickForRouteName = this.filter$BarItemUIClickForRouteName();
     return [
       ['CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT', 'onItemEvent',filterUIClickForRouteName],
+        ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'disposeViewStream']
     ];
   }
 
@@ -47,7 +49,8 @@ export class RouteCreatorRouteNameView extends ViewStream {
 
     if (activeModeHasChanged===true){
       this.props.isActive = currentActiveMode;
-      this.props.el$.toggleClass('show', this.props.isActive);
+      const delayToggle = ()=>this.props.el$.toggleClass('show', this.props.isActive);
+      this.setTimeout(delayToggle, 300);
 
       if (this.props.isActive===true){
         if (this.props.initShow===true || this.props.data.routeNameVal === undefined) {
@@ -60,7 +63,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
       }
 
     }
-    console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
+    //console.log("E IS ",{currentActiveMode,activeModeHasChanged,isActive,holderId,ulData});
 
   }
 
@@ -72,6 +75,12 @@ export class RouteCreatorRouteNameView extends ViewStream {
   onRendered() {
     this.checkIfRouteIsActive();
     this.addChannel("CHANNEL_ROUTE_CREATOR");
+
+    const routeNameValIsPageId = pathEq(['props','data','routeNameVal'], 'pageId')(this);
+    this.props.el$.toggleClass('disable', routeNameValIsPageId);
+
+
+    //console.log("CHECKING ROUTE NAME ",{routeNameValIsPageId},this.props);
   }
 
 }

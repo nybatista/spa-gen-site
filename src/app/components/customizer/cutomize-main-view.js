@@ -6,14 +6,19 @@ export class CustomizeMainView extends ViewStream {
 
   constructor(props = {}) {
       props.id = 'customize-main-view';
+     // props.template=require('./templates/container-main.tmpl.html');
     super(props);
 
   }
 
   addActionListeners() {
     // return nexted array(s)
-    return [];
+    return [
+
+    ];
   }
+
+
 
   broadcastEvents() {
     // return nexted array(s)
@@ -23,6 +28,7 @@ export class CustomizeMainView extends ViewStream {
   onRendered() {
     this.appendView(new CustomizePanelView())
     this.appendView(new RouteJsonViewer());
+
   }
 
 }

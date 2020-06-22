@@ -1,0 +1,147 @@
+#dynamic-app-header{
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: $lyt-header-height;
+  //background: #ededed;
+  background: $clr-ui-bg;// #000;
+  color:#ccc;
+  padding: 0 1.5rem;
+  //opacity: .4;
+
+
+  header{
+    position: relative;
+    width:100%;
+    height:100%;
+    @include add-border-shadow;
+    display: flex;
+    //align-items: flex-end;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding: 10px 0;
+
+
+    @media(max-width: 768px){
+      nav.dynamic-app-header-content {
+        display: none;
+      }
+
+    }
+
+
+    #logo{
+      position:relative;
+      align-self: center;
+      font-size: 2rem;
+      font-family: $logo-font;
+      color:#fff;
+      pointer-events: all;
+      //user-select: none;
+      letter-spacing: .025rem;
+      transition: opacity .25s ease-in-out;
+      width:24%;
+      max-width: 480px;
+      min-width: 320px;
+
+      background: none;
+      border:none;
+
+      text-align: center;
+
+      &:focus{
+        border:none;
+        outline: 1px solid skyblue;
+      }
+
+      &.hide{
+        opacity: 0;
+        pointer-events: none;
+      }
+
+
+    }
+
+
+
+
+
+  }
+
+  nav.dynamic-app-header-content {
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+
+    a {
+      position: relative;
+      font-size: 18px;
+      pointer-events: all;
+      cursor: pointer;
+      padding: 0 .5rem;
+      color: skyblue;
+      text-decoration: none;
+      user-select: none;
+      height: 100%;
+      opacity: .7;
+      display: flex;
+      align-items: center;
+      background: rgba(0,0,0,0);
+      transition: all .125s ease-in-out;
+
+
+      &.selected{
+        //font-weight: 800;
+       // pointer-events: none;
+        color:#fff;
+        opacity: .8;
+      }
+
+      &:hover {
+        opacity: 1;
+        //background: rgba(0,0,0,.3);
+        background: $clr-ui-header-hover;
+      }
+    }
+  }
+}
+
+.dynamic-app-subnav{
+  position: relative;
+  nav{
+      position:relative;
+      margin-top:.5rem;
+    a {
+      position: relative;
+      font-size: 18px;
+      pointer-events: all;
+      cursor: pointer;
+      margin: 0 .5rem;
+      color: darkslateblue;
+      text-decoration: none;
+      user-select: none;
+
+      opacity: .7;
+
+      &.selected{
+        //font-weight: 800;
+        pointer-events: none;
+        color:#000;
+        opacity: .8;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+
+  }
+
+
+}

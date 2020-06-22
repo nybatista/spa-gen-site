@@ -1,0 +1,52 @@
+$enable-responsive-font-sizes: true;
+
+$z-index-ui: 10000;
+
+/*
+font-family: 'Bungee', cursive;
+font-family: 'Fredoka One', cursive;
+font-family: 'Lobster', cursive;
+font-family: 'Pacifico', cursive;
+*/
+
+
+/*font-family: 'Lalezar', cursive;
+font-family: 'Lora', serif;
+font-family: 'Pacifico', cursive;
+font-family: 'Suez One', serif;*/
+
+$logo-font: 'Teko', sans-serif;
+
+
+$z-index-dynamic-app-ui: 4500;
+$z-index-dynamic-app-pages: 4000;
+$z-index-main-container: 5000;
+$z-index-generator-loading: 6000;
+$clr-indigo:#9D25AD;
+
+
+$clr-ui-bg: #000;// royalblue;// #000;
+$clr-ui-header-hover: rgba(255,255,255,.3);
+
+
+$clr-route-creator-blue-orig: #3B8DC2;
+$clr-route-creator-blue-dark: darken(#3B8DC2, 15);
+$clr-route-creator-blue: lighten(#3B8DC2, 15);
+$clr-route-creator-lime: #5EC329;
+$clr-route-creator-txt-grey: #5B6370;
+
+
+$clr-route-creator-container-bg:        #666;
+$clr-route-creator-main-panel-bg:       #2A2B31;//#22242A;
+$clr-route-creator-panel-bg:            #1E2024;
+$clr-route-creator-panel-hilight:       $clr-route-creator-blue;
+$clr-route-creator-panel-text:          #5B6370;
+$clr-route-creator-panel-input:         #191A1F;
+$clr-route-creator-panel-input-text:    #8D939D;
+
+
+$clr-route-creator-routename-text: #5EC329;
+$clr-route-creator-routename-bg: #191A1F;
+$clr-route-creator-routename-label: rgba(255,255,255,.1);//#5E5F62;
+
+$lyt-header-height:68px;

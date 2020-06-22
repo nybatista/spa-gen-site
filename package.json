@@ -5,13 +5,14 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
+    "build": "webpack --mode production --env build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
     "gsap": "file:gsap-bonus.tgz",
     "highlight.js": "^10.0.2",
-    "spyne": "^0.11.9",
+    "spyne": "^0.12.1",
     "spynejs-polyfill": "^0.0.5",
     "whatwg-fetch": "^3.0.0"
   },
@@ -19,6 +20,7 @@
     "chai": "^4.2.0",
     "chai-dom": "^1.8.2",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.1",
     "css-loader": "^3.5.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^6.0.0",
@@ -39,7 +41,8 @@
     "mocha": "^7.1.1",
     "mocha-loader": "^5.0.0",
     "mocha-webpack": "^1.1.0",
-    "node-sass": "^4.14.0",
+    "node-sass": "^4.14.1",
+    "pexels-api-wrapper": "^1.1.2",
     "querystringify": "^2.1.1",
     "requirejs": "^2.3.6",
     "sass": "^1.26.5",
@@ -51,7 +54,7 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-middleware": "^3.7.2",
-    "webpack-dev-server": "^3.10.3",
+    "webpack-dev-server": "^3.11.0",
     "yargs": "15.3.1"
   },
   "repository": {

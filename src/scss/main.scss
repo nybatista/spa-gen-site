@@ -19,7 +19,7 @@
 @import "03-components/route-creator/route-creator-gen-btn.scss";
 @import "03-components/route-creator/route-json-viewer.scss";
 @import "03-components/generator-loading-anim/generator-loading-main.scss";
-@import "03-components/dynamic-app/dynamic-app-main.scss";
+/*@import "03-components/dynamic-app/dynamic-app-main.scss";
 @import "03-components/dynamic-app/dynamic-app-pages.scss";
 @import "03-components/dynamic-app/page-content/page-content.scss";
 @import "03-components/dynamic-app/page-content/page-content-home.scss";
@@ -29,7 +29,21 @@
 @import "03-components/dynamic-app/page-subnav-container.scss";
 @import "03-components/dynamic-app/page-secondary-topic.scss";
 @import "03-components/dynamic-app/menu-hamburger.scss";
-@import "03-components/dynamic-app/menu-drawer.scss";
+@import "03-components/dynamic-app/menu-drawer.scss";*/
+@import "../base-app/src/scss/03-components/dynamic-app/dynamic-app-main";
+@import "../base-app/src/scss/03-components/dynamic-app/dynamic-app-pages.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/page-content/page-content.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/page-content/page-content-home.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/page-content/page-card.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/dynamic-app-ui.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/dynamic-app-ui-header.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/page-subnav-container.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/page-secondary-topic.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/menu-hamburger.scss";
+@import "../base-app/src/scss/03-components/dynamic-app/menu-drawer.scss";
+
+
+
 
 body{
   //background: #ddd;

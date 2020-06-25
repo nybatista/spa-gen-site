@@ -225,7 +225,8 @@
         core: path.resolve(__dirname, 'src/core/'),
         traits: path.resolve(__dirname, 'src/app/traits/'),
         channels: path.resolve(__dirname, 'src/app/channels/'),
-        components: path.resolve(__dirname, 'src/app/components/'),
+        main_components: path.resolve(__dirname, 'src/app/components/'),
+        components: path.resolve(__dirname, 'src/base-app/src/app/components/'),
         node_modules: path.resolve(__dirname, 'node_modules/')
 
       },

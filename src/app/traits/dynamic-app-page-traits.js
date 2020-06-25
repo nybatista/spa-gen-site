@@ -1,10 +1,10 @@
 import {SpyneTrait} from 'spyne';
 import {path, compose, omit, defaultTo, is, keys,values, merge} from 'ramda';
-import {DynamicAppPageSubnavContainer} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-container';
-import {DynamicAppPageSubnavContent} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-content';
-import {PageContentHomeView} from 'components/01-dynamic-app/pages/page-types/page-content-home-view';
-import {PageContentDefaultView} from 'components/01-dynamic-app/pages/page-types/page-content-default-view';
-import {PageSecondaryTopicView} from 'components/01-dynamic-app/pages/page-secondary-topic-view';
+import {DynamicAppPageSubnavContainer} from 'main_components/01-dynamic-app/pages/dynamic-app-page-subnav-container';
+import {DynamicAppPageSubnavContent} from 'main_components/01-dynamic-app/pages/dynamic-app-page-subnav-content';
+import {PageContentHomeView} from 'main_components/01-dynamic-app/pages/page-types/page-content-home-view';
+import {PageContentDefaultView} from 'main_components/01-dynamic-app/pages/page-types/page-content-default-view';
+import {PageSecondaryTopicView} from 'main_components/01-dynamic-app/pages/page-secondary-topic-view';
 
 export class DynamicAppPageTraits extends SpyneTrait {
 

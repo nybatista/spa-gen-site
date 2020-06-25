@@ -1,6 +1,6 @@
 import {ViewStream} from 'spyne';
 import {DynamicAppTraits} from 'traits/dynamic-app-traits';
-import {DynamicAppSubnavContent} from 'components/01-dynamic-app/ui/dynamic-app-subnav-content';
+import {DynamicAppSubnavContent} from 'main_components/01-dynamic-app/ui/dynamic-app-subnav-content';
 
 export class DynamicAppSubnav extends ViewStream {
 

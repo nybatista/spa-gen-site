@@ -1,7 +1,7 @@
 import {ViewStream} from 'spyne';
 import {CustomizeContainer} from './customize-container';
 import {DynamicAppContainer} from './dynamic-app-container';
-import {CustomizeContainerUI} from 'components/containers/containers-ui/customize-container-ui';
+import {CustomizeContainerUI} from 'main_components/containers/containers-ui/customize-container-ui';
 
 export class MainContainer extends ViewStream {
 

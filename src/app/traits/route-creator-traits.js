@@ -1,7 +1,7 @@
 import {SpyneTrait} from 'spyne';
-import {RouteCreatorBarItemView} from 'components/route-creator/route-creator-bar-item-view';
-import {RouteCreateBarHolder} from 'components/route-creator/route-creator-bar-holder';
-import {RouteCreatorRouteNameView} from 'components/route-creator/route-creator-route-name-view';
+import {RouteCreatorBarItemView} from 'main_components/route-creator/route-creator-bar-item-view';
+import {RouteCreateBarHolder} from 'main_components/route-creator/route-creator-bar-holder';
+import {RouteCreatorRouteNameView} from 'main_components/route-creator/route-creator-route-name-view';
 import {omit,path,clone, filter,last,either,defaultTo, reduceRight, nth, hasPath, toPairs, compose,values, prop,keys, is, forEachObjIndex, mapObjIndexed} from 'ramda';
 import {gsap} from "gsap/all";
 

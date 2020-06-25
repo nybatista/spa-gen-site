@@ -1,5 +1,5 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
-import {PageSecondaryTopicView} from 'components/01-dynamic-app/pages/page-secondary-topic-view';
+import {PageSecondaryTopicView} from 'main_components/01-dynamic-app/pages/page-secondary-topic-view';
 import {DynamicAppPageTraits} from 'traits/dynamic-app-page-traits';
 import {path, pick, merge} from 'ramda';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';

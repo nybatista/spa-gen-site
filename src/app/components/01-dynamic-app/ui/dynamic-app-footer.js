@@ -1,5 +1,5 @@
 import {ViewStream} from 'spyne';
-import {DynamicAppFooterContent} from 'components/01-dynamic-app/ui/dynamic-app-footer-content';
+import {DynamicAppFooterContent} from 'main_components/01-dynamic-app/ui/dynamic-app-footer-content';
 
 export class DynamicAppFooter extends ViewStream {
 

@@ -1,7 +1,7 @@
 import {ViewStream, ChannelPayloadFilter} from 'spyne';
 import {DynamicAppPageTraits} from 'traits/dynamic-app-page-traits';
-import {DynamicAppPageSubnavContent} from 'components/01-dynamic-app/pages/dynamic-app-page-subnav-content';
-import {DynamicAppPageCardView} from 'components/01-dynamic-app/pages/dynamic-app-page-card-view';
+import {DynamicAppPageSubnavContent} from 'main_components/01-dynamic-app/pages/dynamic-app-page-subnav-content';
+import {DynamicAppPageCardView} from 'main_components/01-dynamic-app/pages/dynamic-app-page-card-view';
 import {merge, defaultTo, prop, length, compose} from 'ramda';
 import {DynamicAppTraits} from 'traits/dynamic-app-traits';
 

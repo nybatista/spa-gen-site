@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {BarItemsSorter} from 'components/other/bar-items-sorter';
+import {BarItemsSorter} from 'main_components/other/bar-items-sorter';
 import {pluck} from 'ramda';
 import {gsap} from 'gsap/all';
 import {compose,head,filter,propEq} from 'ramda';

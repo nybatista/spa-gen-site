@@ -1,7 +1,7 @@
 import {DomEl, ViewStream} from 'spyne';
-import {MenuDrawerContent} from 'components/01-dynamic-app/ui/menu-drawer/menu-drawer-content';
+import {MenuDrawerContent} from 'main_components/01-dynamic-app/ui/menu-drawer/menu-drawer-content';
 import {DynamicAppTraits} from 'traits/dynamic-app-traits';
-import {DynamicAppHeaderContentView} from 'components/01-dynamic-app/ui/header/dynamic-app-header-content-view';
+import {DynamicAppHeaderContentView} from 'main_components/01-dynamic-app/ui/header/dynamic-app-header-content-view';
 
 export class MenuDrawer extends ViewStream {
 

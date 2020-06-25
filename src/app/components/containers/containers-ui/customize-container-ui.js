@@ -1,5 +1,5 @@
 import {ViewStream} from 'spyne';
-import {CustomizeUIDragbarHolder} from 'components/containers/containers-ui/cutomize-ui-dragbar-holder';
+import {CustomizeUIDragbarHolder} from 'main_components/containers/containers-ui/cutomize-ui-dragbar-holder';
 
 export class CustomizeContainerUI extends ViewStream {
 

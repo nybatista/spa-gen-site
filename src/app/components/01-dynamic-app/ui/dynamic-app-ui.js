@@ -1,8 +1,8 @@
 import {ViewStream} from 'spyne';
-import {DynamicAppHeader} from 'components/01-dynamic-app/ui/header/dynamic-app-header';
-import {DynamicAppSubnav} from 'components/01-dynamic-app/ui/dynamic-app-subnav';
-import {MenuDrawer} from 'components/01-dynamic-app/ui/menu-drawer/menu-drawer';
-import {DynamicAppFooter} from 'components/01-dynamic-app/ui/dynamic-app-footer';
+import {DynamicAppHeader} from 'main_components/01-dynamic-app/ui/header/dynamic-app-header';
+import {DynamicAppSubnav} from 'main_components/01-dynamic-app/ui/dynamic-app-subnav';
+import {MenuDrawer} from 'main_components/01-dynamic-app/ui/menu-drawer/menu-drawer';
+import {DynamicAppFooter} from 'main_components/01-dynamic-app/ui/dynamic-app-footer';
 
 export class DynamicAppUI extends ViewStream {
 

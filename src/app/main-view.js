@@ -1,9 +1,9 @@
 import {ViewStream} from 'spyne';
-import {MainContainer} from 'components/containers/main-container';
+import {MainContainer} from 'main_components/containers/main-container';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
-import {GeneratorLoadingAnimMain} from 'components/generator-loading-anim/generator-loading-anim-main';
+import {GeneratorLoadingAnimMain} from 'main_components/generator-loading-anim/generator-loading-anim-main';
 
 export class MainView extends ViewStream {
 

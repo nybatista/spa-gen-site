@@ -1,6 +1,6 @@
 import {ViewStream} from 'spyne';
-import {DynamicAppUI} from 'components/01-dynamic-app/ui/dynamic-app-ui';
-import {DynamicAppPageContainer} from 'components/01-dynamic-app/pages/dynamic-app-page-container';
+import {DynamicAppUI} from 'main_components/01-dynamic-app/ui/dynamic-app-ui';
+import {DynamicAppPageContainer} from 'main_components/01-dynamic-app/pages/dynamic-app-page-container';
 
 export class DynamicAppMain extends ViewStream {
 

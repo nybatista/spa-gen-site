@@ -6,7 +6,7 @@ import {gsap} from 'gsap/all';
 import {FiltersTrait} from 'traits/filters-trait';
 import {compose,head,filter,propEq} from 'ramda';
 
-import {RouteCreatorBarItemBackground} from 'components/route-creator/route-creator-bar-item-background';
+import {RouteCreatorBarItemBackground} from 'main_components/route-creator/route-creator-bar-item-background';
 
 export class RouteCreatorBarItemView extends ViewStream {
 

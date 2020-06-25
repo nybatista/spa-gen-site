@@ -5,6 +5,7 @@ import {DynamicAppPageContainer} from 'components/01-dynamic-app/pages/dynamic-a
 export class DynamicAppMain extends ViewStream {
 
   constructor(props = {}) {
+    props.tagName='main';
     props.id='dynamic-app-main';
     props.class='main';
     super(props);

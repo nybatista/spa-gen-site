@@ -14,8 +14,8 @@ export class LocalStorageTraits extends SpyneTrait {
     const {localStorageKey} = config;
     window.spyneLocalStorageKey = localStorageKey;
     const routes = path(['channels', 'ROUTE', 'routes'], config);
-    const header =  path(['channels', 'ROUTE', 'header'], config);
-    const footer =  path(['channels', 'ROUTE', 'footer'], config);
+    const header =  path(['appTitles', 'header'], config);
+    const footer =  path(['appTitles', 'footer'], config);
 
     const defaults = {localStorageKey, config, header, footer, routes};
 

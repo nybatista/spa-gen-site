@@ -7,3 +7,4 @@ app/*
 !app/.gitkeep
 dist/*
 !dist/.gitkeep
+src/base-app/*

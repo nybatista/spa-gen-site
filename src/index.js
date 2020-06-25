@@ -26,6 +26,12 @@ const defaultConfig = {
   siteTitle,
   "localStorageKey" : "spaGenStore",
   "debug" : true,
+
+  "appTitles" : {
+    "header" : "Your Title",
+    "footer" : "Your Footer Text"
+  },
+
   "channels" : {
     WINDOW: {
       mediqQueries: {
@@ -40,8 +46,6 @@ const defaultConfig = {
     },
 
   "ROUTE": {
-      "header" : "Your Title",
-      "footer" : "Your Footer Text",
     "type" : "slash",
     "routes": {
       "routePath": {

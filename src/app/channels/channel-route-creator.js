@@ -15,7 +15,7 @@ export class ChannelRouteCreator extends Channel {
   onRegistered() {
 
     const routeCreatorPayloadFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         eventType: "routeCreator"
       }
     });
@@ -27,7 +27,7 @@ export class ChannelRouteCreator extends Channel {
 
 
     const focusEventFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         action: (val)=>String(val).indexOf("FOCUS")>=0
       }
     })

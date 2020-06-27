@@ -35,7 +35,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
     const barItems$ = this.props.el$(".route-creator-bar-item.route-level-0").arr;
     const setItems = (el)=>{
-      console.log("EL IS ",{el})
+      //console.log("EL IS ",{el})
       tl.to(el, {opacity:0, duration:0})
     }
     [container$, title$, mainBtn$, routeBtn$, routeNameLabel$].forEach(setItems);

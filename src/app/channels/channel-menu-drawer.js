@@ -15,21 +15,21 @@ export class ChannelMenuDrawer extends Channel {
   onRegistered() {
 
     const breakPointFilter = new ChannelPayloadFilter({
-      propFilters:{
+      props:{
         mediaQueryName: "showMenuDrawer"
       }
     })
 
 
     const menuDrawerBtnFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         eventType: "menuDrawer"
       }
 
     })
 
     const menuDrawerRouteFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         action: (val) => val!=="CHANNEL_ROUTE_CONFIG_UPDATED_EVENT",
          payload: pathEq(['routeData', 'eventType'], 'menuDrawer')
       }

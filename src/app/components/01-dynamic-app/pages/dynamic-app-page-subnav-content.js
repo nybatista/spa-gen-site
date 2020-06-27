@@ -12,7 +12,7 @@ export class DynamicAppPageSubnavContent extends ViewStream {
   addActionListeners() {
     const {subNavRouteKey, subNavRouteValue} = this.props.data;
     const subNavChangeFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         routeData: (v) => v[subNavRouteKey]!==subNavRouteValue
       }
     })

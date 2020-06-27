@@ -14,7 +14,7 @@ export class DynamicAppSubnavContent extends ViewStream {
     // return nexted array(s)
     //const currentPageId = this.props.pageId;
     const updatePayloadFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         routeData: (d)=>d.pageId !==  this.props.pageId
       }, label:'checkMenu'
     })

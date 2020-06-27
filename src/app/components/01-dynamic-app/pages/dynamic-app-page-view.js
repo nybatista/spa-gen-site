@@ -33,7 +33,7 @@ export class DynamicAppPageView extends ViewStream {
 
 
     const pageIdChangeFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
           routeData: (v)=>v.pageId !== pageId
       }
 

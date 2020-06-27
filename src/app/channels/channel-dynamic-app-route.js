@@ -15,7 +15,7 @@ export class ChannelDynamicAppRoute extends Channel {
 
   onRegistered() {
     const channelRouteUpdateFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         action: "CHANNEL_ROUTE_CONFIG_UPDATED_EVENT",
       }
     });
@@ -26,7 +26,7 @@ export class ChannelDynamicAppRoute extends Channel {
     ]
 
     const routeChangeFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         action:  (val)=>actionsArr.indexOf(val)>=0
       }
     })

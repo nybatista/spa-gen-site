@@ -42,7 +42,7 @@ export class RouteCreatorBarItemView extends ViewStream {
 
     if (this.props.routeLevel === 1){
       const {vsid} = this.props;
-      const focusFilter = new ChannelPayloadFilter({propFilters:{"vsid" : vsid}})
+      const focusFilter = new ChannelPayloadFilter({props:{"vsid" : vsid}})
       arr.push(['CHANNEL_ROUTE_CREATOR_INPUT_FOCUS.*_EVENT', 'onFocusInputEvent',focusFilter]);
     }
 

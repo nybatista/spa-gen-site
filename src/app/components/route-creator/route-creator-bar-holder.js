@@ -25,7 +25,7 @@ export class RouteCreateBarHolder extends ViewStream {
     // return nexted array(s)
     const {vsid, routeLevel} = this.props;
     //console.log("ROUTE LEVEL IN HOLDER ",{routeLevel, vsid})
-    const checkVsidPayloadFilter = new ChannelPayloadFilter({propFilters:{
+    const checkVsidPayloadFilter = new ChannelPayloadFilter({props:{
       parentVsid: vsid
       }});
     const internalUIEventPayloadFilter = this.filter$BarHolderOnInternalUIEvent();

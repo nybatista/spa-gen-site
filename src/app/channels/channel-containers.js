@@ -14,7 +14,7 @@ export class ChannelContainers extends Channel {
 
   onRegistered() {
 
-    const containerPayloadFilter = new ChannelPayloadFilter({propFilters:{
+    const containerPayloadFilter = new ChannelPayloadFilter({props:{
         eventType: "container"
       }})
 

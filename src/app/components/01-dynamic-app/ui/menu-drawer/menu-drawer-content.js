@@ -16,7 +16,7 @@ export class MenuDrawerContent extends ViewStream {
     // return nexted array(s)
     const curentUpdateConfigNum = this.props.updateConfigNum;
     const updatePayloadFilter = new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         updateConfigNum: (val)=>val!==curentUpdateConfigNum
       }
     })

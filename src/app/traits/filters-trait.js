@@ -12,7 +12,7 @@ export class FiltersTrait extends SpyneTrait {
     const {vsid, routeLevel} = props;
     const vsidPred = propEq('parentVsid', vsid);
     return new ChannelPayloadFilter({
-      propFilters: {
+      props: {
         parentVsid: (val)=>val===vsid || routeLevel===0
       }
     })
@@ -27,7 +27,7 @@ export class FiltersTrait extends SpyneTrait {
     const isAdd = propEq('routeBarEvent', 'add');
     const fn = ifElse(isAdd,addPred,deletePred);
     return new ChannelPayloadFilter({
-      propFilters:{
+      props:{
        payload: fn
       }
     });
@@ -37,7 +37,7 @@ export class FiltersTrait extends SpyneTrait {
   static filter$BarItemOnInternalUIEvent(props=this.props){
     const {vsid} = props;
     return new ChannelPayloadFilter({
-      propFilters:{
+      props:{
         barId: vsid
       }
     });
@@ -47,7 +47,7 @@ export class FiltersTrait extends SpyneTrait {
   static filter$BarItemUIClickForRouteName(props=this.props){
     const {holderId} = props;
     return new ChannelPayloadFilter({
-        propFilters: {
+        props: {
           masterItem: holderId
         }
     });
@@ -57,7 +57,7 @@ export class FiltersTrait extends SpyneTrait {
   static filter$InitDraggingItem(props=this.props){
     const {vsid} = props;
     return new ChannelPayloadFilter({
-          propFilters:{
+          props:{
             id: vsid
           }
         });
@@ -66,7 +66,7 @@ export class FiltersTrait extends SpyneTrait {
   static filter$CheckForSwappedItems(props=this.props){
     const {vsid} = props;
     return new ChannelPayloadFilter({
-      propFilters:{
+      props:{
         swapItemsIds: (arr)=>arr.indexOf(vsid)>=0
       }
     })

@@ -2,7 +2,7 @@ import {ViewStream, ChannelPayloadFilter} from 'spyne';
 //import {DynamicAppMain} from '../01-dynamic-app/dynamic-app-main';
 import {DynamicAppHeaderLogo} from 'main_components/01-dynamic-app/ui/header/dynamic-app-header-logo';
 import {DynamicAppFooterContent} from 'main_components/01-dynamic-app/ui/dynamic-app-footer-content';
-import {DynamicAppMain} from 'components/dynamic-app-main';
+import {AppView} from '../../../base-app/src/app/app-view';
 
 export class DynamicAppContainer extends ViewStream {
 
@@ -63,7 +63,7 @@ export class DynamicAppContainer extends ViewStream {
   }
 
   onRendered() {
-    this.appendView(new DynamicAppMain());
+    this.appendView(new AppView());
     this.addChannel("CHANNEL_LIFECYCLE");
   }
 

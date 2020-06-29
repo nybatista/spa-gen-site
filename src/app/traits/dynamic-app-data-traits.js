@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {whereEq, path, compose, pick, flatten,isEmpty, omit,map,all, defaultTo, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
+import {whereEq, path, compose, pick, flatten,isEmpty, omit,map,all, defaultTo,uniq, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
 import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 
@@ -144,7 +144,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
       //console.log("ROUTES JSON ",{routeNamesReducedArr, routesJson})
 
-      return routeNamesReducedArr;
+      return uniq(routeNamesReducedArr);
 /*
       console.log("TEST TRANSUCE ",{routeNamesReducedArr})
 
@@ -179,7 +179,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
         return setRouteNamesArr();
       }
 
-      return routeNamesArr;
+      return uniq(routeNamesArr);
     }
 
 

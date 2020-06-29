@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {DynamicAppHeaderContentView} from 'components/ui/header/dynamic-app-header-content-view';
+import {UiHeaderContentView} from 'components/ui/ui-header-content-view';
 
 export class ConfigUpdaterTraits extends SpyneTrait {
 
@@ -14,7 +14,7 @@ export class ConfigUpdaterTraits extends SpyneTrait {
     const {routes, updateConfigNum} = e.props();
     //console.log("dynamic app header listening to route update ", {routes,e});
 
-    this.appendView(new DynamicAppHeaderContentView({routes, updateConfigNum}), 'header');
+    this.appendView(new UiHeaderContentView({routes, updateConfigNum}), 'header');
 
 
   }
@@ -25,7 +25,7 @@ export class ConfigUpdaterTraits extends SpyneTrait {
 
     if (isDeepLink===true) {
       const routes = this.dynApp$GetCurrentRouteJson();
-      this.appendView(new DynamicAppHeaderContentView({routes}), 'header');
+      this.appendView(new UiHeaderContentView({routes}), 'header');
     }
 
 

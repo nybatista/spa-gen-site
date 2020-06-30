@@ -30,8 +30,13 @@
   z-index: $z-index-ui;
 
   &.show{
-    opacity: 1;
-    pointer-events: all;
+    //opacity: 1;
+    //pointer-events: all;
+    // SET ALL TO DISABLE
+    pointer-events: none;
+    user-select: none;
+    opacity: .7;
+    // =============
   }
 
   p.routename{
@@ -46,6 +51,11 @@
     transition-delay: unset;
     transition: none;
   }
+
+
+
+
+
 
   input{
     position: absolute;

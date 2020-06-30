@@ -45,7 +45,7 @@ export class RouteAnimTraits extends SpyneTrait {
 
     tl.to(container$, {duration:.75, opacity:1});
     tl.to(title$, {duration:baseTime, opacity:1}, "start");
-    tl.to(routeNameLabel$, {duration:baseTime, opacity:1}, "start");
+    tl.to(routeNameLabel$, {duration:baseTime, opacity:.7}, "start");
     tl.to(mainBtn$, {duration:baseTime, opacity:1}, "start");
     tl.to(routeBtn$, {duration:baseTime, opacity:1}, "start");
     tl.to(barItems$, {duration:.2, opacity:1, stagger:.12, ease:"Power1.easeOut"}, "start");

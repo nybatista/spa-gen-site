@@ -14,8 +14,7 @@ import {SpyneConfigData} from 'spyne/src/tests/mocks/utils-data';
 import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 import images from 'data/images.json';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
-
-
+import {AppDataTraits} from './base-app/src/app/traits/app-data-traits';
 
 const hamburgerBreakpoint = 768;
 const mqStr = `(max-width:${hamburgerBreakpoint}px)`;
@@ -55,7 +54,7 @@ const defaultConfig = {
         "work": {
           "routePath": {
             "404": ".+",
-            "routeName": "workId",
+            "routeName": "topicId",
             "services": "services",
             "portfolio": "portfolio",
             "blog": "blog"
@@ -64,7 +63,7 @@ const defaultConfig = {
         "about": {
           "routePath": {
             "404": ".+",
-            "routeName": "aboutId",
+            "routeName": "topicId",
             "contact": "contact"
           }
         }
@@ -156,7 +155,10 @@ const initSpyneAppGenerator = ()=> {
   spyneApp.registerChannel(new ChannelFetch("CHANNEL_SPA_GEN_DATA_IMAGES", {
     url: AllPhotos
   }))
-
+  spyneApp.registerChannel(new ChannelFetch("CHANNEL_APP_DATA", {
+    url: AppContentData,
+    map: AppDataTraits.appData$Map
+  }))
 
 
     const mainView = new MainView();

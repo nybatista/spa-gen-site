@@ -12,6 +12,9 @@ export class RouteCreatorRouteNameView extends ViewStream {
     props.isActive = -1;
     props.initShow = false;
     props.traits = [RouteAnimTraits, RouteCreatorTraits, RouteCreatorToDataTraits, FiltersTrait];
+    props.data.routeNameVal = props.routeLevel === 1 && props.data.routeNameVal !== undefined ? 'topicId' : props.data.routeNameVal;
+    console.log("ROUTE NAME PROPS VALUE ",props.data,props);
+
     props.template = require('./templates/route-creator-route-name.tmpl.html');
     super(props);
 
@@ -36,6 +39,9 @@ export class RouteCreatorRouteNameView extends ViewStream {
      this.checkIfRouteIsActive(isDelete);
   }
   updateRouteNameVal(str){
+    // SETTING DEFAULT TO topicId;
+    str = 'topicId';
+
     this.props.el$('input').el.value = str;
   }
 

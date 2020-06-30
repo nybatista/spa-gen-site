@@ -15,6 +15,7 @@ import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 import images from 'data/images.json';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 import {AppDataTraits} from './base-app/src/app/traits/app-data-traits';
+import {ChannelAppRoute} from './base-app/src/app/channels/channel-app-route';
 
 const hamburgerBreakpoint = 768;
 const mqStr = `(max-width:${hamburgerBreakpoint}px)`;
@@ -147,7 +148,7 @@ const initSpyneAppGenerator = ()=> {
   }));
 
 
-
+  spyneApp.registerChannel(new ChannelAppRoute());
   spyneApp.registerChannel(new ChannelRouteCreator());
   spyneApp.registerChannel(new ChannelContainers());
   spyneApp.registerChannel(new ChannelDynamicAppRoute());

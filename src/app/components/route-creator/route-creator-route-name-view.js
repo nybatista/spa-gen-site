@@ -13,7 +13,7 @@ export class RouteCreatorRouteNameView extends ViewStream {
     props.initShow = false;
     props.traits = [RouteAnimTraits, RouteCreatorTraits, RouteCreatorToDataTraits, FiltersTrait];
     props.data.routeNameVal = props.routeLevel === 1 && props.data.routeNameVal !== undefined ? 'topicId' : props.data.routeNameVal;
-    console.log("ROUTE NAME PROPS VALUE ",props.data,props);
+    //console.log("ROUTE NAME PROPS VALUE ",props.data,props);
 
     props.template = require('./templates/route-creator-route-name.tmpl.html');
     super(props);

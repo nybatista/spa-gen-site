@@ -1,0 +1,1 @@
+/Users/frankbatista/sites/spa-gen-site/src/base-app/src/app/traits/app-data-traits.js

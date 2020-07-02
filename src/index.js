@@ -16,7 +16,7 @@ import images from 'data/images.json';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 import {AppDataTraits} from './base-app/src/app/traits/app-data-traits';
 import {ChannelAppRoute} from './base-app/src/app/channels/channel-app-route';
-import {ChannelAppData} from 'channels/channel-app-data';
+import {ChannelAppApi} from 'channels/channel-app-api';
 
 const hamburgerBreakpoint = 768;
 const mqStr = `(max-width:${hamburgerBreakpoint}px)`;
@@ -158,10 +158,10 @@ const initSpyneAppGenerator = ()=> {
     url: AllPhotos
   }))
 
-  spyneApp.registerChannel(new ChannelAppData());
+  spyneApp.registerChannel(new ChannelAppApi());
 
 /*
-  spyneApp.registerChannel(new ChannelFetch("CHANNEL_APP_DATA", {
+  spyneApp.registerChannel(new ChannelFetch("CHANNEL_APP_API", {
     url: AppContentData,
     map: AppDataTraits.appData$Map
   }))

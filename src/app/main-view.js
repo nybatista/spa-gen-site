@@ -42,7 +42,7 @@ export class MainView extends ViewStream {
 
     const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData);
     //console.log("DYNAMIC DARTA IS ",{updatedDynamicData})
-    this.sendInfoToChannel("CHANNEL_APP_DATA", updatedDynamicData, "CHANNEL_APP_DATA_UPDATED_EVENT");
+    this.sendInfoToChannel("CHANNEL_APP_API", updatedDynamicData, "CHANNEL_APP_API_UPDATED_EVENT");
 
 
     const pageId='home';

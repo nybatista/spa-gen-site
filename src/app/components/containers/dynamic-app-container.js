@@ -25,8 +25,15 @@ export class DynamicAppContainer extends ViewStream {
     })
 
     return [
-        ["CHANNEL_LIFECYCLE_RENDERED_EVENT", "onLifeCycleEvent", logoStaticPFilter]
+        ["CHANNEL_LIFECYCLE_RENDERED_EVENT", "onLifeCycleEvent", logoStaticPFilter],
+        ['CHANNEL_ROUTE_CONFIG_UPDATED_EVENT', 'onRouteConfigUpdated'],
+
     ];
+  }
+
+  onRouteConfigUpdated(){
+    this.appendView(new AppView());
+
   }
 
   addDynamicLogo(parentEl, isHeaderLogo){
@@ -65,6 +72,8 @@ export class DynamicAppContainer extends ViewStream {
   onRendered() {
     this.appendView(new AppView());
     this.addChannel("CHANNEL_LIFECYCLE");
+    this.addChannel('CHANNEL_ROUTE');
+
   }
 
 }

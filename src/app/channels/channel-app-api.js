@@ -7,10 +7,11 @@ import AppContentData from 'data/dynamic-app-data.json';
 import {AppDataTraits} from '../../base-app/src/app/traits/app-data-traits';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 
-export class ChannelAppData extends Channel {
+export class ChannelAppApi extends Channel {
 
   constructor(name, props = {}) {
-    name = "CHANNEL_APP_DATA";
+    name = "CHANNEL_APP_API";
+    props.traits = AppDataTraits;
     props.sendCachedPayload = true;
     super(name, props);
 
@@ -19,13 +20,17 @@ export class ChannelAppData extends Channel {
   onRegistered() {
     const data = path(['Spyne', 'config', 'dynamicData'], window);
 
-    this.props.data = AppDataTraits.appData$Map(data);
+    this.props.data = this.api$Map(data);
+
+    console.log('test page fn ', this.api$GetTopic('work', 'services'));
+
+
     this.sendDataEvent();
   }
 
 
   sendDataEvent(){
-    const action = "CHANNEL_APP_DATA_EVENT";
+    const action = "CHANNEL_APP_API_DATA_EVENT";
     const payload = this.props.data;
     console.log("APP DATA IN CHANNEL IS ",{payload})
     this.sendChannelPayload(action, payload);
@@ -41,8 +46,8 @@ export class ChannelAppData extends Channel {
 
   addRegisteredActions() {
     return [
-        "CHANNEL_APP_DATA_EVENT",
-        ["CHANNEL_APP_DATA_UPDATED_EVENT", "onDataUpdatedEvent"]
+        "CHANNEL_APP_API_DATA_EVENT",
+        ["CHANNEL_APP_API_UPDATED_EVENT", "onDataUpdatedEvent"]
 
     ];
   }

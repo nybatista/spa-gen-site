@@ -11,6 +11,8 @@ export class DynamicAppContainer extends ViewStream {
     props.class='container';
     props.headerId = 'app-header';
     props.footerId = 'app-footer';
+    props.headerLoaded = false;
+    props.footerLoaded = false;
     props.id='dynamic-app-container';
     super(props);
 
@@ -33,11 +35,16 @@ export class DynamicAppContainer extends ViewStream {
   }
 
   onRouteConfigUpdated(){
+    this.props.headerLoaded = false;
+    this.props.footerLoaded = false;
     this.appendView(new AppView());
-
+    this.initDynamictext();
   }
 
   addDynamicLogo(el, isHeaderLogo){
+
+    isHeaderLogo ? this.props.headerLoaded = true : this.props.footerLoaded = true;
+
     const uiContentClass = isHeaderLogo ? DynamicAppHeaderLogo : DynamicAppFooterContent;
     new uiContentClass().appendToDom(el);
   }
@@ -59,9 +66,14 @@ export class DynamicAppContainer extends ViewStream {
     const isHeaderLogo = id === this.props.headerId;
     const elType = isHeaderLogo ? 'header' : 'footer';
     const el = document.querySelector(`#${id} ${elType}`);
-    //el.querySelector('p').style.cssText='display:none;';
-    this.addDynamicLogo(el, isHeaderLogo);
+    el.querySelector('p').style.cssText='display:none;';
+    const {headerLoaded, footerLoaded} = this.props;
+    const addInputBool = isHeaderLogo === true && headerLoaded === false ||
+        isHeaderLogo === false && footerLoaded === false;
 
+    if (addInputBool) {
+      this.addDynamicLogo(el, isHeaderLogo);
+    }
 
   }
 

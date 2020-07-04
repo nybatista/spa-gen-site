@@ -31,6 +31,9 @@ export class ChannelAppApi extends Channel {
 
   sendDataEvent(){
     const action = "CHANNEL_APP_API_DATA_EVENT";
+    const {header,footer} = window.spaGenStore;
+    this.props.data.text = {header,footer};
+
     const payload = this.props.data;
     console.log("APP DATA IN CHANNEL IS ",{payload})
     this.sendChannelPayload(action, payload);

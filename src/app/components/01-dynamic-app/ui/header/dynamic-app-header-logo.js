@@ -21,12 +21,17 @@ export class DynamicAppHeaderLogo extends ViewStream {
     return [
       ["CHANNEL_UI_FOCUSOUT_EVENT", 'onInputFocusOut', "#logo" ],
       ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetHeaderValue'],
-      ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onToggleView'],
+      ['CHANNEL_CONTAINERS_TOGGLE_MAIN_CONTAINER_EVENT', 'onToggleView']
     ];
   }
 
+
+
+
+
   onResetHeaderValue(){
-    this.appDataGen$ResetTitleToDefault();
+    this.disposeViewStream();
+    //this.appDataGen$ResetTitleToDefault();
   }
 
   onInputFocusOut(e){

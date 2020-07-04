@@ -21,7 +21,8 @@ export class DynamicAppFooterContent extends ViewStream {
   addActionListeners() {
     return [
       ["CHANNEL_UI_FOCUSOUT_EVENT", 'onInputFocusOut', "#footer-content" ],
-      ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'onResetHeaderValue']
+      ['CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT', 'disposeViewStream']
+
     ];
   }
 

@@ -9,6 +9,8 @@ export class DynamicAppContainer extends ViewStream {
   constructor(props = {}) {
     props.tagName='section';
     props.class='container';
+    props.headerId = 'app-header';
+    props.footerId = 'app-footer';
     props.id='dynamic-app-container';
     super(props);
 
@@ -16,11 +18,10 @@ export class DynamicAppContainer extends ViewStream {
 
   addActionListeners() {
     // return nexted array(s)
-
+    const {headerId, footerId} = this.props;
     const logoStaticPFilter = new ChannelPayloadFilter({
       props: {
-        tagName: 'p',
-        id: (val) => ['logo', 'footer-content'].indexOf(val)>=0
+        id: (val) => [headerId, footerId].indexOf(val)>=0
       }
     })
 
@@ -36,9 +37,9 @@ export class DynamicAppContainer extends ViewStream {
 
   }
 
-  addDynamicLogo(parentEl, isHeaderLogo){
+  addDynamicLogo(el, isHeaderLogo){
     const uiContentClass = isHeaderLogo ? DynamicAppHeaderLogo : DynamicAppFooterContent;
-    new uiContentClass().appendToDom(parentEl);
+    new uiContentClass().appendToDom(el);
   }
 
 
@@ -55,13 +56,18 @@ export class DynamicAppContainer extends ViewStream {
     const {id} = e.props();
 
 
-    const isHeaderLogo = id === 'logo';
-    const txtEl = document.getElementById(id);
-    const parentEl = txtEl.parentElement;
-    txtEl.style.cssText='display:none;';
-    this.addDynamicLogo(parentEl, isHeaderLogo);
+    const isHeaderLogo = id === this.props.headerId;
+    const elType = isHeaderLogo ? 'header' : 'footer';
+    const el = document.querySelector(`#${id} ${elType}`);
+    //el.querySelector('p').style.cssText='display:none;';
+    this.addDynamicLogo(el, isHeaderLogo);
 
 
+  }
+
+  initDynamictext(){
+    document.querySelector(`#${this.props.headerId} header p`).style.cssText = "display:none";
+    document.querySelector(`#${this.props.footerId} footer p`).style.cssText = "display:none";
   }
 
   broadcastEvents() {
@@ -73,7 +79,7 @@ export class DynamicAppContainer extends ViewStream {
     this.appendView(new AppView());
     this.addChannel("CHANNEL_LIFECYCLE");
     this.addChannel('CHANNEL_ROUTE');
-
+    this.initDynamictext();
   }
 
 }

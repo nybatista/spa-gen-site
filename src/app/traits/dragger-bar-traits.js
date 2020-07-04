@@ -43,7 +43,7 @@ export class DraggerBarTraits extends SpyneTrait {
   }
 
   static dragBar$GetHeaderHeightAdjust(){
-    const headerHeight = document.getElementById('dynamic-app-header').getBoundingClientRect().height;
+    const headerHeight = document.getElementById('app-header').getBoundingClientRect().height;
     return  (headerHeight-this.props.elHeight)/2;
 
   }
@@ -84,7 +84,7 @@ export class DraggerBarTraits extends SpyneTrait {
   }
 
   static dragBar$InitYPos(props=this.props){
-    props.headerBar = document.querySelector("#dynamic-app-header");
+    props.headerBar = document.querySelector("#app-header");
     props.draggerHeight = props.el.getBoundingClientRect().height;
     this.dragBar$SetYPos();
 

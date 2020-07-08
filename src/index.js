@@ -36,8 +36,7 @@ const defaultConfig = {
   "channels" : {
     WINDOW: {
       mediqQueries: {
-        'showMenuDrawer': `(max-width: ${hamburgerBreakpoint}px)`,
-        'newTest': '(max-width: 2800px)'
+        'showMenuDrawer': `(max-width: ${hamburgerBreakpoint}px)`
       },
       listenForScroll: true,
       listenForOrientation:true,

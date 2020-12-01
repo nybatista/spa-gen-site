@@ -47,7 +47,7 @@ describe('should generate content from route data', () => {
     const randomLorem = AppDataGeneratorTraits.appDataGen$CreateRandomText(srcText);
 
     //console.log("STR IS ",{len,pickTextNum,srcText,randomLorem},textArr);
-    console.log("random lorem ",{randomLorem});
+    //console.log("random lorem ",{randomLorem});
 
     return true;
 

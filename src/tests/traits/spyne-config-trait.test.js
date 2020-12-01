@@ -8,7 +8,7 @@ describe('it should create spyne config', () => {
 
     const config = SpyneConfigTrait.config$CreateFile(baseInput);
 
-      console.log('creating the obj ',JSON.stringify(baseInput));
+      //console.log('creating the obj ',JSON.stringify(baseInput));
     return true;
 
   });

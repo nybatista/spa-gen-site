@@ -101,7 +101,7 @@ export class ChannelRouteCreator extends Channel {
 
     const {type, payload} = e.props();
 
-    console.log("ROUTE BAR EVENT ",{type,payload,e});
+    //console.log("ROUTE BAR EVENT ",{type,payload,e});
     const {holderId, barId, masterItem, routeBarEvent} = e.props();
     const action = "CHANNEL_ROUTE_CREATOR_ROUTE_BAR_HOLDER_EVENT";
     this.sendChannelPayload(action, {holderId,barId,masterItem,routeBarEvent});

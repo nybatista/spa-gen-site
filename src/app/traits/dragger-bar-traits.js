@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {Draggable, gsap, InertiaPlugin} from 'gsap/all';
+import {gsap,Draggable, InertiaPlugin} from 'gsap/all';
 
 export class DraggerBarTraits extends SpyneTrait {
 

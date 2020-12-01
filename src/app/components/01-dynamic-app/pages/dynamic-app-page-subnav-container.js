@@ -17,7 +17,7 @@ export class DynamicAppPageSubnavContainer extends ViewStream {
     props.tagName='ul';
     //props.class='dynamic-app-page-subnav-container';
     props.class = createSubNavContainerClass(props.data);
-    console.log('sub nav data ',props.data);
+    //console.log('sub nav data ',props.data);
     props.traits= DynamicAppPageTraits;
     super(props);
 

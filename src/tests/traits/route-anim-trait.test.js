@@ -15,7 +15,7 @@ describe('route anim tests', () => {
     document.body.removeChild(document.getElementById('route-creator-main'));
   });
 
-  console.log("TESTER aa", {props});
+  //console.log("TESTER aa", {props});
 
 
   it('should select all list items', () => {

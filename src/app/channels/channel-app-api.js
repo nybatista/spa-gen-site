@@ -22,7 +22,7 @@ export class ChannelAppApi extends Channel {
 
     this.props.data = this.api$Map(data);
 
-    console.log('test page fn ', this.api$GetTopic('work', 'services'));
+    //console.log('test page fn ', this.api$GetTopic('work', 'services'));
 
 
     this.sendDataEvent();
@@ -35,14 +35,14 @@ export class ChannelAppApi extends Channel {
     this.props.data.text = {header,footer};
 
     const payload = this.props.data;
-    console.log("APP DATA IN CHANNEL IS ",{payload})
+    //console.log("APP DATA IN CHANNEL IS ",{payload})
     this.sendChannelPayload(action, payload);
   }
 
 
   onDataUpdatedEvent(e){
     const {payload} = e;
-    console.log("DATA UPDATED IS ",{payload,e});
+    //console.log("DATA UPDATED IS ",{payload,e});
     this.props.data = AppDataTraits.api$Map(payload);
     this.sendDataEvent();
   }

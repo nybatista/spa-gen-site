@@ -38,7 +38,7 @@ export class LocalStorageTraits extends SpyneTrait {
     // only setter for localStorage item
     //console.log("OBJ AND KEY ARE ",{obj,key});
 
-    // THIS IS HAPPENING ON main-view.js -- SOLVES A WEIRD BUG WHERE STORAGE WAS NOT SAVED WHEN SERVED FROM AWS CDN
+    // THIS IS HAPPENING ON app-view.js -- SOLVES A WEIRD BUG WHERE STORAGE WAS NOT SAVED WHEN SERVED FROM AWS CDN
     localStorage.setItem(key, JSON.stringify(obj));
     return obj;
   }

@@ -1,6 +1,6 @@
 import {SpyneTrait} from 'spyne';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
-import {whereEq, path, compose, pick, evolve, map, find, reduce, ifElse, contains, findIndex, nth, clone, reverse, omit, keys, reduceRight, toPairs, equals, merge,propEq, is, prop,filter, head} from 'ramda';
+import {whereEq, path, compose, pick, evolve, map, find, reduce, ifElse, contains, findIndex, nth, clone, reverse, omit, keys, reduceRight, toPairs, equals, merge,propEq, is, prop,filter,defaultTo, head} from 'ramda';
 import {SrcData} from '../../tests/mocks/src-data-mock';
 
 export class AppDataGeneratorTraits extends SpyneTrait {
@@ -150,7 +150,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
     //console.log("SRC DATA ",{srcData});
     const mainObj = {};
 
-    const parseRouteConfig = (routeObj, parentLabel)=>{
+    const parseRouteConfig = (routeObj, parentLabel, routeNameVal)=>{
       const {routePath} = routeObj;
       const routeName = getRouteName(routePath);
       const routeProps = getRouteProps(routePath);
@@ -166,11 +166,14 @@ export class AppDataGeneratorTraits extends SpyneTrait {
           article: AppDataGeneratorTraits.appDataGen$CreateParagraph(srcData)
         }
 
-
+        if(routeNameVal!==undefined){
+          propObj['routeNameVal'] = routeNameVal;
+        }
 
 
         if (is(Object, pair[1])){
-          propObj['content'] = parseRouteConfig(pair[1], pair[0]);
+          const routeNameVal = compose(path(['routePath', 'routeName']), defaultTo(''))(pair[1]);
+          propObj['content'] = parseRouteConfig(pair[1], pair[0], routeNameVal);
         }
          return propObj;
       }

@@ -161,7 +161,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     hljs.highlightBlock(codeEl);
 
     const {routes} = jsonObj;
-
+    console.log('routes and json obj ',{jsonObj});
     return routes;
   }
 

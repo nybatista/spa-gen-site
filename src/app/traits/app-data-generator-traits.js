@@ -173,6 +173,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
 
         if (is(Object, pair[1])){
           const routeNameVal = compose(path(['routePath', 'routeName']), defaultTo(''))(pair[1]);
+          propObj['cardRouteName'] = routeNameVal;
           propObj['content'] = parseRouteConfig(pair[1], pair[0], routeNameVal);
         }
          return propObj;

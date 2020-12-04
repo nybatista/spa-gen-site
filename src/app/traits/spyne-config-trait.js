@@ -23,6 +23,7 @@ export class SpyneConfigTrait extends SpyneTrait {
 
     const updateConfigIfPropExists = (str)=>{
       const prop = LocalStorageTraits.localStorage$GetStoreObj(str);
+      console.log('prop is ',isDefined(prop),prop);
       if (isDefined(prop)===true){
         config.channels.ROUTE[str] = prop;
       }
@@ -30,6 +31,8 @@ export class SpyneConfigTrait extends SpyneTrait {
 
     configuredProps.forEach(updateConfigIfPropExists);
 
+
+    console.log('config is ',{configuredProps, defaults})
 
    /* const routes = LocalStorageTraits.localStorage$GetStoreObj('routes');
     if (isDefined(routes)===true){

@@ -29,7 +29,7 @@ export class LocalStorageTraits extends SpyneTrait {
 
   static localStorage$GetStore(key=window.spyneLocalStorageKey){
     //only getter for localStorage item
-   //console.log("GET LOCAL STORAGE ", clone(JSON.parse(localStorage.getItem(key)) ))
+   console.log("GET LOCAL STORAGE ", clone(JSON.parse(localStorage.getItem(key)) ))
     return JSON.parse(localStorage.getItem(key)) ||
         LocalStorageTraits.localStorage$SetStore({},key);
   }

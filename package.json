@@ -11,7 +11,7 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "gsap": "file:gsap-bonus.tgz",
-    "highlight.js": "^10.0.2",
+    "highlight.js": "^10.4.1",
     "spyne": "^0.12.1",
     "spynejs-polyfill": "^0.0.5",
     "whatwg-fetch": "^3.0.0"

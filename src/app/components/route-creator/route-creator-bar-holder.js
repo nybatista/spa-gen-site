@@ -71,7 +71,7 @@ export class RouteCreateBarHolder extends ViewStream {
     const isContainer = parentVsid === vsid;
     const item$ = this.props.el$(`#${barId}`);
     const el = isContainer === true ? item$.el : null;
-
+    console.log('bar item sorter error check ',{el},this.props.barItemsSorter);
     const {swapItems, swapItemsIds} =  this.routeAnim$AddItemToSorter(el);
     const animEvent = isContainer === true ? 'animateIn' : 'animate';;
     this.sendAnimInfoToChannel({swapItems,swapItemsIds,animEvent});

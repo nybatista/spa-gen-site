@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {whereEq, path, compose, pick, flatten,isEmpty, omit,map,all, defaultTo,uniq, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
+import {whereEq, path, compose, pick, find,propEq, flatten,isEmpty,invertObj, omit,map,all, defaultTo,uniq, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
 import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 
@@ -25,6 +25,8 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const compareRouteNameAndContent = (routesObj, contentObj)=> {
 
     const {routePath} = routesObj;
+
+    console.log("ROUTE CHECK ",{routesObj, contentObj, routePath})
     const content = compose(defaultContentObj, prop('content'))(contentObj);
 
     // MAP EACH ROUTEPATH OBJ
@@ -55,7 +57,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
     const appDataIsValid = all(equals(true), boolAcc);
 
-    //console.log('validate app data ',{appDataIsValid, boolAcc})
+    console.log('validate app data ',{routesJson, appData, appDataIsValid, boolAcc})
 
     return appDataIsValid;
   }
@@ -64,28 +66,37 @@ export class DynamicAppDataTraits extends SpyneTrait {
     return path(['Spyne', 'config', 'channels', 'ROUTE', 'routes'], configObj);
   }
 
-  static dynAppData$ConformAppData(d, configObj=window){
+  static dynAppData$ConformAppData(d, configObj=window, generatedBool=false){
 
     const defaultIsValid = DynamicAppDataTraits.dynAppData$Validate(d, configObj);
+    const defaultData = DynamicAppDataTraits.dynAppData$CacheData(d);;
 
-    if (defaultIsValid === true){
-      return DynamicAppDataTraits.dynAppData$CacheData(d);
-
-    }
 
 
     let localStorageDynamicData = LocalStorageTraits.localStorage$GetStoreObj('dynamicData');
     const localStorageDataIsValid =  DynamicAppDataTraits.dynAppData$Validate(localStorageDynamicData, configObj);
 
+
+    let generatedAppData = AppDataGeneratorTraits.appDataGen$CreateDataFromRoutes(configObj);
+    const generatedAppDataIsValid =DynamicAppDataTraits.dynAppData$Validate(generatedAppData, configObj);
+
+
+    const findFirstValidArr = generatedBool ? {generatedAppDataIsValid, localStorageDataIsValid, defaultIsValid} : {localStorageDataIsValid, defaultIsValid};
+
+    const isTrue = a => a[1] === true;
+    const validDataType = compose( nth(0), defaultTo([]), find(isTrue), toPairs)(findFirstValidArr);
+
+    console.log('validated data ',{validDataType, findFirstValidArr, generatedBool,generatedAppDataIsValid, localStorageDataIsValid, defaultIsValid, generatedAppData, localStorageDynamicData, defaultData })
+
+
     //console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});
-    if (localStorageDataIsValid === true){
-         return DynamicAppDataTraits.dynAppData$CacheData(localStorageDynamicData);
-    } else {
-      let generatedAppData = AppDataGeneratorTraits.appDataGen$CreateDataFromRoutes(configObj);
-     // const generatedAppDataIsValid =DynamicAppDataTraits.dynAppData$Validate(generateAppData, configObj);
+    if (validDataType === "generatedAppDataIsValid"){
+      return DynamicAppDataTraits.dynAppData$CacheData(localStorageDynamicData);
+    } else if(validDataType === "localStorageDataIsValid"){
       LocalStorageTraits.localStorage$SetStoreObj('dynamicData', generatedAppData)
       return DynamicAppDataTraits.dynAppData$CacheData(generatedAppData);
-
+    } else {
+      return defaultData;
     }
 
 

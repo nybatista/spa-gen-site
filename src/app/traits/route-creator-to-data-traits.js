@@ -76,7 +76,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
   static routeCreatorToData$DomToRouteJson(mainSel='route-creator-container'){
     let iter = 0;
     const addStringOrObjForEachListItem = (liEl)=>{
-
+      console.log('add To Route ',{liEl})
       if (is(Array, liEl)){
         iter++;
         return liEl;
@@ -115,6 +115,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     const mainEl = document.getElementById(mainSel);
     let routes =  createObjFromUl(mainEl.dataset.vsid);
    // routes.routePath['404']='.*';
+    console.log("ROUTES GEN ",{routes, mainEl})
     routes = assocPath(['routePath', 'home'], '^$', routes);
     return {routes};
 

@@ -40,7 +40,7 @@ export class MainView extends ViewStream {
     SpyneConfigTrait.config$SetRouteToLocalStorage();
 
 
-    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData);
+    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData, window, true);
     //console.log("DYNAMIC DARTA IS ",{updatedDynamicData})
     this.sendInfoToChannel("CHANNEL_APP_API", updatedDynamicData, "CHANNEL_APP_API_UPDATED_EVENT");
 

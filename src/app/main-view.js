@@ -10,6 +10,7 @@ export class MainView extends ViewStream {
   constructor(props = {}) {
     props.tagName='main';
     props.id = 'spyne-spa-gen-site';
+    props.routeIsDefaultBool = false;
     super(props);
 
   }
@@ -34,13 +35,15 @@ export class MainView extends ViewStream {
 
 
     const dynamicData = LocalStorageTraits.localStorage$GetStoreObj('defaultDynamicData');
-    //console.log('updated Dynamic Data on ROUTE UPDATED  ', {dynamicData,e});
 
 
     SpyneConfigTrait.config$SetRouteToLocalStorage();
 
+    const generateNewData = this.props.routeIsDefaultBool === false;
 
-    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData, window, true);
+    console.log('updated Dynamic Data on ROUTE UPDATED  ', {generateNewData, dynamicData,e});
+
+    const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData, window, generateNewData);
     //console.log("DYNAMIC DARTA IS ",{updatedDynamicData})
     this.sendInfoToChannel("CHANNEL_APP_API", updatedDynamicData, "CHANNEL_APP_API_UPDATED_EVENT");
 
@@ -68,12 +71,13 @@ export class MainView extends ViewStream {
 
   addGeneratorLoadingAnim(e){
     const {action} = e;
-    const onCompleteAction = action === "CHANNEL_ROUTE_CREATOR_BEFORE_GENERATE_JSON_EVENT" ?
-        "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT" :
-        "CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT";
+    this.props.routeIsDefaultBool = action === "CHANNEL_ROUTE_CREATOR_GENERATE_BEFORE_DEFAULT_JSON_EVENT"
+    const onCompleteAction =  this.props.routeIsDefaultBool ?
+        "CHANNEL_ROUTE_CREATOR_GENERATE_DEFAULT_JSON_EVENT" :
+        "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT";
 
 
-    //console.log("LOADING GEN ANIM ",{action,onCompleteAction,e});
+    console.log("LOADING GEN ANIM ",{action,onCompleteAction,e});
     this.appendView(new GeneratorLoadingAnimMain({onCompleteAction}));
 
   }

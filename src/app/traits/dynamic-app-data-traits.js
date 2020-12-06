@@ -66,6 +66,48 @@ export class DynamicAppDataTraits extends SpyneTrait {
     return path(['Spyne', 'config', 'channels', 'ROUTE', 'routes'], configObj);
   }
 
+  static dynAppData$ConformAppData1(d, configObj=window){
+
+    const defaultIsValid = DynamicAppDataTraits.dynAppData$Validate(d, configObj);
+
+    if (defaultIsValid === true){
+      return DynamicAppDataTraits.dynAppData$CacheData(d);
+
+    }
+
+
+    let localStorageDynamicData = LocalStorageTraits.localStorage$GetStoreObj('dynamicData');
+    const localStorageDataIsValid =  DynamicAppDataTraits.dynAppData$Validate(localStorageDynamicData, configObj);
+
+    //console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});
+    if (localStorageDataIsValid === true){
+      return DynamicAppDataTraits.dynAppData$CacheData(localStorageDynamicData);
+    } else {
+      let generatedAppData = AppDataGeneratorTraits.appDataGen$CreateDataFromRoutes(configObj);
+      // const generatedAppDataIsValid =DynamicAppDataTraits.dynAppData$Validate(generateAppData, configObj);
+      LocalStorageTraits.localStorage$SetStoreObj('dynamicData', generatedAppData)
+      return DynamicAppDataTraits.dynAppData$CacheData(generatedAppData);
+
+    }
+
+
+    /*
+        console.log('generate app data ', {generateAppData, d});
+
+        if (appDataIsValid){
+
+        }
+
+        return d;
+    */
+
+
+
+  }
+
+
+
+
   static dynAppData$ConformAppData(d, configObj=window, generatedBool=false){
 
     const defaultIsValid = DynamicAppDataTraits.dynAppData$Validate(d, configObj);
@@ -91,10 +133,11 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
     //console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});
     if (validDataType === "generatedAppDataIsValid"){
-      return DynamicAppDataTraits.dynAppData$CacheData(localStorageDynamicData);
-    } else if(validDataType === "localStorageDataIsValid"){
+      // const generatedAppDataIsValid =DynamicAppDataTraits.dynAppData$Validate(generateAppData, configObj);
       LocalStorageTraits.localStorage$SetStoreObj('dynamicData', generatedAppData)
       return DynamicAppDataTraits.dynAppData$CacheData(generatedAppData);
+    } else if(validDataType === "localStorageDataIsValid"){
+      return DynamicAppDataTraits.dynAppData$CacheData(localStorageDynamicData);
     } else {
       return defaultData;
     }

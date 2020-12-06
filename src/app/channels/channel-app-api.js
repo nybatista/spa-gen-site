@@ -42,7 +42,7 @@ export class ChannelAppApi extends Channel {
 
   onDataUpdatedEvent(e){
     const {payload} = e;
-    //console.log("DATA UPDATED IS ",{payload,e});
+    console.log("DATA UPDATED IS ",{payload,e});
     this.props.data = AppDataTraits.api$Map(payload);
     this.sendDataEvent();
   }

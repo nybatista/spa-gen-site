@@ -19,7 +19,8 @@ export class SpyneConfigTrait extends SpyneTrait {
     const isDefined = compose(not, either(isNil, isEmpty))
 
 
-    const configuredProps = ['routes', 'header', 'footer'];
+    //const configuredProps = ['routes', 'header', 'footer'];
+    const configuredProps = ['routes'];
 
     const updateConfigIfPropExists = (str)=>{
       const prop = LocalStorageTraits.localStorage$GetStoreObj(str);

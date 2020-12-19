@@ -15,7 +15,7 @@
     const isProd = e === 'build';
     const devMode =  env !== 'build';
     const mode = isProd ? 'production' : 'development';
-    const map = isProd ? 'none' : 'inline-source-map';
+    const map = isProd ? 'none' : 'inline-cheap-source-map';
     const publicPath = isProd ? '' : '/';
     return {devMode, mode, map, publicPath};
 
@@ -170,7 +170,43 @@
         },
         {
           test: /\.html$/,
-          loader: "html-loader"
+          use: {
+            loader: 'html-loader',
+            options: {
+              attributes: {
+                list: [
+                  {
+                    tag: 'img',
+                    attribute: 'src',
+                    type: 'src',
+                  },
+                  {
+                    tag: 'img',
+                    attribute: 'srcset',
+                    type: 'srcset',
+                  },
+                  {
+                    tag: 'img',
+                    attribute: 'data-src',
+                    type: 'src',
+                  },
+                  {
+                    tag: 'img',
+                    attribute: 'data-srcset',
+                    type: 'srcset',
+                  }
+
+                ]
+
+              },
+              minimize: {
+                removeAttributeQuotes: false,
+                removeRedundantAttributes: false,
+                removeScriptTypeAttributes: false,
+                removeStyleLinkTypeAttributes:false,
+              }
+            }
+          }
         },
 
         {

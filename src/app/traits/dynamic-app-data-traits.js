@@ -26,7 +26,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
     const {routePath} = routesObj;
 
-    console.log("ROUTE CHECK ",{routesObj, contentObj, routePath})
+    //console.log("ROUTE CHECK ",{routesObj, contentObj, routePath})
     const content = compose(defaultContentObj, prop('content'))(contentObj);
 
     // MAP EACH ROUTEPATH OBJ
@@ -57,7 +57,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
     const appDataIsValid = all(equals(true), boolAcc);
 
-    console.log('validate app data ',{routesJson, appData, appDataIsValid, boolAcc})
+    //console.log('validate app data ',{routesJson, appData, appDataIsValid, boolAcc})
 
     return appDataIsValid;
   }
@@ -128,7 +128,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const isTrue = a => a[1] === true;
     const validDataType = compose( nth(0), defaultTo([]), find(isTrue), toPairs)(findFirstValidArr);
 
-    console.log('validated data ',{validDataType, findFirstValidArr, generatedBool,generatedAppDataIsValid, localStorageDataIsValid, defaultIsValid, generatedAppData, localStorageDynamicData, defaultData })
+    //console.log('validated data ',{validDataType, findFirstValidArr, generatedBool,generatedAppDataIsValid, localStorageDataIsValid, defaultIsValid, generatedAppData, localStorageDynamicData, defaultData })
 
 
     //console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});

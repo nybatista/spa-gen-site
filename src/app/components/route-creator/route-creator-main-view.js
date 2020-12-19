@@ -70,7 +70,7 @@ export class RouteCreatorMainView extends ViewStream {
       }
       const secondToLastEl = elArr[elItemIndex];
 
-      console.log('el item index ',{elArr, elItemIndex, secondToLastEl})
+      //console.log('el item index ',{elArr, elItemIndex, secondToLastEl})
       const box = secondToLastEl.getBoundingClientRect();
       const newHeight = box.y + box.height * 2;
       const mainHeight = newHeight <= minHeight ? minHeight : newHeight;

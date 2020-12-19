@@ -41,7 +41,7 @@ export class MainView extends ViewStream {
 
     const generateNewData = this.props.routeIsDefaultBool === false;
 
-    console.log('updated Dynamic Data on ROUTE UPDATED  ', {generateNewData, dynamicData,e});
+    //console.log('updated Dynamic Data on ROUTE UPDATED  ', {generateNewData, dynamicData,e});
 
     const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData, window, generateNewData);
     //console.log("DYNAMIC DARTA IS ",{updatedDynamicData})
@@ -77,7 +77,7 @@ export class MainView extends ViewStream {
         "CHANNEL_ROUTE_CREATOR_GENERATE_JSON_EVENT";
 
 
-    console.log("LOADING GEN ANIM ",{action,onCompleteAction,e});
+    //console.log("LOADING GEN ANIM ",{action,onCompleteAction,e});
     this.appendView(new GeneratorLoadingAnimMain({onCompleteAction}));
 
   }

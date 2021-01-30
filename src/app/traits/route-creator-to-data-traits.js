@@ -108,7 +108,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     const createObjFromUl = (vsid)=>{
       const listItemsArr = RouteCreatorToDataTraits.routeCreatorToData$GetUlListItems(vsid)
       const routeName = RouteCreatorToDataTraits.routeCreatorToData$GetRouteName(vsid);
-      const routePath = compose(merge({routeName}),fromPairs, append(['404', '.+']),map(addStringOrObjForEachListItem))(listItemsArr);
+      const routePath = compose(merge({routeName}),fromPairs,map(addStringOrObjForEachListItem))(listItemsArr);
       return {routePath};
     };
 
@@ -116,7 +116,7 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
     let routes =  createObjFromUl(mainEl.dataset.vsid);
    // routes.routePath['404']='.*';
     //console.log("ROUTES GEN ",{routes, mainEl})
-    routes = assocPath(['routePath', 'home'], '^$', routes);
+    routes = assocPath(['routePath', 'home'], '', routes);
     return {routes};
 
   }

@@ -2,6 +2,7 @@ import {SpyneTrait} from 'spyne';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 import {whereEq, path, compose, pick, evolve, map, find, reduce, ifElse, contains, findIndex, nth, clone, reverse, omit, keys, reduceRight, toPairs, equals, merge,propEq, is, prop,filter,defaultTo, head} from 'ramda';
 import {SrcData} from '../../tests/mocks/src-data-mock';
+import {AppDataTraits} from 'traits/app-data-traits';
 
 export class AppDataGeneratorTraits extends SpyneTrait {
 
@@ -154,6 +155,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
       const {routePath} = routeObj;
       const routeName = getRouteName(routePath);
       const routeProps = getRouteProps(routePath);
+      let linksPropObj = {};
 
       const generatePropObj = (pair)=>{
         //console.log("PARENT LABEL ",{parentLabel});
@@ -168,7 +170,17 @@ export class AppDataGeneratorTraits extends SpyneTrait {
 
         if(routeNameVal!==undefined){
           propObj['routeNameVal'] = routeNameVal;
+          linksPropObj = pick([routeNameVal], propObj)
+          linksPropObj['pageId'] = parentLabel;// prop('pageId', routeObj);
+          //console.log("route name val is ",{linksPropObj, propObj},propObj.routeNameVal);
+        } else{
+          linksPropObj = pick(['pageId'], propObj);
+          //console.log("route name val outside is ",propObj.routeNameVal, {linksPropsObj,propObj});
+
+
         }
+        propObj['linkDataset'] = AppDataTraits.api$GetLinksDataset(linksPropObj)
+
 
 
         if (is(Object, pair[1])){

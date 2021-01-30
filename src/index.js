@@ -33,6 +33,7 @@ const defaultConfig = {
     "footer" : "Your Footer Text"
   },
 
+
   "channels" : {
     WINDOW: {
       mediqQueries: {
@@ -46,10 +47,10 @@ const defaultConfig = {
     },
 
   "ROUTE": {
+    "add404s": true,
     "type" : "slash",
     "routes": {
       "routePath": {
-        "404": ".+",
         "routeName": "pageId",
         "home": "^$",
         "work": {
@@ -166,6 +167,12 @@ const initSpyneAppGenerator = ()=> {
   }))
 */
 
+
+
+
+
+
+  //    let routeFromParams = SpyneChannelRoute.getRouteStrFromParams(data, routeConfig, 'query');
 
 
     const mainView = new MainView();

@@ -11,9 +11,9 @@
       "text": "At nonumes expetendis reprimique pri, indoctum vulputate definitionem vim et.",
       "linkDataset": {
         "pageId": "home",
-        "text": "HOME",
+        "title": "HOME",
         "href": "/",
-        "nav-level": 1
+        "navLevel": 1
       }
     },
     {
@@ -23,9 +23,9 @@
       "text": "Adhuc autem audire sit no, mea eu duis autem antiopam. Has et duis summo",
       "linkDataset": {
         "pageId": "home",
-        "text": "HOME",
+        "title": "HOME",
         "href": "/",
-        "nav-level": 1
+        "navLevel": 1
       },
       "content": [
         {
@@ -36,9 +36,9 @@
           "linkDataset": {
             "pageId": "work",
             "topicId": "services",
-            "text": "SERVICES",
+            "title": "SERVICES",
             "href": "/work/services",
-            "nav-level": 2
+            "navLevel": 2
           },
           "background": "//images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
           "article": [
@@ -54,9 +54,9 @@
           "linkDataset": {
             "pageId": "work",
             "topicId": "portfolio",
-            "text": "PORTFOLIO",
+            "title": "PORTFOLIO",
             "href": "/work/portfolio",
-            "nav-level": 2
+            "navLevel": 2
           },
           "background": "//images.pexels.com/photos/256514/pexels-photo-256514.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
           "article": [
@@ -72,9 +72,9 @@
           "linkDataset": {
             "pageId": "work",
             "topicId": "blog",
-            "text": "BLOG",
+            "title": "BLOG",
             "href": "/work/blog",
-            "nav-level": 2
+            "navLevel": 2
           },
           "background": "//images.pexels.com/photos/459654/pexels-photo-459654.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
           "article": [
@@ -90,9 +90,9 @@
       "headline": "Section Work",
       "linkDataset": {
         "pageId": "about",
-        "text": "ABOUT",
+        "title": "ABOUT",
         "href": "/about",
-        "nav-level": 1
+        "navLevel": 1
       },
       "text": "Pri praesent adipiscing ex, id eam autem inciderint. Similique inciderint ei.",
       "content": [
@@ -104,9 +104,9 @@
           "linkDataset": {
             "pageId": "about",
             "topicId": "contact",
-            "text": "CONTACT",
+            "title": "CONTACT",
             "href": "/about/contact",
-            "nav-level": 2
+            "navLevel": 2
           },
           "text": "At nonumes expetendis reprimique pri, indoctum vulputate.",
           "article": [

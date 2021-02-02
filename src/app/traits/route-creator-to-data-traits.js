@@ -61,7 +61,9 @@ export class RouteCreatorToDataTraits extends SpyneTrait {
   static routeCreatorToData$GetRouteName(vsid){
     const routeNamseSel = `[data-vsid='${vsid}'] > div.route-creator-route-name input`;
     const el = document.querySelector(routeNamseSel);
-    return el.value!=="" ? el.value : el.placeholder;
+    let routeNameStr = el.value!=="" ? el.value : el.placeholder;
+    // REMOVE SPECIAL CHARS FROM ROUTENAME
+    return String(routeNameStr).replace(/[^A-Za-z0-9_]/gm, "");
   }
 
   static routeCreatorToData$GetData(ulSelector){

@@ -17,6 +17,7 @@ import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 import {AppDataTraits} from './base-app/src/app/traits/app-data-traits';
 import {ChannelAppRoute} from './base-app/src/app/channels/channel-app-route';
 import {ChannelAppApi} from 'channels/channel-app-api';
+import {compose,path,reject,uniq, flatten, contains,__, map,keys } from 'ramda';
 
 const hamburgerBreakpoint = 768;
 const mqStr = `(max-width:${hamburgerBreakpoint}px)`;
@@ -89,6 +90,7 @@ const css = require('./scss/main.scss');
 const spyneApp = new SpyneApp(config);
 
 
+
 const onDynamicSourceContent = ()=>{
   const {localStorageKey} = config;
   window[localStorageKey]['srcData'] = {};
@@ -109,6 +111,7 @@ const onDynamicSourceContent = ()=>{
     const onDataRetrieved = (data)=>{
       window[localStorageKey].srcData[prop] = data;
       //console.log("DATA IS ",data);
+
       if (srcData.length>=1){
         fetchSrcData(srcData.shift());
       } else {
@@ -133,6 +136,8 @@ onDynamicSourceContent();
 const onAppDataReturned = (d)=>{
   LocalStorageTraits.localStorage$SetStoreObjAndUpdate('defaultDynamicData', d);
   DynamicAppDataTraits.dynAppData$ConformAppData(d, {Spyne:{config}});
+  //window.Spyne.config['data'] = window.Spyne.config.dynamicData;
+
   initSpyneAppGenerator();
 }
 
@@ -166,9 +171,6 @@ const initSpyneAppGenerator = ()=> {
     map: AppDataTraits.appData$Map
   }))
 */
-
-
-
 
 
 

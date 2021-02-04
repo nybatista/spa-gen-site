@@ -1,5 +1,5 @@
 import {SpyneTrait} from 'spyne';
-import {whereEq, path, compose, pick, find,propEq, flatten,isEmpty,invertObj, omit,map,all, defaultTo,uniq, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
+import {whereEq, path, compose, pick,  has, find,propEq,includes, zip, flatten,isEmpty,invertObj, omit,map,all, defaultTo,uniq, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
 import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
 
@@ -11,7 +11,54 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
   }
 
+
+  static dynAppData$ValidateByDatasets(data, configObj=window){
+    const {routeNamesArr, routeDatasetsArr} = path(['Spyne', 'config', 'channels', 'ROUTE'], configObj);
+    //const obj = path(['channels', 'ROUTE'], configObj);
+    const {content} = data;
+
+    //console.log('data validate route is ',{content, routeNamesArr, routeDatasetsArr, configObj})
+
+
+
+    //const pred = compose(whereEq(o), prop('linkDataset'));
+    const reduceDatasets = (acc, o)=>{
+      ///console.log('o dataset ',{acc,o,routePropsObj})
+      const content = prop('content', o);
+
+
+      const obj = compose(pick(routeNamesArr),  prop('linkDataset'))(o);
+      //console.log('validate obj and arr', {o, obj} )
+      acc.push(obj);
+      if (content){
+        return content.reduce(reduceDatasets, acc)
+      }
+      return acc;
+
+    }
+
+    const mainDatasetsArr = compose(map(pick(routeNamesArr)))(routeDatasetsArr);
+
+
+    const compareRouteDatasetsArr =  content.reduce(reduceDatasets, [])
+
+   const compareObjs = arr => whereEq(arr[0], arr[1]);
+    const isTrue = R.equals(true);
+
+    const allEq = compose(all(equals(true)), map(compareObjs),zip)(mainDatasetsArr, compareRouteDatasetsArr);
+
+    //console.log('VALIDATE FROM ROUTE data is ',{allEq, routeDatasetsArr, mainDatasetsArr, compareRouteDatasetsArr});
+    return allEq;
+
+    // return content.reduce(filterByReduceContent, {});
+
+   // return {};
+  }
+
+
   static dynAppData$Validate(appData, configObj=window){
+
+    const newValidatation = DynamicAppDataTraits.dynAppData$ValidateByDatasets(appData, configObj);
 
     const routesJson = DynamicAppDataTraits.dynAppData$GetRoutesJson(configObj);
 
@@ -57,9 +104,10 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
     const appDataIsValid = all(equals(true), boolAcc);
 
-    //console.log('validate app data ',{routesJson, appData, appDataIsValid, boolAcc})
+    //console.log('validate app data ',{routesJson, appData,newValidatation, appDataIsValid, boolAcc}, window.Spyne.config.channels)
 
-    return appDataIsValid;
+    return newValidatation;
+   // return appDataIsValid;
   }
 
   static dynAppData$GetRoutesJson(configObj){
@@ -128,7 +176,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const isTrue = a => a[1] === true;
     const validDataType = compose( nth(0), defaultTo([]), find(isTrue), toPairs)(findFirstValidArr);
 
-    //console.log('validated data ',{validDataType, findFirstValidArr, generatedBool,generatedAppDataIsValid, localStorageDataIsValid, defaultIsValid, generatedAppData, localStorageDynamicData, defaultData })
+    //console.log('dynAppData$ConformAppData validated data ',{validDataType, findFirstValidArr, generatedBool,generatedAppDataIsValid, localStorageDataIsValid, defaultIsValid, generatedAppData, localStorageDynamicData, defaultData })
 
 
     //console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});
@@ -193,7 +241,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
       const routeNamesReducedArr = reduceRouteNamesFn(routesJson);
 
       if (window!==undefined && window.Spyne.config!==undefined){
-        window.Spyne.config.channels.ROUTE.routeNamesArr = routeNamesReducedArr;
+        //window.Spyne.config.channels.ROUTE.routeNamesArr = routeNamesReducedArr;
       }
 
       //console.log("ROUTES JSON ",{routeNamesReducedArr, routesJson})

@@ -180,7 +180,7 @@ export class AppDataGeneratorTraits extends SpyneTrait {
 
         }
         propObj['linkDataset'] = AppDataTraits.api$GetLinksDataset(linksPropObj)
-
+        //console.log('get links dataset ',propObj.linkDataset);
 
 
         if (is(Object, pair[1])){

@@ -4,7 +4,7 @@ import {LocalStorageTraits} from 'traits/local-storage-traits';
 import {SpyneConfigTrait} from 'traits/spyne-config-trait';
 import {DynamicAppDataTraits} from 'traits/dynamic-app-data-traits';
 import {GeneratorLoadingAnimMain} from 'main_components/generator-loading-anim/generator-loading-anim-main';
-
+import {path, pick, mergeDeepRight} from 'ramda';
 export class MainView extends ViewStream {
 
   constructor(props = {}) {
@@ -33,6 +33,11 @@ export class MainView extends ViewStream {
 
   onRouteConfigUpdated(e){
 
+    const routesPropsObj = pick(['routeDatasetsArr', 'routeNamesArr', 'routes'])(e.props());
+
+    //window.Spyne.config.channels.ROUTE = mergeDeepRight(window.Spyne.config.channels.ROUTE, routesPropsObj)
+
+    //console.log('links data updated is ', {e,routesPropsObj},window.Spyne.config.channels.ROUTE)
 
     const dynamicData = LocalStorageTraits.localStorage$GetStoreObj('defaultDynamicData');
 
@@ -44,7 +49,9 @@ export class MainView extends ViewStream {
     //console.log('updated Dynamic Data on ROUTE UPDATED  ', {generateNewData, dynamicData,e});
 
     const updatedDynamicData = DynamicAppDataTraits.dynAppData$ConformAppData(dynamicData, window, generateNewData);
-    //console.log("DYNAMIC DARTA IS ",{updatedDynamicData})
+    LocalStorageTraits.localStorage$SetStore();
+
+    //console.log("DYNAMIC DARTA IS ",{e,routesPropsObj,updatedDynamicData})
     this.sendInfoToChannel("CHANNEL_APP_API", updatedDynamicData, "CHANNEL_APP_API_UPDATED_EVENT");
 
 

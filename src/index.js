@@ -3,6 +3,7 @@ import {ChannelRouteCreator} from 'channels/channel-route-creator';
 import {ChannelContainers} from 'channels/channel-containers';
 import {ChannelMenuDrawer} from 'channels/channel-menu-drawer';
 import {ChannelDynamicAppRoute} from 'channels/channel-dynamic-app-route';
+import {ChannelAppGenFetch} from 'channels/channel-appgen-fetch';
 import {MainView} from './app/main-view';
 import SpaGenData from 'data/route-gen.json';
 import LoremIpsum from 'data/lorem-ipsum.json';
@@ -159,6 +160,7 @@ const initSpyneAppGenerator = ()=> {
   spyneApp.registerChannel(new ChannelContainers());
   spyneApp.registerChannel(new ChannelDynamicAppRoute());
   spyneApp.registerChannel(new ChannelMenuDrawer());
+  spyneApp.registerChannel(new ChannelAppGenFetch());
   spyneApp.registerChannel(new ChannelFetch("CHANNEL_SPA_GEN_DATA_IMAGES", {
     url: AllPhotos
   }))

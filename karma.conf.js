@@ -20,10 +20,9 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['webpack', 'mocha', 'chai'],
 
   //{ pattern: './src/tests/**/*.test.js', watched: true },
 
@@ -34,7 +33,10 @@ module.exports = function(config) {
       { pattern: './node_modules/rxjs/*.js', included:false,   watched: false },
       { pattern: './node_modules/rxjs/**/*.js', included:false,    watched: false },
 
+      { pattern: './src/tests/channels/*.test.js', watched: true },
+/*
       { pattern: './src/tests/traits/app-data-generator*.test.js', watched: true },
+*/
 
     ],
 

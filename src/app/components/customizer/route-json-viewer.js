@@ -94,7 +94,9 @@ export class RouteJsonViewer extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+    return [
+        ['.btn-blue', 'click']
+    ];
   }
 
   onRendered() {

@@ -13,8 +13,19 @@ export class ChannelAppGenFetch extends Channel {
 
   onRegistered() {
 
-    const onAppGenSubmit = (e)=>{
+    const onAppGenSubmit = async (e)=>{
       console.log('app gen submit is ',e);
+      const data = {
+        "name" : "yaya",
+        "city" : "hoboken"
+
+      }
+
+      const res =  await ChannelAppGenFetch.getAppGenLink(data)
+
+      console.log('res is ',res);
+      return res;
+
     }
 
     const propFilters = {
@@ -34,9 +45,37 @@ export class ChannelAppGenFetch extends Channel {
 
   }
 
-  static async getAppGenLink(data){
+  static async getAppGenLink(d){
 
-    fetch('http://localhost:428')
+
+        const data = window.Spyne.config.dynamicData;
+
+        const onSubscribe = (d)=>{
+          console.log('fetched data ',d);
+        }
+
+        const onMap = (d)=>{
+          console.log('mapped data is ',d);
+          return d;
+        }
+
+
+        const appGenFetch = new ChannelFetchUtil({
+          url: "http://localhost:428",
+          method: "POST",
+          body: JSON.stringify(data)
+
+        }, onSubscribe)
+
+
+
+
+/*
+
+    fetch('http://localhost:428', {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
     .then(function(response) {
       console.log('response is ',response);
       return response.text();
@@ -45,31 +84,20 @@ export class ChannelAppGenFetch extends Channel {
       console.log('Request successful', text);
     })
     .catch(function(error) {
-      log('Request failed', error)
+      console.log('Request failed', error)
     });
+
+*/
+
 
 
 /*
-    const onSubscribe = (d)=>{
-      console.log('fetched data ',d);
-    }
-
-    const onMap = (d)=>{
-      console.log('mapped data is ',d);
-      return d;
-    }
-
-    const appGenFetch = new ChannelFetchUtil({
-      url: "http://localhost:428",
-
-    }, onSubscribe)
-
-
    await fetch('http://localhost:428')
     .then(response => response.json())
     .then(data => console.log('data now is ',data));
 
 */
+
 
     return data;
   }

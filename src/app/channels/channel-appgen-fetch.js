@@ -1,7 +1,7 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter, ChannelFetchUtil} from 'spyne';
-
+import {path} from 'ramda';
 
 export class ChannelAppGenFetch extends Channel {
 
@@ -45,13 +45,27 @@ export class ChannelAppGenFetch extends Channel {
 
   }
 
-  static async getAppGenLink(d){
+  static async getAppGenLink(){
 
 
-        const data = window.Spyne.config.dynamicData;
+        const d = window.Spyne.config.dynamicData;
+        let {content, text} = d;
+        const defaultText =  {
+            "header": "the header text",
+            "footer": "the footer text"
+          };
+
+        text = text || defaultText;
+
+        const data = {content, text}
+      console.log('data is ',{data})
 
         const onSubscribe = (d)=>{
-          console.log('fetched data ',d);
+          const body = path(['appGenData', 'body'], d);
+          const bodyJson = JSON.parse(body);
+          const {spyneAppLink} = bodyJson;
+          console.log('fetched data ',{spyneAppLink, d});
+
         }
 
         const onMap = (d)=>{

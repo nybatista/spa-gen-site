@@ -1,6 +1,7 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter, ChannelFetchUtil} from 'spyne';
+import {validateAppGenData} from '../utils/app-data-validator'
 import {path} from 'ramda';
 
 export class ChannelAppGenFetch extends Channel {
@@ -49,6 +50,9 @@ export class ChannelAppGenFetch extends Channel {
 
 
         const d = window.Spyne.config.dynamicData;
+
+        const origDataIsValid = validateAppGenData(d);
+
         let {content, text} = d;
         const defaultText =  {
             "header": "the header text",
@@ -57,8 +61,11 @@ export class ChannelAppGenFetch extends Channel {
 
         text = text || defaultText;
 
-        const data = {content, text}
-      console.log('data is ',{data})
+        const data = origDataIsValid ? d : {content, text}
+
+      //  const revisedDataIsValid = validateAppGenData(data);
+
+     // console.log('data is ',{origDataIsValid, revisedDataIsValid, d, data})
 
         const onSubscribe = (d)=>{
           const body = path(['appGenData', 'body'], d);
@@ -74,12 +81,14 @@ export class ChannelAppGenFetch extends Channel {
         }
 
 
+
         const appGenFetch = new ChannelFetchUtil({
           url: "http://localhost:428",
           method: "POST",
           body: JSON.stringify(data)
 
         }, onSubscribe)
+
 
 
 

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "elliptic": "^6.5.3",
     "gsap": "file:gsap-bonus.tgz",
     "highlight.js": "^10.6.0",
     "spyne": "^0.14.7",

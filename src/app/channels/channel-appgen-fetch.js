@@ -61,11 +61,14 @@ export class ChannelAppGenFetch extends Channel {
 
         text = text || defaultText;
 
-        const data = origDataIsValid ? d : {content, text}
+      const ROUTE = R.compose(R.omit(['paramsArr', 'routeDatasetsArr', 'routeNamesArr']),  R.path(['Spyne', 'config', 'channels', 'ROUTE']))(window)
+
+        let data = origDataIsValid ? d : {content, text}
+        data = R.compose(R.omit(['linksData']), R.assoc('ROUTE', ROUTE))(data);
 
       //  const revisedDataIsValid = validateAppGenData(data);
 
-     // console.log('data is ',{origDataIsValid, revisedDataIsValid, d, data})
+         console.log('data is ',{origDataIsValid, d, data})
 
         const onSubscribe = (d)=>{
           const body = path(['appGenData', 'body'], d);

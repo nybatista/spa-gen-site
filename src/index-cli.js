@@ -26,7 +26,7 @@ const emptyTempDir = async()=>{
 
 const updateBaseApp = async()=>{
   const onSrcCopiedOver = async()=>{
-    console.log('src has been copied ');
+    console.log('src has been copied in spa gen site ');
   }
 
   const currentDir = process.cwd();

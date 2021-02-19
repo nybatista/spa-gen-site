@@ -63,7 +63,7 @@ export class MainView extends ViewStream {
   }
 
   onBeforeUnload(e){
-    LocalStorageTraits.localStorage$SetStore();
+   // LocalStorageTraits.localStorage$SetStore();
 
     /*const storeObj =path(['Spyne','config','localStorageStore'], window);
     const storeKey =path(['Spyne','config','localStorageKey'], window);

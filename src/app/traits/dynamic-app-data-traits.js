@@ -40,7 +40,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const mainDatasetsArr = compose(map(pick(routeNamesArr)))(routeDatasetsArr);
 
 
-    const compareRouteDatasetsArr =  content.reduce(reduceDatasets, [])
+    const compareRouteDatasetsArr = content === undefined ? [false] : content.reduce(reduceDatasets, [])
 
    const compareObjs = arr => whereEq(arr[0], arr[1]);
     const isTrue = R.equals(true);

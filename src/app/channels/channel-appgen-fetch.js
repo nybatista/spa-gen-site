@@ -66,7 +66,12 @@ export class ChannelAppGenFetch extends Channel {
         let data = origDataIsValid ? d : {content, text}
         data = R.compose(R.omit(['linksData']), R.assoc('ROUTE', ROUTE))(data);
 
-      //  const revisedDataIsValid = validateAppGenData(data);
+        const debug = R.path(['Spyne', 'config', 'debug'], window);
+
+        if (debug) {
+          data['fileName'] = 'localtmp';
+        }
+        //  const revisedDataIsValid = validateAppGenData(data);
 
          console.log('data is ',{origDataIsValid, d, data})
 

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "updateBaseApp": "./src/index-cli.js updateBaseApp",
+    "updateLocalTmp": "./src/index-cli.js updateLocalTmp",
     "build": "webpack --mode production --env build",
     "wdTest": "npx wdio run wdio.conf.js",
     "test": "mocha ./src/tests/channels/channel-app-gen-fetch.test.js",

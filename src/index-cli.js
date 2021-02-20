@@ -47,7 +47,27 @@ const updateBaseApp = async()=>{
 }
 
 
+const updateLocalTmp = async()=>{
 
+  const currentDir = process.cwd();
+  const pathObj = path.parse(currentDir);
+  const {dir} = pathObj;
+  const localTmpSrc = path.join(dir, '/spyne-app-generator/src/tmp/localtmp/src/')
+  const localTmpDest = path.join(dir, '/spa-gen-localtmp/src/')
+  const pathExists = await fse.pathExists(localTmpSrc);
+  //const baseAppSrc = path.join(dir, '/base-app/src');
+  try {
+    fse.copySync(localTmpSrc, localTmpDest);
+  } catch(e){
+    console.warn('updateLocalTmp: ',e)
+  }
+
+  console.log('local tmp copied!')
+
+  //console.log('local temp ', {currentDir, pathObj, dir, localTmpSrc, pathExists})
+
+
+}
 
 
 
@@ -56,6 +76,7 @@ const updateBaseApp = async()=>{
 const methodHash = {
   empty: defaultFn,
   updateBaseApp: updateBaseApp,
+  updateLocalTmp: updateLocalTmp,
   emptyTempDir: emptyTempDir,
 }
 

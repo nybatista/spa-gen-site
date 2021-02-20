@@ -69,7 +69,7 @@ export class ChannelAppGenFetch extends Channel {
         const debug = R.path(['Spyne', 'config', 'debug'], window);
 
         if (debug) {
-          data['fileName'] = 'localtmp';
+          //data['fileName'] = 'localtmp';
         }
         //  const revisedDataIsValid = validateAppGenData(data);
 
@@ -89,9 +89,11 @@ export class ChannelAppGenFetch extends Channel {
         }
 
 
+        const url = "http://localhost:428";
+        //const url = "https://oc5zgpcrp4.execute-api.us-east-1.amazonaws.com/Prod/get-app";
 
         const appGenFetch = new ChannelFetchUtil({
-          url: "http://localhost:428",
+          url,
           method: "POST",
           body: JSON.stringify(data)
 

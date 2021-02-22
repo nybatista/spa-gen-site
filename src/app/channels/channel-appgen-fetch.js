@@ -76,9 +76,9 @@ export class ChannelAppGenFetch extends Channel {
          console.log('data is ',{origDataIsValid, d, data})
 
         const onSubscribe = (d)=>{
-          const body = path(['appGenData', 'body'], d);
-          const bodyJson = JSON.parse(body);
-          const {spyneAppLink} = bodyJson;
+         // const body = path(['appGenData', 'body'], d);
+         // const bodyJson = JSON.parse(body);
+          const {spyneAppLink} = d;
           console.log('fetched data ',{spyneAppLink, d});
 
         }
@@ -89,12 +89,14 @@ export class ChannelAppGenFetch extends Channel {
         }
 
 
-        const url = "http://localhost:428";
-        //const url = "https://oc5zgpcrp4.execute-api.us-east-1.amazonaws.com/Prod/get-app";
+        //const url = "http://localhost:428";
+        const url = "https://oc5zgpcrp4.execute-api.us-east-1.amazonaws.com/Prod/get-app";
 
         const appGenFetch = new ChannelFetchUtil({
           url,
           method: "POST",
+          mapFn: onMap,
+
           body: JSON.stringify(data)
 
         }, onSubscribe)
@@ -103,9 +105,9 @@ export class ChannelAppGenFetch extends Channel {
 
 
 
-/*
 
-    fetch('http://localhost:428', {
+/*
+    fetch(url, {
       method: "POST",
       body: JSON.stringify(data)
     })
@@ -118,9 +120,9 @@ export class ChannelAppGenFetch extends Channel {
     })
     .catch(function(error) {
       console.log('Request failed', error)
-    });
+    });*/
 
-*/
+
 
 
 

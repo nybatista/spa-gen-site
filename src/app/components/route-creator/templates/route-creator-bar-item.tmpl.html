@@ -20,7 +20,7 @@
 
     <div class="dragger"></div>
     <div class="input">
-        <input placeholder="{{label}}" data-clickable=true type="text" value="{{text}}">
+        <input placeholder="{{label}}" class="rl-{{routeLevel}}" data-clickable=true type="text" data-rl="{{routeLevel}}" value="{{text}}" pattern="[\w\-]{1,24}">
         <p class="input-label {{inputLabel}}">{{inputLabel}}</p>
     </div>
     <div class="icons">

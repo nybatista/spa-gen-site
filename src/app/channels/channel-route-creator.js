@@ -1,7 +1,8 @@
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter} from 'spyne';
-import {prop, path, pick, compose} from 'ramda';
+import {prop, path, pick, defaultTo, compose} from 'ramda';
+import {RouteCreatorTraits} from 'traits/route-creator-traits';
 
 export class ChannelRouteCreator extends Channel {
 
@@ -46,7 +47,29 @@ export class ChannelRouteCreator extends Channel {
         'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSOUT_EVENT' :
         'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSIN_EVENT';
 
-   // console.log("ACTION SRC ",{focusAction, action, vsid,srcElement})
+    const routeLevel = compose(parseInt, defaultTo(-1),  path(['dataset', 'rl']))(srcElement);
+
+    const inputEl = prop('el', srcElement);
+
+    if (inputEl !== undefined && inputEl.checkValidity!==undefined && inputEl.checkValidity()===false){
+
+      inputEl.value = RouteCreatorTraits.routeCreator$SanitizeInput(inputEl, routeLevel);
+
+    }
+
+    if(focusAction==='CHANNEL_ROUTE_CREATOR_INPUT_FOCUSOUT_EVENT'){
+      const val = prop('value', srcElement);
+      console.log("ACTION SRC ",{focusAction, val, vsid,srcElement})
+
+    }
+
+
+  // const routeLevel = srcElement!==undefined ? parseInt(srcElement.dataset.rl) : -1;
+
+
+    if (routeLevel!==1){
+      return;
+    }
 
     this.sendChannelPayload(focusAction, {vsid});
 

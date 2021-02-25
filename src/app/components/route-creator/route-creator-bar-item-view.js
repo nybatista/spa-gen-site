@@ -18,6 +18,7 @@ export class RouteCreatorBarItemView extends ViewStream {
     props.data.holderId = props.parentVsid;
     props.data.inputLabel = props.routeLevel === 0 ? "menu" : "submenu";
     props.data.label = props.data.keyValue!== '^$' ? props.data.keyValue : props.data.key;
+    props.data.routeLevel = props.routeLevel;
     props.template=require('./templates/route-creator-bar-item.tmpl.html');
     //console.log("BAR ITEM PROPS ",props);
     super(props);
@@ -93,9 +94,10 @@ export class RouteCreatorBarItemView extends ViewStream {
         [this.props.id$+' > section .icons p', 'click']
     ];
 
-    if (this.props.routeLevel===1){
-      arr.push(['div.input input', 'focusin'])
-      arr.push(['div.input input', 'focusout'])
+    if (this.props.routeLevel<=1){
+      const inputSel = `div.input input.rl-${this.props.routeLevel}`
+      arr.push([inputSel, 'focusin'])
+      arr.push([inputSel, 'focusout'])
     }
 
     return arr;

@@ -13,6 +13,17 @@ export class RouteCreatorTraits extends SpyneTrait {
 
   }
 
+  static routeCreator$SanitizeInput(inputEl, routeLevel=0){
+    let value = prop('value', inputEl);
+    let defaultVal = routeLevel === 0 ? 'menu' : "submenu";
+    //value = value || 'menu';
+    let sanitizedVal = String(value).replace(/([\W^\-])/g, "")
+    //console.log('vaoue is ', {value,sanitizedVal, routeLevel}, inputEl);
+    let isDefined = sanitizedVal !== undefined && sanitizedVal !== "";
+    return isDefined ? sanitizedVal : defaultVal;
+
+  }
+
   static routeCreator$CreateRouteBar(props=this.props, data, autoInit=false){
     const {routeLevel, vsid, subNavHolder, menuNameInc} = props;
     const parentVsid = vsid;

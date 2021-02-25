@@ -8,6 +8,16 @@
 
 
 
+.app-download-link-holder{
+  position: relative;;
+  a{
+    display: block;
+    margin: 1rem 0;
+    color: royalblue;
+  }
+
+}
+
   h1,h2,p,span{
     margin:0 0 .5rem 0;
     padding: 0;
@@ -34,6 +44,14 @@
 
   button{
     margin-top:1rem;
+    &.btn-blue{
+
+      //background: royalblue;
+      padding: 10px 26px;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 1rem;
+    }
   }
 
 

@@ -2,11 +2,12 @@ import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {Channel, ChannelPayloadFilter, ChannelFetchUtil} from 'spyne';
 import {validateAppGenData} from '../utils/app-data-validator'
-import {path} from 'ramda';
+import {path, is} from 'ramda';
 
 export class ChannelAppGenFetch extends Channel {
 
   constructor(name, props = {}) {
+    name="CHANNEL_APP_GEN_FETCH";
     props.sendCachedPayload = false;
     super(name, props);
 
@@ -22,7 +23,7 @@ export class ChannelAppGenFetch extends Channel {
 
       }
 
-      const res =  await ChannelAppGenFetch.getAppGenLink(data)
+      const res =  await this.getAppGenLink(data)
 
       console.log('res is ',res);
       return res;
@@ -46,7 +47,7 @@ export class ChannelAppGenFetch extends Channel {
 
   }
 
-  static async getAppGenLink(){
+  async getAppGenLink(){
 
 
         const d = window.Spyne.config.dynamicData;
@@ -68,18 +69,28 @@ export class ChannelAppGenFetch extends Channel {
 
         const debug = R.path(['Spyne', 'config', 'debug'], window);
 
+        //const url =
+        let url = "https://oc5zgpcrp4.execute-api.us-east-1.amazonaws.com/Prod/get-app";
+
         if (debug) {
-          //data['fileName'] = 'localtmp';
+          url="http://localhost:428";
+          data['fileName'] = 'localtmp';
         }
         //  const revisedDataIsValid = validateAppGenData(data);
 
          console.log('data is ',{origDataIsValid, d, data})
 
+
+        this.sendChannelPayload("CHANNEL_APP_GEN_FETCH_DATA_FETCH", data);
+
+
         const onSubscribe = (d)=>{
-         // const body = path(['appGenData', 'body'], d);
-         // const bodyJson = JSON.parse(body);
-          const {spyneAppLink} = d;
-          console.log('fetched data ',{spyneAppLink, d});
+          const body = path(['appGenData', 'body'], d);
+          const bodyJson = is(String, body) ? JSON.parse(body) : body;
+          const {spyneAppLink} = bodyJson;
+          console.log('fetched data ',{spyneAppLink, d,bodyJson});
+          this.sendChannelPayload("CHANNEL_APP_GEN_FETCH_DATA_RETURNED", {spyneAppLink});
+
 
         }
 
@@ -88,9 +99,6 @@ export class ChannelAppGenFetch extends Channel {
           return d;
         }
 
-
-        //const url = "http://localhost:428";
-        const url = "https://oc5zgpcrp4.execute-api.us-east-1.amazonaws.com/Prod/get-app";
 
         const appGenFetch = new ChannelFetchUtil({
           url,
@@ -139,7 +147,10 @@ export class ChannelAppGenFetch extends Channel {
 
 
   addRegisteredActions() {
-    return [];
+    return [
+      'CHANNEL_APP_GEN_FETCH_DATA_FETCH',
+      'CHANNEL_APP_GEN_FETCH_DATA_RETURNED'
+    ];
   }
 
   onViewStreamInfo(obj) {

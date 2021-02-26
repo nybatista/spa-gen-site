@@ -86,7 +86,13 @@ export class ChannelAppGenFetch extends Channel {
 
         const onSubscribe = (d)=>{
           const body = path(['appGenData', 'body'], d);
+          if (body===undefined){
+            console.log('body is not returned ',{d});
+          }
+
           const bodyJson = is(String, body) ? JSON.parse(body) : body;
+          console.log('fetched data ',{body, d,bodyJson});
+
           const {spyneAppLink} = bodyJson;
           console.log('fetched data ',{spyneAppLink, d,bodyJson});
           this.sendChannelPayload("CHANNEL_APP_GEN_FETCH_DATA_RETURNED", {spyneAppLink});

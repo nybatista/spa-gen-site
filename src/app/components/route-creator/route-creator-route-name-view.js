@@ -75,7 +75,11 @@ export class RouteCreatorRouteNameView extends ViewStream {
 
   broadcastEvents() {
     // return nexted array(s)
-    return [];
+
+
+    return [
+        ['input.rl-3', 'focusout']
+    ];
   }
 
   onRendered() {

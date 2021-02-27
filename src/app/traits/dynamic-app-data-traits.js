@@ -1,4 +1,5 @@
 import {SpyneTrait} from 'spyne';
+const fdEqual = require('fast-deep-equal');
 import {whereEq, path, compose, pick,  has, find,propEq,includes, zip, flatten,isEmpty,invertObj, omit,map,all, defaultTo,uniq, nth, mapObjIndexed, forEachObjIndexed, reverse, reduceRight, toPairs, equals, merge, is, prop,filter, head} from 'ramda';
 import {AppDataGeneratorTraits} from 'traits/app-data-generator-traits';
 import {LocalStorageTraits} from 'traits/local-storage-traits';
@@ -42,17 +43,18 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
     const compareRouteDatasetsArr = content === undefined ? [false] : content.reduce(reduceDatasets, [])
 
-   const compareObjs = arr => whereEq(arr[0], arr[1]);
+    const compareObjs = arr => whereEq(arr[0], arr[1]);
     const isTrue = R.equals(true);
 
     const allEq = compose(all(equals(true)), map(compareObjs),zip)(mainDatasetsArr, compareRouteDatasetsArr);
+    const arrLengthsMatch = mainDatasetsArr.length === compareRouteDatasetsArr.length;
 
-    //console.log('VALIDATE FROM ROUTE data is ',{allEq, routeDatasetsArr, mainDatasetsArr, compareRouteDatasetsArr});
-    return allEq;
+    console.log('VALIDATE FROM ROUTE data is ',{allEq,arrLengthsMatch, routeDatasetsArr, mainDatasetsArr, compareRouteDatasetsArr});
+    return allEq && arrLengthsMatch;
 
     // return content.reduce(filterByReduceContent, {});
 
-   // return {};
+    // return {};
   }
 
 
@@ -71,43 +73,43 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const defaultContentObj = defaultTo({});
     const compareRouteNameAndContent = (routesObj, contentObj)=> {
 
-    const {routePath} = routesObj;
+      const {routePath} = routesObj;
 
-    //console.log("ROUTE CHECK ",{routesObj, contentObj, routePath})
-    const content = compose(defaultContentObj, prop('content'))(contentObj);
+      //console.log("ROUTE CHECK ",{routesObj, contentObj, routePath})
+      const content = compose(defaultContentObj, prop('content'))(contentObj);
 
-    // MAP EACH ROUTEPATH OBJ
-    const onMapObj = (rObj, cObj) => {
-      const {routeName} = rObj;
-      const props = getProps(rObj);
+      // MAP EACH ROUTEPATH OBJ
+      const onMapObj = (rObj, cObj) => {
+        const {routeName} = rObj;
+        const props = getProps(rObj);
 
-      const mapThroughProps = (arrPair)=>{
-        const prop = arrPair[0];
-        const propVal = arrPair[1];
-        const whereEqFn = compose(head, filter(whereEq({[routeName]:prop})))
-        const sectionContent = whereEqFn(content);
-        const propExists = sectionContent!==undefined;
-        boolAcc.push(propExists);
-        if (valIsObj(arrPair)){
-          return compareRouteNameAndContent(propVal, sectionContent);
+        const mapThroughProps = (arrPair)=>{
+          const prop = arrPair[0];
+          const propVal = arrPair[1];
+          const whereEqFn = compose(head, filter(whereEq({[routeName]:prop})))
+          const sectionContent = whereEqFn(content);
+          const propExists = sectionContent!==undefined;
+          boolAcc.push(propExists);
+          if (valIsObj(arrPair)){
+            return compareRouteNameAndContent(propVal, sectionContent);
+          }
+
+          return propExists;
         }
-
-        return propExists;
+        return props.map(mapThroughProps);
       }
-      return props.map(mapThroughProps);
+      return onMapObj(routePath, content);
     }
-    return onMapObj(routePath, content);
-  }
 
 
-   compareRouteNameAndContent(routesJson, appData);
+    compareRouteNameAndContent(routesJson, appData);
 
     const appDataIsValid = all(equals(true), boolAcc);
 
     //console.log('validate app data ',{routesJson, appData,newValidatation, appDataIsValid, boolAcc}, window.Spyne.config.channels)
 
     return newValidatation;
-   // return appDataIsValid;
+    // return appDataIsValid;
   }
 
   static dynAppData$GetRoutesJson(configObj){
@@ -158,9 +160,25 @@ export class DynamicAppDataTraits extends SpyneTrait {
 
   static dynAppData$ConformAppData(d, configObj=window, generatedBool=false){
 
+       const checkIfRouteIsDefault = ()=>{
+          const configRoute = path(['Spyne', 'config', 'channels', 'ROUTE', 'routes'], configObj);
+          const defaultRoute = LocalStorageTraits.localStorage$GetDefaultProp('routes');
+          defaultRoute['routePath']['404'] = ".+";
+          //console.log('ROUTES ',{configRoute, defaultRoute})
+          return fdEqual(configRoute, defaultRoute);
+
+        }
+
+
+
     const defaultIsValid = DynamicAppDataTraits.dynAppData$Validate(d, configObj);
     const defaultData = DynamicAppDataTraits.dynAppData$CacheData(d);;
+    const isDefaultRoute = checkIfRouteIsDefault();
+    console.log("DEFAULT DATA ",{defaultIsValid, isDefaultRoute,defaultData})
+    if (isDefaultRoute){
 
+      return defaultData;
+    }
 
 
     let localStorageDynamicData = LocalStorageTraits.localStorage$GetStoreObj('dynamicData');
@@ -176,7 +194,7 @@ export class DynamicAppDataTraits extends SpyneTrait {
     const isTrue = a => a[1] === true;
     const validDataType = compose( nth(0), defaultTo([]), find(isTrue), toPairs)(findFirstValidArr);
 
-    //console.log('dynAppData$ConformAppData validated data ',{validDataType, findFirstValidArr, generatedBool,generatedAppDataIsValid, localStorageDataIsValid, defaultIsValid, generatedAppData, localStorageDynamicData, defaultData })
+    console.log('dynAppData$ConformAppData validated data ',{isDefaultRoute,validDataType, findFirstValidArr, generatedBool,generatedAppDataIsValid, localStorageDataIsValid, defaultIsValid, generatedAppData, localStorageDynamicData, defaultData })
 
 
     //console.log("LODAL STORAGE ", {localStorageDynamicData, localStorageDataIsValid});
@@ -191,15 +209,15 @@ export class DynamicAppDataTraits extends SpyneTrait {
     }
 
 
-/*
-    console.log('generate app data ', {generateAppData, d});
+    /*
+        console.log('generate app data ', {generateAppData, d});
 
-    if (appDataIsValid){
+        if (appDataIsValid){
 
-    }
+        }
 
-    return d;
-*/
+        return d;
+    */
 
 
 
@@ -247,31 +265,31 @@ export class DynamicAppDataTraits extends SpyneTrait {
       //console.log("ROUTES JSON ",{routeNamesReducedArr, routesJson})
 
       return uniq(routeNamesReducedArr);
-/*
-      console.log("TEST TRANSUCE ",{routeNamesReducedArr})
+      /*
+            console.log("TEST TRANSUCE ",{routeNamesReducedArr})
 
-      const mapper = (v, k, obj) => {
-        const checkForRouteName = (obj) => {
-          if (k === 'routeName') {
-            acc.push(v);
-          }
-        }
-        checkForRouteName(v);
-        if (is(Object, v) === true) {
-          mapObjIndexed(mapper, v);
-        }
+            const mapper = (v, k, obj) => {
+              const checkForRouteName = (obj) => {
+                if (k === 'routeName') {
+                  acc.push(v);
+                }
+              }
+              checkForRouteName(v);
+              if (is(Object, v) === true) {
+                mapObjIndexed(mapper, v);
+              }
 
-        return v;
-      }
+              return v;
+            }
 
-      mapObjIndexed(mapper, routesJson);
+            mapObjIndexed(mapper, routesJson);
 
-        assocPath(['Spyne', 'config', 'channels', 'ROUTE', 'routeNamesArr'], acc, configObj);
-        if (window!==undefined){
-          window.Spyne.config.channels.ROUTE.routeNamesArr = acc;
-        }
+              assocPath(['Spyne', 'config', 'channels', 'ROUTE', 'routeNamesArr'], acc, configObj);
+              if (window!==undefined){
+                window.Spyne.config.channels.ROUTE.routeNamesArr = acc;
+              }
 
-      return acc;*/
+            return acc;*/
 
     }
 

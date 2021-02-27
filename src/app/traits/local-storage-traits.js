@@ -26,6 +26,10 @@ export class LocalStorageTraits extends SpyneTrait {
 
   }
 
+  static localStorage$GetDefaultProp(prop){
+    const defaults = LocalStorageTraits.localStorage$GetStoreObj('defaults');
+    return defaults[prop];
+  }
 
   static localStorage$GetStore(key=window.spyneLocalStorageKey){
     //only getter for localStorage item

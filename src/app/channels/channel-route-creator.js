@@ -47,19 +47,24 @@ export class ChannelRouteCreator extends Channel {
         'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSOUT_EVENT' :
         'CHANNEL_ROUTE_CREATOR_INPUT_FOCUSIN_EVENT';
 
-    const routeLevel = compose(parseInt, defaultTo(-1),  path(['dataset', 'rl']))(srcElement);
+    const routeLevel = compose(parseInt, defaultTo(-1),  path(['el', 'dataset', 'rl']))(srcElement);
 
     const inputEl = prop('el', srcElement);
 
-    if (inputEl !== undefined && inputEl.checkValidity!==undefined && inputEl.checkValidity()===false){
+    if (inputEl !== undefined){
 
-      inputEl.value = RouteCreatorTraits.routeCreator$SanitizeInput(inputEl, routeLevel);
+      if (inputEl.checkValidity!==undefined && inputEl.checkValidity()===false) {
+        inputEl.value = RouteCreatorTraits.routeCreator$SanitizeInput(inputEl, routeLevel);
+      } else if (routeLevel === 0 && String(inputEl.value).toLowerCase() === 'view'){
+        inputEl.value = 'view1';
+        console.warn("SpyneAppGen Error: The word, 'view' is reserved.")
+      }
 
     }
 
     if(focusAction==='CHANNEL_ROUTE_CREATOR_INPUT_FOCUSOUT_EVENT'){
-      const val = prop('value', srcElement);
-      console.log("ACTION SRC ",{focusAction, val, vsid,srcElement})
+      const val = inputEl.value;
+      console.log("ACTION SRC ",{focusAction, routeLevel, val, vsid,srcElement})
 
     }
 

@@ -2,7 +2,8 @@ import {ViewStream, ChannelPayloadFilter} from 'spyne';
 //import {DynamicAppMain} from '../01-dynamic-app/dynamic-app-main';
 import {DynamicAppHeaderLogo} from 'main_components/01-dynamic-app/ui/header/dynamic-app-header-logo';
 import {DynamicAppFooterContent} from 'main_components/01-dynamic-app/ui/dynamic-app-footer-content';
-import {AppView} from '../../../base-app/src/app/app-view';
+//import {AppView} from '../../../base-app/src/app/app-view';
+import {AppView} from './base-app-extended/app-view';
 
 export class DynamicAppContainer extends ViewStream {
 

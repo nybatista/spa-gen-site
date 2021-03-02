@@ -15,7 +15,7 @@
     const isProd = e === 'build';
     const devMode =  env !== 'build';
     const mode = isProd ? 'production' : 'development';
-    const map = isProd ? 'none' : 'inline-cheap-source-map';
+    const map = isProd ? 'eval' : 'inline-cheap-source-map';
     const publicPath = isProd ? '' : '/';
     return {devMode, mode, map, publicPath};
 
@@ -173,7 +173,7 @@
           use: {
             loader: 'html-loader',
             options: {
-              attributes: {
+/*              attributes: {
                 list: [
                   {
                     tag: 'img',
@@ -198,13 +198,9 @@
 
                 ]
 
-              },
-              minimize: {
-                removeAttributeQuotes: false,
-                removeRedundantAttributes: false,
-                removeScriptTypeAttributes: false,
-                removeStyleLinkTypeAttributes:false,
-              }
+              },*/
+              minimize: false,
+              esModule: false
             }
           }
         },

@@ -1,0 +1,71 @@
+<div class="page-header">
+    <div class="bg-image"
+   style="background: url({{background}}) center center / cover no-repeat;">
+
+
+
+
+
+    </div>
+
+    <div class="callout">
+        <header>
+         <h1>{{pageId}} HEADLINE</h1>
+        <p>Minim laoreet ad mei, volumus invenire elaboraret has ut.</p>
+        </header>
+    </div>
+
+</div>
+
+<div class="page-content home-content">
+
+    <div>
+    <h1>spyne</h1>
+
+    <h2>Application Generator<br/><span>Create a fully-functional Single-Page-Application with just a few clicks.</span></h2>
+
+
+    <header>
+        <h4>What is Spyne?</h4>
+        <p>Spyne is a next-gen Javascript Framework designed from the ground up to efficiently develop the most demanding single-page-applications. <br/>The framework combines traditional coding principles with modern patterns to create the cleanest, most efficient Javascript codebase. </p>
+        <h4>How to Generate Your Single-Page-App</h4>
+
+        <p>After customizing the menu, your custom application outputs a data-file, html-templates and view-components (ViewStreams) that can be further customized with Javascript, Sass and Javascript libraries.</p>
+    </header>
+
+
+        <button class="cta-button"  data-type="toggleMain" data-value="true" data-event-type="container">Test it Out</button>
+        <br/>
+        <button class="btn btn-blue submit"  data-type="appGenSubmit" data-value="true" >Download this App</button>
+        <div class="app-download-link-holder">
+
+        </div>
+
+
+    </div>
+
+    <ul class="dynamic-app-page-subnav-container subnav-items-{{linksNum}}" id="fvqahfw" name="PageBodyView" data-vsid="fvqahfw">
+
+    {{#linksData}}
+    <li class="page-card">
+        <a href="{{href}}" class="sub-nav" data-channel="ROUTE" data-event-prevent-default="true" data-page-id="{{pageId}}" data-topic-id="{{topicId}}" >
+            <dl class="card-content">
+                <dt class="card-image">
+                    <img src="{{background}}" alt="" style="width:100%">
+
+                </dt>
+                <dd class="card-text">
+                    <h2>{{headline}}</h2>
+                    <p>{{text}}</p>
+
+                </dd>
+
+
+            </dl>
+        </a>
+    </li>
+    {{/linksData}}
+</ul>
+
+
+</div>

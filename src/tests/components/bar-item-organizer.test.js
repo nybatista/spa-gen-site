@@ -1,4 +1,4 @@
-import {BarItemsSorter} from "components/other/bar-items-sorter";
+import {BarItemsSorter} from "../../app/components/other/bar-items-sorter";
 import {RouteCreatorDom} from '../mocks/route-creator-mock';
 import {RouteAnimTraits} from 'traits/route-anim-traits';
 const R = require('ramda');
@@ -19,7 +19,7 @@ describe('bar items sorter tests', () => {
   });
 
 
-/*
+
   it('should create organizer sorter object', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const barItemsSorter = new BarItemsSorter(liItems, draggerId);
@@ -31,7 +31,7 @@ describe('bar items sorter tests', () => {
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);
     const boxData = BarItemsSorter.getDataFromBoundingBox(liItems[2]);
     const {height} = boxData;
-    expect(height).to.equal(176);
+    expect(height).to.equal(204);
   });
 
   it('should create organizer sorter array', () => {
@@ -56,9 +56,9 @@ describe('bar items sorter tests', () => {
   it('should get the height of each li element', ()=>{
     var el = document.getElementById(draggerId);
     const theHeight = BarItemsSorter.getBarItemHeight(el);
-    expect(theHeight).to.equal(386);
+    expect(theHeight).to.equal(392.5);
   })
-*/
+
 
   it('should delete an item', ()=>{
     const liItems = RouteAnimTraits.routeAnim$GetBarItems(props, mainUl);

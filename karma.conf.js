@@ -5,6 +5,7 @@ const path = require('path');
 const webpackConfig = require('./webpack.config');
 webpackConfig.mode = 'development';
 webpackConfig.plugins=[];
+webpackConfig.watch = true;
 webpackConfig.entry = {
   index: path.join(__dirname, 'src/index.js')
 }
@@ -16,6 +17,7 @@ process.env.BABEL_ENV = 'test';
 
 module.exports = function(config) {
   config.set({
+
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -34,6 +36,7 @@ module.exports = function(config) {
       { pattern: './node_modules/rxjs/**/*.js', included:false,    watched: false },
 
       { pattern: './src/tests/channels/*.test.js', watched: true },
+      { pattern: './src/tests/components/*.test.js', watched: true },
 /*
       { pattern: './src/tests/traits/app-data-generator*.test.js', watched: true },
 */
@@ -86,7 +89,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous

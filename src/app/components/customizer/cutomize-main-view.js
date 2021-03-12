@@ -1,6 +1,6 @@
 import {ViewStream} from 'spyne';
 import {CustomizePanelView} from './cutomize-panel-view';
-import {RouteJsonViewer} from 'main_components/customizer/route-json-viewer';
+import {CustomizeAdditionalFields} from 'main_components/customizer/customize-additional-fiels';
 
 export class CustomizeMainView extends ViewStream {
 
@@ -27,7 +27,7 @@ export class CustomizeMainView extends ViewStream {
 
   onRendered() {
     this.appendView(new CustomizePanelView())
-    this.appendView(new RouteJsonViewer());
+    this.appendView(new CustomizeAdditionalFields());
 
   }
 
